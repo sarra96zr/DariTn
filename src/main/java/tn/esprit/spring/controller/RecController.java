@@ -33,7 +33,7 @@ public class RecController {
 		// http://localhost:8081/DariTn/Pi/retrieve-reclamation/{rec-id}
 				@GetMapping("/retrieve-reclamation/{rec-id}")
 				@ResponseBody
-				public Reclamations retrieveMeuble(@PathVariable("rec-id") String id_r) {
+				public Reclamations retrieveRec(@PathVariable("rec-id") String id_r) {
 					return RecService.retrieveRec(id_r);
 				}
 
@@ -54,7 +54,7 @@ public class RecController {
 				}
 
 				// http://localhost:8081/DariTn/Pi/modify-reclamation
-				@PutMapping("/modify-meuble")
+				@PutMapping("/modify-rec")
 				@ResponseBody
 				public Reclamations modifyProduct(@RequestBody Reclamations r) {
 					return RecService.updateRec(r);

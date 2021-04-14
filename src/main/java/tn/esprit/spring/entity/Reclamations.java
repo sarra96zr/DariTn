@@ -1,13 +1,12 @@
 package tn.esprit.spring.entity;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 @Entity
@@ -21,6 +20,8 @@ public class Reclamations {
 	public String titreReclam;
 	@Column(name="description_Reclam")
 	public String descriptionReclam;
+	@Enumerated(EnumType.STRING)
+    private Type_Rec type;
 	@ManyToOne
 	
 	Client client;
@@ -50,20 +51,29 @@ public class Reclamations {
 		this.client = client;
 	}
 	
+	public Type_Rec getType() {
+		return type;
+	}
+	public void setType(Type_Rec type) {
+		this.type = type;
+	}
 	
-	public Reclamations(long id_reclam, String titreReclam, String descriptionReclam, Client client) {
+	public Reclamations(long id_reclam, String titreReclam, String descriptionReclam, Type_Rec type, Client client) {
 		super();
 		this.id_reclam = id_reclam;
 		this.titreReclam = titreReclam;
 		this.descriptionReclam = descriptionReclam;
+		this.type = type;
 		this.client = client;
 	}
+	
 	public Reclamations() {
 		super();
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
 	
 
 }

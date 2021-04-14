@@ -16,12 +16,12 @@ import tn.esprit.spring.repository.RecRepo;
 public class RecServiceImpl implements RecService {
 	@Autowired
 	private RecRepo RecDAO;
-	//private static final Logger L= LogManager.getLogger(MeubleServiceImpl.class);
+	//private static final Logger L= LogManager.getLogger(RecServiceImpl.class);
 	@Override
 	public List<Reclamations> retrieveAllRecs() {
 		// TODO Auto-generated method stub
-		List<Reclamations> meubles= (List<Reclamations>) RecDAO.findAll();
-		return meubles;
+		List<Reclamations> recs= (List<Reclamations>) RecDAO.findAll();
+		return recs;
 	}
 
 	@Override

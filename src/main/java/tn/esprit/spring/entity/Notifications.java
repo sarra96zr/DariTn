@@ -10,7 +10,7 @@ public class Notifications implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ref")
+	@Column(name = "id_notif")
 	public int idNotif ;
 	@Column(name = "dateNotif")
 	public String dateNotif;
@@ -18,22 +18,16 @@ public class Notifications implements Serializable{
 	public String titre;
 	@Column(name = "description")
 	public String description_notif;
+	@Column(name = "etat")
+	public String etat;
 	@ManyToOne(cascade = CascadeType.ALL)
 	Annonce annonce;
 	@ManyToOne(cascade = CascadeType.ALL)
 	User user;
-	@OneToOne
+//	@OneToOne
 //	@JoinColumn(name="Notif_annonces")
-	private Annonce annonces;
+//	private Annonce annonces;
 	
-	public Annonce getAnnonces() {
-		return annonces;
-	}
-
-	public void setAnnonces(Annonce annonces) {
-		this.annonces = annonces;
-	}
-
 	public int getIdNotif() {
 		return idNotif;
 	}
@@ -102,7 +96,7 @@ public class Notifications implements Serializable{
 		this.description_notif = description_notif;
 		this.annonce = annonce;
 		this.user = user;
-		this.annonces = annonces;
+		//this.annonces = annonces;
 	}
 
 	
