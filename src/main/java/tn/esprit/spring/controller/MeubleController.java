@@ -53,7 +53,7 @@ public class MeubleController {
 					
 				}
 
-				// http://localhost:8086/ConsomiTounsi/servlet/modify-meuble
+				// http://localhost:8081/DariTn/Pi/modify-meuble
 				@PutMapping("/modify-meuble")
 				@ResponseBody
 				public Meubles modifyProduct(@RequestBody Meubles m) {
