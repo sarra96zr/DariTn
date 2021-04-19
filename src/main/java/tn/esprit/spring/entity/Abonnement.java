@@ -14,8 +14,6 @@ public class Abonnement implements Serializable {
 	@Column(name = "id_abonnement")
 	public long id;
 
-	@Column(name = "contrat")
-	public String contrat;
 
 	@Column(name = "date_debut")
 	public Date date_debut;
@@ -35,13 +33,6 @@ public class Abonnement implements Serializable {
 		this.id = id;
 	}
 
-	public String getContrat() {
-		return contrat;
-	}
-
-	public void setContrat(String contrat) {
-		this.contrat = contrat;
-	}
 
 	public Date getDate_debut() {
 		return date_debut;
@@ -74,7 +65,6 @@ public class Abonnement implements Serializable {
 	public Abonnement(long id, String contrat, Date date_debut, Date date_fin, Client client) {
 		super();
 		this.id = id;
-		this.contrat = contrat;
 		this.date_debut = date_debut;
 		this.date_fin = date_fin;
 		this.client = client;

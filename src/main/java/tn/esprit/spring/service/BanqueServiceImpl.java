@@ -45,7 +45,15 @@ public class BanqueServiceImpl implements BanqueService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Banque> SearchBanqueByName(String name_banque) {
+		// TODO Auto-generated method stub
+		return banqueDAO.SearchProductByName(name_banque);
+	}
+
 	
+
 
 	
 		

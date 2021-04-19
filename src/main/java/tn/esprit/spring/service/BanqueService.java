@@ -16,5 +16,6 @@ public interface BanqueService {
 		void deleteBanque(String id_b);
 		Banque updateBanque(Banque b);
 		Banque retrieveBanque(String id_b);
-
+        List<Banque> SearchBanqueByName(String name_banque);
+            
 }
