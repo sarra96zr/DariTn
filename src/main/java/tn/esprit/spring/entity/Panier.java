@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.*;
+
+import tn.esprit.spring.entity.Client;
+import tn.esprit.spring.entity.Commande;
 @Entity
 public class Panier implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -18,8 +21,19 @@ public class Panier implements Serializable {
 	private Paiement type_paiement;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="Panier")
     private Set<Commande> commande;
+	 @OneToOne
+	    private Client client;
 	
-	
+	public Client getClient() {
+		return client;
+	}
+
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+
 	public Panier() {
 		super();
 	}
@@ -87,6 +101,18 @@ public class Panier implements Serializable {
 		this.prix_total = prix_total;
 		this.type_paiement = type_paiement;
 		this.commande = commande;
+	}
+
+
+	public Panier(long id_panier, Date date_basket, float prix_total, Paiement type_paiement, Set<Commande> commande,
+			Client client) {
+		super();
+		this.id_panier = id_panier;
+		this.date_basket = date_basket;
+		this.prix_total = prix_total;
+		this.type_paiement = type_paiement;
+		this.commande = commande;
+		this.client = client;
 	}
 	
 	

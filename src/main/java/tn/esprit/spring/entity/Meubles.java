@@ -37,13 +37,10 @@ public class Meubles implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Type_Meuble type_meuble;
 	@ManyToOne
-	
 	Client client;
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "T_meuble_commande", joinColumns = { @JoinColumn(name = "ref_meuble") }, inverseJoinColumns = {
-			@JoinColumn(name = "id_order") })
+	@ManyToMany(mappedBy="meuble", cascade = CascadeType.ALL)
 	private Set<Commande> commande;
-
+	
 	public Meubles() {
 		super();
 	}

@@ -5,6 +5,9 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import tn.esprit.spring.entity.Meubles;
+import tn.esprit.spring.entity.Panier;
+
 @Entity
 @Table(name="Orders")
 public class Commande implements Serializable {
@@ -20,15 +23,16 @@ public class Commande implements Serializable {
 	@Temporal (TemporalType.DATE)
 	private Date date_order;
  
-	
-	@ManyToMany(mappedBy="commande", cascade = CascadeType.ALL)
+	@ManyToOne
+	private Meubles m;
+	@ManyToMany( cascade = CascadeType.ALL)
 	private Set<Meubles> meuble;
 	@ManyToOne
-	@JoinColumn(name="commande_panier")
-	Panier Panier;
+	private Panier Panier;
 	public long getId_order() {
 		return id_order;
 	}
+	
 	public void setId_order(long id_order) {
 		this.id_order = id_order;
 	}
@@ -56,26 +60,40 @@ public class Commande implements Serializable {
 	public void setMeuble(Set<Meubles> meuble) {
 		this.meuble = meuble;
 	}
-	public Panier getPanier() {
-		return Panier;
-	}
-	public void setPanier(Panier panier) {
-		Panier = panier;
-	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 	
-	public Commande(long id_order, String statut, float price_order, Date date_order, Set<Meubles> meuble,
+	public Panier getPanier() {
+		return Panier;
+	}
+
+	public void setPanier(Panier panier) {
+		Panier = panier;
+	}
+
+	public Meubles getM() {
+		return m;
+	}
+
+	public void setM(Meubles m) {
+		this.m = m;
+	}
+	
+
+	public Commande(long id_order, String statut, float price_order, Date date_order, Meubles m, Set<Meubles> meuble,
 			tn.esprit.spring.entity.Panier panier) {
 		super();
 		this.id_order = id_order;
 		Statut = statut;
 		this.price_order = price_order;
 		this.date_order = date_order;
+		this.m = m;
 		this.meuble = meuble;
 		Panier = panier;
 	}
+
 	public Commande() {
 		super();
 	}

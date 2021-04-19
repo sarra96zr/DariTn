@@ -52,4 +52,16 @@ public class MeubleServiceImpl implements MeubleService {
 		return MeubleDAO.findById(Long.parseLong(id_m)).orElse(null);
 	}
 
+	@Override
+	public List<Meubles> SearchMeublesByName(String name_meuble) {
+		// TODO Auto-generated method stub
+		return MeubleDAO.SearchProductByName(name_meuble);
+	}
+
+	@Override
+	public List<Meubles> Range(float min, float max) {
+		// TODO Auto-generated method stub
+		return MeubleDAO.Range(min, max);
+	}
+
 }

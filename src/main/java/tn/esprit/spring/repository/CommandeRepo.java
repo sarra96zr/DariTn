@@ -2,17 +2,20 @@ package tn.esprit.spring.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import tn.esprit.spring.entity.Commande;
 import tn.esprit.spring.entity.Meubles;
 
 
-
-public interface CommandeRepo  extends CrudRepository<Commande, Long>  {
-	@Query("SELECT o FROM Orders o WHERE o.meuble= :meubles")
-	List<Commande> GetOrdersByMeuble(@Param("meuble") Meubles meuble);
+@Repository
+public interface CommandeRepo  extends CrudRepository<Commande, Long>,JpaRepository<Commande,Long>,JpaSpecificationExecutor<Commande>  {
+	@Query("SELECT c FROM Commande c WHERE c.m= :meuble")
+	List<Commande> GetOrdersByMeubles(@Param("meuble") Meubles meuble);
 
 }

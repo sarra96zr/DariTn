@@ -59,5 +59,19 @@ public class MeubleController {
 				public Meubles modifyProduct(@RequestBody Meubles m) {
 					return meubleService.updateMeuble(m);
 				}
+				// recherche par nom
+				// http://localhost:8081/DariTn/Pi/search-meuble/{meuble-name}
+				@GetMapping("/search-meuble/{meuble-name}")
+				@ResponseBody
+				public List<Meubles> SearchProductByName(@PathVariable("meuble-name") String name_meuble) {
+					return meubleService.SearchMeublesByName(name_meuble);
+				}
+				// range of price
+				// http://localhost:8081/DariTn/Pi/range/{min}/{max}
+				@GetMapping("/range/{min}/{max}")
+				@ResponseBody
+				public List<Meubles> RangeProducts(@PathVariable("min") float min, @PathVariable("max") float max) {
+					return meubleService.Range(min, max);
+				}
 				
 }
