@@ -20,6 +20,17 @@ public class Abonnement implements Serializable {
 
 	@Column(name = "date_fin")
 	public Date date_fin;
+	
+	@Column(name = "type")
+	public String type;
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	@ManyToOne
 	
@@ -62,11 +73,12 @@ public class Abonnement implements Serializable {
 		return serialVersionUID;
 	}
 
-	public Abonnement(long id, String contrat, Date date_debut, Date date_fin, Client client) {
+	public Abonnement(long id, Date date_debut, Date date_fin, String type, Client client) {
 		super();
 		this.id = id;
 		this.date_debut = date_debut;
 		this.date_fin = date_fin;
+		this.type = type;
 		this.client = client;
 	}
 

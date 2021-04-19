@@ -47,6 +47,12 @@ public class AbonnementServiceImpl implements AbonnementService {
 		return null;
 	}
 
+	@Override
+	public List<Abonnement> SearchAbonnementByType(String type_abonnement) {
+		// TODO Auto-generated method stub
+		return abonnementDAO.SearchAbonnementByType(type_abonnement);
+	}
+
 
 
 }

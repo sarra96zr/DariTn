@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.entity.Abonnement;
+import tn.esprit.spring.entity.Banque;
 import tn.esprit.spring.service.AbonnementService;
 
 
@@ -60,6 +61,14 @@ public class AbonnementController {
 				@ResponseBody
 				public Abonnement modifyAbonnementt(@RequestBody Abonnement ab) {
 					return abservice.updateAbonnement(ab);
+				}
+				
+				// recherche par type
+				// http://localhost:8081/DariTn/Pi/search-abonnement/{abonnement-type}
+				@GetMapping("/search-abonnement/{abonnement-type}")
+				@ResponseBody
+				public List<Abonnement> SearchAbonnementByType(@PathVariable("abonnement-type") String type_abonnement) {
+					return abservice.SearchAbonnementByType(type_abonnement);
 				}
 				
 				
