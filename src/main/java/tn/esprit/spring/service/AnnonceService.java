@@ -13,7 +13,7 @@ public interface AnnonceService {
 	Annonce addAnnonce(Annonce a);
 	void deleteAnnonce(String id);
 	Annonce updateAnnonce(Annonce a);
-	Optional<Annonce> retrieveAnnonce(String id);
-
+	//Optional<Annonce> retrieveAnnonce(String id);
+	Annonce retrieveAnnonce(String id_m);
 
 }

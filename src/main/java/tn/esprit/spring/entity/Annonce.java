@@ -27,8 +27,8 @@ public class Annonce implements Serializable {
     @Column(name="id")
 	public long id;
 	
-	@Column(name="title")
-	public String title;
+	@Column(name="titre")
+	public String titre;
 	
 	@Column(name="adresse")
 	public String adresse;
@@ -42,12 +42,20 @@ public class Annonce implements Serializable {
 	@Column(name="photo")
 	public String photo;
 	
-	@Column(name="price")
-	public float price;
+	@Column(name="prix")
+	public float prix;
+	
+	@Column(name="disponible")
+	public boolean disponible;
 	
 	@Enumerated (EnumType.STRING)
 	@Column(name="type_annonce")
 	public Type_Annonce type_annonce;
+	
+	
+	@Enumerated (EnumType.STRING)
+	@Column(name="categorie_annonce")
+	public Categorie_Annonce categorie_annonce;
 	
 	@ManyToOne
 	
@@ -64,13 +72,36 @@ public class Annonce implements Serializable {
 	}
 
 
-	public String getTitle() {
-		return title;
+	
+
+
+	public String getTitre() {
+		return titre;
 	}
 
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
+
+
+	public float getPrix() {
+		return prix;
+	}
+
+
+	public void setPrix(float prix) {
+		this.prix = prix;
+	}
+
+
+	public boolean isDisponible() {
+		return disponible;
+	}
+
+
+	public void setDisponible(boolean disponible) {
+		this.disponible = disponible;
 	}
 
 
@@ -114,14 +145,7 @@ public class Annonce implements Serializable {
 	}
 
 
-	public float getPrice() {
-		return price;
-	}
-
-
-	public void setPrice(float price) {
-		this.price = price;
-	}
+	
 
 
 	
@@ -157,19 +181,36 @@ public class Annonce implements Serializable {
 	}
 
 
-	public Annonce(String title, String adresse, String video, String description, String photo,
-			float price, Type_Annonce type_annonce) {
+	public Categorie_Annonce getCategorie_annonce() {
+		return categorie_annonce;
+	}
+
+
+	public void setCategorie_annonce(Categorie_Annonce categorie_annonce) {
+		this.categorie_annonce = categorie_annonce;
+	}
+
+
+	public Annonce(String titre, String adresse, String video, String description, String photo, float prix,
+			boolean disponible, Type_Annonce type_annonce, Categorie_Annonce categorie_annonce, User user) {
 		super();
-		this.title = title;
+		this.titre = titre;
 		this.adresse = adresse;
 		this.video = video;
 		this.description = description;
 		this.photo = photo;
-		this.price = price;
+		this.prix = prix;
+		this.disponible = disponible;
 		this.type_annonce = type_annonce;
-		//this.id = id;
+		this.categorie_annonce = categorie_annonce;
+		this.user = user;
 	}
 
+
+
+
+	
+	
 		
 	
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.entity.Annonce;
+import tn.esprit.spring.entity.Meubles;
 import tn.esprit.spring.repository.AnnonceRepository;
 
 @Service
@@ -46,12 +47,17 @@ public Annonce updateAnnonce(Annonce a) {
 	return annonceRepository.save(a);
 }
 
-@Override
+/*@Override
 public Optional<Annonce> retrieveAnnonce(String id) {
 	Optional<Annonce> annonce = annonceRepository.findById(Long.parseLong(id));
 	return annonce;
-}
+}*/
+
+@Override
+public Annonce retrieveAnnonce(String id_a) {
+	// TODO Auto-generated method stub
+	return annonceRepository.findById(Long.parseLong(id_a)).orElse(null);
 
 
-}
+}}
 

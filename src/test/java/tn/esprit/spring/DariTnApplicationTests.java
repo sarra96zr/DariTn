@@ -21,9 +21,8 @@ public class DariTnApplicationTests {
 	public void contextLoads() {
 		
 		
-		Annonce a = new Annonce("Maison" , "ariana", "none", "belle maison 300m²", "oui", 300, Type_Annonce.MAISON);
 				//an.addAnnonce(a);
-				
+				//an.updateAnnonce(a);
 				//an.deleteAnnonce("2");
 				an.retrieveAllAnnonces();
 	}
