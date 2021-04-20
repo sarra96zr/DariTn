@@ -31,7 +31,7 @@ public class BanqueServiceImpl implements BanqueService {
 	@Override
 	public void deleteBanque(String id_b) {
 		// TODO Auto-generated method stub
-		banqueDAO.deleteById(Long.parseLong(id_b));
+		banqueDAO.deleteById((int) Long.parseLong(id_b));
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class BanqueServiceImpl implements BanqueService {
 	@Override
 	public Banque retrieveBanque(String id_b) {
 		// TODO Auto-generated method stub
-		return null;
+		return banqueDAO.findById((int) Long.parseLong(id_b)).orElse(null);
 	}
 
 	@Override

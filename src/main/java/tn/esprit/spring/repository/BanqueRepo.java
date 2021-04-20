@@ -14,7 +14,7 @@ import tn.esprit.spring.entity.Banque;
 
 @Repository
 
-public interface BanqueRepo extends CrudRepository<Banque, Long> {
+public interface BanqueRepo extends CrudRepository<Banque, Integer> {
 
 	@Query("SELECT p FROM Banque p WHERE p.nombanque= :nombanque")
 	List<Banque> SearchProductByName(@Param("nombanque") String nombanque);

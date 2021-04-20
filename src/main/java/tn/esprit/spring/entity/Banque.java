@@ -1,62 +1,79 @@
 package tn.esprit.spring.entity;
 
-import java.io.Serializable;
-import java.util.Set;
 
-import javax.persistence.*;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 
 @Entity
 @Table(name="banque")
 public class Banque implements Serializable{
-private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 1L;
+	
+	public Banque()
+	{
+		super();
+	}
+	
+	public Banque(String nombanque) 
+	{
+		super();
+		this.nombanque=nombanque;
+	}
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column(name="id_banque")
-	public long id_banque;
+	@Column(name="ID")
+	private int id; 
 	
 	@Column(name="nombanque")
-	public String nombanque;
-	@OneToMany(mappedBy="Banque")
-	private Set<Credit> credit;
-	@OneToOne
-    private Expert_financier exp;
-	public long getId_banque() {
-		return id_banque;
+	private String nombanque;
+	
+	
+	@javax.persistence.OneToMany(mappedBy="bank", cascade = CascadeType.ALL, orphanRemoval = true)
+	List<CreditFormula> creditformulas=new ArrayList<CreditFormula>();
+	
+	public int getId() {
+		return id;
 	}
-	public void setId_banque(long id_banque) {
-		this.id_banque = id_banque;
+
+	public void setId(int id) {
+		this.id = id;
 	}
+
+	
+	
 	public String getNombanque() {
 		return nombanque;
 	}
+
 	public void setNombanque(String nombanque) {
 		this.nombanque = nombanque;
 	}
-	public Set<Credit> getCredit() {
-		return credit;
-	}
-	public void setCredit(Set<Credit> credit) {
-		this.credit = credit;
-	}
-	public Expert_financier getExp() {
-		return exp;
-	}
-	public void setExp(Expert_financier exp) {
-		this.exp = exp;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	public Banque() {
-		super();
-	}
-	public Banque(long id_banque, String nombanque, Set<Credit> credit, Expert_financier exp) {
-		super();
-		this.id_banque = id_banque;
-		this.nombanque = nombanque;
-		this.credit = credit;
-		this.exp = exp;
-	}
 
+
+
+	public void addFormula(CreditFormula F) {
+        creditformulas.add(F);
+        F.setBank(this);
+    }
+
+
+ 
+
+	
+	
 }

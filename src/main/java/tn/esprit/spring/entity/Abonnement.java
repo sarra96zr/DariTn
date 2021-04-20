@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "abonnement")
 public class Abonnement implements Serializable {
@@ -33,7 +35,7 @@ public class Abonnement implements Serializable {
 	}
 
 	@ManyToOne
-	
+	@JsonIgnore
 	 public Client client;
 
 	public long getId() {

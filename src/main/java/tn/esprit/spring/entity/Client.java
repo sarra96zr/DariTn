@@ -1,16 +1,21 @@
 package tn.esprit.spring.entity;
-
+import java.util.Date;
+import java.util.List;
 import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 @Table(name = "client")
+@DiscriminatorValue("C")
 public class Client extends User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	//private int id_client ;
@@ -19,8 +24,8 @@ public class Client extends User implements Serializable {
 	private Panier panier;
 	@OneToMany(mappedBy="client")
 	private Set<Abonnement> abonnement;
-	@OneToMany(mappedBy="client")
-	private Set<Credit> credit;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
+	private List<Credit> credits;
 	@OneToMany(mappedBy="client")
 	private Set<Reclamations> reclam;
 	@OneToOne
@@ -46,11 +51,9 @@ public class Client extends User implements Serializable {
 	public void setAbonnement(Set<Abonnement> abonnement) {
 		this.abonnement = abonnement;
 	}
-	public Set<Credit> getCredit() {
-		return credit;
-	}
-	public void setCredit(Set<Credit> credit) {
-		this.credit = credit;
+
+	public void setCredits(List<Credit> credits) {
+		this.credits = credits;
 	}
 	public Set<Reclamations> getReclam() {
 		return reclam;
@@ -58,6 +61,7 @@ public class Client extends User implements Serializable {
 	public void setReclam(Set<Reclamations> reclam) {
 		this.reclam = reclam;
 	}
+	
 	public RDV getRdv() {
 		return rdv;
 	}
@@ -70,19 +74,34 @@ public class Client extends User implements Serializable {
 	public void setMeuble(Set<Meubles> meuble) {
 		this.meuble = meuble;
 	}
-	public Client(int id_client, Panier panier, Set<Abonnement> abonnement, Set<Credit> credit,
-			Set<Reclamations> reclam, RDV rdv, Set<Meubles> meuble) {
-		super();
-		//this.id_client = id_client;
+
+	public Client(long id_user, String firstName, String lastName, String email, String password,
+			Date date_de_naissance, Set<Annonce> annonces, Set<Notifications> notifications, Panier panier,
+			Set<Abonnement> abonnement, List<Credit> credits, Set<Reclamations> reclam, RDV rdv, Set<Meubles> meuble) {
+		super(id_user, firstName, lastName, email, password, date_de_naissance, annonces, notifications);
 		this.panier = panier;
 		this.abonnement = abonnement;
-		this.credit = credit;
+		this.credits = credits;
 		this.reclam = reclam;
 		this.rdv = rdv;
 		this.meuble = meuble;
 	}
 	public Client() {
 		super();
+	}
+	
+	@JsonManagedReference(value="credits-client")
+	public List<Credit> getCredits() {
+		return credits;
+	}
+
+	public void setCredit(List<Credit> credits) {
+		this.credits = credits;
+	}
+	public void addcredit(Credit C)
+	{
+		this.credits.add(C);
+		C.setClient(this);
 	}
 	
 }

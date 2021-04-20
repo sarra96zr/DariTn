@@ -1,0 +1,21 @@
+package tn.esprit.spring.service;
+
+
+import java.util.List;
+
+
+import tn.esprit.spring.entity.Credit;
+import tn.esprit.spring.entity.CreditFormula;
+
+public interface CreditService {
+
+	public void ajouterCredit(int client, int id, Credit C);
+	public Credit afficherCredit(int id);
+	public void supprimerCredit(int id);
+	public void ajouterCreditFormula(CreditFormula C, int id);
+	public List<CreditFormula> listeformulescredit(int banque);
+	public CreditFormula affichercreditformula(int id);
+	public List<Credit> getallcreditsofclient(int idclient);
+	public List<Credit> retrieveAllCredit();
+	public List<CreditFormula> retrieveAllFormule();
+}

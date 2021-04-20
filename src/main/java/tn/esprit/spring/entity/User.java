@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 @Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="user_type")
 @Table(name="T_User")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;

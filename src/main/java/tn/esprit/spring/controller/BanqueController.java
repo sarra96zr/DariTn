@@ -33,14 +33,14 @@ public class BanqueController {
 		// http://localhost:8081/DariTn/Pi/retrieve-banque/{banque-id}
 				@GetMapping("/retrieve-banque/{banque-id}")
 				@ResponseBody
-				public Banque retrieveMeuble(@PathVariable("banque-id") String id_b) {
+				public Banque retrieveBanque(@PathVariable("banque-id") String id_b) {
 					return banqueService.retrieveBanque(id_b);
 				}
 
 				// Ajouter : http://localhost:8081/DariTn/Pi/add-banque
 				@PostMapping("/add-banque")
 				@ResponseBody
-				public Banque addBanque(@RequestBody Banque b) {
+				public Banque ajouterCreditFormula(@RequestBody Banque b) {
 					 Banque banque = banqueService.addBanque(b);
 					return banque;
 				}

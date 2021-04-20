@@ -1,5 +1,6 @@
 package tn.esprit.spring.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.entity.Abonnement;
-import tn.esprit.spring.entity.Banque;
 import tn.esprit.spring.service.AbonnementService;
 
 
@@ -70,7 +70,31 @@ public class AbonnementController {
 				public List<Abonnement> SearchAbonnementByType(@PathVariable("abonnement-type") String type_abonnement) {
 					return abservice.SearchAbonnementByType(type_abonnement);
 				}
+				// range of date
+				// http://localhost:8081/DariTn/Pi/range/{db}/{df}
+				@GetMapping("/range/{db}/{df}")
+				@ResponseBody
+				public List<Abonnement> RangeDate(@PathVariable("db") Date db, @PathVariable("df") Date df) {
+					return abservice.Range(db, df);
+				}
 				
+				// trie abonnement par id asc
+				// http://localhost:8081/DariTn/Pi/retrieve-all-products-asc
+				@GetMapping("/retrieve-all-products-asc")
+				@ResponseBody
+				public List<Abonnement> orderByAscendingQantity() {
+					List<Abonnement> list = abservice.orderByAscendingId();
+					return list;
+				}
+
+				// trie abonnement par id desc
+				// http://localhost:8081/DariTn/Pi/retrieve-all-products-desc
+				@GetMapping("/retrieve-all-products-desc")
+				@ResponseBody
+				public List<Abonnement> orderByDescendingId() {
+					List<Abonnement> list = abservice.orderByDescendingId();
+					return list;
+				}
 				
 				
 }
