@@ -39,7 +39,7 @@ public class AnnonceController {
 					return annonceService.retrieveAnnonce(id_m);
 				}
 
-				// Ajouter : http://localhost:8081/DariTn/Pi/add-annonce
+				// http://localhost:8081/DariTn/Pi/add-annonce
 				@PostMapping("/add-annonce")
 				@ResponseBody
 				public Annonce addProduct(@RequestBody Annonce a) {
@@ -60,6 +60,14 @@ public class AnnonceController {
 				@ResponseBody
 				public Annonce modifyAnnoce(@RequestBody Annonce a) {
 					return annonceService.updateAnnonce(a);
+				}
+				
+				
+				// http://localhost:8081/DariTn/Pi/search-annonce/{annonce-title}
+				@GetMapping("/search-annonce/{annonce-title}")
+				@ResponseBody
+				public List<Annonce> SearchProductByName(@PathVariable("annonce-title") String annonce_title) {
+					return annonceService.RechercheAnnonce(annonce_title);
 				}
 
 }

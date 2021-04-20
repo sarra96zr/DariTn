@@ -59,5 +59,12 @@ public Annonce retrieveAnnonce(String id_a) {
 	return annonceRepository.findById(Long.parseLong(id_a)).orElse(null);
 
 
-}}
+}
+
+@Override
+public List<Annonce> RechercheAnnonce(String annonce_title) {
+
+		return annonceRepository.RechercheAnnonce(annonce_title);
+	}
+}
 

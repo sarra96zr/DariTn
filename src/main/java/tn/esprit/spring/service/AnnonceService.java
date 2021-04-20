@@ -15,5 +15,7 @@ public interface AnnonceService {
 	Annonce updateAnnonce(Annonce a);
 	//Optional<Annonce> retrieveAnnonce(String id);
 	Annonce retrieveAnnonce(String id_m);
+	List<Annonce> RechercheAnnonce(String annonce_title);
+	
 
 }

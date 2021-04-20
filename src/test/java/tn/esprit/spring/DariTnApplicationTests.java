@@ -20,11 +20,12 @@ public class DariTnApplicationTests {
 	@Test
 	public void contextLoads() {
 		
-		
 				//an.addAnnonce(a);
 				//an.updateAnnonce(a);
 				//an.deleteAnnonce("2");
-				an.retrieveAllAnnonces();
+				//an.retrieveAllAnnonces();
+			//AnnonceLocation.calculprix("20/04/2021", "24/04/2021", 22.2f);
+				//AnnonceLocation.calculPrix(223.4, 20-04-2021, 24-04-2021);
 	}
 
 }
