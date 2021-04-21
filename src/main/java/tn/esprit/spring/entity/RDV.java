@@ -24,7 +24,7 @@ private static final long serialVersionUID = 1L;
 	private Client client;
 	
 	@OneToOne
-	@JoinColumn(name="T_RDV_FeedBack")
+	@JoinColumn(name="id_RDV_FeedBack")
 	private RDVFeedBack RDVF;
 
 	public long getId_rdv() {

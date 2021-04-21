@@ -10,9 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import tn.esprit.spring.entity.RDV;
 import tn.esprit.spring.service.RDVService;
 
+
+@RestController
 public class RDVController {
 	
 	@Autowired
@@ -28,9 +32,9 @@ public class RDVController {
 			return list;
 		}
 		// http://localhost:8081/DariTn/Pi/retrieve-RDV/{rdv-id}
-				@GetMapping("/retrieve-furniture/{rdv-id}")
+				@GetMapping("/retrieve-rdv/{rdv-id}")
 				@ResponseBody
-				public RDV retrieveRDV(@PathVariable("meuble-id") String id_rdv) {
+				public RDV retrieveRDV(@PathVariable("rdv-id") String id_rdv) {
 					return rdvService.retrieveRDV(id_rdv);
 				}
 
