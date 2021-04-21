@@ -1,6 +1,8 @@
 package tn.esprit.spring.controller;
 
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +26,22 @@ public class LocationController {
 		// http://localhost:8081/DariTn/Pi/louer
 	       @PostMapping("/louer/{datedeb}/{datefin}")
 			@ResponseBody
-			public Location addLocation(@PathVariable("datedeb") Date datedeb,@PathVariable("datefin") Date datefin) {
-				 Location l = locationService.addLocation(datedeb, datefin);
-				return l;
+			public Location addLocation(@PathVariable("datedeb") String datedeb,@PathVariable("datefin") String datefin) throws ParseException {
+	    	   Date date1=new SimpleDateFormat("dd-MM-yyyy").parse(datedeb);
+	    	   Date date2=new SimpleDateFormat("dd-MM-yyyy").parse(datefin);
+	    	   if (date1.before(date2)){
+	    	   Location l = locationService.addLocation(date1, date2);
+				return l;}
+	    	   else return null;
+	    	   
 			}
 			
-		
+	    // http://localhost:8081/DariTn/Pi/retrieve-all-location
+	   	    @GetMapping("/retrieve-all-location")
+	   		@ResponseBody
+	   		public List<Location> getLocation() {
+	   			List<Location> list = locationService.retrieveAllLocation();
+	   			return list;
+	   		}
 
 }

@@ -1,10 +1,13 @@
 package tn.esprit.spring.service;
 
 import java.util.Date;
+import java.util.List;
 
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tn.esprit.spring.entity.Annonce;
 import tn.esprit.spring.entity.Location;
 import tn.esprit.spring.repository.AnnonceRepository;
 import tn.esprit.spring.repository.LocationRepository;
@@ -28,8 +31,18 @@ public class LocationServiceImpl implements LocationService{
 
 	@Override
 	public Location addLocation( Date datedeb, Date datefin) {
-		Location l = new Location(datedeb, datefin, calculPrix(300.2,datedeb, datefin));
+		//User u = new tn.esprit.spring.entity.User(1, "zeineb","yah", "zeineb", "pass", , annonces, notifications)
+		Location l = new Location(datedeb, datefin, calculPrix(300.2,datedeb, datefin),null,null);
 		return locarepo.save(l);
+	}
+
+	@Override
+	public List<Location> retrieveAllLocation() {
+		List<Location> annonces = (List<Location>) locarepo.findAll();
+		/*for (User user : users) {
+			L.info("user :"+ user);
+		}*/
+		return annonces;
 	}
 	
 	

@@ -16,4 +16,8 @@ public interface AnnonceRepository extends CrudRepository<Annonce, Long> {
 	@Query("SELECT a FROM Annonce a WHERE a.titre= :annonce_title")
 	List<Annonce> RechercheAnnonce(@Param("annonce_title") String annonce_title);
 
+	@Query("SELECT a FROM Annonce a WHERE a.id= :id_user")
+	List<Annonce> ListeParUser(@Param("id_user") String id_user);
+	
+	
 }

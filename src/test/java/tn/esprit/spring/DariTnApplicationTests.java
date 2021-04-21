@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import tn.esprit.spring.entity.Annonce;
+import tn.esprit.spring.entity.Categorie_Annonce;
 import tn.esprit.spring.entity.Location;
 import tn.esprit.spring.entity.Type_Annonce;
 import tn.esprit.spring.service.AnnonceServiceImpl;
@@ -39,6 +40,8 @@ public class DariTnApplicationTests {
 				 //Date startDate = Date.parse('12/15/15');
 			       // Date endDate = Date.parse('12/16/15');
 			        //SimpleDateFormat( "yyyyMMdd" ).parse( "20100520" );
+	Annonce a = new Annonce("vente", "ariana","oui", "vente", "oui", 334.5f, true, Type_Annonce.Vente, Categorie_Annonce.DEPOT, null);
+an.addAnnonce(a);
 	}
 
 }

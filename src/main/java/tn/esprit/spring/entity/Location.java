@@ -18,18 +18,17 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name="Location")
 public class Location implements Serializable {
-
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name="id")
 	public long id;
 
 	@Column(name="dateDebut")
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	public Date dateDebut;
 	@Column(name="dateFin")
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	public Date dateFin;
+	
 	@Column(name="prixLocation")
 	public Double prixLocation;
 	
@@ -75,14 +74,6 @@ public class Location implements Serializable {
 	public void setAnnonce(Annonce annonce) {
 		this.annonce = annonce;
 	}
-	public Location(java.util.Date datedeb, java.util.Date datefin2, Double prixLocation) {
-		super();
-		this.dateDebut = datedeb;
-		this.dateFin = datefin2;
-		this.prixLocation = prixLocation;
-		//this.user = user;
-		//this.annonce = annonce;
-	}
 	
 	public static Double calculPrix(Double prix, SimpleDateFormat datedeb, SimpleDateFormat datefin) {
 		
@@ -94,5 +85,27 @@ public class Location implements Serializable {
 	        return prix1= ((prix/31)*(datefin.getCalendar().compareTo(datedeb.getCalendar())))/ (MILLISECONDS_PER_DAY);
 	           
 	}
+	public Location(Date dateDebut, Date dateFin, Double prixLocation, User user, Annonce annonce) {
+		super();
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.prixLocation = prixLocation;
+		this.user = user;
+		this.annonce = annonce;
+	}
+	public Location() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Location(long id, Date dateDebut, Date dateFin, Double prixLocation, User user, Annonce annonce) {
+		super();
+		this.id = id;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.prixLocation = prixLocation;
+		this.user = user;
+		this.annonce = annonce;
+	}
+
 	
 }
