@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import ch.qos.logback.core.net.server.Client;
 import tn.esprit.spring.entity.Reclamations;
+import tn.esprit.spring.entity.Type_Rec;
 import tn.esprit.spring.service.RecService;
 
 
@@ -59,5 +61,19 @@ public class RecController {
 				public Reclamations modifyProduct(@RequestBody Reclamations r) {
 					return RecService.updateRec(r);
 				}
+				
+				// http://localhost:8081/DariTn/Pi/findByType/{rec-type}
+				@GetMapping("/findByType/{rec-type}")
+				@ResponseBody
+				public List<Reclamations> SearchRecByType(@PathVariable("rec-type") Type_Rec type) {
+					return RecService.RechercheRec(type);
+				}
+				
+				// http://localhost:8081/DariTn/Pi/findById-rec/{client-id}
+				@GetMapping("/findById/{client-id}")
+				@ResponseBody
+				public List<Reclamations> findById(@PathVariable("client-id") Client client) {
+						return RecService.findById(client);
+					}
 				
 }

@@ -8,7 +8,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ch.qos.logback.core.net.server.Client;
 import tn.esprit.spring.entity.Reclamations;
+import tn.esprit.spring.entity.Type_Rec;
 import tn.esprit.spring.repository.RecRepo;
 
 
@@ -50,6 +52,15 @@ public class RecServiceImpl implements RecService {
 	public Reclamations retrieveRec(String id_r) {
 		// TODO Auto-generated method stub
 		return RecDAO.findById(Long.parseLong(id_r)).orElse(null);
+	}
+
+	@Override
+	public List<Reclamations> RechercheRec(Type_Rec type) {
+			return RecDAO.RechercheRec(type);
+	}
+	@Override
+	public List<Reclamations> findById(Client client) {
+			return RecDAO.findById(client);
 	}
 
 }

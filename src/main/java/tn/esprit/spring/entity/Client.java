@@ -22,15 +22,16 @@ public class Client extends User implements Serializable {
 	@OneToMany(mappedBy="client")
 	private Set<Credit> credit;
 	@OneToMany(mappedBy="client")
-	private Set<Reclamations> reclam;
+	//private Set<Reclamations> reclam;
 	@OneToOne
 	@JoinColumn(name="T_RDV_client")
 	private RDV rdv;
 	@OneToMany(cascade= CascadeType.ALL , mappedBy="client")
 	private Set<Meubles> meuble;
-//	public int getId_client() {
-//		return id_client;
-//	}
+	
+	//public int getId_client() {
+	//	return id_client;
+	//}
 //	public void setId_client(int id_client) {
 //		this.id_client = id_client;
 //	}
@@ -52,12 +53,12 @@ public class Client extends User implements Serializable {
 	public void setCredit(Set<Credit> credit) {
 		this.credit = credit;
 	}
-	public Set<Reclamations> getReclam() {
-		return reclam;
-	}
-	public void setReclam(Set<Reclamations> reclam) {
-		this.reclam = reclam;
-	}
+	//public Set<Reclamations> getReclam() {
+	//	return reclam;
+	//}
+	//public void setReclam(Set<Reclamations> reclam) {
+	//	this.reclam = reclam;
+	//}
 	public RDV getRdv() {
 		return rdv;
 	}
@@ -77,7 +78,7 @@ public class Client extends User implements Serializable {
 		this.panier = panier;
 		this.abonnement = abonnement;
 		this.credit = credit;
-		this.reclam = reclam;
+		//this.reclam = reclam;
 		this.rdv = rdv;
 		this.meuble = meuble;
 	}
