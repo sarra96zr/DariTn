@@ -6,3 +6,185 @@
 2021-04-21 00:01:02.193  INFO 9224 --- [RMI TCP Connection(2)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2021-04-21 00:01:02.199  INFO 9224 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2021-04-21 00:01:02.212  INFO 9224 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-04-21 00:35:16.607  INFO 14128 --- [main] tn.esprit.spring.DariTnApplication       : Starting DariTnApplication on DESKTOP-6LQV6AQ with PID 14128 (C:\Users\MSI\Documents\workspace-sts-3.8.4.RELEASE\DariTn\target\classes started by MSI in C:\Users\MSI\Documents\workspace-sts-3.8.4.RELEASE\DariTn)
+2021-04-21 00:35:16.610  INFO 14128 --- [main] tn.esprit.spring.DariTnApplication       : No active profile set, falling back to default profiles: default
+2021-04-21 00:35:17.094  INFO 14128 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-04-21 00:35:17.194  INFO 14128 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 93ms. Found 2 repository interfaces.
+2021-04-21 00:35:17.417  INFO 14128 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-04-21 00:35:17.778  INFO 14128 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2021-04-21 00:35:17.805  INFO 14128 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-04-21 00:35:17.805  INFO 14128 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2021-04-21 00:35:18.099  INFO 14128 --- [main] o.a.c.c.C.[.[localhost].[/DariTn]        : Initializing Spring embedded WebApplicationContext
+2021-04-21 00:35:18.099  INFO 14128 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1457 ms
+2021-04-21 00:35:18.367  INFO 14128 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-04-21 00:35:18.499  INFO 14128 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.4.8.Final}
+2021-04-21 00:35:18.779  INFO 14128 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-04-21 00:35:18.903  INFO 14128 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-04-21 00:35:19.136  INFO 14128 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-04-21 00:35:19.151  INFO 14128 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-04-21 00:35:19.331  WARN 14128 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Client
+2021-04-21 00:35:19.341  WARN 14128 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Expert_financier
+2021-04-21 00:35:19.749  INFO 14128 --- [main] org.hibernate.tuple.PojoInstantiator     : HHH000182: No default (no-argument) constructor for class: tn.esprit.spring.entity.Location (class must be instantiated by Interceptor)
+2021-04-21 00:35:20.180  INFO 14128 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-04-21 00:35:20.193  INFO 14128 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-04-21 00:35:20.683  WARN 14128 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-04-21 00:35:20.823  INFO 14128 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-04-21 00:35:21.193  INFO 14128 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path '/DariTn'
+2021-04-21 00:35:21.196  INFO 14128 --- [main] tn.esprit.spring.DariTnApplication       : Started DariTnApplication in 4.832 seconds (JVM running for 5.483)
+2021-04-21 00:35:21.671  INFO 14128 --- [http-nio-8081-exec-1] o.a.c.c.C.[.[localhost].[/DariTn]        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-04-21 00:35:21.672  INFO 14128 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-04-21 00:35:21.688  INFO 14128 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 16 ms
+2021-04-21 00:44:40.505  INFO 14584 --- [main] tn.esprit.spring.DariTnApplicationTests  : Starting DariTnApplicationTests on DESKTOP-6LQV6AQ with PID 14584 (started by MSI in C:\Users\MSI\Documents\workspace-sts-3.8.4.RELEASE\DariTn)
+2021-04-21 00:44:40.507  INFO 14584 --- [main] tn.esprit.spring.DariTnApplicationTests  : No active profile set, falling back to default profiles: default
+2021-04-21 00:44:41.183  INFO 14584 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-04-21 00:44:41.297  INFO 14584 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 95ms. Found 2 repository interfaces.
+2021-04-21 00:44:41.661  INFO 14584 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-04-21 00:44:41.893  INFO 14584 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-04-21 00:44:41.959  INFO 14584 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.4.8.Final}
+2021-04-21 00:44:42.087  INFO 14584 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-04-21 00:44:42.451  INFO 14584 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-04-21 00:44:42.600  INFO 14584 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-04-21 00:44:42.614  INFO 14584 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-04-21 00:44:42.797  WARN 14584 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Client
+2021-04-21 00:44:42.805  WARN 14584 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Expert_financier
+2021-04-21 00:44:43.210  INFO 14584 --- [main] org.hibernate.tuple.PojoInstantiator     : HHH000182: No default (no-argument) constructor for class: tn.esprit.spring.entity.Location (class must be instantiated by Interceptor)
+2021-04-21 00:44:43.750  INFO 14584 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-04-21 00:44:43.756  INFO 14584 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-04-21 00:44:44.524  WARN 14584 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-04-21 00:44:44.760  INFO 14584 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-04-21 00:44:45.104  INFO 14584 --- [main] tn.esprit.spring.DariTnApplicationTests  : Started DariTnApplicationTests in 4.889 seconds (JVM running for 5.738)
+2021-04-21 00:44:45.202  INFO 14584 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-04-21 00:44:45.204  INFO 14584 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-04-21 00:44:45.206  INFO 14584 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-04-21 00:44:45.217  INFO 14584 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-04-21 00:45:57.772  INFO 14128 --- [RMI TCP Connection(2)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2021-04-21 00:45:57.779  INFO 14128 --- [RMI TCP Connection(2)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-04-21 00:45:57.782  INFO 14128 --- [RMI TCP Connection(2)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-04-21 00:45:57.789  INFO 14128 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-04-21 00:45:57.802  INFO 14128 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-04-21 00:46:10.682  INFO 8868 --- [main] tn.esprit.spring.DariTnApplicationTests  : Starting DariTnApplicationTests on DESKTOP-6LQV6AQ with PID 8868 (started by MSI in C:\Users\MSI\Documents\workspace-sts-3.8.4.RELEASE\DariTn)
+2021-04-21 00:46:10.684  INFO 8868 --- [main] tn.esprit.spring.DariTnApplicationTests  : No active profile set, falling back to default profiles: default
+2021-04-21 00:46:11.329  INFO 8868 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-04-21 00:46:11.415  INFO 8868 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 73ms. Found 2 repository interfaces.
+2021-04-21 00:46:11.794  INFO 8868 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-04-21 00:46:12.022  INFO 8868 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-04-21 00:46:12.085  INFO 8868 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.4.8.Final}
+2021-04-21 00:46:12.201  INFO 8868 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-04-21 00:46:12.715  INFO 8868 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-04-21 00:46:12.926  INFO 8868 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-04-21 00:46:12.942  INFO 8868 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-04-21 00:46:13.129  WARN 8868 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Client
+2021-04-21 00:46:13.137  WARN 8868 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Expert_financier
+2021-04-21 00:46:13.587  INFO 8868 --- [main] org.hibernate.tuple.PojoInstantiator     : HHH000182: No default (no-argument) constructor for class: tn.esprit.spring.entity.Location (class must be instantiated by Interceptor)
+2021-04-21 00:46:13.969  INFO 8868 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-04-21 00:46:13.975  INFO 8868 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-04-21 00:46:14.749  WARN 8868 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-04-21 00:46:15.016  INFO 8868 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-04-21 00:46:15.376  INFO 8868 --- [main] tn.esprit.spring.DariTnApplicationTests  : Started DariTnApplicationTests in 4.997 seconds (JVM running for 5.769)
+2021-04-21 00:46:15.470  INFO 8868 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-04-21 00:46:15.472  INFO 8868 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-04-21 00:46:15.474  INFO 8868 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-04-21 00:46:15.484  INFO 8868 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-04-21 00:56:15.492  INFO 17968 --- [main] tn.esprit.spring.DariTnApplicationTests  : Starting DariTnApplicationTests on DESKTOP-6LQV6AQ with PID 17968 (started by MSI in C:\Users\MSI\Documents\workspace-sts-3.8.4.RELEASE\DariTn)
+2021-04-21 00:56:15.493  INFO 17968 --- [main] tn.esprit.spring.DariTnApplicationTests  : No active profile set, falling back to default profiles: default
+2021-04-21 00:56:16.154  INFO 17968 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-04-21 00:56:16.241  INFO 17968 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 77ms. Found 2 repository interfaces.
+2021-04-21 00:56:16.632  INFO 17968 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-04-21 00:56:16.874  INFO 17968 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-04-21 00:56:16.937  INFO 17968 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.4.8.Final}
+2021-04-21 00:56:17.062  INFO 17968 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-04-21 00:56:17.601  INFO 17968 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-04-21 00:56:17.757  INFO 17968 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-04-21 00:56:17.772  INFO 17968 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-04-21 00:56:17.961  WARN 17968 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Client
+2021-04-21 00:56:17.970  WARN 17968 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Expert_financier
+2021-04-21 00:56:18.372  INFO 17968 --- [main] org.hibernate.tuple.PojoInstantiator     : HHH000182: No default (no-argument) constructor for class: tn.esprit.spring.entity.Location (class must be instantiated by Interceptor)
+2021-04-21 00:56:18.847  INFO 17968 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-04-21 00:56:18.854  INFO 17968 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-04-21 00:56:19.608  WARN 17968 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-04-21 00:56:19.865  INFO 17968 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-04-21 00:56:20.238  INFO 17968 --- [main] tn.esprit.spring.DariTnApplicationTests  : Started DariTnApplicationTests in 5.069 seconds (JVM running for 5.853)
+2021-04-21 00:56:20.333  INFO 17968 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-04-21 00:56:20.338  INFO 17968 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-04-21 00:56:20.341  INFO 17968 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-04-21 00:56:20.359  INFO 17968 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-04-21 01:25:29.728  INFO 5288 --- [main] tn.esprit.spring.DariTnApplicationTests  : Starting DariTnApplicationTests on DESKTOP-6LQV6AQ with PID 5288 (started by MSI in C:\Users\MSI\Documents\workspace-sts-3.8.4.RELEASE\DariTn)
+2021-04-21 01:25:29.729  INFO 5288 --- [main] tn.esprit.spring.DariTnApplicationTests  : No active profile set, falling back to default profiles: default
+2021-04-21 01:25:30.346  INFO 5288 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-04-21 01:25:30.440  INFO 5288 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 81ms. Found 2 repository interfaces.
+2021-04-21 01:25:30.826  INFO 5288 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-04-21 01:25:31.090  INFO 5288 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-04-21 01:25:31.170  INFO 5288 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.4.8.Final}
+2021-04-21 01:25:31.364  INFO 5288 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-04-21 01:25:31.789  INFO 5288 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-04-21 01:25:31.943  INFO 5288 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-04-21 01:25:31.963  INFO 5288 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-04-21 01:25:32.223  WARN 5288 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Client
+2021-04-21 01:25:32.231  WARN 5288 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Expert_financier
+2021-04-21 01:25:32.772  INFO 5288 --- [main] org.hibernate.tuple.PojoInstantiator     : HHH000182: No default (no-argument) constructor for class: tn.esprit.spring.entity.Location (class must be instantiated by Interceptor)
+2021-04-21 01:25:33.159  INFO 5288 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-04-21 01:25:33.167  INFO 5288 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-04-21 01:25:33.985  WARN 5288 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-04-21 01:25:34.241  INFO 5288 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-04-21 01:25:34.650  INFO 5288 --- [main] tn.esprit.spring.DariTnApplicationTests  : Started DariTnApplicationTests in 5.208 seconds (JVM running for 6.161)
+2021-04-21 01:25:34.755  INFO 5288 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-04-21 01:25:34.757  INFO 5288 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-04-21 01:25:34.760  INFO 5288 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-04-21 01:25:34.790  INFO 5288 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-04-21 01:26:57.445  INFO 16704 --- [main] tn.esprit.spring.DariTnApplication       : Starting DariTnApplication on DESKTOP-6LQV6AQ with PID 16704 (C:\Users\MSI\Documents\workspace-sts-3.8.4.RELEASE\DariTn\target\classes started by MSI in C:\Users\MSI\Documents\workspace-sts-3.8.4.RELEASE\DariTn)
+2021-04-21 01:26:57.448  INFO 16704 --- [main] tn.esprit.spring.DariTnApplication       : No active profile set, falling back to default profiles: default
+2021-04-21 01:26:58.036  INFO 16704 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-04-21 01:26:58.102  INFO 16704 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 57ms. Found 2 repository interfaces.
+2021-04-21 01:26:58.435  INFO 16704 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-04-21 01:26:58.994  INFO 16704 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2021-04-21 01:26:59.007  INFO 16704 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-04-21 01:26:59.008  INFO 16704 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2021-04-21 01:26:59.112  INFO 16704 --- [main] o.a.c.c.C.[.[localhost].[/DariTn]        : Initializing Spring embedded WebApplicationContext
+2021-04-21 01:26:59.112  INFO 16704 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1611 ms
+2021-04-21 01:26:59.318  INFO 16704 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-04-21 01:26:59.395  INFO 16704 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.4.8.Final}
+2021-04-21 01:26:59.607  INFO 16704 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-04-21 01:26:59.694  INFO 16704 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-04-21 01:26:59.838  INFO 16704 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-04-21 01:26:59.853  INFO 16704 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-04-21 01:27:00.113  WARN 16704 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Client
+2021-04-21 01:27:00.123  WARN 16704 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Expert_financier
+2021-04-21 01:27:00.534  INFO 16704 --- [main] org.hibernate.tuple.PojoInstantiator     : HHH000182: No default (no-argument) constructor for class: tn.esprit.spring.entity.Location (class must be instantiated by Interceptor)
+2021-04-21 01:27:00.899  INFO 16704 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-04-21 01:27:00.905  INFO 16704 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-04-21 01:27:01.422  WARN 16704 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-04-21 01:27:01.548  INFO 16704 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-04-21 01:27:01.847  INFO 16704 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path '/DariTn'
+2021-04-21 01:27:01.850  INFO 16704 --- [main] tn.esprit.spring.DariTnApplication       : Started DariTnApplication in 4.739 seconds (JVM running for 5.17)
+2021-04-21 01:57:38.771  INFO 14900 --- [main] tn.esprit.spring.DariTnApplication       : Starting DariTnApplication on DESKTOP-6LQV6AQ with PID 14900 (C:\Users\MSI\Documents\workspace-sts-3.8.4.RELEASE\DariTn\target\classes started by MSI in C:\Users\MSI\Documents\workspace-sts-3.8.4.RELEASE\DariTn)
+2021-04-21 01:57:38.773  INFO 14900 --- [main] tn.esprit.spring.DariTnApplication       : No active profile set, falling back to default profiles: default
+2021-04-21 01:57:39.222  INFO 14900 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-04-21 01:57:39.351  INFO 14900 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 123ms. Found 3 repository interfaces.
+2021-04-21 01:57:39.720  INFO 14900 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-04-21 01:57:39.946  INFO 14900 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2021-04-21 01:57:39.955  INFO 14900 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-04-21 01:57:39.956  INFO 14900 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2021-04-21 01:57:40.095  INFO 14900 --- [main] o.a.c.c.C.[.[localhost].[/DariTn]        : Initializing Spring embedded WebApplicationContext
+2021-04-21 01:57:40.096  INFO 14900 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1282 ms
+2021-04-21 01:57:40.356  INFO 14900 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-04-21 01:57:40.400  INFO 14900 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.4.8.Final}
+2021-04-21 01:57:40.488  INFO 14900 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-04-21 01:57:40.561  INFO 14900 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-04-21 01:57:40.691  INFO 14900 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-04-21 01:57:40.700  INFO 14900 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-04-21 01:57:40.884  WARN 14900 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Client
+2021-04-21 01:57:40.896  WARN 14900 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Expert_financier
+2021-04-21 01:57:41.298  INFO 14900 --- [main] org.hibernate.tuple.PojoInstantiator     : HHH000182: No default (no-argument) constructor for class: tn.esprit.spring.entity.Location (class must be instantiated by Interceptor)
+2021-04-21 01:57:41.774  INFO 14900 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-04-21 01:57:41.780  INFO 14900 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-04-21 01:57:42.113  WARN 14900 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-04-21 01:57:42.213  INFO 14900 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-04-21 01:57:42.404  INFO 14900 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path '/DariTn'
+2021-04-21 01:57:42.406  INFO 14900 --- [main] tn.esprit.spring.DariTnApplication       : Started DariTnApplication in 3.919 seconds (JVM running for 4.559)
+2021-04-21 01:58:37.794  INFO 14900 --- [http-nio-8081-exec-2] o.a.c.c.C.[.[localhost].[/DariTn]        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-04-21 01:58:37.795  INFO 14900 --- [http-nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-04-21 01:58:37.811  INFO 14900 --- [http-nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 16 ms
+2021-04-21 02:00:29.440  WARN 14900 --- [http-nio-8081-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.sql.Date'; nested exception is org.springframework.core.convert.ConversionFailedException: Failed to convert from type [java.lang.String] to type [@org.springframework.web.bind.annotation.PathVariable java.sql.Date] for value '20-04-2021'; nested exception is java.lang.IllegalArgumentException]
+2021-04-21 02:04:22.497  WARN 14900 --- [http-nio-8081-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.sql.Date'; nested exception is org.springframework.core.convert.ConversionFailedException: Failed to convert from type [java.lang.String] to type [@org.springframework.web.bind.annotation.PathVariable java.sql.Date] for value '2021-04-21 00:00:00'; nested exception is java.lang.IllegalArgumentException]
+2021-04-21 02:07:58.851  WARN 14900 --- [http-nio-8081-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.sql.Date'; nested exception is org.springframework.core.convert.ConversionFailedException: Failed to convert from type [java.lang.String] to type [@org.springframework.web.bind.annotation.PathVariable java.sql.Date] for value '20-04-2021'; nested exception is java.lang.IllegalArgumentException]
+2021-04-21 02:10:55.751  WARN 14900 --- [http-nio-8081-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.sql.Date'; nested exception is org.springframework.core.convert.ConversionFailedException: Failed to convert from type [java.lang.String] to type [@org.springframework.web.bind.annotation.PathVariable java.sql.Date] for value '"20-04-2021"'; nested exception is java.lang.IllegalArgumentException]
