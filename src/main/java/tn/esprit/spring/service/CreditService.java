@@ -12,10 +12,11 @@ public interface CreditService {
 	public void ajouterCredit(int client, int id, Credit C);
 	public Credit afficherCredit(int id);
 	public void supprimerCredit(int id);
+	public void modifiercredit(int id, int credit);
 	public void ajouterCreditFormula(CreditFormula C, int id);
-	public List<CreditFormula> listeformulescredit(int banque);
 	public CreditFormula affichercreditformula(int id);
-	public List<Credit> getallcreditsofclient(int idclient);
+	public List<Credit> getallcreditsofclient(int id_client);
 	public List<Credit> retrieveAllCredit();
 	public List<CreditFormula> retrieveAllFormule();
+	
 }

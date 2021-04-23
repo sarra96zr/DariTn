@@ -1,5 +1,6 @@
 package tn.esprit.spring.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,12 +53,13 @@ public class CreditServiceImpl implements CreditService {
 	@Override
 	public Credit afficherCredit(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return crep.findById(id).orElse(null);
 	}
 
 	@Override
 	public void supprimerCredit(int id) {
 		// TODO Auto-generated method stub
+		crep.deleteById(id);
 		
 	}
 
@@ -69,23 +71,30 @@ public class CreditServiceImpl implements CreditService {
 		frep.save(C);
 	}
 
-	@Override
-	public List<CreditFormula> listeformulescredit(int banque) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public CreditFormula affichercreditformula(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return frep.findById(id).orElse(null);
 	}
 
 	@Override
-	public List<Credit> getallcreditsofclient(int idclient) {
+	public List<Credit> getallcreditsofclient(int id_client) {
 		// TODO Auto-generated method stub
-		return null;
+		List<Credit> liste=(List<Credit>) crep.findAll();
+		
+		List<Credit> finale=new ArrayList<Credit>();
+		
+		for(int i=0;i<liste.size();i++)
+		{
+			if(liste.get(i).getClient().getId_user()==id_client)
+				finale.add(liste.get(i));
+		}
+		
+		
+		return finale;
 	}
+	
 
 	@Override
 	public List<Credit> retrieveAllCredit() {
@@ -100,6 +109,22 @@ public class CreditServiceImpl implements CreditService {
 		List<CreditFormula> creditformule= (List<CreditFormula>) frep.findAll();
 		return creditformule;
 	}
+
+	@Override
+	public void modifiercredit(int credit, int id) {
+		Credit C=crep.findById(credit).get();
+		CreditFormula F=frep.findById(id).get();
+		int duree=F.getDuration();
+		double interet=F.getInterestRate();
+		float somme=C.getInitialamount();	
+		float sommefinal=(float) (somme+(somme*interet));	
+		float monthly=sommefinal/(duree*12);
+		C.setFinalamount(sommefinal);
+		C.setMonthly(monthly);	
+		C.setCreditformula(F);
+		crep.save(C);
 	
 
-}
+	
+
+}}

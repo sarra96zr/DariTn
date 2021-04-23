@@ -66,7 +66,8 @@ public class Credit implements Serializable{
 	}
 	
 	
-	@JsonBackReference(value="credits-client")
+	@JsonBackReference(value="credit-client")
+	
 	public User getClient() {
 		return client;
 	}

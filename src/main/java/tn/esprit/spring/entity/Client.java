@@ -15,7 +15,6 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 @Table(name = "client")
-@DiscriminatorValue("C")
 public class Client extends User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	//private int id_client ;
@@ -90,7 +89,7 @@ public class Client extends User implements Serializable {
 		super();
 	}
 	
-	@JsonManagedReference(value="credits-client")
+	@JsonManagedReference(value="credit-client")
 	public List<Credit> getCredits() {
 		return credits;
 	}
@@ -103,5 +102,11 @@ public class Client extends User implements Serializable {
 		this.credits.add(C);
 		C.setClient(this);
 	}
+	
+	@JsonManagedReference(value="credit-client")
+	public List<Credit> getCredit() {
+		return credits;
+	}
+
 	
 }
