@@ -69,11 +69,13 @@ public class RecController {
 					return RecService.RechercheRec(type);
 				}
 				
-				// http://localhost:8081/DariTn/Pi/findById-rec/{client-id}
-				@GetMapping("/findById/{client-id}")
+			    // http://localhost:8081/DariTn/Pi/reclamations/client/get/{client}			
+				@GetMapping("/reclamations/client/get/{client}")
 				@ResponseBody
-				public List<Reclamations> findById(@PathVariable("client-id") Client client) {
-						return RecService.findById(client);
-					}
+				public List<Reclamations> findClientById(@PathVariable("client") int id_client)
+				{
+					List<Reclamations> liste=RecService.findByClientId(id_client);
+					return liste;
+				}
 				
 }

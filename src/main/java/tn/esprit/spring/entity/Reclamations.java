@@ -1,5 +1,6 @@
 package tn.esprit.spring.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 @Table(name="Reclamations")
 public class Reclamations {
@@ -22,9 +25,13 @@ public class Reclamations {
 	public String descriptionReclam;
 	@Enumerated(EnumType.STRING)
     private Type_Rec type;
-	@ManyToOne
-	
+	@ManyToOne(cascade = CascadeType.ALL)
 	Client client;
+	
+	@JsonBackReference(value="reclamations-client")
+	public User getClient() {
+		return client;
+	}
 	
 	public long getId_reclam() {
 		return id_reclam;
@@ -44,9 +51,8 @@ public class Reclamations {
 	public void setDescriptionReclam(String descriptionReclam) {
 		this.descriptionReclam = descriptionReclam;
 	}
-	public Client getClient() {
-		return client;
-	}
+	
+	
 	public void setClient(Client client) {
 		this.client = client;
 	}

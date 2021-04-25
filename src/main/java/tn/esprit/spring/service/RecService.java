@@ -17,5 +17,5 @@ public interface RecService {
 	Reclamations retrieveRec(String id_r);
 	Reclamations addRec(Reclamations r);
 	List<Reclamations> RechercheRec(Type_Rec type);
-	List<Reclamations> findById(Client client);
+	List<Reclamations> findByClientId(int client);
 }

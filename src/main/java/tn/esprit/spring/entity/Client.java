@@ -1,6 +1,7 @@
 package tn.esprit.spring.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 @Table(name = "client")
 public class Client extends User implements Serializable {
@@ -22,7 +26,8 @@ public class Client extends User implements Serializable {
 	@OneToMany(mappedBy="client")
 	private Set<Credit> credit;
 	@OneToMany(mappedBy="client")
-	//private Set<Reclamations> reclam;
+	@JsonIgnore
+	private Set<Reclamations> reclam;
 	@OneToOne
 	@JoinColumn(name="T_RDV_client")
 	private RDV rdv;
@@ -35,6 +40,7 @@ public class Client extends User implements Serializable {
 //	public void setId_client(int id_client) {
 //		this.id_client = id_client;
 //	}
+	
 	public Panier getPanier() {
 		return panier;
 	}
@@ -53,12 +59,14 @@ public class Client extends User implements Serializable {
 	public void setCredit(Set<Credit> credit) {
 		this.credit = credit;
 	}
-	//public Set<Reclamations> getReclam() {
-	//	return reclam;
-	//}
-	//public void setReclam(Set<Reclamations> reclam) {
-	//	this.reclam = reclam;
-	//}
+	public Set<Reclamations> getReclam() {
+		return reclam;
+	}
+	public void setReclam(Set<Reclamations> reclam) {
+		this.reclam = reclam;
+	}
+	
+	
 	public RDV getRdv() {
 		return rdv;
 	}
@@ -78,7 +86,7 @@ public class Client extends User implements Serializable {
 		this.panier = panier;
 		this.abonnement = abonnement;
 		this.credit = credit;
-		//this.reclam = reclam;
+		this.reclam = reclam;
 		this.rdv = rdv;
 		this.meuble = meuble;
 	}
@@ -86,4 +94,6 @@ public class Client extends User implements Serializable {
 		super();
 	}
 	
+ 
+
 }
