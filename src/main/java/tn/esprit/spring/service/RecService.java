@@ -18,4 +18,7 @@ public interface RecService {
 	Reclamations addRec(Reclamations r);
 	List<Reclamations> RechercheRec(Type_Rec type);
 	List<Reclamations> findByClientId(int client);
+	public void ajouterRec(int client, Reclamations r);
+	public void modifierRec(int rec);
+
 }

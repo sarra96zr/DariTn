@@ -3,6 +3,8 @@ package tn.esprit.spring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,12 +42,12 @@ public class RecController {
 				}
 
 				// http://localhost:8081/DariTn/Pi/add-reclamation
-				@PostMapping("/add-reclamation")
-				@ResponseBody
-				public Reclamations addProduct(@RequestBody Reclamations r) {
-					 Reclamations rec = RecService.addRec(r);
-					return rec;
-				}
+				//@PostMapping("/add-reclamation")
+				//@ResponseBody
+				//public Reclamations addProduct(@RequestBody Reclamations r) {
+				//	 Reclamations rec = RecService.addRec(r);
+				//	return rec;
+				//}
 
 				// http://localhost:8081/DariTn/Pi/Delete-rec/{rec-id}
 				@DeleteMapping("/Delete-rec/{rec-id}")
@@ -77,5 +79,28 @@ public class RecController {
 					List<Reclamations> liste=RecService.findByClientId(id_client);
 					return liste;
 				}
+	
+				// http://localhost:8081/DariTn/Pi/add-reclamation/{client}
+				@PutMapping("/add-reclamation/{client}")
+				@ResponseBody
+				public ResponseEntity<String> ajouterRec(@PathVariable("client")int client, @RequestBody Reclamations r)
+				{
+					RecService.ajouterRec(client,r);
+					return new ResponseEntity<>("Ajout réussi.", HttpStatus.CREATED);
+				
+					
+				}
+				
+				// http://localhost:8081/DariTn/Pi/modify-reclamation/{rec}/{client}
+				@PutMapping("/modify-reclamation/{rec}/{client}")
+				@ResponseBody
+				public ResponseEntity<String> modifierCredit(@PathVariable("rec")int rec,@PathVariable("client")int client)
+				{
+					RecService.modifierRec(rec);		
+					return new ResponseEntity<>("modification résussie.", HttpStatus.ACCEPTED);
+				}
+				
+				
+				
 				
 }

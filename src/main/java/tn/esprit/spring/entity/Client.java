@@ -94,6 +94,11 @@ public class Client extends User implements Serializable {
 		super();
 	}
 	
+	public void addReclam(Reclamations R)
+	{
+		this.reclam.add(R);
+		R.setClient(this);
+	}
  
 
 }

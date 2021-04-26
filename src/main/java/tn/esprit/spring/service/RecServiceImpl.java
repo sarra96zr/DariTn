@@ -13,12 +13,15 @@ import tn.esprit.spring.entity.Client;
 import tn.esprit.spring.entity.Reclamations;
 import tn.esprit.spring.entity.Type_Rec;
 import tn.esprit.spring.repository.RecRepo;
+import tn.esprit.spring.repository.UserRepo;
 
 
 @Service
 public class RecServiceImpl implements RecService {
 	@Autowired
 	private RecRepo RecDAO;
+	@Autowired
+	UserRepo urep;
 	//private static final Logger L= LogManager.getLogger(RecServiceImpl.class);
 	@Override
 	public List<Reclamations> retrieveAllRecs() {
@@ -74,6 +77,31 @@ public class RecServiceImpl implements RecService {
 		
 		
 		return finale;
+	}
+
+	@Override
+	public void ajouterRec(int client, Reclamations r) {
+		Client cl=(Client) urep.findById((long) client).get();
+		String titre=r.getTitreReclam();	
+		String description=r.getDescriptionReclam();
+		Type_Rec type=r.getType();
+		r.setDescriptionReclam(description);
+		r.setTitreReclam(titre);
+		r.setType(type);
+		cl.addReclam(r);
+		RecDAO.save(r);	
+	}
+
+	@Override
+	public void modifierRec(int rec) {
+		Reclamations r=RecDAO.findById((long) rec).get();
+		String titre=r.getTitreReclam();	
+		String description=r.getDescriptionReclam();
+		Type_Rec type=r.getType();
+		r.setDescriptionReclam(description);
+		r.setTitreReclam(titre);
+		r.setType(type);
+		RecDAO.save(r);
 	}
 
 }
