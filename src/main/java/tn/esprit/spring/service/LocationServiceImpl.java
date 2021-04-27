@@ -39,9 +39,6 @@ public class LocationServiceImpl implements LocationService{
 	@Override
 	public List<Location> retrieveAllLocation() {
 		List<Location> annonces = (List<Location>) locarepo.findAll();
-		/*for (User user : users) {
-			L.info("user :"+ user);
-		}*/
 		return annonces;
 	}
 	
