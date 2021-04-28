@@ -7,11 +7,48 @@ template="/template/template.xhtml">
 <ui:define name="content">
 <!-- BEGIN : TP1 JSF Introduction Login -->
 <h:panelGroup>
+
 <h:form>
-<h:outputText
-value="Bonjour #{userController.login}" />
+<h:outputText value="Veuillez ajouter votre annonce " />
 |
-<h:commandLink value="Déconnexion" action="#{userController.doLogout()}" />
+<h:panelGroup columns="2">
+	<h:form>
+		<table>
+		
+<tr><td><h:outputText value="Titre"></h:outputText></td><td><h:inputText
+value="#{annonceController.}"></h:inputText></td></tr>
+
+<tr><td><h:outputText value="Description"></h:outputText></td>
+<td><h:inputSecret value="#{employeController.password}"></h:inputSecret></td></tr>
+
+<tr><td><h:outputText value="Adresse"></h:outputText></td>
+<td><h:inputText value="#{employeController.nom}"></h:inputText></td></tr>
+
+<tr><td><h:outputText value="Prix"></h:outputText></td>
+<td><h:inputText value="#{employeController.prenom}"></h:inputText></td></tr>
+
+<tr>
+<td><h:outputText value="Categorie annonce"></h:outputText></td>
+<td><h:selectOneMenu value="#{employeController.role}">
+<f:selectItem itemLabel="Choisir la categorie" itemValue="#{null}" />
+<f:selectItems value="#{employeController.roles}" />
+</h:selectOneMenu></td>
+</tr>
+<tr>
+<td><h:outputText value="Type Annonce"></h:outputText></td>
+<td><h:selectOneMenu value="#{employeController.role}">
+<f:selectItem itemLabel="Choisir le type de l'annonce" itemValue="#{null}" />
+<f:selectItems value="#{employeController.roles}" />
+</h:selectOneMenu></td>
+</tr>
+
+<tr><td colspan="2"> <h:commandButton value="Ajouter Annonce"
+action="#{employeController.addEmploye()}" /></td></tr>
+
+		</table>
+	</h:form>
+</h:panelGroup>
+
 </h:form>
 </h:panelGroup>
 </ui:define>

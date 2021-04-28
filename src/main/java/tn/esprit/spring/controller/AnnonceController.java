@@ -22,8 +22,13 @@ public class AnnonceController {
 	@Autowired
 	AnnonceService annonceService;
 	
+	private List<Annonce> annonces;
 	
 	
+	public void setAnnonces(List<Annonce> annonces) {
+		this.annonces = annonces;
+	}
+
 	// http://localhost:8081/DariTn/Pi/retrieve-all-annonces
 	@GetMapping("/retrieve-all-annonces")
 		@ResponseBody

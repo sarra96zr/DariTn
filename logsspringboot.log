@@ -1,5 +1,133 @@
-2021-04-25 02:20:44.347  INFO 6740 --- [RMI TCP Connection(2)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-04-25 02:20:44.485  INFO 6740 --- [RMI TCP Connection(2)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
-2021-04-25 02:20:44.504  INFO 6740 --- [RMI TCP Connection(2)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2021-04-25 02:20:44.594  INFO 6740 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2021-04-25 02:20:44.630  INFO 6740 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-04-28 00:01:47.119  INFO 14768 --- [RMI TCP Connection(2)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2021-04-28 00:01:47.131  INFO 14768 --- [RMI TCP Connection(2)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-04-28 00:01:47.133  INFO 14768 --- [RMI TCP Connection(2)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-04-28 00:01:47.139  INFO 14768 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-04-28 00:01:47.145  INFO 14768 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-04-28 00:01:52.881  INFO 8784 --- [main] tn.esprit.spring.DariTnApplication       : Starting DariTnApplication on DESKTOP-6LQV6AQ with PID 8784 (C:\Users\MSI\Documents\workspace-sts-3.8.4.RELEASE\DariTn\src\main\webapp\WEB-INF\classes started by MSI in C:\Users\MSI\Documents\workspace-sts-3.8.4.RELEASE\DariTn)
+2021-04-28 00:01:52.883  INFO 8784 --- [main] tn.esprit.spring.DariTnApplication       : No active profile set, falling back to default profiles: default
+2021-04-28 00:01:53.280  INFO 8784 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-04-28 00:01:53.328  INFO 8784 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 42ms. Found 3 repository interfaces.
+2021-04-28 00:01:53.489  INFO 8784 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-04-28 00:01:53.652  INFO 8784 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2021-04-28 00:01:53.658  INFO 8784 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-04-28 00:01:53.659  INFO 8784 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2021-04-28 00:01:53.748  INFO 8784 --- [main] o.a.c.c.C.[.[localhost].[/DariTn]        : Initializing Spring embedded WebApplicationContext
+2021-04-28 00:01:53.748  INFO 8784 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 840 ms
+2021-04-28 00:01:53.856  INFO 8784 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-04-28 00:01:53.907  INFO 8784 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.4.8.Final}
+2021-04-28 00:01:54.008  INFO 8784 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-04-28 00:01:54.075  INFO 8784 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-04-28 00:01:54.222  INFO 8784 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-04-28 00:01:54.230  INFO 8784 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-04-28 00:01:54.348  WARN 8784 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Client
+2021-04-28 00:01:54.355  WARN 8784 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Expert_financier
+2021-04-28 00:01:55.001  INFO 8784 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-04-28 00:01:55.006  INFO 8784 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-04-28 00:01:55.303  WARN 8784 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-04-28 00:01:55.383  INFO 8784 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-04-28 00:01:55.509  INFO 8784 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path '/DariTn'
+2021-04-28 00:01:55.511  INFO 8784 --- [main] tn.esprit.spring.DariTnApplication       : Started DariTnApplication in 2.852 seconds (JVM running for 3.419)
+2021-04-28 00:02:05.985  INFO 8784 --- [http-nio-8081-exec-1] o.a.c.c.C.[.[localhost].[/DariTn]        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-04-28 00:02:05.986  INFO 8784 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-04-28 00:02:05.995  INFO 8784 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2021-04-28 00:52:39.665  INFO 8784 --- [RMI TCP Connection(2)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2021-04-28 00:52:39.705  INFO 8784 --- [RMI TCP Connection(2)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-04-28 00:52:39.709  INFO 8784 --- [RMI TCP Connection(2)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-04-28 00:52:39.737  INFO 8784 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-04-28 00:52:39.745  INFO 8784 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-04-28 00:52:45.415  INFO 12248 --- [main] tn.esprit.spring.DariTnApplication       : Starting DariTnApplication on DESKTOP-6LQV6AQ with PID 12248 (C:\Users\MSI\Documents\workspace-sts-3.8.4.RELEASE\DariTn\src\main\webapp\WEB-INF\classes started by MSI in C:\Users\MSI\Documents\workspace-sts-3.8.4.RELEASE\DariTn)
+2021-04-28 00:52:45.415  INFO 12248 --- [main] tn.esprit.spring.DariTnApplication       : No active profile set, falling back to default profiles: default
+2021-04-28 00:52:45.821  INFO 12248 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-04-28 00:52:45.862  INFO 12248 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 43ms. Found 3 repository interfaces.
+2021-04-28 00:52:46.034  INFO 12248 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-04-28 00:52:46.190  INFO 12248 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2021-04-28 00:52:46.206  INFO 12248 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-04-28 00:52:46.206  INFO 12248 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2021-04-28 00:52:46.306  INFO 12248 --- [main] o.a.c.c.C.[.[localhost].[/DariTn]        : Initializing Spring embedded WebApplicationContext
+2021-04-28 00:52:46.307  INFO 12248 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 861 ms
+2021-04-28 00:52:46.424  INFO 12248 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-04-28 00:52:46.465  INFO 12248 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.4.8.Final}
+2021-04-28 00:52:46.574  INFO 12248 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-04-28 00:52:46.655  INFO 12248 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-04-28 00:52:46.807  INFO 12248 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-04-28 00:52:46.817  INFO 12248 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-04-28 00:52:46.928  WARN 12248 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Client
+2021-04-28 00:52:46.939  WARN 12248 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Expert_financier
+2021-04-28 00:52:47.513  INFO 12248 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-04-28 00:52:47.513  INFO 12248 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-04-28 00:52:47.830  WARN 12248 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-04-28 00:52:47.908  INFO 12248 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-04-28 00:52:48.033  INFO 12248 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path '/DariTn'
+2021-04-28 00:52:48.049  INFO 12248 --- [main] tn.esprit.spring.DariTnApplication       : Started DariTnApplication in 2.844 seconds (JVM running for 3.373)
+2021-04-28 00:52:52.570  INFO 12248 --- [http-nio-8081-exec-1] o.a.c.c.C.[.[localhost].[/DariTn]        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-04-28 00:52:52.570  INFO 12248 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-04-28 00:52:52.577  INFO 12248 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2021-04-28 00:56:38.158  INFO 12248 --- [RMI TCP Connection(2)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2021-04-28 00:56:38.170  INFO 12248 --- [RMI TCP Connection(2)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-04-28 00:56:38.170  INFO 12248 --- [RMI TCP Connection(2)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-04-28 00:56:38.170  INFO 12248 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-04-28 00:56:38.170  INFO 12248 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-04-28 00:56:42.594  INFO 13068 --- [main] tn.esprit.spring.DariTnApplication       : Starting DariTnApplication on DESKTOP-6LQV6AQ with PID 13068 (C:\Users\MSI\Documents\workspace-sts-3.8.4.RELEASE\DariTn\src\main\webapp\WEB-INF\classes started by MSI in C:\Users\MSI\Documents\workspace-sts-3.8.4.RELEASE\DariTn)
+2021-04-28 00:56:42.594  INFO 13068 --- [main] tn.esprit.spring.DariTnApplication       : No active profile set, falling back to default profiles: default
+2021-04-28 00:56:43.002  INFO 13068 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-04-28 00:56:43.039  INFO 13068 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 41ms. Found 3 repository interfaces.
+2021-04-28 00:56:43.209  INFO 13068 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-04-28 00:56:43.372  INFO 13068 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2021-04-28 00:56:43.372  INFO 13068 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-04-28 00:56:43.372  INFO 13068 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2021-04-28 00:56:43.468  INFO 13068 --- [main] o.a.c.c.C.[.[localhost].[/DariTn]        : Initializing Spring embedded WebApplicationContext
+2021-04-28 00:56:43.468  INFO 13068 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 843 ms
+2021-04-28 00:56:43.568  INFO 13068 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-04-28 00:56:43.604  INFO 13068 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.4.8.Final}
+2021-04-28 00:56:43.677  INFO 13068 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-04-28 00:56:43.724  INFO 13068 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-04-28 00:56:43.868  INFO 13068 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-04-28 00:56:43.875  INFO 13068 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-04-28 00:56:43.975  WARN 13068 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Client
+2021-04-28 00:56:43.975  WARN 13068 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Expert_financier
+2021-04-28 00:56:44.494  INFO 13068 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-04-28 00:56:44.504  INFO 13068 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-04-28 00:56:44.771  WARN 13068 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-04-28 00:56:44.849  INFO 13068 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-04-28 00:56:44.974  INFO 13068 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path '/DariTn'
+2021-04-28 00:56:44.974  INFO 13068 --- [main] tn.esprit.spring.DariTnApplication       : Started DariTnApplication in 2.595 seconds (JVM running for 3.133)
+2021-04-28 00:57:01.964  INFO 13068 --- [http-nio-8081-exec-8] o.a.c.c.C.[.[localhost].[/DariTn]        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-04-28 00:57:01.964  INFO 13068 --- [http-nio-8081-exec-8] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-04-28 00:57:01.971  INFO 13068 --- [http-nio-8081-exec-8] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2021-04-28 01:11:03.768  INFO 13068 --- [RMI TCP Connection(2)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2021-04-28 01:11:03.814  INFO 13068 --- [RMI TCP Connection(2)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-04-28 01:11:03.820  INFO 13068 --- [RMI TCP Connection(2)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-04-28 01:11:03.845  INFO 13068 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-04-28 01:11:03.857  INFO 13068 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-04-28 01:11:11.258  INFO 13460 --- [main] tn.esprit.spring.DariTnApplication       : Starting DariTnApplication on DESKTOP-6LQV6AQ with PID 13460 (C:\Users\MSI\Documents\workspace-sts-3.8.4.RELEASE\DariTn\src\main\webapp\WEB-INF\classes started by MSI in C:\Users\MSI\Documents\workspace-sts-3.8.4.RELEASE\DariTn)
+2021-04-28 01:11:11.262  INFO 13460 --- [main] tn.esprit.spring.DariTnApplication       : No active profile set, falling back to default profiles: default
+2021-04-28 01:11:12.262  INFO 13460 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-04-28 01:11:12.375  INFO 13460 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 93ms. Found 3 repository interfaces.
+2021-04-28 01:11:12.750  INFO 13460 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-04-28 01:11:13.009  INFO 13460 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2021-04-28 01:11:13.027  INFO 13460 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-04-28 01:11:13.028  INFO 13460 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2021-04-28 01:11:13.230  INFO 13460 --- [main] o.a.c.c.C.[.[localhost].[/DariTn]        : Initializing Spring embedded WebApplicationContext
+2021-04-28 01:11:13.230  INFO 13460 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1900 ms
+2021-04-28 01:11:13.509  INFO 13460 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-04-28 01:11:13.633  INFO 13460 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.4.8.Final}
+2021-04-28 01:11:13.850  INFO 13460 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-04-28 01:11:14.020  INFO 13460 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-04-28 01:11:14.329  INFO 13460 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-04-28 01:11:14.350  INFO 13460 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-04-28 01:11:14.598  WARN 13460 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Client
+2021-04-28 01:11:14.609  WARN 13460 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Expert_financier
+2021-04-28 01:11:16.010  INFO 13460 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-04-28 01:11:16.022  INFO 13460 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-04-28 01:11:16.717  WARN 13460 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-04-28 01:11:16.917  INFO 13460 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-04-28 01:11:17.236  INFO 13460 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path '/DariTn'
+2021-04-28 01:11:17.239  INFO 13460 --- [main] tn.esprit.spring.DariTnApplication       : Started DariTnApplication in 6.528 seconds (JVM running for 7.645)
+2021-04-28 01:11:17.538  INFO 13460 --- [http-nio-8081-exec-1] o.a.c.c.C.[.[localhost].[/DariTn]        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-04-28 01:11:17.538  INFO 13460 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-04-28 01:11:17.562  INFO 13460 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 23 ms
+2021-04-28 01:15:00.006  INFO 13460 --- [RMI TCP Connection(2)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2021-04-28 01:15:00.009  INFO 13460 --- [RMI TCP Connection(2)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-04-28 01:15:00.011  INFO 13460 --- [RMI TCP Connection(2)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-04-28 01:15:00.014  INFO 13460 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-04-28 01:15:00.019  INFO 13460 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
