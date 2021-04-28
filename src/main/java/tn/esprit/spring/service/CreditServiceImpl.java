@@ -6,21 +6,23 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import tn.esprit.spring.entity.Banque;
 import tn.esprit.spring.entity.Client;
 import tn.esprit.spring.entity.Credit;
 import tn.esprit.spring.entity.CreditFormula;
+import tn.esprit.spring.entity.Expert_financier;
 import tn.esprit.spring.repository.BanqueRepo;
-import tn.esprit.spring.repository.ClientRepo;
 import tn.esprit.spring.repository.CreditFormulaRepo;
 import tn.esprit.spring.repository.CreditRepo;
 import tn.esprit.spring.repository.UserRepo;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+
+
 
 @Service
 public class CreditServiceImpl implements CreditService {
-	
-	@Autowired
-	CreditFormulaRepo frep;
 	
 	@Autowired
 	BanqueRepo brep;
@@ -29,10 +31,13 @@ public class CreditServiceImpl implements CreditService {
 	CreditRepo crep;
 	
 	@Autowired
+	CreditFormulaRepo frep;
+	
+	@Autowired
 	UserRepo urep;
 	
 	@Autowired
-	ClientRepo clrep;
+    private JavaMailSender mailSender;
 
 	@Override
 	public void ajouterCredit(int client, int id, Credit C) {
@@ -123,8 +128,25 @@ public class CreditServiceImpl implements CreditService {
 		C.setMonthly(monthly);	
 		C.setCreditformula(F);
 		crep.save(C);
+}
+
+	@Override
+	public void emailagentbancaire(int credit, String sender, String subject, String body) {
+		// TODO Auto-generated method stub
+		Credit C=crep.findById(credit).get();
+		Banque bank=C.getCreditformula().getBank();
+		Expert_financier E=urep.findbankagentbybankid(bank).get();
+		String email=E.getEmail();
+		SimpleMailMessage message = new SimpleMailMessage();		 
+		message.setFrom(sender);
+		message.setTo(email);
+		message.setSubject(subject);
+		message.setText(body);		 
+		mailSender.send(message);
+		
+	}
 	
 
 	
-
-}}
+	
+}

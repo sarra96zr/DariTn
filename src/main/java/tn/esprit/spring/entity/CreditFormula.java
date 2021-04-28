@@ -7,10 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -35,7 +34,7 @@ public class CreditFormula implements Serializable{
 	@Column
 	private double interestRate;
 
-	@javax.persistence.ManyToOne
+	@ManyToOne
 	Banque bank;
 	
 
@@ -68,11 +67,16 @@ public class CreditFormula implements Serializable{
 		this.id = id;
 	}
 
-
+	public Banque getBank() {
+		return bank;
+	}
 
 	public void setBank(Banque bank) {
 		this.bank = bank;
 	}
+
+
+
 
 
 	

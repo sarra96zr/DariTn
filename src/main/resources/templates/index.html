@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>Liste des abonnements</title>
+</head>
+<body>
+<div align="center">
+    <h1>Liste abonnement</h1>
+    <a href="/DariTn/new">Liste des abonnements</a>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>abonnement ID</th>
+                <th>date debut</th>
+                <th>date fin</th>
+                <th>type</th> 
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="abonnement : ${abonnement}">
+                <td th:text="${abonnement.id}">abonnement ID</td>
+                <td th:text="${abonnement.date_debut}">date debut</td>
+                <td th:text="${abonnement.date_fin}">date fin</td>
+                <td th:text="${abonnement.type}">type</td>
+                		
+        <td>
+                   <input class="btn btn-primary" type="submit" value=" Edit">
+                
+               <input class="btn btn-primary" type="submit" a href="/@{'/delete/' + ${abonnement.id}}" value=" Delete"></td>
+                
+            
+            </tr>
+        </tbody>
+    </table>
+</div>   
+</body>
+</html>

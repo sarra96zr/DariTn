@@ -29,9 +29,9 @@ public class BanqueServiceImpl implements BanqueService {
 	}
 
 	@Override
-	public void deleteBanque(String id_b) {
+	public void deleteBanque(int id_b) {
 		// TODO Auto-generated method stub
-		banqueDAO.deleteById((int) Long.parseLong(id_b));
+		banqueDAO.deleteById((int)(id_b));
 	}
 
 	@Override

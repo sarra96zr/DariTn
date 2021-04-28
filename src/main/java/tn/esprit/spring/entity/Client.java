@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -101,6 +100,16 @@ public class Client extends User implements Serializable {
 	{
 		this.credits.add(C);
 		C.setClient(this);
+	}
+	
+	private String refClient;
+
+	public String getRefClient() {
+		return refClient;
+	}
+
+	public void setRefClient(String refClient) {
+		this.refClient = refClient;
 	}
 	
 	@JsonManagedReference(value="credit-client")

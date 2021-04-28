@@ -4,12 +4,15 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +22,7 @@ import tn.esprit.spring.service.AbonnementService;
 
 
 
-@RestController
+@Controller
 public class AbonnementController {
 	@Autowired
 	AbonnementService abservice;
@@ -95,6 +98,23 @@ public class AbonnementController {
 					List<Abonnement> list = abservice.orderByDescendingId();
 					return list;
 				}
+				
+				@RequestMapping("/")
+				public String viewHomePage(Model model) {
+				    List<Abonnement> abonnement = abservice.retrieveAllAbonnement();
+				    model.addAttribute("abonnement", abonnement);
+				     
+				    return "index";
+				}
+				
+				@RequestMapping("/addabonnement")
+				public String showNewAbonnementPage(Model model) {
+				    Abonnement abonnement = new Abonnement();
+				    model.addAttribute("abonnement", abonnement);
+				     
+				    return "new_abonnement";
+				}
+				
 				
 				
 }
