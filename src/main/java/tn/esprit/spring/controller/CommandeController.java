@@ -1,33 +1,49 @@
 package tn.esprit.spring.controller;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.entity.Meubles;
 import tn.esprit.spring.repository.CommandeRepo;
+import tn.esprit.spring.repository.UserRepo;
 import tn.esprit.spring.entity.User;
+import tn.esprit.spring.helper.MailService;
+
 import tn.esprit.spring.entity.Commande;
 import tn.esprit.spring.service.CommandeService;
 import tn.esprit.spring.service.PanierService;
-@RestController
+@Controller
 public class CommandeController {
 	@Autowired
 	CommandeService ordersService;
 	@Autowired
 	 PanierService basketService;
-	private User user;
+
 	@Autowired
 	private CommandeRepo orderrepository;
-	// afficher les orders with product
+	@Autowired
+	private MailService notificationService;
+	@Autowired
+	private UserRepo ur;
+	
+	private Object user=new User();
+	// afficher les commandes par meubles
 	// http://localhost:8081/DariTn/Pi/ordersmeubles/{ref_meuble}
 			@GetMapping("/ordersmeubles/{ref_meuble}")
 			@ResponseBody
@@ -59,7 +75,7 @@ public class CommandeController {
 		  }
 
 
-		// http://localhost:8081/retrieve-all-orders
+		// http://localhost:8081/DariTn/Pi/retrieve-all-orders
 		@GetMapping("/retrieve-all-orders")
 		@ResponseBody
 		public List<Commande> getOrders() {
@@ -80,6 +96,65 @@ public class CommandeController {
 		@ResponseBody
 		public void affectOrderToBasket(@PathVariable("id_basket") int basketId, @PathVariable("id_order") int orderId) {
 			ordersService.affecterOrdertoBasket(orderId, basketId);
+		}
+		/////Mail
+		@RequestMapping("/send-mail/{id}")
+		public String send(long id) {
+            user=ur.findById(id);
+			
+			/*
+			 * Creating a User with the help of User class that we have declared and setting
+			 * Email address of the sender.
+			 */
+			//user.setEmail("sarra.zribi@esprit.tn");  //Receiver's email address
+			/*
+			 * Here we will call sendEmail() for Sending mail to the sender.
+			 */
+			try {
+				notificationService.sendEmail(user);
+			} catch (MailException mailException) {
+				System.out.println(mailException);
+			}
+			return "Congratulations! Your mail has been send to the user.";
+		}
+
+		/**
+		 * 
+		 * @return
+		 * @throws MessagingException
+		 */
+		@RequestMapping("/send-mail-attachment")
+		public String sendWithAttachment() throws MessagingException {
+
+			/*
+			 * Creating a User with the help of User class that we have declared and setting
+			 * Email address of the sender.
+			 */
+			//user.setEmail("sarra.zribi@esprit.tn "); //Receiver's email address
+
+			/*
+			 * Here we will call sendEmailWithAttachment() for Sending mail to the sender
+			 * that contains a attachment.
+			 */
+			try {
+				notificationService.sendEmailWithAttachment(user);
+			} catch (MailException mailException) {
+				System.out.println(mailException);
+			}
+			return "Congratulations! Your mail has been send to the user.";
+		}
+		////////////////JSF
+		@RequestMapping("/cmd")
+		public String  getMeubles(Model model) {
+			List<Commande> list = ordersService.retrieveAll();
+		    model.addAttribute("order", list);
+		     
+		    return "cmd";
+		}
+		@RequestMapping("/payer")
+		public String  payer(Model model) {
+		  
+		    return "payer";
 		}
 			
 }

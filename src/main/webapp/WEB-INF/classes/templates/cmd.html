@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>Product Manager</title>
+</head>
+<body>
+	<div align="center">
+		<h1>Votre commande</h1>
+
+		<table border="1" cellpadding="10">
+			<thead>
+				<tr>
+					<th>id_order</th>
+					<th>Statut</th>
+					<th>Prix</th>
+					<th>date_order</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each=" Commande : ${order}">
+					<td th:text="${Commande.id_order}">id_order</td>
+					<td th:text="${Commande.Statut}">Statut</td>
+					<td th:text="${Commande.price_order}">Prix</td>
+					<td th:text="${Commande.date_order}">date_order</td>
+			<tbody>
+		</table>
+		<br /> <br />
+	     <a href="/DariTn/payer">Valider</a> &nbsp;&nbsp;&nbsp; 
+		<a	href="/">Annuler</a> <br /> <br />
+	</div>
+
+</body>
+</html>

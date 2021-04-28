@@ -64,4 +64,10 @@ public class MeubleServiceImpl implements MeubleService {
 		return MeubleDAO.Range(min, max);
 	}
 
+	@Override
+	public List<Meubles> findAll() {
+		// TODO Auto-generated method stub
+		return (List<Meubles>) MeubleDAO.findAll();
+	}
+
 }

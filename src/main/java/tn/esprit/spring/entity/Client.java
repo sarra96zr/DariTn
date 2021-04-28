@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import tn.esprit.spring.entity.Meubles;
 import tn.esprit.spring.entity.Panier;
 @Entity
@@ -18,20 +20,27 @@ import tn.esprit.spring.entity.Panier;
 public class Client extends User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	//private int id_client ;
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="T_Panier_client")
 	private Panier panier;
+	@JsonIgnore
 	@OneToMany(mappedBy="client")
 	private Set<Abonnement> abonnement;
+	@JsonIgnore
 	@OneToMany(mappedBy="client")
 	private Set<Credit> credit;
+	@JsonIgnore
 	@OneToMany(mappedBy="client")
 	private Set<Reclamations> reclam;
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="T_RDV_client")
 	private RDV rdv;
+	@JsonIgnore
 	@OneToOne(mappedBy="client")
 	private Panier basket; 
+	@JsonIgnore
 	@OneToMany(cascade= CascadeType.ALL , mappedBy="client")
 	private Set<Meubles> meuble;
 //	public int getId_client() {

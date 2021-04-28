@@ -5,6 +5,8 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import tn.esprit.spring.entity.Meubles;
 import tn.esprit.spring.entity.Panier;
 
@@ -16,17 +18,22 @@ public class Commande implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_order")
+	@JsonIgnore
 	private long id_order;
+	@JsonIgnore
 	private String  Statut;
+	@JsonIgnore
 	private float price_order;
-
+	@JsonIgnore
 	@Temporal (TemporalType.DATE)
 	private Date date_order;
- 
+	@JsonIgnore
 	@ManyToOne
 	private Meubles m;
+	@JsonIgnore
 	@ManyToMany( cascade = CascadeType.ALL)
 	private Set<Meubles> meuble;
+	@JsonIgnore
 	@ManyToOne
 	private Panier Panier;
 	public long getId_order() {

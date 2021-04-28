@@ -17,27 +17,32 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Meuble")
 public class Meubles implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	@JsonIgnore
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ref_meuble")
 	public Long ref_meuble;
-
+	@JsonIgnore
 	@Column(name = "nom_meuble")
 	public String Nom_meuble;
-
+	@JsonIgnore
 	@Column(name = "des_meuble")
 	public String Description_meuble;
 	@Column(name = "prix")
 	public float prix;
+	@JsonIgnore
 	@Enumerated(EnumType.STRING)
 	private Type_Meuble type_meuble;
+	@JsonIgnore
 	@ManyToOne
 	Client client;
+	@JsonIgnore
 	@ManyToMany(mappedBy="meuble", cascade = CascadeType.ALL)
 	private Set<Commande> commande;
 	

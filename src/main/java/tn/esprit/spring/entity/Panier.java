@@ -6,21 +6,29 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import tn.esprit.spring.entity.Client;
 import tn.esprit.spring.entity.Commande;
 @Entity
 public class Panier implements Serializable {
 	private static final long serialVersionUID = 1L;
+	@JsonIgnore
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id_panier ;
+	@JsonIgnore
 	@Temporal (TemporalType.DATE)
 	private Date date_basket ;
+	@JsonIgnore
 	private float prix_total ;
+	@JsonIgnore
 	@Enumerated(EnumType.STRING)
 	private Paiement type_paiement;
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="Panier")
     private Set<Commande> commande;
+	@JsonIgnore
 	 @OneToOne
 	    private Client client;
 	

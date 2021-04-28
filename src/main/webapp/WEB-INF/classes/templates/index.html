@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>Product Manager</title>
+</head>
+<body>
+	<div align="center">
+		<h1>Liste des ventes</h1>
+		
+		<table border="1" cellpadding="10">
+			<thead>
+				<tr>
+					<th>Ref_meuble</th>
+					<th>Nom</th>
+					<th>Description</th>
+					<th>Prix</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each=" Meubles : ${m}">
+					<td th:text="${Meubles.ref_meuble}">Ref_meuble</td>
+					<td th:text="${Meubles.Nom_meuble}">Nom</td>
+					<td th:text="${Meubles.Description_meuble}">Description</td>
+					<td th:text="${Meubles.prix}">Prix</td>
+      				<td> 				
+         			<input class="btn btn-primary" type="submit" value=" Ajouter au panier">
+         			</td> 					
+			<tbody>
+		</table>
+<a href="/DariTn/new">Ajouter annonce</a> <br /> <br />
+	</div>
+
+</body>
+</html>
