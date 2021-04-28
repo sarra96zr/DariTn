@@ -23,32 +23,33 @@ public class NotController {
 	
 	
 	
+	
+	
 	// http://localhost:8081/DariTn/Pi/retrieve-all-notifications
 		@GetMapping("/retrieve-all-notifications")
 		@ResponseBody
 		public List<Notifications> getNots() {
-			List<Notifications> list = NotService.retrieveAllNots();
-			return list;
+			return NotService.retrieveAllNots();
 		}
 		// http://localhost:8081/DariTn/Pi/retrieve-notification/{not-id}
 				@GetMapping("/retrieve-notification/{not-id}")
 				@ResponseBody
-				public Notifications retrieveNot(@PathVariable("not-id") String id_n) {
+				public Notifications retrieveNot(@PathVariable("not-id") Long id_n) {
 					return NotService.retrieveNot(id_n);
 				}
 
-				// http://localhost:8081/DariTn/Pi/add-notification
-				@PostMapping("/add-notification")
+				// http://localhost:8081/DariTn/Pi/add-notification/{idA}
+				@PostMapping("/add-notification/{idA}")
 				@ResponseBody
-				public Notifications addProduct(@RequestBody Notifications n) {
-					 Notifications not = NotService.addNot(n);
-					return not;
+				public String addNotif(@RequestBody Notifications n,@PathVariable("idA") Long idA) throws Exception {
+					return (NotService.addNot(n, idA));
+					
 				}
 
 				// http://localhost:8081/DariTn/Pi/Delete-not/{not-id}
 				@DeleteMapping("/Delete-not/{not-id}")
 				@ResponseBody
-				public void removeProduct(@PathVariable("not-id") String id_n) {
+				public void removeNotif(@PathVariable("not-id") String id_n) {
 					NotService.deleteNot(id_n);
 					
 				}
@@ -56,7 +57,7 @@ public class NotController {
 				// http://localhost:8081/DariTn/Pi/modify-notification
 				@PutMapping("/modify-not")
 				@ResponseBody
-				public Notifications modifyProduct(@RequestBody Notifications n) {
+				public Notifications modifyNotif(@RequestBody Notifications n) {
 					return NotService.updateNot(n);
 				}
 				

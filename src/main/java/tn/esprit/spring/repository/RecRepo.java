@@ -23,8 +23,14 @@ public interface RecRepo extends CrudRepository<Reclamations, Long> {
 		//@Query("SELECT r FROM Reclamations r WHERE r.type= :type")
 		//List<Reclamations> RechercheRec(@Param("type") Type_Rec type);
 		List<Reclamations> findByType(Type_Rec type);
+		
 		@Query("select r from Reclamations r where r.client= :client")
 		List<Reclamations> findByClientId(@Param("client") Client client);
-
+		
+		@Query("select r.id_reclam from Reclamations r join r.client c join c.panier p where p.id_panier =:idd ") 
+		List<Reclamations> findRecWithPID(@Param("idd") Long id);
+		
+		
+		
 }
 

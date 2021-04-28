@@ -2,13 +2,8 @@ package tn.esprit.spring.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import tn.esprit.spring.entity.Client;
 import tn.esprit.spring.entity.Reclamations;
 import tn.esprit.spring.entity.Type_Rec;
@@ -26,7 +21,9 @@ public class RecServiceImpl implements RecService {
 	@Override
 	public List<Reclamations> retrieveAllRecs() {
 		// TODO Auto-generated method stub
-		List<Reclamations> recs= (List<Reclamations>) RecDAO.findAll();
+		//List<Reclamations> recs= (List<Reclamations>) RecDAO.findAll();
+		List<Reclamations> recs= new ArrayList<Reclamations>();
+		RecDAO.findAll().forEach(e ->recs.add(e));
 		return recs;
 	}
 
@@ -62,6 +59,7 @@ public class RecServiceImpl implements RecService {
 	public List<Reclamations> RechercheRec(Type_Rec type) {
 			return RecDAO.findByType(type);
 	}
+	
 	@Override
 	public List<Reclamations> findByClientId(int client) {
 		
@@ -103,5 +101,15 @@ public class RecServiceImpl implements RecService {
 		r.setType(type);
 		RecDAO.save(r);
 	}
+
+	@Override
+	public List<Reclamations> findRecWithPID(Long id) {
+		//List<Reclamations> liste=(List<Reclamations>) RecDAO.findRecWithPID(id);
+		List<Reclamations> rc = new ArrayList<Reclamations>();
+		RecDAO.findRecWithPID(id);
+		return rc;
+		
+	}
+	
 
 }

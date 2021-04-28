@@ -3,6 +3,8 @@ package tn.esprit.spring.entity;
 import java.io.Serializable;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name="Notifications")
 public class Notifications implements Serializable{
@@ -11,28 +13,30 @@ public class Notifications implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_notif")
-	public int idNotif ;
+	private Long idNotif ;
 	@Column(name = "dateNotif")
-	public String dateNotif;
+	private String dateNotif;
 	@Column(name = "titre")
-	public String titre;
+	private String titre;
 	@Column(name = "description")
-	public String description_notif;
+	private String description_notif;
 	@Column(name = "etat")
-	public String etat;
+	private String etat;
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
-	Annonce annonce;
+	private  Annonce annonce;
 	@ManyToOne(cascade = CascadeType.ALL)
-	User user;
+	@JsonIgnore
+	private User user;
 //	@OneToOne
 //	@JoinColumn(name="Notif_annonces")
 //	private Annonce annonces;
 	
-	public int getIdNotif() {
+	public Long getIdNotif() {
 		return idNotif;
 	}
 
-	public void setIdNotif(int idNotif) {
+	public void setIdNotif(Long idNotif) {
 		this.idNotif = idNotif;
 	}
 
@@ -87,7 +91,7 @@ public class Notifications implements Serializable{
 		super();
 	}
 
-	public Notifications(int idNotif, String dateNotif, String titre, String description_notif, Annonce annonce,
+	public Notifications(Long idNotif, String dateNotif, String titre, String description_notif, Annonce annonce,
 			User user, Annonce annonces) {
 		super();
 		this.idNotif = idNotif;

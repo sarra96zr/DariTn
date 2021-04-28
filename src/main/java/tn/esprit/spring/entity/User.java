@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name="T_User")
 public class User implements Serializable {
@@ -19,8 +21,17 @@ private String email;
 
 private String password;
 
- private Date date_de_naissance;
+private Date date_de_naissance;
+ 
+@OneToMany (cascade= CascadeType.ALL , mappedBy="user")
+@JsonIgnore
+private Set<Annonce> annonces;
 
+//@OneToMany (cascade= CascadeType.ALL , mappedBy="user")
+@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
+
+@JsonIgnore
+private Set<Notifications> notifications; 
 	public long getId_user() {
 	return id_user;
 }
@@ -74,10 +85,7 @@ public static long getSerialversionuid() {
 	return serialVersionUID;
 }
 	
-	@OneToMany ( mappedBy="user")
-	private Set<Annonce> annonces;
-	@OneToMany (cascade= CascadeType.ALL , mappedBy="user")
-	private Set<Notifications> notifications;
+
 
 	public User(long id_user, String firstName, String lastName, String email, String password, Date date_de_naissance,
 			 Set<Annonce> annonces, Set<Notifications> notifications) {

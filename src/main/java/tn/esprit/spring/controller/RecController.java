@@ -8,13 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import ch.qos.logback.core.net.server.Client;
 import tn.esprit.spring.entity.Reclamations;
 import tn.esprit.spring.entity.Type_Rec;
 import tn.esprit.spring.service.RecService;
@@ -31,8 +29,7 @@ public class RecController {
 		@GetMapping("/retrieve-all-reclamations")
 		@ResponseBody
 		public List<Reclamations> getRecs() {
-			List<Reclamations> list = RecService.retrieveAllRecs();
-			return list;
+			return RecService.retrieveAllRecs();
 		}
 		// http://localhost:8081/DariTn/Pi/retrieve-reclamation/{rec-id}
 				@GetMapping("/retrieve-reclamation/{rec-id}")
@@ -100,6 +97,14 @@ public class RecController {
 					return new ResponseEntity<>("modification résussie.", HttpStatus.ACCEPTED);
 				}
 				
+				// http://localhost:8081/DariTn/Pi/reclamations/panier/{panier}			
+				@GetMapping("/reclamations/panier/{panier}")
+				@ResponseBody
+				public List<Reclamations> findRecWithPID(@PathVariable("panier") Long id_panier)
+				{
+					List<Reclamations> liste=RecService.findRecWithPID(id_panier);
+					return liste;
+				}
 				
 				
 				

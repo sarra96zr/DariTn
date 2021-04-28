@@ -12,7 +12,7 @@ public interface NotService {
 	List<Notifications> retrieveAllNots();
 	void deleteNot(String id_n);
 	Notifications updateNot(Notifications  n);
-	Notifications retrieveNot(String id_n);
-	Notifications addNot(Notifications n);
+	Notifications retrieveNot(Long id_n);
+	String addNot(Notifications n,Long idA) throws Exception ;
 
 }

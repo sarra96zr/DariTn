@@ -1,33 +1,55 @@
 package tn.esprit.spring.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tn.esprit.spring.entity.Annonce;
 import tn.esprit.spring.entity.Notifications;
+import tn.esprit.spring.entity.User;
+import tn.esprit.spring.repository.AnnonceRepo;
 import tn.esprit.spring.repository.NotRepo;
+import tn.esprit.spring.repository.UserRepo;
 
 
 @Service
 public class NotServiceImpl implements NotService {
 	@Autowired
-	private NotRepo NotDAO;
+	NotRepo NotDAO;
+	@Autowired
+	AnnonceRepo AnoDAO;
+	@Autowired
+	UserRepo UserDAO;
+	
 	//private static final Logger L= LogManager.getLogger(NotServiceImpl.class);
 	@Override
 	public List<Notifications> retrieveAllNots() {
 		// TODO Auto-generated method stub
-		List<Notifications> Nots= (List<Notifications>) NotDAO.findAll();
-		return Nots;
+	//	List<Notifications> Nots= (List<Notifications>) NotDAO.findAll();
+		List<Notifications> recs= new ArrayList<Notifications>();
+		NotDAO.findAll().forEach(e ->recs.add(e));
+		return recs;
 	}
 
 	@Override
-	public Notifications addNot(Notifications n) {
-		// TODO Auto-generated method stub
-		return NotDAO.save(n);
+	public String addNot(Notifications n,Long idA) throws Exception  {
+		Annonce a = AnoDAO.findById(idA).get();
+		long idd = 1 ; 
+		//p.setParent(currentParent());
+		User u = UserDAO.findById(idd).get() ;
+		//long iduser = u.getId_user() ; 
+		n.setUser(u);
+		n.setAnnonce(a);
+		if (n.getUser().getId_user() == n.getAnnonce().getUser().getId_user() )
+		{
+			 NotDAO.save(n);
+			 return ("Ajouté");
+		}
+		else 
+		{
+			return ("Ajout non effectué");
+		}
 	}
 
 	@Override
@@ -47,9 +69,9 @@ public class NotServiceImpl implements NotService {
 	}
 
 	@Override
-	public Notifications retrieveNot(String id_n) {
+	public Notifications retrieveNot(Long id_n) {
 		// TODO Auto-generated method stub
-		return NotDAO.findById(Long.parseLong(id_n)).orElse(null);
+		return NotDAO.findById(id_n).orElse(null);
 	}
 
 }
