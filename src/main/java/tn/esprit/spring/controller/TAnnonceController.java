@@ -10,20 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import tn.esprit.spring.entity.Annonce;
 import tn.esprit.spring.service.AnnonceService;
 
-@Controller
+
 public class TAnnonceController {
 
 	
-	@Autowired
+	/*@Autowired
 	AnnonceService ann;
 	
-	@RequestMapping("/")
+	@RequestMapping("/all")
 	public String viewHomePage(Model model) {
 	    List<Annonce> listAnnonces = ann.retrieveAllAnnonces();
 	    model.addAttribute("listAnnonces", listAnnonces);
 	     
 	    return "index";
-	}
+	}*/
 	
 	
 }

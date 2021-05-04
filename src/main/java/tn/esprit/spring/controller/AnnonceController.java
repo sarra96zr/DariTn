@@ -3,12 +3,17 @@ package tn.esprit.spring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,7 +21,7 @@ import tn.esprit.spring.entity.Annonce;
 import tn.esprit.spring.service.AnnonceService;
 import tn.esprit.spring.service.MeubleService;
 
-@RestController
+@Controller
 public class AnnonceController {
 
 	@Autowired
@@ -73,6 +78,28 @@ public class AnnonceController {
 				@ResponseBody
 				public List<Annonce> SearchProductByName(@PathVariable("annonce-title") String annonce_title) {
 					return annonceService.RechercheAnnonce(annonce_title);
+				}
+				
+				@RequestMapping("/")
+				public String viewHomePage(Model model) {
+				    List<Annonce> listAnnonces = annonceService.retrieveAllAnnonces();
+				    model.addAttribute("listAnnonces", listAnnonces);
+				     
+				    return "index";
+
+}
+				@RequestMapping("/new")
+				public String addAnnonce(Model model) {
+					Annonce annonce = new Annonce();
+					model.addAttribute("a", annonce);
+					return "newAnn";
+
+				}				
+				@RequestMapping(value = "/add_annonce", method = RequestMethod.POST)
+				public String saveProduct(@ModelAttribute("a") Annonce annonce) {
+					annonceService.addAnnonce(annonce);
+
+					return "redirect:/";
 				}
 
 }
