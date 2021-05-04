@@ -27,10 +27,12 @@ public interface RecRepo extends CrudRepository<Reclamations, Long> {
 		@Query("select r from Reclamations r where r.client= :client")
 		List<Reclamations> findByClientId(@Param("client") Client client);
 		
-		@Query("select r.id_reclam from Reclamations r join r.client c join c.panier p where p.id_panier =:idd ") 
+		@Query(value="select * from reclamations r INNER JOIN t_user c ON r.client_id_user=c.id_user INNER JOIN panier p ON c.t_panier_client=p.id_panier where p.id_panier =:idd ",nativeQuery=true)
+		
 		List<Reclamations> findRecWithPID(@Param("idd") Long id);
 		
 		
-		
+		//@Query("select r.id_reclam from reclamations r INNER JOIN client c ON r.client.id_user=c.id_user INNER JOIN panier p ON c.panier.id_panier=p.id_panier where p.id_panier =:idd ") 
+		//List<Long> findRecWithPID1(@Param("idd") Long id);
 }
 

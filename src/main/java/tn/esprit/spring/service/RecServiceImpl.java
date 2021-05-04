@@ -103,13 +103,17 @@ public class RecServiceImpl implements RecService {
 	}
 
 	@Override
-	public List<Reclamations> findRecWithPID(Long id) {
+	public List<Reclamations> findRecWithPID(long id) {
 		//List<Reclamations> liste=(List<Reclamations>) RecDAO.findRecWithPID(id);
-		List<Reclamations> rc = new ArrayList<Reclamations>();
-		RecDAO.findRecWithPID(id);
-		return rc;
+		return RecDAO.findRecWithPID(id);
 		
 	}
 	
+	//@Override
+	//public List<Long> findRecWithPID1(long id) {
+		//List<Reclamations> liste=(List<Reclamations>) RecDAO.findRecWithPID(id);
+		//return RecDAO.findRecWithPID1(id);
+		
+	//}
 
 }

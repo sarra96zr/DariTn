@@ -2,9 +2,6 @@ package tn.esprit.spring.service;
 
 import java.util.List;
 
-import org.springframework.data.repository.query.Param;
-
-import ch.qos.logback.core.net.server.Client;
 import tn.esprit.spring.entity.Reclamations;
 import tn.esprit.spring.entity.Type_Rec;
 
@@ -22,6 +19,7 @@ public interface RecService {
 	List<Reclamations> findByClientId(int client);
 	public void ajouterRec(int client, Reclamations r);
 	public void modifierRec(int rec);
-	List<Reclamations> findRecWithPID(Long id);
+	List<Reclamations> findRecWithPID(long id);
+	//List<Long> findRecWithPID1(long id);
 
 }
