@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import tn.esprit.spring.entity.Client;
 import tn.esprit.spring.entity.Reclamations;
 import tn.esprit.spring.entity.Type_Rec;
 import tn.esprit.spring.service.RecService;
@@ -26,11 +27,47 @@ import tn.esprit.spring.service.RecService;
 @Scope(value = "session")
 @Controller(value = "RecController") // Name of the bean in Spring IoC
 @ELBeanName(value = "RecController") // Name of the bean used by JSF
-@Join(path = "/", to = "/Reclamation.jsf")
+@Join(path = "/", to = "/ReclamationClient.jsf")
 @RestController
 public class RecController {
+	
+	public String getTitreReclam() {
+		return titreReclam;
+	}
+	public void setTitreReclam(String titreReclam) {
+		this.titreReclam = titreReclam;
+	}
+	public String getDescriptionReclam() {
+		return descriptionReclam;
+	}
+	public void setDescriptionReclam(String descriptionReclam) {
+		this.descriptionReclam = descriptionReclam;
+	}
+	public Type_Rec getType() {
+		return type;
+	}
+	public void setType(Type_Rec type) {
+		this.type = type;
+	}
+	public Client getClient() {
+		return client;
+	}
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public String titreReclam;
+	public String descriptionReclam;
+	public Type_Rec type;
+	Client client;
 	@Autowired
 	private RecService RecService;
+	
+	
+	public void addRec() {
+		RecService.addOrUpdateRec(new Reclamations(titreReclam, descriptionReclam, type, client));
+		}
+	public Type_Rec[] getTypes() { return Type_Rec.values(); } 
 
 
 

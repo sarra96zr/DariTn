@@ -7,6 +7,7 @@
 	template="/template/template.xhtml">
 	<ui:param name="page_name" value="Connexion" />
 	<ui:define name="menu">
+	<center>
 		<h:head>
 			<link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png" />
 			<link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png" />
@@ -30,57 +31,30 @@
 				rel='stylesheet' type='text/css' />
 		</h:head>
 		<h:panelGroup columns="2">
-			<div class="col-lg-6" align="center">
-				<div class="card">
-					<div class="card-header">
-						<strong class="card-title">Liste des Réclamations</strong>
-					</div>
-					<div class="table-stats order-table ov-h">
-						<table class="table">
-							<thead>
-								<tr>
-									<th class="avatar">Client</th>
-									<th>Titre Réclamation</th>
-									<th>Type Réclamation</th>
-									<th>Description Réclamation</th>
-									<th>Modifier</th>
-									<th>Supprimer</th>
-								</tr>
-							</thead>
-							<tbody>
-								<ui:repeat value="#{RecController.getRecs()}" var="Reclamations">
-									<tr>
-										<td class="avatar">
-											<div class="round-img">
-												<a href="#"><img class="rounded-circle"
-													src="images/avatar/1.jpg" alt=""></img></a>
-											</div>
-										</td>
-										
-										<td><span class="titre"><h:outputText
-													value="#{Reclamations.titreReclam}" /> </span></td>
-										
-										<td><span class="type"><h:outputText
-													value="#{Reclamations.type}" /> </span></td>
-
-									    <td><span class="description"><h:outputText
-													value="#{Reclamations.descriptionReclam}" /> </span></td>
-										
-										<td><span class="badge badge-primary">Modifier</span></td>
-										<td> 		
-													<h:commandButton
-													action="#{RecController.removeProduct(Reclamations.id_reclam)}"
-													value="Supprimer" 
-													/>
-										</td>
-									</tr>
-								</ui:repeat>
-							</tbody>
-						</table>
-					</div>
-					<!-- /.table-stats -->
-				</div>
-			</div>
+			<h:form>
+				<table>
+					<tr>
+						<td><h:outputText value="Type"></h:outputText></td>
+						<td><h:selectOneMenu value="#{RecController.type}">
+								<f:selectItem itemLabel="Choisir le Type" itemValue="#{null}" />
+								<f:selectItems value="#{RecController.types}" />
+							</h:selectOneMenu></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Titre"></h:outputText></td>
+						<td><h:inputText value="#{RecController.titreReclam}"></h:inputText></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Description"></h:outputText></td>
+						<td><h:inputText value="#{RecController.descriptionReclam}"></h:inputText></td>
+					</tr>
+					<tr>
+						<td colspan="2"><h:commandButton value="Ajouter Réclamation"
+								action="#{RecController.ajouterRec()}" /></td>
+					</tr>
+				</table>
+			</h:form>
 		</h:panelGroup>
+		</center>
 	</ui:define>
 </ui:composition>

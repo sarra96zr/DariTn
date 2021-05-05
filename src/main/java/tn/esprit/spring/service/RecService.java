@@ -21,5 +21,6 @@ public interface RecService {
 	public void modifierRec(int rec);
 	List<Reclamations> findRecWithPID(long id);
 	//List<Long> findRecWithPID1(long id);
+	long addOrUpdateRec(Reclamations rec);
 
 }

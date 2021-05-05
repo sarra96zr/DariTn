@@ -115,5 +115,11 @@ public class RecServiceImpl implements RecService {
 		//return RecDAO.findRecWithPID1(id);
 		
 	//}
+	
+	@Override
+	public long addOrUpdateRec(Reclamations rec) {
+	RecDAO.save(rec);
+	return rec.getId_reclam();
+	}
 
 }

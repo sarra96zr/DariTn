@@ -73,6 +73,14 @@ public class Reclamations {
 		this.client = client;
 	}
 	
+	public Reclamations(String titreReclam, String descriptionReclam, Type_Rec type, Client client) {
+		super();
+		this.titreReclam = titreReclam;
+		this.descriptionReclam = descriptionReclam;
+		this.type = type;
+		this.client = client;
+	}
+	
 	public Reclamations() {
 		super();
 	}
