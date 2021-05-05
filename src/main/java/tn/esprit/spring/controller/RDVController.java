@@ -1,8 +1,14 @@
 package tn.esprit.spring.controller;
 
+import java.util.Date;
 import java.util.List;
 
+import org.ocpsoft.rewrite.annotation.Join;
+import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +22,12 @@ import tn.esprit.spring.entity.RDV;
 import tn.esprit.spring.service.RDVService;
 
 
+@Scope(value = "session")
+@Controller(value = "RDVController") // Name of the bean in Spring IoC
+@ELBeanName(value = "RDVController") // Name of the bean used by JSF
+@Join(path = "/", to = "/AddRDV.jsf")
 @RestController
+
 public class RDVController {
 	
 	@Autowired
@@ -49,17 +60,30 @@ public class RDVController {
 				// http://localhost:8081/DariTn/Pi/Delete-rdv/{rdv-id}
 				@DeleteMapping("/Delete-rdv/{rdv-id}")
 				@ResponseBody
-				public void removeRDV(@PathVariable("rdv-id") String id_rdv) {
+				public void removeRDV(@PathVariable("rdv-id") Long id_rdv) {
 					rdvService.deleteRDV(id_rdv);
 					
 				}
 
 				// http://localhost:8081/DariTn/Pi/modify-rdv
-				@PutMapping("/modify-rdv")
+				@PutMapping("/modify-rdv/{id_rdv}")
 				@ResponseBody
-				public RDV modifyRDV(@RequestBody RDV r) {
-					return rdvService.updateRDV(r);
+				public RDV modifyRDV(@RequestBody RDV r,@PathVariable("id_rdv") Long id_rdv) {
+					return rdvService.updateRDV(r,id_rdv);
 				}
+				
+				/*// http://localhost:8081/DariTn/Pi/rdv/{dateDeb}/{dateFin}
+				@GetMapping("/rdv/{dateDeb}/{dateFin}")
+				List<RDV> RDV(@PathVariable("dateDeb") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date  dateDeb, @PathVariable("dateFin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFin)
+				{
+				    return rdvService.getRDV(dateDeb,dateFin);
+				}*/
+				
+				// http://localhost:8081/DariTn/Pi/searchRDV/{title}
+				/*@GetMapping("/searchRDV/{title}")
+				public List<RDV> searchRDV(@PathVariable("title") String title) {
+					return rdvService.searchRDV(title);
+				}*/
 				
 }
 

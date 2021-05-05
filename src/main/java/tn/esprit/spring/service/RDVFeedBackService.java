@@ -10,5 +10,6 @@ public interface RDVFeedBackService {
 	void deleteRDVFeedBack(String id_rdv_feedback);
 	RDVFeedBack updateRDVFeedBack(RDVFeedBack  rf);
 	RDVFeedBack retrieveRDVFeedBack(String id_rdv_feedback);
+	public void affecteFeedToRdv( Long id_feedback,Long id_rdv );
 
 }

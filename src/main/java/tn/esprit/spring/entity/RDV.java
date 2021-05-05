@@ -2,6 +2,7 @@ package tn.esprit.spring.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -20,6 +21,13 @@ private static final long serialVersionUID = 1L;
 	@Column(name="dateRDV")
 	public Date dateRDV;
 	
+	@Column(name="dateDeb")
+	public Date dateDeb;
+	
+	@Column(name="dateFin")
+	public Date dateFin;
+
+
 	@OneToOne(mappedBy="rdv")
 	private Client client;
 	
@@ -50,6 +58,22 @@ private static final long serialVersionUID = 1L;
 	public void setDateRDV(Date dateRDV) {
 		this.dateRDV = dateRDV;
 	}
+	
+	public Date getDateDeb() {
+		return dateDeb;
+	}
+
+	public void setDateDeb(Date dateDeb) {
+		this.dateDeb = dateDeb;
+	}
+
+	public Date getDateFin() {
+		return dateFin;
+	}
+
+	public void setDateFin(Date dateFin) {
+		this.dateFin = dateFin;
+	}
 
 	public Client getClient() {
 		return client;
@@ -71,11 +95,13 @@ private static final long serialVersionUID = 1L;
 		return serialVersionUID;
 	}
 
-	public RDV(long id_rdv, String title, Date dateRDV, Client client, RDVFeedBack rDVF) {
+	public RDV(long id_rdv, String title, Date dateRDV, Date dateDeb, Date dateFin, Client client, RDVFeedBack rDVF ) {
 		super();
 		this.id_rdv = id_rdv;
 		this.title = title;
 		this.dateRDV = dateRDV;
+		this.dateDeb = dateDeb;
+		this.dateFin = dateFin;
 		this.client = client;
 		RDVF = rDVF;
 	}
