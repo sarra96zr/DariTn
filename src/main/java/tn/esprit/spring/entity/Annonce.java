@@ -9,8 +9,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 
@@ -46,8 +48,8 @@ public class Annonce implements Serializable {
 		@Column(name="type_annonce")
 		public Type_Annonce type_annonce;
 		
+		@JsonIgnore
 		@ManyToOne
-		
 		public User user;
 	
 

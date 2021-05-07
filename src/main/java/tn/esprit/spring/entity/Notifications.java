@@ -3,6 +3,8 @@ package tn.esprit.spring.entity;
 import java.io.Serializable;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name="Notifications")
 public class Notifications implements Serializable{
@@ -10,35 +12,31 @@ public class Notifications implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ref")
-	public int idNotif ;
+	@Column(name = "id_notif")
+	private Long idNotif ;
 	@Column(name = "dateNotif")
-	public String dateNotif;
+	private String dateNotif;
 	@Column(name = "titre")
-	public String titre;
+	private String titre;
 	@Column(name = "description")
-	public String description_notif;
+	private String description_notif;
+	@Column(name = "etat")
+	private String etat;
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
-	Annonce annonce;
+	private  Annonce annonce;
 	@ManyToOne(cascade = CascadeType.ALL)
-	User user;
-	@OneToOne
+	@JsonIgnore
+	private User user;
+//	@OneToOne
 //	@JoinColumn(name="Notif_annonces")
-	private Annonce annonces;
+//	private Annonce annonces;
 	
-	public Annonce getAnnonces() {
-		return annonces;
-	}
-
-	public void setAnnonces(Annonce annonces) {
-		this.annonces = annonces;
-	}
-
-	public int getIdNotif() {
+	public Long getIdNotif() {
 		return idNotif;
 	}
 
-	public void setIdNotif(int idNotif) {
+	public void setIdNotif(Long idNotif) {
 		this.idNotif = idNotif;
 	}
 
@@ -93,7 +91,7 @@ public class Notifications implements Serializable{
 		super();
 	}
 
-	public Notifications(int idNotif, String dateNotif, String titre, String description_notif, Annonce annonce,
+	public Notifications(Long idNotif, String dateNotif, String titre, String description_notif, Annonce annonce,
 			User user, Annonce annonces) {
 		super();
 		this.idNotif = idNotif;
@@ -102,7 +100,7 @@ public class Notifications implements Serializable{
 		this.description_notif = description_notif;
 		this.annonce = annonce;
 		this.user = user;
-		this.annonces = annonces;
+		//this.annonces = annonces;
 	}
 
 	

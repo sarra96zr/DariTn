@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "client")
 public class Client extends User implements Serializable {
@@ -22,18 +24,21 @@ public class Client extends User implements Serializable {
 	@OneToMany(mappedBy="client")
 	private Set<Credit> credit;
 	@OneToMany(mappedBy="client")
+	@JsonIgnore
 	private Set<Reclamations> reclam;
 	@OneToOne
 	@JoinColumn(name="T_RDV_client")
 	private RDV rdv;
 	@OneToMany(cascade= CascadeType.ALL , mappedBy="client")
 	private Set<Meubles> meuble;
-//	public int getId_client() {
-//		return id_client;
-//	}
+	
+	//public int getId_client() {
+	//	return id_client;
+	//}
 //	public void setId_client(int id_client) {
 //		this.id_client = id_client;
 //	}
+	
 	public Panier getPanier() {
 		return panier;
 	}
@@ -58,6 +63,8 @@ public class Client extends User implements Serializable {
 	public void setReclam(Set<Reclamations> reclam) {
 		this.reclam = reclam;
 	}
+	
+	
 	public RDV getRdv() {
 		return rdv;
 	}
@@ -85,4 +92,11 @@ public class Client extends User implements Serializable {
 		super();
 	}
 	
+	public void addReclam(Reclamations R)
+	{
+		this.reclam.add(R);
+		R.setClient(this);
+	}
+ 
+
 }
