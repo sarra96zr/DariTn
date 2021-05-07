@@ -5,12 +5,16 @@ package tn.esprit.spring;
 import java.util.Arrays;
 
 import javax.faces.webapp.FacesServlet;
+import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
+
+import com.sun.faces.config.ConfigureListener;
 
 
 @SpringBootApplication
@@ -23,16 +27,19 @@ public class DariTnApplication  {
 
 
 	@Bean
-	  ServletRegistrationBean jsfServletRegistration (ServletContext servletContext) {
-	      //spring boot only works if this is set
-	      servletContext.setInitParameter("com.sun.faces.forceLoadConfiguration", Boolean.TRUE.toString());
+	public FacesServlet facesServlet() {
+		return new FacesServlet();
+	}
 
-	      //FacesServlet registration
-	      ServletRegistrationBean srb = new ServletRegistrationBean();
-	      srb.setServlet(new FacesServlet());
-	      srb.setUrlMappings(Arrays.asList("*.xhtml"));
-	      srb.setLoadOnStartup(1);
-	      return srb;
-	  }
+	@Bean
+	public ServletRegistrationBean<Servlet> facesServletRegistration() {
+		ServletRegistrationBean<Servlet> registration = new ServletRegistrationBean<Servlet>(facesServlet(), "*.jsf");
+		return registration;
+	}
+
+	@Bean
+	public ServletListenerRegistrationBean<ConfigureListener> jsfConfigureListener() {
+		return new ServletListenerRegistrationBean<ConfigureListener>(new ConfigureListener());
+	}
 }
 
