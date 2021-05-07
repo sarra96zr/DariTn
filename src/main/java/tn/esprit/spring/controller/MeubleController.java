@@ -87,19 +87,19 @@ public class MeubleController {
 
 	// importer la liste des meubles en vente dans un fichier PDF
 	// http://localhost:8081/Daritn/Pi/pdfreport
-	@RequestMapping(value = "/pdfreport", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
-	public ResponseEntity<InputStreamResource> MeubleReport() {
-
-		List<Meubles> mb = (List<Meubles>) meubleService.findAll();
-
-		ByteArrayInputStream bis = GeneratePdfReport.MeublesReport(mb);
-
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-Disposition", "inline; filename=meublesreport.pdf");
-
-		return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
-				.body(new InputStreamResource(bis));
-	}
+//	@RequestMapping(value = "/pdfreport", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
+//	public ResponseEntity<InputStreamResource> MeubleReport() {
+//
+//		List<Meubles> mb = (List<Meubles>) meubleService.findAll();
+//
+//		ByteArrayInputStream bis = GeneratePdfReport.MeublesReport(mb);
+//
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.add("Content-Disposition", "inline; filename=meublesreport.pdf");
+//
+//		return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
+//				.body(new InputStreamResource(bis));
+//	}
 
 	// JSF
 	// http://localhost:8081/Daritn/

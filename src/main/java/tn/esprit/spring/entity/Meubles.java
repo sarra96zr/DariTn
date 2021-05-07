@@ -46,6 +46,14 @@ public class Meubles implements Serializable {
 	@ManyToMany(mappedBy="meuble", cascade = CascadeType.ALL)
 	private Set<Commande> commande;
 	
+	public Meubles(String nom_meuble, String description_meuble, float prix, Type_Meuble type_meuble) {
+		super();
+		Nom_meuble = nom_meuble;
+		Description_meuble = description_meuble;
+		this.prix = prix;
+		this.type_meuble = type_meuble;
+	}
+
 	public Meubles() {
 		super();
 	}

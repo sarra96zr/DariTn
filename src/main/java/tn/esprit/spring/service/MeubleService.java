@@ -17,5 +17,6 @@ public interface MeubleService {
 	List<Meubles> SearchMeublesByName(String name_meuble);
 	List<Meubles> Range(float min, float max);
 	List<Meubles> findAll();
+	
 
 }

@@ -1,9 +1,14 @@
 package tn.esprit.spring.controller;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
@@ -19,11 +24,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itextpdf.text.DocumentException;
+
 import tn.esprit.spring.entity.Meubles;
 import tn.esprit.spring.repository.CommandeRepo;
 import tn.esprit.spring.repository.UserRepo;
 import tn.esprit.spring.entity.User;
-import tn.esprit.spring.helper.MailService;
+import tn.esprit.spring.helper.GeneratePdfReport;
+
 
 import tn.esprit.spring.entity.Commande;
 import tn.esprit.spring.service.CommandeService;
@@ -37,8 +45,7 @@ public class CommandeController {
 
 	@Autowired
 	private CommandeRepo orderrepository;
-	@Autowired
-	private MailService notificationService;
+	
 	@Autowired
 	private UserRepo ur;
 	
@@ -97,52 +104,7 @@ public class CommandeController {
 		public void affectOrderToBasket(@PathVariable("id_basket") int basketId, @PathVariable("id_order") int orderId) {
 			ordersService.affecterOrdertoBasket(orderId, basketId);
 		}
-		/////Mail
-		@RequestMapping("/send-mail/{id}")
-		public String send(long id) {
-            user=ur.findById(id);
-			
-			/*
-			 * Creating a User with the help of User class that we have declared and setting
-			 * Email address of the sender.
-			 */
-			//user.setEmail("sarra.zribi@esprit.tn");  //Receiver's email address
-			/*
-			 * Here we will call sendEmail() for Sending mail to the sender.
-			 */
-			try {
-				notificationService.sendEmail(user);
-			} catch (MailException mailException) {
-				System.out.println(mailException);
-			}
-			return "Congratulations! Your mail has been send to the user.";
-		}
-
-		/**
-		 * 
-		 * @return
-		 * @throws MessagingException
-		 */
-		@RequestMapping("/send-mail-attachment")
-		public String sendWithAttachment() throws MessagingException {
-
-			/*
-			 * Creating a User with the help of User class that we have declared and setting
-			 * Email address of the sender.
-			 */
-			//user.setEmail("sarra.zribi@esprit.tn "); //Receiver's email address
-
-			/*
-			 * Here we will call sendEmailWithAttachment() for Sending mail to the sender
-			 * that contains a attachment.
-			 */
-			try {
-				notificationService.sendEmailWithAttachment(user);
-			} catch (MailException mailException) {
-				System.out.println(mailException);
-			}
-			return "Congratulations! Your mail has been send to the user.";
-		}
+		
 		////////////////JSF
 		@RequestMapping("/cmd")
 		public String  getMeubles(Model model) {
@@ -155,6 +117,24 @@ public class CommandeController {
 		public String  payer(Model model) {
 		  
 		    return "payer";
+		}
+		//PDF
+		// http://localhost:8083/orders/export/pdf
+		@RequestMapping("/export/pdf")
+		public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException {
+		   response.setContentType("application/pdf");
+		   DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		   String currentDateTime = dateFormatter.format(new Date());
+		    
+		   String headerKey = "Content-Disposition";
+		   String headerValue = "attachment; filename=users_" + currentDateTime + ".pdf";
+		   response.setHeader(headerKey, headerValue);
+		    
+		   List<Commande> listorders = ordersService.findAll();
+		    
+		   GeneratePdfReport exporter = new GeneratePdfReport(listorders);
+		   exporter.export(response);
+		    
 		}
 			
 }
