@@ -35,7 +35,6 @@ public class Abonnement implements Serializable {
 	}
 
 	@ManyToOne
-	@JsonIgnore
 	 public Client client;
 
 	public long getId() {

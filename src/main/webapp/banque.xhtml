@@ -1,0 +1,48 @@
+<html xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/template.xhtml">
+<ui:param name="page_name" value="Accueil"/>
+<ui:define name="content">
+<p:panel>
+<h:form>
+<p:toolbarGroup align="right">
+<p:commandButton value="Export" icon="pi pi-upload" styleClass="ui-button-help" ajax="false">
+<p:dataExporter type="pdf" target="dt-products" fileName="products"/>
+</p:commandButton>
+</p:toolbarGroup>
+<p:dataTable id="dt-products" widgetVar="dtProducts" value="#{jsfBanqueController.m}" var="Banque" reflow="true" styleClass="products-table" rowKey="#{m.ref_banque}" paginator="true" rows="10" rowSelectMode="add" paginatorPosition="bottom">
+>
+<f:facet name="header">
+<div class="products-table-header">
+<span style="font-weight: bold">Banque</span>
+<span class="filter-container ui-input-icon-left">
+<i class="pi pi-search"/>
+<p:inputText id="globalFilter" onkeyup="PF('dtProducts').filter()" placeholder="Search"/>
+</span>
+</div>
+</f:facet>
+<p:column headerText="productName" sortBy="#{Product.productName}">
+<h:outputText value="#{Banque.nombanque}"/>
+</p:column>
+</p:dataTable>
+</h:form>
+</p:panel>
+<p:panel>
+<h:form>
+<p:dataTable value="#{jsfBanqueController.type_paiement}" var="LigneComand" border="1">
+<p:column>
+<f:facet name="header">
+<h:outputText value="Prix"/>
+</f:facet>
+<h:outputText value="#{LigneComand.price}"/>
+</p:column>
+<f:facet name="header">
+<h:outputText value="Annuler"/>
+</f:facet>
+<h:commandButton action="#{ProductController.delete(LigneComand.idlc)}" value="X"/>
+</p:dataTable>
+<p:commandButton action="#{ProductController.validerpanier()}" value="Add To Cart" icon="pi pi-shopping-cart"/>
+</h:form>
+</p:panel>
+</ui:define>
+</ui:composition>
+</html>
