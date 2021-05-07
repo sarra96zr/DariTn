@@ -1,113 +1,116 @@
 package tn.esprit.spring.entity;
 
+
 import java.io.Serializable;
 
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+
 
 @Entity
 @Table(name="credit")
-public class Credit implements Serializable {
-private static final long serialVersionUID = 1L;
+public class Credit implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	public Credit()
+	{
+		super();
+	}
+	
+	public Credit(Client client, CreditFormula creditformula, float initialamount, float monthly) 
+	{
+		super();
+		this.client=client;
+		this.creditformula=creditformula;
+		this.initialamount = initialamount;
+		this.monthly=monthly;
+	}
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column(name="id_credit")
-	public long id_credit;
+	@Column(name="ID")
+	private int id; 
 	
-	@Column(name="montant")
-	public float montant;
+	@Column(name="initialamount")
+	private float initialamount;
 	
-	@Column(name="salaire")
-	public float salaire;
+	@Column(name="finalamount")
+	private float finalamount;
 	
-	@Column(name="TMM")
-	public float TMM;
+	@Column
+	private float monthly;
 	
-	@Column(name="apport_personnel")
-	public float apport_personnel;
-	
-	@Column(name="D_de_remboursement")
-	public String D_remboursement;
 	@ManyToOne
+	private Client client;
 	
-	Banque Banque;
-	@ManyToOne
+	@OneToOne
+	private CreditFormula creditformula;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	
-	Client client;
-	public long getId_credit() {
-		return id_credit;
-	}
-	public void setId_credit(long id_credit) {
-		this.id_credit = id_credit;
-	}
-	public float getMontant() {
-		return montant;
-	}
-	public void setMontant(float montant) {
-		this.montant = montant;
-	}
-	public float getSalaire() {
-		return salaire;
-	}
-	public void setSalaire(float salaire) {
-		this.salaire = salaire;
-	}
-	public float getTMM() {
-		return TMM;
-	}
-	public void setTMM(float tMM) {
-		TMM = tMM;
-	}
-	public float getApport_personnel() {
-		return apport_personnel;
-	}
-	public void setApport_personnel(float apport_personnel) {
-		this.apport_personnel = apport_personnel;
-	}
-	public String getD_remboursement() {
-		return D_remboursement;
-	}
-	public void setD_remboursement(String d_remboursement) {
-		D_remboursement = d_remboursement;
-	}
-	public Banque getBanque() {
-		return Banque;
-	}
-	public void setBanque(Banque banque) {
-		Banque = banque;
-	}
-	public Client getClient() {
+	
+	@JsonBackReference(value="credit-client")
+	
+	public User getClient() {
 		return client;
 	}
-	public void setClient(Client client) {
-		this.client = client;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+
+	public void setClient(Client C) {
+		this.client=C;
 	}
 
-	public Credit(long id_credit, float montant, float salaire, float tMM, float apport_personnel,
-			String d_remboursement, tn.esprit.spring.entity.Banque banque, Client client) {
-		super();
-		this.id_credit = id_credit;
-		this.montant = montant;
-		this.salaire = salaire;
-		TMM = tMM;
-		this.apport_personnel = apport_personnel;
-		D_remboursement = d_remboursement;
-		Banque = banque;
-		this.client = client;
+	public CreditFormula getCreditformula() {
+		return creditformula;
 	}
-	public Credit() {
-		super();
+
+	public void setCreditformula(CreditFormula creditformula) {
+		this.creditformula = creditformula;
+	}
+
+	public float getMonthly() {
+		return monthly;
+	}
+
+	public void setMonthly(float monthly) {
+		this.monthly = monthly;
 	}
 	
+	public float getInitialamount() {
+		return initialamount;
+	}
 
-	
+	public void setInitialamount(float initialamount) {
+		this.initialamount = initialamount;
+	}
 
-	
+	public float getFinalamount() {
+		return finalamount;
+	}
 
+	public void setFinalamount(float finalamount) {
+		this.finalamount = finalamount;
+	}
 
-	
-
+	@Override
+	public String toString() {
+		return "Credit [id=" + id + ", initialamount=" + initialamount + ", finalamount=" + finalamount + ", monthly="
+				+ monthly + ", client=" + client + ", creditformula=" + creditformula.getId() + "]";
+	}
 }
