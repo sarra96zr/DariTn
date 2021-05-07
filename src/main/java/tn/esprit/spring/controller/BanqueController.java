@@ -2,7 +2,12 @@ package tn.esprit.spring.controller;
 
 import java.util.List;
 
+import org.ocpsoft.rewrite.annotation.Join;
+import org.ocpsoft.rewrite.el.ELBeanName;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,22 +20,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import tn.esprit.spring.entity.Abonnement;
+
 import tn.esprit.spring.entity.Banque;
 import tn.esprit.spring.service.BanqueService;
 
-
+@Scope (value = "session")
+@Component (value = "bankLists")
+@ELBeanName(value = "bankLists")
+@Join(path = "/", to = "/bank-lists.jsf")
 @Controller
 public class BanqueController {
 	@Autowired
 	BanqueService banqueService;
+
+
 	
 	
+
 	
-	// http://localhost:8081/DariTn/Pi/retrieve-all-banque
+		// http://localhost:8081/DariTn/Pi/retrieve-all-banque
 		@GetMapping("/retrieve-all-banque")
 		@ResponseBody
 		public List<Banque> getBanque() {
@@ -75,42 +85,27 @@ public class BanqueController {
 					return banqueService.SearchBanqueByName(name_banque);
 				}
 				
-				@RequestMapping("/retbanque")
-				public String viewHomePage(Model model) {
-				    List<Banque> banque = banqueService.retrieveAllBanque();
-				    model.addAttribute("banque", banque);
-				     
-				    return "retrivebanque";
-				}
-				
-				@RequestMapping("/newbanque")
-				public String showNewProductPage(Model model) {
-				    Banque banque = new Banque();
-				    model.addAttribute("banque", banque);
-				     
-				    return "newbanque";
-				}
-				
-				@RequestMapping(value = "/save", method = RequestMethod.POST)
-				public String saveProduct(@ModelAttribute("banque") Banque banque) {
-					banqueService.addBanque(banque);
-				     
-				    return "redirect:/";
-				}
-				
-				@RequestMapping("/deletebanque/{id}")
-				public String deleteBanque(@PathVariable(name = "id") int id) {
-				    banqueService.deleteBanque(id);
-				    return "redirect:/";       
-				}
-				
-				@RequestMapping("/editbanque/{id}")
-				public ModelAndView showEditProductPage(@PathVariable(name = "id") Banque b) {
-				    ModelAndView mav = new ModelAndView("edit_banque");
-				    Banque banque = banqueService.updateBanque(b);
-				    mav.addObject("banque", banque);
-				     
-				    return mav;
-				}}
+
+
+private List<Banque> banques; // ajouter le getter et le setter
+
+
+
+public List<Banque> getBanques() {
+	banques = banqueService.retrieveAllBanque();
+	return banques;
+}
+public void setBanques(List<Banque> banques) {
+	this.banques = banques;
+}
+
+public void removeBank(int id) { 
+	banqueService.deleteBanque(id);
+	getBanques();
+}
+
+
+
+}
 				
 				

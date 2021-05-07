@@ -2,9 +2,13 @@ package tn.esprit.spring.controller;
 
 import java.util.List;
 
+import org.ocpsoft.rewrite.annotation.Join;
+import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,13 +23,18 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tn.esprit.spring.entity.Abonnement;
+import tn.esprit.spring.entity.Banque;
 import tn.esprit.spring.entity.Credit;
 import tn.esprit.spring.entity.CreditFormula;
 import tn.esprit.spring.repository.BanqueRepo;
 import tn.esprit.spring.repository.ClientRepo;
+import tn.esprit.spring.repository.CreditRepo;
 import tn.esprit.spring.service.CreditService;
 
-
+@Scope (value = "session")
+@Component (value = "credits")
+@ELBeanName(value = "credits")
+//@Join(path = "/", to = "/bank-lists.jsf")
 @Controller
 public class CreditController {
 	
@@ -37,6 +46,9 @@ public class CreditController {
 	
 	@Autowired
 	ClientRepo rp;
+	
+	@Autowired
+	CreditRepo cr;
 	
 	
 	// http://localhost:8081/DariTn/Pi/retrieve-all-credit
@@ -122,6 +134,40 @@ public class CreditController {
 		cs.emailagentbancaire(id, sender, subject, body);
 		return new ResponseEntity<>("success.", HttpStatus.CREATED);
 	}
+	
+	private List<Credit> credits; // ajouter le getter et le setter
+
+
+
+	public List<Credit> getCredits() {
+		credits = cs.retrieveAllCredit();
+		return credits;
+	}
+	public void setCredits(List<Credit> credits) {
+		this.credits = credits;
+	}
+	
+	private Credit cre = new Credit();
+
+    public String save() {
+    	cr.save(cre);
+        cre = new Credit();
+        return "/DariTn/banque-list.xhtml";
+    }
+
+	public Credit getCre() {
+		return cre;
+	}
+
+	public void setCre(Credit cre) {
+		this.cre = cre;
+	}
+	
+	public void removeCredit(int id) { 
+		cs.supprimerCredit(id);
+		getCre();
+	}
+	
 	
 
 	

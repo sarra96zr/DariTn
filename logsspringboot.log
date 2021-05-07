@@ -1452,3 +1452,25 @@ java.util.zip.ZipException: invalid LOC header (bad signature)
 2021-05-07 02:44:13.100  INFO 27560 --- [RMI TCP Connection(2)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2021-05-07 02:44:13.101  INFO 27560 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
 2021-05-07 02:44:13.107  INFO 27560 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2021-05-07 03:13:38.463  INFO 12652 --- [main] tn.esprit.spring.DariTnApplicationTests  : Starting DariTnApplicationTests on DESKTOP-T51QOAL with PID 12652 (started by mekki in C:\Users\mekki\Documents\GitHub\DariTn)
+2021-05-07 03:13:38.467  INFO 12652 --- [main] tn.esprit.spring.DariTnApplicationTests  : No active profile set, falling back to default profiles: default
+2021-05-07 03:13:39.098  INFO 12652 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-05-07 03:13:39.201  INFO 12652 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 94ms. Found 7 repository interfaces.
+2021-05-07 03:13:39.513  INFO 12652 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-05-07 03:13:39.713  INFO 12652 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-05-07 03:13:39.829  INFO 12652 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.4.8.Final}
+2021-05-07 03:13:39.986  INFO 12652 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-05-07 03:13:40.298  INFO 12652 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-05-07 03:13:40.446  INFO 12652 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-05-07 03:13:40.462  INFO 12652 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-05-07 03:13:40.668  WARN 12652 --- [main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: tn.esprit.spring.entity.Client
+2021-05-07 03:13:41.553  INFO 12652 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-05-07 03:13:41.562  INFO 12652 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-05-07 03:13:42.402  WARN 12652 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-05-07 03:13:42.597  INFO 12652 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-05-07 03:13:42.816  INFO 12652 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2021-05-07 03:13:43.083  INFO 12652 --- [main] tn.esprit.spring.DariTnApplicationTests  : Started DariTnApplicationTests in 4.871 seconds (JVM running for 5.744)
+2021-05-07 03:13:43.182  INFO 12652 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-05-07 03:13:43.184  INFO 12652 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-05-07 03:13:43.185  INFO 12652 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-05-07 03:13:43.194  INFO 12652 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
