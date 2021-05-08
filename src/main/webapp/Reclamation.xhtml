@@ -7,6 +7,7 @@
 	template="/template/template.xhtml">
 	<ui:param name="page_name" value="Connexion" />
 	<ui:define name="menu">
+	<center>
 		<h:head>
 			<link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png" />
 			<link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png" />
@@ -29,7 +30,9 @@
 				href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800'
 				rel='stylesheet' type='text/css' />
 		</h:head>
-		<h:panelGroup columns="2">
+		<h:panelGroup columns="2" style="display:block; text-align:center">
+		<center>
+		<h:form>
 			<div class="col-lg-6" align="center">
 				<div class="card">
 					<div class="card-header">
@@ -43,7 +46,6 @@
 									<th>Titre Réclamation</th>
 									<th>Type Réclamation</th>
 									<th>Description Réclamation</th>
-									<th>Modifier</th>
 									<th>Supprimer</th>
 								</tr>
 							</thead>
@@ -65,8 +67,6 @@
 
 									    <td><span class="description"><h:outputText
 													value="#{Reclamations.descriptionReclam}" /> </span></td>
-										
-										<td><span class="badge badge-primary">Modifier</span></td>
 										<td> 		
 													<h:commandButton
 													action="#{RecController.removeProduct(Reclamations.id_reclam)}"
@@ -81,6 +81,9 @@
 					<!-- /.table-stats -->
 				</div>
 			</div>
+			</h:form>
+			</center>
+			</center>
 		</h:panelGroup>
 	</ui:define>
 </ui:composition>
