@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/template.xhtml">
+	<ui:param name="page_name" value="Accueil" />
+	<ui:define name="content">
+		<!-- BEGIN : TP1 JSF Introduction Login -->
+		<h:panelGroup>
+
+			<h:form>
+				<h:outputText value="Veuillez ajouter votre annonce " />
+|
+<h:panelGroup columns="2">
+					<br></br>
+					<br></br>
+					<br></br>
+					<h:form>
+
+						<table>
+
+							<tr>
+								<td><h:outputText value="Titre"></h:outputText></td>
+								<td><h:inputText value="#{annController.titre}"></h:inputText></td>
+							</tr>
+
+							<tr>
+								<td><h:outputText value="Description"></h:outputText></td>
+								<td><h:inputText value="#{annController.description}"></h:inputText></td>
+							</tr>
+
+							<tr>
+								<td><h:outputText value="Adresse"></h:outputText></td>
+								<td><h:inputText value="#{annController.adresse}"></h:inputText></td>
+							</tr>
+
+							<tr>
+								<td><h:outputText value="Prix"></h:outputText></td>
+								<td><h:inputText value="#{annController.prix}"></h:inputText></td>
+							</tr>
+
+
+
+
+
+							<tr>
+								<td><h:outputText value="Type Annonce"></h:outputText></td>
+								<td><h:selectOneMenu value="#{annController.type_annonce}">
+										<f:selectItem itemLabel="Choisir le type" itemValue="#{null}" />
+										<f:selectItems value="#{annController.typea}" />
+									</h:selectOneMenu></td>
+							</tr>
+
+							<tr>
+								<td><h:outputText value="Catégorie de l'annonce"></h:outputText></td>
+								<td><h:selectOneMenu
+										value="#{annController.categorie_annonce}">
+										<f:selectItem itemLabel="Choisir le Role" itemValue="#{null}" />
+										<f:selectItems value="#{annController.typec}" />
+									</h:selectOneMenu></td>
+							</tr>
+							<tr>
+								<h:button value="Save" action="#{annController.addAnnonce()}" />
+							</tr>
+
+
+						</table>
+
+					</h:form>
+				</h:panelGroup>
+
+			</h:form>
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>

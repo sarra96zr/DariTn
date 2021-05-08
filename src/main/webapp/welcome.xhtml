@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="template/template.xhtml">
+	<ui:param name="page_name" value="Connexion" />
+	<ui:define name="menu">
+
+
+		<h:panelGroup columns="2">
+			<center>
+				<br></br> <br></br> <br></br>
+				<h:form>
+				<br></br>
+				<br></br>
+				<h:outputText value="Liste des annonces " />
+				<br></br>
+				<br></br>
+					<h:dataTable value="#{annController.getAnnonce()}"
+						var="annonce" border="1">
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="titre" />
+							</f:facet>
+							<h:outputText value="#{annonce.titre}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="description" />
+							</f:facet>
+							<h:outputText value="#{annonce.description}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="prix" />
+							</f:facet>
+							<h:outputText value="#{annonce.prix}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="adresse" />
+							</f:facet>
+							<h:outputText value="#{annonce.adresse}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="photo" />
+							</f:facet>
+							<h:outputText value="#{annonce.photo}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="video" />
+							</f:facet>
+							<h:outputText value="#{annonce.video}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="disponible" />
+							</f:facet>
+							<h:outputText value="#{annonce.disponible}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Type annonce" />
+							</f:facet>
+							<h:outputText value="#{annonce.type_annonce}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Categorie annonce" />
+							</f:facet>
+							<h:outputText value="#{annonce.categorie_annonce}" />
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Action" />
+							</f:facet>
+
+							<h:commandButton
+								action="#{annController.removeAnnonce(annonce.id)}"
+								value="Supprimer" />
+						</h:column>
+					</h:dataTable>
+				</h:form> 
+				<h:button value="Ajouter une annonce" outcome="addAnnonce" />
+			</center>
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>
+
+
+

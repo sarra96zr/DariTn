@@ -2,9 +2,14 @@ package tn.esprit.spring.controller;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+
+import org.ocpsoft.rewrite.annotation.Join;
+import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.util.AlternativeJdkIdGenerator;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,22 +23,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.entity.Annonce;
+import tn.esprit.spring.entity.Categorie_Annonce;
+import tn.esprit.spring.entity.Type_Annonce;
+import tn.esprit.spring.repository.AnnonceRepository;
 import tn.esprit.spring.service.AnnonceService;
 import tn.esprit.spring.service.MeubleService;
 
-@Controller
+
+
+@RestController
 public class AnnonceController {
 
 	@Autowired
 	AnnonceService annonceService;
 	
-	private List<Annonce> annonces;
-	
-	
-	public void setAnnonces(List<Annonce> annonces) {
-		this.annonces = annonces;
-	}
 
+	private List<Annonce> annonces;
+
+	
+	
+	
+	
 	// http://localhost:8081/DariTn/Pi/retrieve-all-annonces
 	@GetMapping("/retrieve-all-annonces")
 		@ResponseBody
@@ -77,10 +87,12 @@ public class AnnonceController {
 				@GetMapping("/search-annonce/{annonce-title}")
 				@ResponseBody
 				public List<Annonce> SearchProductByName(@PathVariable("annonce-title") String annonce_title) {
+					
+					
 					return annonceService.RechercheAnnonce(annonce_title);
 				}
 				
-				@RequestMapping("/")
+				/*@RequestMapping("/")
 				public String viewHomePage(Model model) {
 				    List<Annonce> listAnnonces = annonceService.retrieveAllAnnonces();
 				    model.addAttribute("listAnnonces", listAnnonces);
@@ -100,6 +112,9 @@ public class AnnonceController {
 					annonceService.addAnnonce(annonce);
 
 					return "redirect:/";
-				}
+				}*/
+				
+				
+				
 
 }

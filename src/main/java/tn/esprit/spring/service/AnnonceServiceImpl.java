@@ -6,9 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import tn.esprit.spring.entity.Annonce;
-import tn.esprit.spring.entity.Meubles;
 import tn.esprit.spring.repository.AnnonceRepository;
 
 @Service
@@ -66,5 +64,23 @@ public List<Annonce> RechercheAnnonce(String annonce_title) {
 
 		return annonceRepository.RechercheAnnonce(annonce_title);
 	}
+
+
+
+//jsf
+@Override
+public Long addOrUpdateAnnonce(Annonce a) {
+	annonceRepository.save(a);
+	return a.getId();
 }
+
+@Override
+public List<Annonce> getAllAnnonces() {
+	return (List<Annonce>) annonceRepository.findAll();
+}
+
+
+
+	
+	}
 
