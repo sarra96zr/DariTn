@@ -3,17 +3,25 @@ package tn.esprit.spring.controller;
 
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.ManagedBean;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.inject.Named;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
+import org.primefaces.PrimeFaces;
+import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import net.bytebuddy.asm.Advice.This;
 import tn.esprit.spring.service.MeubleService;
 import tn.esprit.spring.service.MeubleServiceImpl;
 import tn.esprit.spring.entity.Client;
@@ -26,7 +34,6 @@ import tn.esprit.spring.repository.MeubleRepo;
 @Controller(value = "JsfMeubleController")
 @ELBeanName(value = "JsfMeubleController")
 @Join(path = "/DariTn/meuble", to = "/Meuble.jsf")
-
 public class JsfMeubleController {
 	@Autowired
 	MeubleService MeubleService;
@@ -44,7 +51,7 @@ public class JsfMeubleController {
 	private float price;
 	private List<Meubles> meuble;
 	private long ref_meuble;
-	private int idlc;
+	private long update;
 	private int qte;
 	private Commande cmd;
 	private Meubles m=new Meubles();
@@ -125,11 +132,11 @@ public class JsfMeubleController {
 	public void setRef_meuble(long ref_meuble) {
 		this.ref_meuble = ref_meuble;
 	}
-	public int getIdlc() {
-		return idlc;
+	public long getUpdate() {
+		return update;
 	}
-	public void setIdlc(int idlc) {
-		this.idlc = idlc;
+	public void setUpdate(long update) {
+		this.update = update;
 	}
 	public int getQte() {
 		return qte;
@@ -146,7 +153,7 @@ public class JsfMeubleController {
 	public Meubles getM() {
 		return m;
 	}
-	public void setM(Meubles m) {
+public void setM(Meubles m) {
 		this.m = m;
 	}
 	public Client getClient() {
@@ -155,15 +162,59 @@ public class JsfMeubleController {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	public void removeProduct( String id_m) {
-		MeubleService.deleteMeubles(id_m);
-
-	}
 	public String save()
 
 		{ mr.save(m);
         m = new Meubles();
-        return "/DariTn/Ajout_meuble.xhtml";
-    
+        this.meuble.add(this.m);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Product Added"));
+        PrimeFaces.current().executeScript("PF('manageProductDialog').hide()");
+        PrimeFaces.current().ajax().update("form:messages", "form:dt-products");
+        return "/DariTn/new.xhtml";
+        
+       	}
+	 public void remove(String ref_meuble) {
+		 mc.removeProduct(ref_meuble);
+			getM();
 	
-		}}
+	    }
+		
+	public void displayMeuble(Meubles meuble)
+	{
+	this.setNom_meuble(meuble.getNom_meuble());
+	this.setDescription_meuble(meuble.getDescription_meuble());
+	this.setTypem(meuble.getType_meuble());
+	this.setPrice(meuble.getPrix());
+	this.setUpdate(meuble.getRef_meuble());
+	}
+	public void updateMeuble()
+	{ ms.updateMeuble(new Meubles(update, nom_meuble, description_meuble, price, typem));
+		 }
+	public void openNew() {
+        this.m = new Meubles();
+    }
+	
+    public void onRowEdit(RowEditEvent<Meubles> event) {
+        FacesMessage msg = new FacesMessage("Product Edited", String.valueOf(event.getObject().getRef_meuble()));
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public void onRowCancel(RowEditEvent<Meubles> event) {
+        FacesMessage msg = new FacesMessage("Edit Cancelled", String.valueOf(event.getObject().getRef_meuble()));
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    public void onCellEdit(CellEditEvent event) {
+        Object oldValue = event.getOldValue();
+        Object newValue = event.getNewValue();
+
+        if (newValue != null && !newValue.equals(oldValue)) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }
+
+
+
+    
+}

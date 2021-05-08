@@ -55,61 +55,59 @@
 		<h:body>
 
 			<div class="card">
-				<h:form>
+				<p:dataTable id="m" var="meuble" value="#{JsfMeubleController.meuble}" editable="true"
+                     style="margin-bottom:20px">
 
-					<p:dataTable id="dt-products" widgetVar="dtProducts" value="#{JsfMeubleController.meuble}" var="meuble" reflow="true" styleClass="products-table" rowKey="#{meuble.ref_meuble}" paginator="true" rows="5" rowSelectMode="add" paginatorPosition="bottom">
-			
-						<f:facet name="header" >
-							<div class="products-table-header" align="center">
-								<span style="font-weight: bold">Liste des Meubles a
-									vendre</span> <span class="filter-container ui-input-icon-left">
-									<i class="pi pi-search" /> <p:inputText id="globalFilter"
-										onkeyup="PF('dtProducts').SearchProductByName(nom_meuble)"
-										placeholder="Search" />
-								</span>
-							</div>
-						</f:facet>
+            <p:ajax event="rowEdit" listener="#{JsfMeubleController.onRowEdit()}" />
+            <p:ajax event="rowEditCancel" listener="#{JsfMeubleController.onRowCancel()}" />
 
-						<p:column headerText="Meubles">
-							<h:outputText value="#{meuble.nom_meuble}" />
-						</p:column>
+            <p:column headerText="Code">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText value="#{meuble.ref_meuble}"/>
+                    </f:facet>
+                    <f:facet name="input">
+                        <p:inputText id="modelInput" value="#{meuble.ref_meuble}" style="width:100%"/>
+                    </f:facet>
+                </p:cellEditor>
+            </p:column>
 
-						<p:column headerText="Description">
-							<h:outputText value="#{meuble.description_meuble}" />
-						</p:column>
+            <p:column headerText="Name">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText value="#{meuble.nom_meuble}"/>
+                    </f:facet>
+                    <f:facet name="input">
+                        <p:inputText value="#{meuble.nom_meuble}" style="width:100%" label="Name"/>
+                    </f:facet>
+                </p:cellEditor>
+            </p:column>
 
-						<p:column headerText="Prix en DT">
-							<h:outputText value="#{meuble.prix}" />
-						</p:column>
+            <p:column headerText="Status">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{product.inventoryStatus}"/></f:facet>
+                    <f:facet name="input">
+                        <h:selectOneMenu value="#{meuble.type_meuble}" style="width:100%">
+                            		<f:selectItem itemLabel="Choisir le type du meuble"
+										itemValue="#{null}" />
+									<f:selectItems value="#{JsfMeubleController.type}" />
+                        </h:selectOneMenu>
+                    </f:facet>
+                </p:cellEditor>
+            </p:column>
 
-<!-- 						<p:column headerText="Action"> -->
-<!-- 							<p:commandButton -->
-<!-- 								action="#{ProductController.ajouterlc(Product.idProduct)}" -->
-<!-- 								value="Commander" /> -->
+            <p:column headerText="Price">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="$#{meuble.prix}"/></f:facet>
+                    <f:facet name="input"><p:inputText value="#{meuble.prix}" style="width:100%"
+                                                       label="Price"/></f:facet>
+                </p:cellEditor>
+            </p:column>
 
-<!-- 						</p:column> -->
-<!-- <p:column headerText="Action"> -->
-<!-- <p:cascadeSelect value="#{cascadeSelectView.selection}" style="min-width: 14rem" placeholder="Type de paiement"> -->
-<!--             <p:ajax event="itemSelect" listener="#{cascadeSelectView.onItemSelect}"  /> -->
-<!--             <f:selectItems value="#{cascadeSelectView.panier}"/> -->
-<!--         </p:cascadeSelect> -->
-<!--         </p:column> -->
-<p:column headerText="Acheter">
-   <i class="money-bill"></i>
-    <p:button type="button" value="Livraison" icon="money-bill" />
-    <i class="credit-card"></i>
-    <p:button type="button" value="Carte Bancaire" icon="credit-card" iconPos="right" href="/DariTn/charge"/>
-    
-</p:column>
-					</p:dataTable>
-					<p:dataTable value="#{JsfMeubleController.m}" var="mb"	border="1">
-					<div align="center">
-					<p:column style="text-align:center">			
-						<p:button href="/DariTn/Ajout_meuble.jsf" value="Deposer votre annonce" />
-						</p:column>
-							</div>
-							</p:dataTable>
-				</h:form>
+            <p:column style="width:6rem">
+                <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
+            </p:column>
+        </p:dataTable>
 			</div>
 
 		</h:body>

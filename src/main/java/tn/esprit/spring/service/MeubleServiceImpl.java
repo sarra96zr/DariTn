@@ -31,12 +31,12 @@ public class MeubleServiceImpl implements MeubleService {
 		return MeubleDAO.save(m);
 	}
 
-	@Override
-	public void deleteMeubles(String id_m) {
-		// TODO Auto-generated method stub
-		MeubleDAO.deleteById(Long.parseLong(id_m));
-
-	}
+//	@Override
+//	public void deleteMeubles(String id_m) {
+//		// TODO Auto-generated method stub
+//		MeubleDAO.deleteById(Long.parseLong(id_m));
+//
+//	}
 
 	@Override
 	public Meubles updateMeuble(Meubles m) {
@@ -69,6 +69,20 @@ public class MeubleServiceImpl implements MeubleService {
 	public List<Meubles> findAll() {
 		// TODO Auto-generated method stub
 		return (List<Meubles>) MeubleDAO.findAll();
+	}
+
+	@Override
+	public void deleteMeubles(long id_m) {
+		// TODO Auto-generated method stub
+		MeubleDAO.deleteById(id_m);
+		
+	}
+
+	@Override
+	public void deleteMeubles(String id_m) {
+		// TODO Auto-generated method stub
+		MeubleDAO.deleteById(Long.parseLong(id_m));
+		
 	}
 
 	}

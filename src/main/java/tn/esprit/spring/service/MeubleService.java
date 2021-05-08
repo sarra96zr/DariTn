@@ -12,6 +12,7 @@ public interface MeubleService {
 	List<Meubles> retrieveAllMeubles();
 	Meubles addMeuble(Meubles  m);
 	void deleteMeubles(String id_m);
+	void deleteMeubles(long id_m);
 	Meubles updateMeuble(Meubles  m);
 	Meubles retrieveMeubles(String id_m);
 	List<Meubles> SearchMeublesByName(String name_meuble);

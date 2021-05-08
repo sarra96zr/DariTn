@@ -57,8 +57,8 @@ public class MeubleController {
 	// http://localhost:8081/DariTn/Pi/Delete-meuble/{meuble-id}
 	@DeleteMapping("/Delete-meuble/{meuble-id}")
 	@ResponseBody
-	public void removeProduct(@PathVariable("meuble-id") String id_m) {
-		meubleService.deleteMeubles(id_m);
+	public void removeProduct(@PathVariable("meuble-id") String ref_meuble) {
+		meubleService.deleteMeubles(ref_meuble);
 
 	}
 

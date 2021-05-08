@@ -147,6 +147,8 @@ public class GeneratePdfReport {
 	        table1.setWidthPercentage(25f);
 	        table1.setWidths(new float[] {3.0f});
 	        table1.setSpacingBefore(10);
+	        
+		      
 	         
 	     /*   PdfPTable table2 = new PdfPTable(5);
 	        table2.setWidthPercentage(25f);
