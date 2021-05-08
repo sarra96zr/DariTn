@@ -3,7 +3,10 @@ package tn.esprit.spring.controller;
 import java.util.Date;
 import java.util.List;
 
+import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,15 +20,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.entity.Abonnement;
+import tn.esprit.spring.entity.Aonnement;
+import tn.esprit.spring.entity.Banque;
+import tn.esprit.spring.repository.AbonnementRepo;
 import tn.esprit.spring.service.AbonnementService;
 
 
 
-
+@Scope (value = "session")
+@Component (value = "abonnement")
+@ELBeanName(value = "abonnement")
+//@Join(path = "/", to = "/bank-lists.jsf")
 @Controller
 public class AbonnementController {
 	@Autowired
 	AbonnementService abservice;
+	AbonnementRepo abrepo;
 	
 	
 	
@@ -99,22 +109,36 @@ public class AbonnementController {
 					return list;
 				}
 				
-				@RequestMapping("/")
-				public String viewHomePage(Model model) {
-				    List<Abonnement> abonnement = abservice.retrieveAllAbonnement();
-				    model.addAttribute("abonnement", abonnement);
-				     
-				    return "index";
+				
+				private Aonnement type;
+				
+				public Aonnement[] getAb() {
+					return  Aonnement.values();
+				}
+				public Aonnement getType() {
+					return type;
+				}
+				public void setType(Aonnement type) {
+					this.type = type;
 				}
 				
-				@RequestMapping("/addabonnement")
-				public String showNewAbonnementPage(Model model) {
-				    Abonnement abonnement = new Abonnement();
-				    model.addAttribute("abonnement", abonnement);
-				     
-				    return "new_abonnement";
+				private Abonnement abonn = new Abonnement();
+
+
+
+				public Abonnement getAbonn() {
+					return abonn;
+				}
+				public void setAbonn(Abonnement abonn) {
+					this.abonn = abonn;
 				}
 				
+				
+				public String save() {
+				    	abrepo.save(abonn);
+				        abonn = new Abonnement();
+				        return "/DariTn/banque-list.xhtml";
+				    }
 				
 				
 }

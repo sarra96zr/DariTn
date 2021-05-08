@@ -15,24 +15,23 @@ public class Abonnement implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_abonnement")
 	public long id;
+	@Enumerated
+	private Aonnement type;
 
+	public Aonnement getType() {
+		return type;
+	}
+
+	public void setType(Aonnement type) {
+		this.type = type;
+	}
 
 	@Column(name = "date_debut")
 	public Date date_debut;
 
 	@Column(name = "date_fin")
 	public Date date_fin;
-	
-	@Column(name = "type")
-	public String type;
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
 
 	@ManyToOne
 	 public Client client;
@@ -74,12 +73,16 @@ public class Abonnement implements Serializable {
 		return serialVersionUID;
 	}
 
-	public Abonnement(long id, Date date_debut, Date date_fin, String type, Client client) {
+
+
+
+
+	public Abonnement(long id, Aonnement type, Date date_debut, Date date_fin, Client client) {
 		super();
 		this.id = id;
+		this.type = type;
 		this.date_debut = date_debut;
 		this.date_fin = date_fin;
-		this.type = type;
 		this.client = client;
 	}
 
