@@ -15,22 +15,78 @@
 <h:panelGrid columns="1">
 
                      <div class="p-field p-col-12 p-md-4">
-                <p:outputLabel for="navigator" value="Navigator"/>
-                <p:datePicker id="navigator" value="#{abonnement.abonn.date_debut}" monthNavigator="true" yearNavigator="true" showWeek="true"/>
+                <p:outputLabel for="spanish" value="Date Debut"/>
+                <p:datePicker id="spanish" value="#{subscription.datedeb}" locale="es" monthNavigator="true"
+                          pattern="yyyy-MMM-dd"/>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <p:outputLabel for="navigator" value="Navigator"/>
-                <p:datePicker id="navigator1" value="#{abonnement.abonn.date_debut}" monthNavigator="true" yearNavigator="true" showWeek="true"/>
+                <p:outputLabel for="spanish" value="Date Fin"/>
+                <p:datePicker id="spanish1" value="#{subscription.datefin}" locale="es" monthNavigator="true"
+                          pattern="yyyy-MMM-dd"/>
             </div>
  
                     </h:panelGrid>
                     
-        <p:selectOneMenu value="#{abonnement.type}">
-	<f:selectItems value="#{abonnement.ab}" />
+        <p:selectOneMenu value="#{subscription.type}">
+	<f:selectItems value="#{subscription.ab}" />
 	</p:selectOneMenu>
-	<h:commandButton value="Add" action="#{abonnement.addSubscription()}" />
+	<h:commandButton value="Add" action="#{subscription.addSubscription()}" />
 	</div>
+	
 	</p:panel>
+	
+	        <p:panel header="Bank List">
+        
+        
+        <f:facet name="header">
+<div class="products-table-header">
+
+<span class="filter-container ui-input-icon-left">
+<i class="pi pi-search"/>
+<p:inputText id="globalFilter" onkeyup="PF('dtProducts').SearchProductByName(nom_meuble)" placeholder="Search"/>
+</span>
+</div>
+</f:facet>
+              
+                <p:dataTable id="table"  value="#{subscription.getAbonnements()}" var="abonnement">
+                   
+<p:column>
+                        <f:facet name="header">Client</f:facet>
+                        <h:outputText value="#{abonnement.client.firstName}" />
+                        
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Date Debut</f:facet>
+                        <h:outputText value="#{abonnement.date_debut}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Date Fin</f:facet>
+                        <h:outputText value="#{abonnement.date_fin}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Date Fin</f:facet>
+                        <h:outputText value="#{abonnement.type}" />
+                    </p:column>
+                    <p:column id="action">
+						<f:facet name="header"><h:outputText value="Action" /></f:facet>
+						<h:commandLink value="Edit"
+							action="#{bankLists.editBanque(banque)}">
+							</h:commandLink> /
+							<h:commandLink value="Delete"
+								action="#{subscription.removeSubscription(abonnement.id)}">
+								
+							</h:commandLink>
+							
+
+					</p:column>
+                   
+                    
+                    
+    
+
+                   
+                </p:dataTable>
+            </p:panel>
 	</h:form>
 	</ui:define>
 	</ui:composition>

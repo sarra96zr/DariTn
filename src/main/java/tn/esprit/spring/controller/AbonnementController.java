@@ -29,8 +29,8 @@ import tn.esprit.spring.service.AbonnementService;
 
 
 @Scope (value = "session")
-@Component (value = "abonnement")
-@ELBeanName(value = "abonnement")
+@Component (value = "subscription")
+@ELBeanName(value = "subscription")
 //@Join(path = "/", to = "/bank-lists.jsf")
 @Controller
 public class AbonnementController {
@@ -65,7 +65,7 @@ public class AbonnementController {
 				// http://localhost:8081/DariTn/Pi/Delete-abonnement/{abonnement-id}
 				@DeleteMapping("/Delete-abonnement/{abonnement-id}")
 				@ResponseBody
-				public void removeAbonnement(@PathVariable("abonnement-id") String id_ab) {
+				public void removeAbonnement(@PathVariable("abonnement-id") int id_ab) {
 					abservice.deleteAbonnement(id_ab);
 					
 				}
@@ -93,8 +93,8 @@ public class AbonnementController {
 				}
 				
 				// trie abonnement par id asc
-				// http://localhost:8081/DariTn/Pi/retrieve-all-products-asc
-				@GetMapping("/retrieve-all-products-asc")
+				// http://localhost:8081/DariTn/Pi/retrieve-all-abonnement-asc
+				@GetMapping("/retrieve-all-abonnement-asc")
 				@ResponseBody
 				public List<Abonnement> orderByAscendingQantity() {
 					List<Abonnement> list = abservice.orderByAscendingId();
@@ -102,8 +102,8 @@ public class AbonnementController {
 				}
 
 				// trie abonnement par id desc
-				// http://localhost:8081/DariTn/Pi/retrieve-all-products-desc
-				@GetMapping("/retrieve-all-products-desc")
+				// http://localhost:8081/DariTn/Pi/retrieve-all-abonnement-desc
+				@GetMapping("/retrieve-all-abonnement-desc")
 				@ResponseBody
 				public List<Abonnement> orderByDescendingId() {
 					List<Abonnement> list = abservice.orderByDescendingId();
@@ -111,9 +111,17 @@ public class AbonnementController {
 				}
 				private Date datedeb;
 				private Date datefin;
+				private List<Abonnement> abonnements;
 				
 				
 				
+				public List<Abonnement> getAbonnements() {
+					abonnements = abservice.retrieveAllAbonnement();
+					return abonnements;
+				}
+				public void setAbonnements(List<Abonnement> abonnements) {
+					this.abonnements = abonnements;
+				}
 				public Date getDatedeb() {
 					return datedeb;
 				}
@@ -163,5 +171,9 @@ public class AbonnementController {
 					
 					}
 				
+				public void removeSubscription(int id_b) { 
+					abservice.deleteAbonnement(id_b);
+					getAbonnements();
+				}
 				
 }

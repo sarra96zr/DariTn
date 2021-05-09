@@ -31,9 +31,9 @@ public class AbonnementServiceImpl implements AbonnementService {
 	}
 
 	@Override
-	public void deleteAbonnement(String id_ab) {
+	public void deleteAbonnement(int id_ab) {
 		// TODO Auto-generated method stub
-		abonnementDAO.deleteById(Long.parseLong(id_ab));
+		abonnementDAO.deleteById((long) id_ab);
 		
 	}
 

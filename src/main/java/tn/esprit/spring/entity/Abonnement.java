@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -33,11 +34,12 @@ public class Abonnement implements Serializable {
 	public Date date_debut;
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_fin")
-	@JsonFormat(pattern = "dd-MM-yyyy")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	public Date date_fin;
 
 
 	@ManyToOne
+	@JsonIgnore
 	 public Client client;
 
 	public long getId() {

@@ -11,7 +11,7 @@ public interface AbonnementService {
 	
 	List<Abonnement> retrieveAllAbonnement();
 	public long addAbonnement(Abonnement abonnement);
-	void deleteAbonnement(String id_ab);
+	public void deleteAbonnement(int id_ab);
 	Abonnement updateAbonnement(Abonnement ab);
 	Abonnement retrieveAbonnement(String id_ab);
 	List<Abonnement> SearchAbonnementByType(String type_abonnement);
