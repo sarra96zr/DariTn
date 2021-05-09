@@ -10,7 +10,7 @@ import tn.esprit.spring.entity.Abonnement;
 public interface AbonnementService {
 	
 	List<Abonnement> retrieveAllAbonnement();
-	Abonnement addAbonnement(Abonnement ab);
+	public long addAbonnement(Abonnement abonnement);
 	void deleteAbonnement(String id_ab);
 	Abonnement updateAbonnement(Abonnement ab);
 	Abonnement retrieveAbonnement(String id_ab);

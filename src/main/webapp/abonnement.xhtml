@@ -13,20 +13,22 @@
             <p:panel header="Bank Details">
 	<div class="p-field">
 <h:panelGrid columns="1">
-  <p:calendar id="button" value="#{abonnement.abonn.date_debut}"
-            showOn="button" pattern="MM-dd-yy">
 
-        </p:calendar>
-        <p:calendar id="button1" value="#{abonnement.abonn.date_fin}"
-            showOn="button" pattern="MM-dd-yy">
-
-        </p:calendar>
-                     
+                     <div class="p-field p-col-12 p-md-4">
+                <p:outputLabel for="navigator" value="Navigator"/>
+                <p:datePicker id="navigator" value="#{abonnement.abonn.date_debut}" monthNavigator="true" yearNavigator="true" showWeek="true"/>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <p:outputLabel for="navigator" value="Navigator"/>
+                <p:datePicker id="navigator1" value="#{abonnement.abonn.date_debut}" monthNavigator="true" yearNavigator="true" showWeek="true"/>
+            </div>
+ 
                     </h:panelGrid>
+                    
         <p:selectOneMenu value="#{abonnement.type}">
 	<f:selectItems value="#{abonnement.ab}" />
 	</p:selectOneMenu>
-	<h:commandButton value="Add" action="#{abonnement.save()}" />
+	<h:commandButton value="Add" action="#{abonnement.addSubscription()}" />
 	</div>
 	</p:panel>
 	</h:form>

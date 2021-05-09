@@ -24,9 +24,10 @@ public class AbonnementServiceImpl implements AbonnementService {
 	}
 
 	@Override
-	public Abonnement addAbonnement(Abonnement ab) {
-		// TODO Auto-generated method stub
-		return abonnementDAO.save(ab);
+	public long addAbonnement(Abonnement abonnement) {
+
+		abonnementDAO.save(abonnement);
+		return abonnement.getId();
 	}
 
 	@Override

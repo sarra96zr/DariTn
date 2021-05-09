@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Entity
 @Table(name = "abonnement")
@@ -25,11 +26,14 @@ public class Abonnement implements Serializable {
 	public void setType(Aonnement type) {
 		this.type = type;
 	}
-
+	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "date_debut")
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	public Date date_debut;
-
+	@Temporal(TemporalType.DATE)
 	@Column(name = "date_fin")
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	public Date date_fin;
 
 
@@ -88,6 +92,13 @@ public class Abonnement implements Serializable {
 
 	public Abonnement() {
 		super();
+	}
+
+	public Abonnement(Date date_debut, Date date_fin, Aonnement type) {
+		// TODO Auto-generated constructor stub
+		this.date_debut = date_debut;
+		this.date_fin = date_fin;
+		this.type = type;
 	}
 
 }

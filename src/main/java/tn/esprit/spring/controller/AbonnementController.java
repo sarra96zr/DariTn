@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tn.esprit.spring.entity.Abonnement;
 import tn.esprit.spring.entity.Aonnement;
 import tn.esprit.spring.entity.Banque;
+import tn.esprit.spring.entity.User;
 import tn.esprit.spring.repository.AbonnementRepo;
 import tn.esprit.spring.service.AbonnementService;
 
@@ -56,8 +57,8 @@ public class AbonnementController {
 				// Ajouter : http://localhost:8081/DariTn/Pi/add-abonnement
 				@PostMapping("/add-abonnement")
 				@ResponseBody
-				public Abonnement addAbonnement(@RequestBody Abonnement ab) {
-					Abonnement abonnement = abservice.addAbonnement(ab);
+				public long addAbonnement(@RequestBody Abonnement ab) {
+					long abonnement = abservice.addAbonnement(ab);
 					return abonnement;
 				}
 
@@ -108,8 +109,23 @@ public class AbonnementController {
 					List<Abonnement> list = abservice.orderByDescendingId();
 					return list;
 				}
+				private Date datedeb;
+				private Date datefin;
 				
 				
+				
+				public Date getDatedeb() {
+					return datedeb;
+				}
+				public void setDatedeb(Date datedeb) {
+					this.datedeb = datedeb;
+				}
+				public Date getDatefin() {
+					return datefin;
+				}
+				public void setDatefin(Date datefin) {
+					this.datefin = datefin;
+				}
 				private Aonnement type;
 				
 				public Aonnement[] getAb() {
@@ -134,11 +150,18 @@ public class AbonnementController {
 				}
 				
 				
-				public String save() {
-				    	abrepo.save(abonn);
-				        abonn = new Abonnement();
-				        return "/DariTn/banque-list.xhtml";
-				    }
+				public AbonnementRepo getAbrepo() {
+					return abrepo;
+				}
+				public void setAbrepo(AbonnementRepo abrepo) {
+					this.abrepo = abrepo;
+				}
+				public void addSubscription() {
+
+					
+					abservice.addAbonnement(new Abonnement(datedeb, datefin, type));
+					
+					}
 				
 				
 }
