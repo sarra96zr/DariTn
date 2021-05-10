@@ -20,7 +20,25 @@ private String email;
 private String password;
 
  private Date date_de_naissance;
+ private int num_tel;
 
+	public User(long id_user, String firstName, String lastName, String email, String password, Date date_de_naissance,
+		int num_tel) {
+	super();
+	this.id_user = id_user;
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.email = email;
+	this.password = password;
+	this.date_de_naissance = date_de_naissance;
+	this.num_tel = num_tel;
+}
+	public int getNum_tel() {
+	return num_tel;
+}
+public void setNum_tel(int num_tel) {
+	this.num_tel = num_tel;
+}
 	public long getId_user() {
 	return id_user;
 }

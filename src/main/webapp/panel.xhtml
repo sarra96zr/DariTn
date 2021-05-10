@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<ui:composition template="/template/template.xhtml">
+	<ui:param name="Product" value="Accueil" />
+	<ui:define name="content">
+	<style type="text/css">
+    .label {
+        width: 20%;
+        padding: 4px;
+    }
+
+    .value {
+        width: 80%;
+        padding: 4px;
+    }
+
+    .grid {
+        width: 100%;
+    }
+
+    .error {
+        color: red;
+    }
+
+    .outputLabel {
+        font-weight: bold;
+    }
+
+    .grid {
+        width: 33%;
+        padding: 4px;
+    }
+    .tg {
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-color: #ccc;
+}
+
+.tg p {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	padding: 10px 5px;
+	border-style: solid;
+	border-width: 1px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #ccc;
+	color: #333;
+	background-color: #fff;
+}
+
+.tg h {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	padding: 10px 5px;
+	border-style: solid;
+	border-width: 1px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #ccc;
+	color: #333;
+	background-color: #f0f0f0;
+}
+
+.tg .tg-4eph {
+	background-color: #f9f9f9
+}
+/* reset on the showcase style*/
+        body .ui-panelgrid .ui-panelgrid-cell {
+            background-color: transparent;
+        }
+
+        /* example use of styles for your form */
+        .my-heading-row {
+            background-color: var(--surface-c);
+            font-weight: bold;
+        }
+            .ui-panelgrid.showcase-text-align-center .ui-grid-responsive .ui-panelgrid-cell {
+        text-align: center;
+    }
+
+    .customPanelGrid .ui-panelgrid-content {
+        align-items: center;
+    }
+</style>
+<body>
+<br></br>
+					<br></br>
+					<br></br>
+<div class="card">
+<p:panelGrid columns="4"
+                 columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                 layout="grid"
+                 styleClass="ui-panelgrid-blank ui-fluid"
+                 style="border:0px none; background-color:transparent;">
+                 
+                 
+
+        <p:row styleClass="my-heading-row">
+            Biographic
+        </p:row>
+
+        <p:outputLabel for="@next" value="First Name"/>
+        <p:inputText/>
+
+        <p:outputLabel for="@next" value="Last Name"/>
+        <p:inputText/>
+
+        <p:outputLabel for="@next" value="Phone"/>
+        <p:inputText/>
+
+        <p:outputLabel for="@next" value="Email"/>
+        <p:inputText/>
+
+        <p:outputLabel for="@next" value="Address"/>
+        <p:inputTextarea rows="3"/>
+
+        
+    </p:panelGrid>
+    								<p:button value="Show" type="button"
+									icon="pi pi-external-link" onclick="PF('dlg1').show()" />
+								<p:dialog header="Header" widgetVar="dlg1" minHeight="40"
+									width="350" showEffect="fade">
+									<p class="p-m-0">Lorem ipsum dolor sit .</p>
+								</p:dialog>
+</div>
+</body>
+	</ui:define>
+</ui:composition>
+
+</html>

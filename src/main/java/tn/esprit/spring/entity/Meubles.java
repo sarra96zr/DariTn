@@ -31,6 +31,7 @@ public class Meubles implements Serializable {
 	@JsonIgnore
 	@Column(name = "nom_meuble")
 	public String Nom_meuble;
+	private String img;
 	@JsonIgnore
 	@Column(name = "des_meuble")
 	public String Description_meuble;
@@ -56,6 +57,40 @@ public class Meubles implements Serializable {
 
 	public Meubles() {
 		super();
+	}
+
+	public Meubles(String nom_meuble, String img, String description_meuble, float prix, Type_Meuble type_meuble) {
+		super();
+		Nom_meuble = nom_meuble;
+		this.img = img;
+		Description_meuble = description_meuble;
+		this.prix = prix;
+		this.type_meuble = type_meuble;
+	}
+
+	public Meubles(Long ref_meuble, String nom_meuble, String img, String description_meuble, float prix,
+			Type_Meuble type_meuble, Client client, Set<Commande> commande) {
+		super();
+		this.ref_meuble = ref_meuble;
+		Nom_meuble = nom_meuble;
+		this.img = img;
+		Description_meuble = description_meuble;
+		this.prix = prix;
+		this.type_meuble = type_meuble;
+		this.client = client;
+		this.commande = commande;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+	public void setRef_meuble(Long ref_meuble) {
+		this.ref_meuble = ref_meuble;
 	}
 
 	public Meubles(Long ref_meuble, String nom_meuble, String description_meuble, float prix, Type_Meuble type_meuble,

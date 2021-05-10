@@ -2,21 +2,22 @@ package tn.esprit.spring.controller;
 
 
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.List;
-import java.util.UUID;
+
 
 import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.inject.Named;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 
-import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.FlowEvent;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -33,7 +34,7 @@ import tn.esprit.spring.repository.MeubleRepo;
 @Scope
 @Controller(value = "JsfMeubleController")
 @ELBeanName(value = "JsfMeubleController")
-@Join(path = "/DariTn/meuble", to = "/Meuble.jsf")
+//@Join(path = "/DariTn/meuble", to = "/Meuble.jsf")
 public class JsfMeubleController {
 	@Autowired
 	MeubleService MeubleService;
@@ -45,7 +46,7 @@ public class JsfMeubleController {
 	MeubleController mc;
 	private String nom_meuble;
 	private Type_Meuble typem;
-
+    private UploadedFile file;
 	//private String picture;
 	private String description_meuble;
 	private float price;
@@ -57,6 +58,12 @@ public class JsfMeubleController {
 	private Meubles m=new Meubles();
 	private Client client;
 	
+	public UploadedFile getFile() {
+		return file;
+	}
+	public void setFile(UploadedFile file) {
+		this.file = file;
+	}
 	public MeubleRepo getMr() {
 		return mr;
 	}
@@ -162,7 +169,7 @@ public void setM(Meubles m) {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	public String save()
+	public void save()
 
 		{ mr.save(m);
         m = new Meubles();
@@ -170,7 +177,7 @@ public void setM(Meubles m) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Product Added"));
         PrimeFaces.current().executeScript("PF('manageProductDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-products");
-        return "/DariTn/new.xhtml";
+//        return "/DariTn/Meuble.xhtml";
         
        	}
 	 public void remove(String ref_meuble) {
@@ -212,9 +219,39 @@ public void setM(Meubles m) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
+        
     }
+    boolean skip;
+    public boolean isSkip() {
+		return skip;
+	}
 
-
-
+	public void setSkip(boolean skip) {
+		this.skip = skip;
+	}
+    public String onFlowProcess(FlowEvent event) {
+		
+		if(skip) {
+			skip = false;	//reset in case user goes back
+			return "confirm";
+		}
+		else {
+			return event.getNewStep();
+		}
+	}
+    public void upload() {
+    	try{
+    		if(file != null){
+    		Class.forName("com.mysql.jdbc.Driver");
+    		Connection cn= DriverManager.getConnection("jdbc:mysql://localhost:3306/DariTn?user=root&password=");
+    		PreparedStatement st= cn.prepareStatement("INSERT INTO meuble(img) VALUES (?)");
+    		st.setBinaryStream(1,file.getInputStream());
+    		st.executeUpdate();
+    		cn.close();
+    		}
+    		}
+    		catch (Exception e){}
+    }
+    
     
 }

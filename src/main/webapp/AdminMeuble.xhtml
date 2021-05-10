@@ -90,7 +90,11 @@
 						<p:column headerText="Meubles">
 							<h:outputText value="#{meuble.nom_meuble}" />
 						</p:column>
-
+						<p:column headerText="Image">
+							<p:graphicImage value="img/home.jpg"
+                                styleClass="product-image"             />
+						</p:column>
+                        
 						<p:column headerText="Description">
 							<h:outputText value="#{meuble.description_meuble}" />
 						</p:column>
@@ -102,11 +106,10 @@
 
 						<p:column headerText="Actions" exportable="false">
 						  <p:commandButton icon="pi pi-pencil" 
-                                 oncomplete="PF('manageProductDialog').show()" 
-                                 styleClass="edit-button rounded-button ui-button-success" process="@this"
-                                 >
-                    <f:setPropertyActionListener value="#{meuble}" target="#{JsfMeubleController.display(meuble.m)}"/>
-                    <p:resetInput target=":form:manage-product-content"/>
+                                 oncomplete="PF('manageProductDialog').show()"
+                                 styleClass="edit-button rounded-button ui-button-success" process="@this">
+                    <f:setPropertyActionListener value="#{m.ref_meuble}" target="#{JsfMeubleController.m}"/>
+                     <p:resetInput target=":form:manage-product-content"/>
                 </p:commandButton>
 						<p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
                                  oncomplete="PF('deleteProductDialog').show()">
@@ -124,13 +127,23 @@
  						</p:column> 
 					</p:dataTable>
 <p:dialog header="Ajouter une nouvelle annonce" showEffect="fade"
-					modal="true" widgetVar="manageProductDialog" responsive="true">
+					modal="true" widgetVar="manageProductDialog" responsive="true"
+					minHeight="40" width="350" minimizable="true" maximizable="true">
 					<p:outputPanel id="manage-product-content" class="ui-fluid">
 						<p:outputPanel rendered="#{not empty JsfMeubleController.m}">
-							<!--                     <p:graphicImage name="images/product/#{crudView.selectedProduct.image}" library="demo" -->
-							<!--                                     styleClass="product-image" -->
-							<!--                                     rendered="#{not empty crudView.selectedProduct.image}"/> -->
+							<p:graphicImage value="img/home.jpg"
+							                                    styleClass="product-image"
+							                                    />
+							                                    <div class="p-field">
+								<p:outputLabel>Type </p:outputLabel>
+								<p:selectOneMenu value="#{JsfMeubleController.m.type_meuble}">
+									<f:selectItem itemLabel="Choisir le type du meuble"
+										itemValue="#{null}" />
+									<f:selectItems value="#{JsfMeubleController.type}" />
+								</p:selectOneMenu>
+							</div>
 							<div class="p-field">
+							
 								<p:outputLabel for="name">Name</p:outputLabel>
 								<p:inputText id="name"
 									value="#{JsfMeubleController.m.nom_meuble}" required="true" />
@@ -140,14 +153,7 @@
 								<p:inputTextarea id="description"
 									value="#{JsfMeubleController.m.description_meuble}" />
 							</div>
-							<div class="p-field">
-								<p:outputLabel>Type </p:outputLabel>
-								<p:selectOneMenu value="#{JsfMeubleController.m.type_meuble}">
-									<f:selectItem itemLabel="Choisir le type du meuble"
-										itemValue="#{null}" />
-									<f:selectItems value="#{JsfMeubleController.type}" />
-								</p:selectOneMenu>
-							</div>
+							
 							<div class="p-formgrid p-grid">
 								<div class="p-field p-col">
 									<p:outputLabel for="price">Price</p:outputLabel>
