@@ -119,16 +119,8 @@ public void removeBank(int id) {
 	banqueService.deleteBanque(id);
 	getBanques();
 }
-public void updateBanque() { 
-	banqueService.updateBanque(new Banque(idbanque,nombank));
 
-}
-public void addBanque() {
 
-	
-	banqueService.addBanque(new Banque(nombank));
-	
-	}
 
 
 

@@ -41,14 +41,14 @@ public class BanqueControllerJsf {
 
 	private Banque banque = new Banque();
 
-    public String save() {
-    	banqueRepository.save(banque);
-        banque = new Banque(nombank);
-        return "/DariTn/banque-list.xhtml";
-    }
+    
     
     public void update() { 
 		bs.updateBanque(new Banque(idbanque,nombank));
+	}
+    
+    public void add() { 
+		bs.addBanque(new Banque(nombank));
 	}
     
     public void displayBanque(Banque bank){
