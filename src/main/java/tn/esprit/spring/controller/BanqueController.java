@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import tn.esprit.spring.entity.Abonnement;
 import tn.esprit.spring.entity.Banque;
 import tn.esprit.spring.service.BanqueService;
 
@@ -88,9 +88,25 @@ public class BanqueController {
 
 
 private List<Banque> banques; // ajouter le getter et le setter
+private String nombank;
+private Integer idbanque;
 
 
 
+
+
+public String getNombank() {
+	return nombank;
+}
+public void setNombank(String nombank) {
+	this.nombank = nombank;
+}
+public Integer getIdbanque() {
+	return idbanque;
+}
+public void setIdbanque(Integer idbanque) {
+	this.idbanque = idbanque;
+}
 public List<Banque> getBanques() {
 	banques = banqueService.retrieveAllBanque();
 	return banques;
@@ -103,6 +119,19 @@ public void removeBank(int id) {
 	banqueService.deleteBanque(id);
 	getBanques();
 }
+public void updateBanque() { 
+	banqueService.updateBanque(new Banque(idbanque,nombank));
+
+}
+public void addBanque() {
+
+	
+	banqueService.addBanque(new Banque(nombank));
+	
+	}
+
+
+
 
 
 

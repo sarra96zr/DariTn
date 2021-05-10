@@ -102,5 +102,16 @@ public class Abonnement implements Serializable {
 		this.date_fin = date_fin;
 		this.type = type;
 	}
+	
+	public Abonnement(long id, Aonnement type, Date date_debut, Date date_fin) {
+		super();
+		this.id = id;
+		this.type = type;
+		this.date_debut = date_debut;
+		this.date_fin = date_fin;
+		
+	}
+	
+	
 
 }

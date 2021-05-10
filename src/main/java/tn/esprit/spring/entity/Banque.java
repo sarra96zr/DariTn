@@ -33,7 +33,8 @@ public class Banque implements Serializable{
 		super();
 		this.nombanque=nombanque;
 	}
-	
+
+
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	@Column(name="ID")
@@ -70,6 +71,12 @@ public class Banque implements Serializable{
         creditformulas.add(F);
         F.setBank(this);
     }
+
+	public Banque(int id, String nombanque) {
+		super();
+		this.id = id;
+		this.nombanque = nombanque;
+	}
 
 
 

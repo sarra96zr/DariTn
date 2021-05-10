@@ -35,6 +35,7 @@ public class AbonnementServiceImpl implements AbonnementService {
 		// TODO Auto-generated method stub
 		abonnementDAO.deleteById((long) id_ab);
 		
+		
 	}
 
 	@Override

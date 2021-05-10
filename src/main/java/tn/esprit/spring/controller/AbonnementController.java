@@ -112,9 +112,14 @@ public class AbonnementController {
 				private Date datedeb;
 				private Date datefin;
 				private List<Abonnement> abonnements;
+				private Long id;
 				
-				
-				
+				public Long getId() {
+					return id;
+				}
+				public void setId(Long id) {
+					this.id = id;
+				}
 				public List<Abonnement> getAbonnements() {
 					abonnements = abservice.retrieveAllAbonnement();
 					return abonnements;
@@ -176,4 +181,19 @@ public class AbonnementController {
 					getAbonnements();
 				}
 				
-}
+				public void updateSubscription() { 
+					abservice.updateAbonnement(new Abonnement(id, type, datedeb, datefin));
+				}
+				
+				
+				public void displayAbonnement(Abonnement abon){
+					this.setDatedeb(abon.getDate_debut());
+					this.setDatefin(abon.getDate_fin());
+					this.setType(abon.getType());
+					this.setId(abon.getId());
+					
+					
+				}
+				}
+				
+

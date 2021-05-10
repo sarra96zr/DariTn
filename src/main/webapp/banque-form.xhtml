@@ -13,11 +13,22 @@
             <p:panel header="Bank Details">
                 <h:panelGrid columns="1">
                     <p:outputLabel for="name" value="Name: " />
-                    <p:inputText id="name" value="#{bankController.banque.nombanque}" />
+                    <p:inputText id="name" value="#{bankController.nombank}" />
+                    </h:panelGrid>
                     <h:commandButton value="Save" action="#{bankController.save()}" />
-                </h:panelGrid>
+                    <h:commandButton value="Update" action="#{bankController.update()}" />
+                
             </p:panel>
         <p:panel header="Bank List">
+        <f:facet name="header">
+<div class="products-table-header">
+
+<span class="filter-container ui-input-icon-left">
+<i class="pi pi-search"/>
+<p:inputText id="globalFilter" onkeyup="PF('dtProducts').SearchProductByName(nom_meuble)" placeholder="Search"/>
+</span>
+</div>
+</f:facet>
                 <p:dataTable id="table"  value="#{bankLists.getBanques()}" var="banque">
                    
 
@@ -28,10 +39,10 @@
                    <p:column id="action">
 						<f:facet name="header"><h:outputText value="Action" /></f:facet>
 						<h:commandLink value="Edit"
-							action="#{bankLists.editBanque(banque)}">
+							action="#{bankController.displayBanque(banque)}">
 							</h:commandLink> /
 							<h:commandLink value="Delete"
-								action="#{abonnement.removeAbonnement(abonn.id_b)}">
+								action="#{bankLists.removeBank(banque.id)}">
 								
 							</h:commandLink>
 							

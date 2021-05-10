@@ -16,9 +16,6 @@
                 <p:outputLabel for="initial" value="Name: " />
                     <p:inputText id="initial" value="#{credits.cre.initialamount}" />
                     
-                    <p:outputLabel for="initial" value="Formule " />
-                    <p:inputText id="form" value="#{credits.cre.creditformula.id}" />
-                    
                     <h:commandButton value="Add" action="#{credits.save()}" />
                 </h:panelGrid>
             </p:panel>
@@ -30,7 +27,7 @@
 
 <span class="filter-container ui-input-icon-left">
 <i class="pi pi-search"/>
-<p:inputText id="globalFilter" onkeyup="PF('dtProducts').SearchProductByName(nom_meuble)" placeholder="Search"/>
+<p:inputText id="globalFilter" onkeyup="PF('Credit').getcreditsbyclient(client.firstName)" placeholder="Search"/>
 </span>
 </div>
 </f:facet>
