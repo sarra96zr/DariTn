@@ -191,6 +191,23 @@ public class Annonce implements Serializable {
 	}
 
 
+	public Annonce(long id, String titre, String adresse, String video, String description, String photo, float prix,
+			boolean disponible, Type_Annonce type_annonce, Categorie_Annonce categorie_annonce, User user) {
+		super();
+		this.id = id;
+		this.titre = titre;
+		this.adresse = adresse;
+		this.video = video;
+		this.description = description;
+		this.photo = photo;
+		this.prix = prix;
+		this.disponible = disponible;
+		this.type_annonce = type_annonce;
+		this.categorie_annonce = categorie_annonce;
+		this.user = user;
+	}
+
+
 	public Annonce(String titre, String adresse, String video, String description, String photo, float prix,
 			boolean disponible, Type_Annonce type_annonce, Categorie_Annonce categorie_annonce, User user) {
 		super();

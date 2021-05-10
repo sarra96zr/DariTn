@@ -41,6 +41,12 @@ public class LocationServiceImpl implements LocationService{
 		List<Location> annonces = (List<Location>) locarepo.findAll();
 		return annonces;
 	}
+
+	@Override
+	public Long addOrUpdateLocation(Location l) {
+		locarepo.save(l);
+		return l.getId();
+	}
 	
 	
 

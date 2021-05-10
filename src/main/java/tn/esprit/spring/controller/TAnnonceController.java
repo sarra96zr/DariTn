@@ -2,6 +2,9 @@ package tn.esprit.spring.controller;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.primefaces.*;
+import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.RowEditEvent;
 import tn.esprit.spring.entity.Annonce;
 import tn.esprit.spring.entity.Categorie_Annonce;
 import tn.esprit.spring.entity.Type_Annonce;
@@ -39,6 +44,7 @@ public class TAnnonceController {
 	private boolean disponible; 
 	private Type_Annonce type_annonce;
 	private Categorie_Annonce categorie_annonce;
+	private Long update;
 	
 	
 	// aff liste
@@ -54,9 +60,25 @@ public class TAnnonceController {
 		// methode 1
 	public void addAnnonce() {
 		System.out.println("hello");
-		annonceService.addOrUpdateAnnonce(new Annonce(titre, adresse, null, description, null, prix, true,type_annonce, categorie_annonce, null));
-		System.out.println("hello2");
+		if (titre.equals("") || adresse.equals("") || description.equals("") || prix==0 || prix<0 || type_annonce==null || categorie_annonce==null)
+			
+		{
+			System.out.println("not added");
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Vérifier "));
+        //PrimeFaces.current().executeScript("PF('manageProductDialog').hide()");
+        //PrimeFaces.current().ajax().update("form:messages", "form:dt-products");
+			
+		
 		}
+		
+		else
+			
+			annonceService.addOrUpdateAnnonce(new Annonce(titre, adresse, null, description, null, prix, true,type_annonce, categorie_annonce, null));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Annonce bien ajoutée "));
+			System.out.println("added");
+        
+		
+	}
 	   // methode 2
 	
 	/*public String save() {
@@ -75,23 +97,25 @@ public class TAnnonceController {
 		annonceService.deleteAnnonce(id_a);}
 	
 	// update
-	/*public void updateAnnonce()
-	{ annonceService.updateAnnonce(a)(new Annonce(update, nom_meuble, description_meuble, price, typem));
+	
+
+	public void displayEmploye(Annonce a) 
+	{
+	this.setTitre(a.getTitre());
+	this.setDescription(a.getDescription());
+	this.setAdresse(a.getAdresse()); 
+	this.setPrix(a.getPrix());
+	this.setType_annonce(a.getType_annonce());
+	this.setCategorie_annonce(a.getCategorie_annonce());
+	this.setUpdate(a.getId());
+	}
+	
+	public void updateAnnonce()
+	{ annonceService.updateAnnonce(new Annonce(update, titre, adresse, video, description, photo, prix, disponible, type_annonce, categorie_annonce, null));
 		 }
 	public void openNew() {
-        this.m = new Meubles();
+        this.a = new Annonce();
     }
-
-	public void displayEmploye(Employe empl) 
-	{
-	this.setPrenom(empl.getPrenom());
-	this.setNom(empl.getNom());
-	this.setActif(empl.isActif()); 
-	this.setEmail(empl.getEmail());
-	this.setRole(empl.getRole());
-	this.setPassword(empl.getPassword());
-	this.setEmployeIdToBeUpdated(empl.getId());
-	}*/
 	
 	
 	
@@ -112,10 +136,17 @@ public class TAnnonceController {
 	
 	
 	
-	
-	
+	public Long getUpdate() {
+		return update;
+	}
+	public void setUpdate(Long update) {
+		this.update = update;
+	}
 	public Integer getAnnonceIdToBeUpdated() {
 		return annonceIdToBeUpdated;
+	}
+	public List<Annonce> getAnnonces() {
+		return annonces;
 	}
 	public void setAnnonceIdToBeUpdated(Integer annonceIdToBeUpdated) {
 		this.annonceIdToBeUpdated = annonceIdToBeUpdated;

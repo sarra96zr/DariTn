@@ -11,4 +11,5 @@ public interface LocationService {
 	Location addLocation(Date datedeb, Date datefin);
 	public Double calculPrix (Double prix,Date datedeb, Date datefin);
 	List<Location> retrieveAllLocation();
+	Long addOrUpdateLocation(Location l);
 }

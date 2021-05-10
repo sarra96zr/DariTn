@@ -91,6 +91,15 @@
 								action="#{annController.removeAnnonce(annonce.id)}"
 								value="Supprimer" />
 						</h:column>
+						
+						
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Action" />
+							</f:facet>
+
+							<h:button value="Modifier" outcome="modifAnnonce" />
+						</h:column>
 					</h:dataTable>
 				</h:form> 
 				<h:button value="Ajouter une annonce" outcome="addAnnonce" />
