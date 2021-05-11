@@ -14,4 +14,5 @@ public interface RDVService {
 	RDV retrieveRDV(String id_rdv);
 	List<RDV> retrieveAllRDV();	
 	//public List<RDV> searchRDV(String title);
+	void addOrUpdateRDV(RDV rdv);
 }

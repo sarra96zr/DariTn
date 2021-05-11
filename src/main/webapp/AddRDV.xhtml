@@ -4,35 +4,48 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
 	template="/template/template.xhtml">
 	<ui:param name="page_name" value="Connexion" />
 	<ui:define name="menu">
+		
 		<h:panelGroup columns="2">
-			<h:form>
-				<table>
-					<tr>
-						<td><h:outputText value="title"></h:outputText></td>
-						<td><h:inputText value="#{RDVController.title}"></h:inputText></td>
-					</tr>
-					<tr>
-						<td><h:outputText value="dateRDV"></h:outputText></td>
-						<td><h:inputSecret value="#{RDVController.dateRDV}"></h:inputSecret></td>
-					</tr>
-					<tr>
-						<td><h:outputText value="dateDeb"></h:outputText></td>
-						<td><h:inputText value="#{RDVController.dateDeb}"></h:inputText></td>
-					</tr>
-					<tr>
-						<td><h:outputText value="dateFin"></h:outputText></td>
-						<td><h:inputText value="#{RDVController.dateFin}"></h:inputText></td>
-					</tr>
-					
-					<tr>
-						<td colspan="2"><h:commandButton value="Ajouter RDV"
-								action="#{RDVController.addRDV()}" /></td>
-					</tr>
-				</table>
-			</h:form>
+			<center>
+				<br></br> <br></br> <br></br>
+				<h:form>
+				 <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+				
+					<table>
+												
+						<tr>
+
+							<td><h:inputText value="dateRDV">
+									<f:convertDateTime pattern="dd-mm-yyyy"
+										value="#{RDVController.rdv.dateRDV}"></f:convertDateTime>
+								</h:inputText></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="dateDeb"></h:outputText></td>
+							<td><h:inputText>
+									<f:convertDateTime pattern="dd-mm-yyyy"
+										value="#{RDVController.rdv.dateDeb}"></f:convertDateTime>
+								</h:inputText></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="dateFin"></h:outputText></td>
+							<td><h:inputText>
+									<f:convertDateTime pattern="dd-mm-yyyy"
+										value="#{RDVController.rdv.dateFin}"></f:convertDateTime>
+								</h:inputText></td>
+						</tr>
+
+						<tr>
+							<td colspan="2"><h:commandButton value="Ajouter RDV"
+									action="#{RDVController.save()}" /></td>
+						</tr>
+					</table>
+				</h:form>
+			</center>
 		</h:panelGroup>
 	</ui:define>
 </ui:composition>

@@ -1,7 +1,9 @@
 package tn.esprit.spring.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -45,6 +48,10 @@ public class Annonce implements Serializable {
 		@Enumerated (EnumType.STRING)
 		@Column(name="type_annonce")
 		public Type_Annonce type_annonce;
+		
+		/*@OneToMany(mappedBy="Annonce")
+	    private Set<RDV> rdv;*/
+		
 		
 		@ManyToOne
 		

@@ -52,7 +52,7 @@ public class RDVFeedBackServiceImpl implements RDVFeedBackService {
 		return RDVFeedBackDAO.findById(Long.parseLong(id_rdv_feedback)).orElse(null);
 	}
 
-	@Override
+	/*@Override
 	public void affecteFeedToRdv(Long id_feedback, Long id_rdv) {
 		// TODO Auto-generated method stub
 		RDVFeedBack feedb =RDVFeedBackDAO.findById(id_feedback).get();
@@ -64,5 +64,5 @@ public class RDVFeedBackServiceImpl implements RDVFeedBackService {
 		//RDVFeedBackDAO.save(feedb);
 		
 	}
-
+*/
 }

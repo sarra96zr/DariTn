@@ -15,24 +15,20 @@ private static final long serialVersionUID = 1L;
     @Column(name="id")
 	public long id_rdv;
 	
-	@Column(name="sujet")
-	public String title;
+	
 	
 	@Column(name="dateRDV")
 	public Date dateRDV;
 	
-	@Column(name="dateDeb")
-	public Date dateDeb;
-	
-	@Column(name="dateFin")
-	public Date dateFin;
-
 
 	@OneToOne(mappedBy="rdv")
 	private Client client;
 	
+	/*@ManyToOne
+	@JoinColumn(name="Annonce_id")
+	private Annonce annonce;*/
+	
 	@OneToOne
-	@JoinColumn(name="id_RDV_FeedBack")
 	private RDVFeedBack RDVF;
 
 	public long getId_rdv() {
@@ -43,13 +39,7 @@ private static final long serialVersionUID = 1L;
 		this.id_rdv = id_rdv;
 	}
 
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
+	
 
 	public Date getDateRDV() {
 		return dateRDV;
@@ -57,22 +47,6 @@ private static final long serialVersionUID = 1L;
 
 	public void setDateRDV(Date dateRDV) {
 		this.dateRDV = dateRDV;
-	}
-	
-	public Date getDateDeb() {
-		return dateDeb;
-	}
-
-	public void setDateDeb(Date dateDeb) {
-		this.dateDeb = dateDeb;
-	}
-
-	public Date getDateFin() {
-		return dateFin;
-	}
-
-	public void setDateFin(Date dateFin) {
-		this.dateFin = dateFin;
 	}
 
 	public Client getClient() {
@@ -90,22 +64,25 @@ private static final long serialVersionUID = 1L;
 	public void setRDVF(RDVFeedBack rDVF) {
 		RDVF = rDVF;
 	}
-
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	public RDV(long id_rdv, String title, Date dateRDV, Date dateDeb, Date dateFin, Client client, RDVFeedBack rDVF ) {
+	public RDV(long id_rdv,  Date dateRDV, Client client, RDVFeedBack rDVF ) {
 		super();
-		this.id_rdv = id_rdv;
-		this.title = title;
+		this.id_rdv = id_rdv;	
 		this.dateRDV = dateRDV;
-		this.dateDeb = dateDeb;
-		this.dateFin = dateFin;
 		this.client = client;
 		RDVF = rDVF;
 	}
 
+	public RDV( Date dateRDV) {
+		super();
+		
+		this.dateRDV = dateRDV;
+	}
+	
 	public RDV() {
 		super();
 	}

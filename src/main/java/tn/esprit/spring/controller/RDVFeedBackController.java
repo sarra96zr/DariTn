@@ -59,10 +59,10 @@ public class RDVFeedBackController {
 					return rdvFeedBackService.updateRDVFeedBack(rf);
 				}
 				// http://localhost:8081/DariTn/Pi/affecteFeedToRdv/{id_feedback}/{id_rdv}
-				@PutMapping("/affecteFeedToRdv/{id_feedback}/{id_rdv}")
+				/*@PutMapping("/affecteFeedToRdv/{id_feedback}/{id_rdv}")
 				public void affecteFeedToRdv(@PathVariable("id_feedback")Long id_feedback,@PathVariable("id_rdv")Long id_rdv)
 				{
 					rdvFeedBackService.affecteFeedToRdv(id_feedback, id_rdv);
 				}
-				
+				*/
 }
