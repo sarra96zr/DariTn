@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="layout.xhtml">
+	<ui:param name="page_name" value="Accueil" />
+	<ui:define name="content">
+		<!-- BEGIN : TP1 JSF Introduction Login -->
+
+
+
+
+
+		<h:head>
+
+	
+
+		</h:head>
+
+
+
+
+
+
+
+
+
+
+
+		<body>
+			
+			
+<h:form>
+<br /><br />
+<br /><br />
+
+			<center>
+				<p:photoCam widgetVar="pc" listener="#{photoCamView.oncapture}"
+					update="photo" />
+				<p:commandButton type="button" value="Capture"
+					onclick="PF('pc').capture()" />
+				<p:outputPanel id="photo">
+					<p:graphicImage
+						name="demo/images/photocam/#{photoCamView.filename}.jpeg"
+						rendered="#{not empty photoCamView.filename}" />
+				</p:outputPanel>
+			</center>
+		</h:form>
+	<br></br><br></br><br></br><br></br>
+
+
+		</body>
+
+	</ui:define>
+</ui:composition>

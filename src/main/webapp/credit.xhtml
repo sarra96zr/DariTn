@@ -1,91 +1,110 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:sec="http://www.springframework.org/security/tags">
-<ui:composition template="layout.xhtml">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/template.xhtml">
+	<ui:param name="page_name" value="Accueil" />
 	<ui:define name="content">
-        <h:form id="productForm">
-            <p:panel header="Bank Details">
-                <h:panelGrid columns="1">
- 
-                <p:outputLabel for="initial" value="Name: " />
-                    <p:inputText id="initial" value="#{credits.cre.initialamount}" />
-                    
-                    <p:selectOneMenu required="true"  value="#{credits.creditformule.bank}">
-									
-									<f:selectItems value="#{credits.creditformule}" />
-								</p:selectOneMenu>
-                    
-                    <h:commandButton value="Add" action="#{credits.save()}" />
-                </h:panelGrid>
-            </p:panel>
-        <p:panel header="Bank List">
-        
-        
-        <f:facet name="header">
-<div class="products-table-header">
+		<!-- BEGIN : TP1 JSF Introduction Login -->
 
-<span class="filter-container ui-input-icon-left">
-<i class="pi pi-search"/>
-<p:inputText id="globalFilter" onkeyup="PF('Credit').getcreditsbyclient(client.firstName)" placeholder="Search"/>
-</span>
-</div>
-</f:facet>
-        
-        
-        
-                <p:dataTable id="table"  value="#{credits.getCredits()}" var="credit">
-                    <p:column>
-                        <f:facet name="header">Client</f:facet>
-                        <h:outputText value="#{credit.client.firstName}" />
-                        
-                    </p:column>
-                    
-                    
-                    <p:column>
-                        <f:facet name="header">formule</f:facet>
-                        <h:outputText value="#{credit.creditformula.id}" />
-                    </p:column>
 
-                    <p:column>
-                        <f:facet name="header">initialamount</f:facet>
-                        <h:outputText value="#{credit.initialamount}" />
-                    </p:column>
-                    
-                    <p:column>
-                        <f:facet name="header">finalamount</f:facet>
-                        <h:outputText value="#{credit.finalamount}" />
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">monthly</f:facet>
-                        <h:outputText value="#{credit.monthly}" />
-                    </p:column>
-                  
-                   <p:column id="action">
-						<f:facet name="header"><h:outputText value="Action" /></f:facet>
-						<h:commandLink value="Edit"
-							action="#{bankLists.editBanque(banque)}">
-							</h:commandLink> /
-							<h:commandLink value="Delete"
-								action="#{credits.removeCredit(credit.id)}">
-								
-							</h:commandLink>
+
+
+
+		<h:head>
+
+			<link href="../../resources/assets/css/vendor.css" rel="stylesheet" />
+			<link href="../../resources/assets/css/font-awesome.css"
+				rel="stylesheet" />
+			<link href="../../resources/assets/css/theme-blue-orange_red.css"
+				rel="stylesheet" />
+			<link href="../..resources/assets/css/custom.css" rel="stylesheet" />
+			<link href="../../resources/assets/css/ie-fix.css" rel="stylesheet" />
+			<link href="../../resources/assets/img/favicon.ico" rel="stylesheet" />
+			<link href="../../resources/assets/img/favicon.ico" rel="stylesheet"
+				type="image/x-icon" />
+
+		</h:head>
+
+
+
+
+
+
+
+
+
+
+
+		<body>
+		
+		
+		<h:panelGroup columns="2">
+		
+			<h:form>
+			
+				<h:dataTable value="#{surveillanceController.surveillances}" var="surveillance" border="1">
+				<h:column><f:facet name="header"><h:outputText value="Start date" /></f:facet>
+				<h:outputText value="#{surveillance.dateDebut}" /></h:column>
+				<h:column><f:facet name="header"><h:outputText value="End date" /></f:facet>
+				<h:outputText value="#{surveillance.dateFin}" /></h:column>
+				<h:column><f:facet name="header"><h:outputText value="Validation code" /></f:facet>
+				<h:outputText value="#{surveillance.code}" /></h:column>
+				<h:column><f:facet name="header"><h:outputText value="Price" /></f:facet>
+				<h:outputText value="#{surveillance.prix}" /></h:column>
+				<h:column><f:facet name="header"><h:outputText value="Number of camera" /></f:facet>
+				<h:outputText value="#{surveillance.camera}" /></h:column>
+				<h:column >
+						<f:facet name="header">
+							<h:outputText value="Action" class="datatable__head-13 datatable__head-sort" />
+						</f:facet>
+						<h:commandButton type="submit" class="form__submit" 
+							action="#{surveillanceController.removeSurv(surveillance.id)}"
+							value="Remove" />
 							
+					</h:column>
+					  
+				</h:dataTable>
+				
+			</h:form>
+		</h:panelGroup>	
+			<BR /><BR/>
+			<center>
+<h:panelGroup columns="2"><h:form><table>
+<h:graphicImage value="../../images/carte-visa-blue-boursorama-banque.jpg" />
+<BR/><BR/>
+			<tr><td><h:outputText value="Subscription Id"></h:outputText></td><td>
+			<h:inputText value="#{surveillanceController.idc}"></h:inputText></td></tr>
+			<tr><td><h:outputText value="Visa card number"></h:outputText></td><td>
+			<h:inputText value="#{surveillanceController.carta}"></h:inputText></td></tr>
+			<tr><td><h:outputText value="expMonth"></h:outputText></td><td>
+			<h:inputText value="#{surveillanceController.expMonth}"></h:inputText></td></tr>
+			<tr><td><h:outputText value="expYear"></h:outputText></td><td>
+			<h:inputText value="#{surveillanceController.expYear}"></h:inputText></td></tr>
+			<tr><td><h:outputText value="cvc"></h:outputText></td><td>
+			<h:inputText value="#{surveillanceController.cvc}"></h:inputText></td></tr>
+			<center>
+			<tr><td colspan="2"><h:commandButton type="submit" class="form__submit" value="Pay" action="#{surveillanceController.Pay(surveillanceController.idc,surveillanceController.carta,surveillanceController.expMonth,surveillanceController.expYear,surveillanceController.cvc)}" /></td>
+			</tr></center>
+		</table></h:form></h:panelGroup>
+		</center>
+	<br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+	
 
-					</p:column>
-                    
-                    
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=places,drawing,geometry"></script>
+    <script type="text/javascript" src="http://cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
+   
+    <script type="text/javascript" src="../../resources/assets/js/vendor.js"></script>
+   
+    <script type="text/javascript" src="../../resources/assets/js/demodata.js"></script>
+ 
+    <script type="text/javascript" src="../../resources/assets/js/app.js"></script>
+ 
+    <script type="text/javascript" src="../../resources/assets/js/demo.js"></script>
     
 
-                   
-                </p:dataTable>
-            </p:panel>
-        </h:form>
-    </ui:define>
+		</body>
+
+	</ui:define>
 </ui:composition>
-</html>
