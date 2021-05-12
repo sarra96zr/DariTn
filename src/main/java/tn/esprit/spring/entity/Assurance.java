@@ -89,12 +89,21 @@ public class Assurance {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Assurance(Long id, Date dateDebut, Date dateFin, Assur assur) {
+		super();
+		this.id = id;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.assur = assur;
+	}
 	public Assurance(Date dateDebut, Date dateFin, Assur assur) {
 		super();
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
 		this.assur = assur;
 	}
+	
 	
 	
 	

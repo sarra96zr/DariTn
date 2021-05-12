@@ -27,11 +27,11 @@
  
                     </h:panelGrid>
                     
-        <p:selectOneMenu value="#{assuranceController.entreprise}">
-	<f:selectItems value="#{assuranceController.entreprise}" />
+        <p:selectOneMenu value="#{assuranceController.assur}">
+	<f:selectItems value="#{assuranceController.entreprises}" />
 	</p:selectOneMenu>
-	<h:commandButton value="Add" action="#{addAssurance.addSubscription()}" />
-	<h:commandButton value="Update" action="#{subscription.updateSubscription()}" />
+	<h:commandButton value="Add" action="#{assuranceController.addAssurance()}" />
+	<h:commandButton value="Update" action="#{assuranceController.updateAssurance()}" />
 	</div>
 	
 	</p:panel>
@@ -49,32 +49,32 @@
 </div>
 </f:facet>
               
-                <p:dataTable id="table"  value="#{subscription.getAbonnements()}" var="abonnement">
+                <p:dataTable id="table"  value="#{assuranceController.getAssurances()}" var="assurance">
                    
 <p:column>
                         <f:facet name="header">Client</f:facet>
-                        <h:outputText value="#{abonnement.client.firstName}" />
+                        <h:outputText value="#{assurance.client.firstName}" />
                         
                     </p:column>
                     <p:column>
                         <f:facet name="header">Date Debut</f:facet>
-                        <h:outputText value="#{abonnement.date_debut}" />
+                        <h:outputText value="#{assurance.dateDebut}" />
                     </p:column>
                     <p:column>
                         <f:facet name="header">Date Fin</f:facet>
-                        <h:outputText value="#{abonnement.date_fin}" />
+                        <h:outputText value="#{assurance.dateFin}" />
                     </p:column>
                     <p:column>
-                        <f:facet name="header">Date Fin</f:facet>
-                        <h:outputText value="#{abonnement.type}" />
+                        <f:facet name="header">Assurance</f:facet>
+                        <h:outputText value="#{assurance.assur}" />
                     </p:column>
                     <p:column id="action">
 						<f:facet name="header"><h:outputText value="Action" /></f:facet>
 						<h:commandLink value="Edit"
-							action="#{subscription.displayAbonnement(abonnement)}">
+							action="#{assuranceController.displayAssurance(assurance)}">
 							</h:commandLink> /
 							<h:commandLink value="Delete"
-								action="#{subscription.removeSubscription(abonnement.id)}">
+								action="#{assuranceController.removeAssurance(assurance.id)}">
 								
 							</h:commandLink>
 							
