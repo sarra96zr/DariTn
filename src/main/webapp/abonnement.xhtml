@@ -14,16 +14,16 @@
 	<div class="p-field">
 <h:panelGrid columns="1">
 
-                     <div class="p-field p-col-12 p-md-4">
-                <p:outputLabel for="spanish" value="Date Debut"/>
-                <p:datePicker id="spanish" value="#{subscription.datedeb}" locale="es" monthNavigator="true"
-                          pattern="yyyy-MMM-dd"/>
-            </div>
-            <div class="p-field p-col-12 p-md-4">
-                <p:outputLabel for="spanish" value="Date Fin"/>
-                <p:datePicker id="spanish1" value="#{subscription.datefin}" locale="es" monthNavigator="true"
-                          pattern="yyyy-MMM-dd"/>
-            </div>
+                     <tr>
+							<td><h:outputText value="Start date"></h:outputText></td>
+							<td><p:datePicker id="button"
+									value="#{subscription.datedeb}" showIcon="true" /></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="End date"></h:outputText></td>
+							<td><p:datePicker id="button1"
+									value="#{subscription.datefin}" showIcon="true" /></td>
+						</tr>
  
                     </h:panelGrid>
                     

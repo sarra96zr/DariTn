@@ -136,8 +136,46 @@ public class CreditController {
 	}
 	
 	private List<Credit> credits; // ajouter le getter et le setter
+private int client;
+private int id;
+private Credit C;
+private CreditFormula bank;
 
 
+
+
+	public CreditFormula getBank() {
+	return bank;
+}
+	
+
+public void setBank(CreditFormula bank) {
+	this.bank = bank;
+}
+
+	public int getClient() {
+	return client;
+}
+
+public void setClient(int client) {
+	this.client = client;
+}
+
+public int getId() {
+	return id;
+}
+
+public void setId(int id) {
+	this.id = id;
+}
+
+public Credit getC() {
+	return C;
+}
+
+public void setC(Credit c) {
+	C = c;
+}
 
 	public List<Credit> getCredits() {
 		credits = cs.retrieveAllCredit();
@@ -146,6 +184,7 @@ public class CreditController {
 	public void setCredits(List<Credit> credits) {
 		this.credits = credits;
 	}
+	
 	
 	private Credit cre = new Credit();
 
@@ -166,6 +205,20 @@ public class CreditController {
 	public void removeCredit(int id) { 
 		cs.supprimerCredit(id);
 		getCre();
+	}
+	private CreditFormula creditformule = new CreditFormula();
+	public CreditFormula getCreditformule() {
+		return creditformule;
+	}
+
+	public void setCreditformule(CreditFormula creditformule) {
+		this.creditformule = creditformule;
+	}
+
+	public void add(){
+		
+		cs.ajouterCredit(client, id, C);
+		
 	}
 	
 	

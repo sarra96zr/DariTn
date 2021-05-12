@@ -4,6 +4,7 @@ package tn.esprit.spring.entity;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,6 +36,7 @@ public class CreditFormula implements Serializable{
 	private double interestRate;
 
 	@ManyToOne
+	@Enumerated
 	Banque bank;
 	
 

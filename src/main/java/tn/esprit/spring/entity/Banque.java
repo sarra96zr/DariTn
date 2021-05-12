@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -43,8 +44,8 @@ public class Banque implements Serializable{
 	@Column(name="nombanque")
 	private String nombanque;
 	
-	
-	@javax.persistence.OneToMany(mappedBy="bank", cascade = CascadeType.ALL, orphanRemoval = true)
+
+	@OneToMany(mappedBy="bank", cascade = CascadeType.ALL, orphanRemoval = true)
 	List<CreditFormula> creditformulas=new ArrayList<CreditFormula>();
 	
 	public int getId() {
