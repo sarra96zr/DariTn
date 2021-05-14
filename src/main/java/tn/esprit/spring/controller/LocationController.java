@@ -1,10 +1,13 @@
 package tn.esprit.spring.controller;
 
+import java.awt.event.MouseListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+
+import javax.faces.event.ActionEvent;
 
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
@@ -26,9 +29,9 @@ import tn.esprit.spring.service.LocationService;
 
 
 @Scope(value="session")
-@ELBeanName(value = "annonceController") // Name of the bean used by JSF
+@ELBeanName(value = "locationController") // Name of the bean used by JSF
 @Join(path = "/", to = "/welcome.jsf")
-@Controller(value = "annController")
+@Controller(value = "locationController")
 @RestController
 public class LocationController {
 
@@ -62,7 +65,7 @@ public class LocationController {
 	 	public Location location = new Location();
 
 	 	
-	 	public Date dateDeb;
+	 	public Date dateDebut;
 	 	public Date dateFin;
 
 
@@ -71,22 +74,65 @@ public class LocationController {
 	 		//System.err.println("*********"+rdv.title);
 	 		System.err.println("*********"+location.dateDebut);
 	 		System.err.println("*********"+location.dateFin);
+	 		MouseListener an;
+	 		
 	 	    location.dateDebut = GregorianCalendar.getInstance().getTime();
 	 		location.dateFin = GregorianCalendar.getInstance().getTime();
-	 		locationService.addOrUpdateLocation(new Location(location.dateDebut, location.dateFin, 347.5, null, null) );
+	 		locationService.addOrUpdateLocation(new Location(dateDebut, dateFin, null, null, null) );
 	 		//rdvService.addOrUpdateRDV(new RDV(rdv.dateRDV, rdv.dateDeb, rdv.dateFin));
 	 	}
 
 	 	public String save() {
 
-
-	 		location.save(location);
+	 		
+	 		locationRepository.save(location);
 	 		location = new Location();
 	 		location.dateDebut = GregorianCalendar.getInstance().getTime();
 	 		// = GregorianCalendar.getInstance().getTime();
 	 		location.dateFin = GregorianCalendar.getInstance().getTime();
 	 		//System.err.println("*********"+rdv.RD);
-	 		return "/DariTn/RDV.xhtml";
+	 		return "/DariTn/welcome.xhtml";
 	 	}
 
+		public LocationService getLocationService() {
+			return locationService;
+		}
+
+		public void setLocationService(LocationService locationService) {
+			this.locationService = locationService;
+		}
+
+		public LocationRepository getLocationRepository() {
+			return locationRepository;
+		}
+
+		public void setLocationRepository(LocationRepository locationRepository) {
+			this.locationRepository = locationRepository;
+		}
+
+		public Date getDateDebut() {
+			return dateDebut;
+		}
+
+		public void setDateDebut(Date dateDebut) {
+			this.dateDebut = dateDebut;
+		}
+
+		public Date getDateFin() {
+			return dateFin;
+		}
+
+		public void setDateFin(Date dateFin) {
+			this.dateFin = dateFin;
+		}
+
+		public void setLocation(Location location) {
+			this.location = location;
+		}
+
+	 	
+	 	
+	 	
+	 	
+	 	
 }

@@ -75,7 +75,7 @@ public class Location implements Serializable {
 		this.annonce = annonce;
 	}
 	
-	public static Double calculPrix(Double prix, SimpleDateFormat datedeb, SimpleDateFormat datefin) {
+	public static Double calculPrix(Float prix, SimpleDateFormat datedeb, SimpleDateFormat datefin) {
 		
 		 double prix1;
 		 //LocalDate datedebut = datedeb.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();

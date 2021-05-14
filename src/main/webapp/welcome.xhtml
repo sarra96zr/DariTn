@@ -1,112 +1,140 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="template/template.xhtml">
-	<ui:param name="page_name" value="Connexion" />
-	<ui:define name="menu">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<ui:composition template="/template/template.xhtml">
+	<ui:param name="Product" value="Accueil" />
+	<ui:define name="content">
 
 
-		<h:panelGroup columns="2">
+		<h:head>
+			<title>Annonces</title>
+			<style type="text/css">
+.tg {
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-color: #ccc;
+}
+
+.tg p {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	padding: 10px 5px;
+	border-style: solid;
+	border-width: 1px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #ccc;
+	color: #333;
+	background-color: #fff;
+}
+
+.tg h {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	padding: 10px 5px;
+	border-style: solid;
+	border-width: 1px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #ccc;
+	color: #333;
+	background-color: #f0f0f0;
+}
+
+<!--
+Theme Informations --> <meta name ="viewport " content
+	 ="width =device-width, initial-scale =1"/> <meta name ="description "
+	content
+	 =""/> <meta name ="keywords " content =""/> <meta name ="author "
+	content
+	 =""/><!--Theme Informations --> <title>Real Estate-Responsive Theme
+	 </title><!--Stylesheets --> <link rel ="stylesheet " href
+	 ="bootstrap /css/bootstrap.css "/> <link rel ="stylesheet " href
+	 ="css /common-style.css "/> <link rel ="stylesheet " href
+	 ="css /magnific-popup.css "/> <link rel ="stylesheet " href
+	 ="css /style_third_theme.css "/><!--Stylesheets --><!--Icons & Fonts -->
+	<link rel ="stylesheet " href ="font-awesome /css/font-awesome.min.css 
+	 "/><!--Icons 
+	 & Fonts -->.tg .tg-4eph {
+	background-color: #f9f9f9
+}
+
+.yui-carousel-element li {
+	height: 321px;
+}
+</style>
+		</h:head>
+		<br></br>
+		<br></br>
+		<br></br>
+
+
+
+		<h:form id="form">
 			<center>
-				<br></br> <br></br> <br></br>
-				<h:form>
-				<br></br>
-				<br></br>
-				<h:outputText value="Liste des annonces " />
-				<br></br>
-				<br></br>
-					<h:dataTable value="#{annController.getAnnonce()}"
-						var="annonce" border="1">
+				<div class="card">
+					<h1>Annonces</h1>
+					<div class="card">
+					
+							<div class="products-table-header" align="center">
+								<span style="font-weight: bold">Liste des Meubles a
+									vendre</span> <span class="filter-container ui-input-icon-left">
+									<i class="pi pi-search" /> <p:inputText id="globalFilter"
+										onkeyup="PF('dtProducts').RechercheAnnonce(titre)"
+										placeholder="Search" />
+								</span>
+							</div>
+					
+						<p:carousel value="#{annController.getAnnonce()}" var="annonce"
+							responsive="true">
+							<div class="product">
+								<div class="product-grid-item p-p-5">
+									<div class="product-grid-item-top">
+										<div>
+											<i class="pi pi-tag product-category-icon" /> <span
+												class="product-category"><h2>#{annonce.titre}</h2></span>
+										</div>
+									</div>
+									<div class="product-grid-item-content">
+										<img class="responsive" src="img/selling-img/sel-img1.jpg"
+											width="100" height="100" />
+										<div class="product-name">#{annonce.description}</div>
+										<div class="product-description">#{annonce.adresse}</div>
+										
+									</div>
+									<div class="product-grid-item-bottom">
+										<h:outputText value="#{annonce.prix}"
+											styleClass="product-price">
+											<f:convertNumber currencySymbol="DT" type="currency" />
+										</h:outputText><br></br>
+										<p:rating readonly="true" value="#{annonce.rating}"/><br></br>
+										<p:commandButton type="button" value="Louer"
+											icon="pi pi-shopping-cart"
+											disabled="#{annonce.type_annonce == 'Vente'}">
+										</p:commandButton>
+										<p:commandButton type="button" value="Acheter"
+											icon="pi pi-shopping-cart"
+											disabled="#{annonce.type_annonce == 'Location'}">
+										</p:commandButton>
+									</div>
+								</div>
+							</div>
 
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="titre" />
-							</f:facet>
-							<h:outputText value="#{annonce.titre}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="description" />
-							</f:facet>
-							<h:outputText value="#{annonce.description}" />
-						</h:column>
-
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="prix" />
-							</f:facet>
-							<h:outputText value="#{annonce.prix}" />
-						</h:column>
-
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="adresse" />
-							</f:facet>
-							<h:outputText value="#{annonce.adresse}" />
-						</h:column>
-
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="photo" />
-							</f:facet>
-							<h:outputText value="#{annonce.photo}" />
-						</h:column>
-
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="video" />
-							</f:facet>
-							<h:outputText value="#{annonce.video}" />
-						</h:column>
-
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="disponible" />
-							</f:facet>
-							<h:outputText value="#{annonce.disponible}" />
-						</h:column>
-
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Type annonce" />
-							</f:facet>
-							<h:outputText value="#{annonce.type_annonce}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Categorie annonce" />
-							</f:facet>
-							<h:outputText value="#{annonce.categorie_annonce}" />
-						</h:column>
-						
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Action" />
-							</f:facet>
-
-							<h:commandButton
-								action="#{annController.removeAnnonce(annonce.id)}"
-								value="Supprimer" />
-						</h:column>
-						
-						
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Action" />
-							</f:facet>
-
-							<h:button value="Modifier" outcome="modifAnnonce" />
-						</h:column>
-					</h:dataTable>
-				</h:form> 
-				<h:button value="Ajouter une annonce" outcome="addAnnonce" />
+							<f:facet name="footer">
+                In total there are #{fn:length(annController.annonce)} annonces.
+            </f:facet>
+						</p:carousel>
+					</div>
+				</div>
 			</center>
-		</h:panelGroup>
+		</h:form>
+
 	</ui:define>
 </ui:composition>
-
-
-
+</html>

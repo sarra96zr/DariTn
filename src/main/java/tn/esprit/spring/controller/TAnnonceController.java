@@ -1,5 +1,7 @@
 package tn.esprit.spring.controller;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -18,9 +20,11 @@ import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 import tn.esprit.spring.entity.Annonce;
 import tn.esprit.spring.entity.Categorie_Annonce;
+import tn.esprit.spring.entity.Location;
 import tn.esprit.spring.entity.Type_Annonce;
 import tn.esprit.spring.repository.AnnonceRepository;
 import tn.esprit.spring.service.AnnonceService;
+import tn.esprit.spring.service.LocationService;
 
 @Scope(value="session")
 @ELBeanName(value = "annonceController") // Name of the bean used by JSF
@@ -30,22 +34,25 @@ public class TAnnonceController {
 
 	@Autowired
 	AnnonceService annonceService;
-	
+	@Autowired
+	LocationService locationService;
+	@Autowired
 	AnnonceRepository ann;
 	private List<Annonce> annonces;
-
+	private Date dateDebut;
+	private Date dateFin;
 	public Type_Annonce[] getTypea() { return Type_Annonce.values(); }
 	public Categorie_Annonce[] getTypec() { return Categorie_Annonce.values(); }
 	private Integer annonceIdToBeUpdated; 
 	Annonce a = new Annonce();
 	
 	private String titre , adresse, video,description, photo;
-	private float prix;
+	private Double prix;
 	private boolean disponible; 
 	private Type_Annonce type_annonce;
 	private Categorie_Annonce categorie_annonce;
 	private Long update;
-	
+	private int rating;
 	
 	// aff liste
 	public List<Annonce> getAnnonce() {
@@ -73,7 +80,7 @@ public class TAnnonceController {
 		
 		else
 			
-			annonceService.addOrUpdateAnnonce(new Annonce(titre, adresse, null, description, null, prix, true,type_annonce, categorie_annonce, null));
+			annonceService.addOrUpdateAnnonce(new Annonce(titre, adresse, null, description, null,prix,3, true,type_annonce, categorie_annonce, null));
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Annonce bien ajoutée "));
 			System.out.println("added");
         
@@ -94,6 +101,11 @@ public class TAnnonceController {
 	
 	//delete
 	public void removeAnnonce(@PathVariable("annonce-id") String id_a) {
+		Long id = Long.valueOf(id_a);
+		System.out.print(id_a);
+		System.out.println("hello");
+		Annonce a = ann.findById(id).get();
+		System.out.print(a.getPrix());
 		annonceService.deleteAnnonce(id_a);}
 	
 	// update
@@ -111,11 +123,32 @@ public class TAnnonceController {
 	}
 	
 	public void updateAnnonce()
-	{ annonceService.updateAnnonce(new Annonce(update, titre, adresse, video, description, photo, prix, disponible, type_annonce, categorie_annonce, null));
+	{ annonceService.updateAnnonce(new Annonce(update, titre, adresse, video, description, photo, prix, rating,disponible, type_annonce, categorie_annonce, null));
 		 }
 	public void openNew() {
         this.a = new Annonce();
     }
+	//louer
+	
+	
+	public void louer(@PathVariable("annonce-id") String id_a) {
+		Long id = Long.valueOf(id_a);
+		
+		System.out.println("hello");
+		Annonce a = ann.findById(id).get();
+		System.out.println(a.getPrix());
+		
+		dateDebut = GregorianCalendar.getInstance().getTime();
+ 		dateFin = GregorianCalendar.getInstance().getTime();
+ 		locationService.addOrUpdateLocation(new Location(dateDebut, dateFin, a.getPrix(), null, null) );
+		locationService.calculPrix(a.getPrix(), dateDebut, dateFin);
+		System.out.println(locationService.calculPrix(a.getPrix(), dateDebut, dateFin));
+		
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Annonce bien ajoutée "));
+			System.out.println("added");
+        
+		
+	} 
 	
 	
 	
@@ -136,6 +169,30 @@ public class TAnnonceController {
 	
 	
 	
+	public LocationService getLocationService() {
+		return locationService;
+	}
+	public void setLocationService(LocationService locationService) {
+		this.locationService = locationService;
+	}
+	public Date getDateDebut() {
+		return dateDebut;
+	}
+	public void setDateDebut(Date dateDebut) {
+		this.dateDebut = dateDebut;
+	}
+	public Date getDateFin() {
+		return dateFin;
+	}
+	public void setDateFin(Date dateFin) {
+		this.dateFin = dateFin;
+	}
+	public int getRating() {
+		return rating;
+	}
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
 	public Long getUpdate() {
 		return update;
 	}
@@ -215,11 +272,11 @@ public class TAnnonceController {
 		this.photo = photo;
 	}
 
-	public float getPrix() {
+	public Double getPrix() {
 		return prix;
 	}
 
-	public void setPrix(float prix) {
+	public void setPrix(Double prix) {
 		this.prix = prix;
 	}
 

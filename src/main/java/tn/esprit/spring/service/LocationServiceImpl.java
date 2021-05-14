@@ -21,7 +21,7 @@ public class LocationServiceImpl implements LocationService{
 	@Override
 	public Double calculPrix(Double prix, Date datedeb, Date datefin) {
 		
-		 double prix1;
+		 Double prix1;
 	        final long MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24; 
 
 	        return prix1= ((prix/31)*(datefin.getTime()-datedeb.getTime()))/ (MILLISECONDS_PER_DAY);
@@ -32,7 +32,7 @@ public class LocationServiceImpl implements LocationService{
 	@Override
 	public Location addLocation( Date datedeb, Date datefin) {
 		//User u = new tn.esprit.spring.entity.User(1, "zeineb","yah", "zeineb", "pass", , annonces, notifications)
-		Location l = new Location(datedeb, datefin, calculPrix(300.2,datedeb, datefin),null,null);
+		Location l = new Location(datedeb, datefin, calculPrix(308.6 ,datedeb, datefin),null,null);
 		return locarepo.save(l);
 	}
 
@@ -46,6 +46,12 @@ public class LocationServiceImpl implements LocationService{
 	public Long addOrUpdateLocation(Location l) {
 		locarepo.save(l);
 		return l.getId();
+	}
+
+	@Override
+	public void deleteLocation(String id) {
+		locarepo.deleteById(Long.parseLong(id));
+		
 	}
 	
 	

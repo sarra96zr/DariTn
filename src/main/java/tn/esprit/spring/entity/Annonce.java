@@ -43,7 +43,10 @@ public class Annonce implements Serializable {
 	public String photo;
 	
 	@Column(name="prix")
-	public float prix;
+	public Double prix;
+	
+	@Column(name="rating")
+	public int rating;
 	
 	@Column(name="disponible")
 	public boolean disponible;
@@ -85,12 +88,12 @@ public class Annonce implements Serializable {
 	}
 
 
-	public float getPrix() {
+	public Double getPrix() {
 		return prix;
 	}
 
 
-	public void setPrix(float prix) {
+	public void setPrix(Double prix) {
 		this.prix = prix;
 	}
 
@@ -191,8 +194,18 @@ public class Annonce implements Serializable {
 	}
 
 
-	public Annonce(long id, String titre, String adresse, String video, String description, String photo, float prix,
-			boolean disponible, Type_Annonce type_annonce, Categorie_Annonce categorie_annonce, User user) {
+	public int getRating() {
+		return rating;
+	}
+
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
+
+	public Annonce(long id, String titre, String adresse, String video, String description, String photo, Double prix,
+			int rating, boolean disponible, Type_Annonce type_annonce, Categorie_Annonce categorie_annonce, User user) {
 		super();
 		this.id = id;
 		this.titre = titre;
@@ -201,6 +214,7 @@ public class Annonce implements Serializable {
 		this.description = description;
 		this.photo = photo;
 		this.prix = prix;
+		this.rating = rating;
 		this.disponible = disponible;
 		this.type_annonce = type_annonce;
 		this.categorie_annonce = categorie_annonce;
@@ -208,8 +222,8 @@ public class Annonce implements Serializable {
 	}
 
 
-	public Annonce(String titre, String adresse, String video, String description, String photo, float prix,
-			boolean disponible, Type_Annonce type_annonce, Categorie_Annonce categorie_annonce, User user) {
+	public Annonce(String titre, String adresse, String video, String description, String photo, Double prix,
+			int rating, boolean disponible, Type_Annonce type_annonce, Categorie_Annonce categorie_annonce, User user) {
 		super();
 		this.titre = titre;
 		this.adresse = adresse;
@@ -217,6 +231,7 @@ public class Annonce implements Serializable {
 		this.description = description;
 		this.photo = photo;
 		this.prix = prix;
+		this.rating = rating;
 		this.disponible = disponible;
 		this.type_annonce = type_annonce;
 		this.categorie_annonce = categorie_annonce;
@@ -224,7 +239,7 @@ public class Annonce implements Serializable {
 	}
 
 
-
+	
 
 	
 	
