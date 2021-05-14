@@ -26,7 +26,7 @@ public class RecServiceImpl implements RecService {
 		RecDAO.findAll().forEach(e ->recs.add(e));
 		return recs;
 	}
-
+	
 	@Override
 	public Reclamations addRec(Reclamations r) {
 		// TODO Auto-generated method stub
@@ -82,10 +82,10 @@ public class RecServiceImpl implements RecService {
 		Client cl=(Client) urep.findById((long) client).get();
 		String titre=r.getTitreReclam();	
 		String description=r.getDescriptionReclam();
-		Type_Rec type=r.getType();
+		//Type_Rec type=r.getType();
 		r.setDescriptionReclam(description);
 		r.setTitreReclam(titre);
-		r.setType(type);
+		//r.setType(type);
 		cl.addReclam(r);
 		RecDAO.save(r);	
 	}
@@ -102,6 +102,10 @@ public class RecServiceImpl implements RecService {
 		RecDAO.save(r);
 	}
 
+	
+	
+	
+	
 	@Override
 	public List<Reclamations> findRecWithPID(long id) {
 		//List<Reclamations> liste=(List<Reclamations>) RecDAO.findRecWithPID(id);
@@ -117,9 +121,17 @@ public class RecServiceImpl implements RecService {
 	//}
 	
 	@Override
-	public long addOrUpdateRec(Reclamations rec) {
-	RecDAO.save(rec);
-	return rec.getId_reclam();
+	public void addOrUpdateRec(int client,Reclamations rec) {
+		Client cl=(Client) urep.findById((long) client).get();
+		rec.getId_reclam();
+		cl.addReclam(rec);
+		RecDAO.save(rec);
 	}
 
+	@Override
+	public void update(Reclamations r) {
+		RecDAO.save(r);
+	}
+	
+	
 }

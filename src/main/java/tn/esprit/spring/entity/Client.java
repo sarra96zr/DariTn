@@ -32,13 +32,6 @@ public class Client extends User implements Serializable {
 	@OneToMany(cascade= CascadeType.ALL , mappedBy="client")
 	private Set<Meubles> meuble;
 	
-	//public int getId_client() {
-	//	return id_client;
-	//}
-//	public void setId_client(int id_client) {
-//		this.id_client = id_client;
-//	}
-	
 	public Panier getPanier() {
 		return panier;
 	}
@@ -77,7 +70,7 @@ public class Client extends User implements Serializable {
 	public void setMeuble(Set<Meubles> meuble) {
 		this.meuble = meuble;
 	}
-	public Client(int id_client, Panier panier, Set<Abonnement> abonnement, Set<Credit> credit,
+	public Client(Panier panier, Set<Abonnement> abonnement, Set<Credit> credit,
 			Set<Reclamations> reclam, RDV rdv, Set<Meubles> meuble) {
 		super();
 		//this.id_client = id_client;
@@ -97,6 +90,12 @@ public class Client extends User implements Serializable {
 		this.reclam.add(R);
 		R.setClient(this);
 	}
+	@Override
+	public String toString() {
+		return "Client [toString()=" + super.toString() + "]";
+	}
+	
+	
  
-
+	
 }

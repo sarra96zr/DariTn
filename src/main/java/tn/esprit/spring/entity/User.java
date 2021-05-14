@@ -102,6 +102,12 @@ public static long getSerialversionuid() {
 	public User() {
 		super();
 	}
+	@Override
+	public String toString() {
+		return "User [id_user=" + id_user + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", password=" + password + ", date_de_naissance=" + date_de_naissance + ", annonces=" + annonces
+				+ ", notifications=" + notifications + "]";
+	}
 	
 	
 	

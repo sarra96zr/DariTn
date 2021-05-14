@@ -1,6 +1,5 @@
 package tn.esprit.spring.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,9 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import tn.esprit.spring.repository.ClientRepo;
+
+
+
 @Entity
 @Table(name="Reclamations")
 public class Reclamations {
@@ -27,13 +29,15 @@ public class Reclamations {
 	public String descriptionReclam;
 	@Enumerated(EnumType.STRING)
     private Type_Rec type;
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne
 	Client client;
-	
-	public ClientRepo ClientDAO;
-	
+		
 	@JsonBackReference(value="reclamations-client")
 	public User getClient() {
+		return client;
+	}
+	
+	public Client getClient1() {
 		return client;
 	}
 	
@@ -68,10 +72,7 @@ public class Reclamations {
 		this.type = type;
 	}
 	
-	public Client getClientById(long id) {
-		Client client=ClientDAO.findByClientId(id);
-		return client;
-	}
+	
 	
 	public Reclamations(long id_reclam, String titreReclam, String descriptionReclam, Type_Rec type, Client client) {
 		super();
@@ -90,13 +91,27 @@ public class Reclamations {
 		this.client = client;
 	}
 	
+	
+	
+	public Reclamations(String titreReclam, String descriptionReclam, Type_Rec type) {
+		super();
+		this.titreReclam = titreReclam;
+		this.descriptionReclam = descriptionReclam;
+		this.type = type;
+	}
+	
 	public Reclamations() {
 		super();
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return "Reclamations [id_reclam=" + id_reclam + ", titreReclam=" + titreReclam + ", descriptionReclam="
+				+ descriptionReclam + ", type=" + type + ", client=" + client + "]";
+	}
+	
+	
 }

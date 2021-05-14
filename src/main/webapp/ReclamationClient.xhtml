@@ -5,38 +5,76 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/template/template.xhtml">
-	<ui:param name="page_name" value="Connexion" />
 	<ui:define name="menu">
-	<center>
-	<br></br><br></br><br></br>
-		<h:panelGroup columns="2">
-			<h:form>
-				<table>
-					<tr>
-						<td><h:outputText value="Type"></h:outputText></td>
-						<td><h:selectOneMenu value="#{RecController.type}">
-								<f:selectItem itemLabel="Choisir le Type" itemValue="#{null}" />
-								<f:selectItems value="#{RecController.types}" />
-							</h:selectOneMenu></td>
-					</tr>
-					<tr>
-						<td><h:outputText value="Titre"></h:outputText></td>
-						<td><h:inputText value="#{RecController.rec.titreReclam}"></h:inputText></td>
-					</tr>
-					<tr>
-						<td><h:outputText value="Description"></h:outputText></td>
-						<td><h:inputText value="#{RecController.rec.descriptionReclam}"></h:inputText></td>
-					</tr>
-					<tr>
-						<td><h:outputText value="Client"></h:outputText></td>
-						<td><h:inputText value="#{RecController.rec.client}"></h:inputText></td>
-					</tr>
-					<tr>
-						<h:commandButton value="Save" action="#{RecController.save()}" />
-					</tr>
-				</table>
-			</h:form>
-		</h:panelGroup>
+		<center>
+			<br></br> <br></br> <br></br>
+			<h:panelGroup columns="2">
+				<h:form>
+					<table>
+						<tr>
+							<td><h:outputText value="Type"></h:outputText></td>
+							<td><h:selectOneMenu value="#{RecController.type}">
+									<f:selectItem itemLabel="Choisir le Type" itemValue="#{null}" />
+									<f:selectItems value="#{RecController.types}" />
+								</h:selectOneMenu></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Titre"></h:outputText></td>
+							<td><h:inputText value="#{RecController.rec.titreReclam}"></h:inputText></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Description"></h:outputText></td>
+							<td><h:inputText
+									value="#{RecController.rec.descriptionReclam}"></h:inputText></td>
+						</tr>
+						<tr>
+							<h:commandButton value="Save" action="#{RecController.save()}" />
+						</tr>
+						<tr>
+							<h:commandButton value="update" action="#{RecController.update1()}" />
+						</tr>
+					</table>
+				</h:form>
+				<h:form>
+					<h:dataTable value="#{RecController.getRecs()}" var="Rec"
+						border="1">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Titre" />
+							</f:facet>
+							<h:outputText value="#{Rec.titreReclam}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Type" />
+							</f:facet>
+							<h:outputText value="#{Rec.type}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Description" />
+							</f:facet>
+							<h:outputText value="#{Rec.descriptionReclam}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Action" />
+							</f:facet>
+							<h:commandButton
+								action="#{RecController.removeProduct(Rec.id_reclam)}"
+								value="Supprimer" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Action" />
+							</f:facet>
+							<h:commandButton
+								action="#{RecController.show(Rec)}"
+								value="Mettre à jour" />
+						</h:column>
+					</h:dataTable>
+				</h:form>
+			</h:panelGroup>
 		</center>
 	</ui:define>
 </ui:composition>

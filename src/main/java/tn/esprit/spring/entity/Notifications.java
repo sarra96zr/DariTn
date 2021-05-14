@@ -14,8 +14,6 @@ public class Notifications implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_notif")
 	private Long idNotif ;
-	@Column(name = "dateNotif")
-	private String dateNotif;
 	@Column(name = "titre")
 	private String titre;
 	@Column(name = "description")
@@ -38,14 +36,6 @@ public class Notifications implements Serializable{
 
 	public void setIdNotif(Long idNotif) {
 		this.idNotif = idNotif;
-	}
-
-	public String getDateNotif() {
-		return dateNotif;
-	}
-
-	public void setDateNotif(String dateNotif) {
-		this.dateNotif = dateNotif;
 	}
 
 	public String getTitre() {
@@ -91,16 +81,14 @@ public class Notifications implements Serializable{
 		super();
 	}
 
-	public Notifications(Long idNotif, String dateNotif, String titre, String description_notif, Annonce annonce,
+	public Notifications(Long idNotif, String titre, String description_notif, Annonce annonce,
 			User user, Annonce annonces) {
 		super();
 		this.idNotif = idNotif;
-		this.dateNotif = dateNotif;
 		this.titre = titre;
 		this.description_notif = description_notif;
 		this.annonce = annonce;
 		this.user = user;
-		//this.annonces = annonces;
 	}
 
 	
