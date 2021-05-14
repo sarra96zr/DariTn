@@ -29,7 +29,7 @@ import tn.esprit.spring.service.BanqueService;
 @Scope (value = "session")
 @Component (value = "bankLists")
 @ELBeanName(value = "bankLists")
-@Join(path = "/", to = "/bank-lists.jsf")
+//@Join(path = "/banque", to = "/banque-form.jsf")
 @Controller
 public class BanqueController {
 	@Autowired

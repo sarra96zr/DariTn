@@ -3,6 +3,7 @@ package tn.esprit.spring.controller;
 import java.util.Date;
 import java.util.List;
 
+import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -26,7 +27,7 @@ import tn.esprit.spring.service.AbonnementService;
 @Scope (value = "session")
 @Component (value = "subscription")
 @ELBeanName(value = "subscription")
-//@Join(path = "/", to = "/bank-lists.jsf")
+//@Join(path = "/Abonnement", to = "/abonnement.jsf")
 @Controller
 public class AbonnementController {
 	@Autowired
@@ -108,7 +109,17 @@ public class AbonnementController {
 				private Date datefin;
 				private List<Abonnement> abonnements;
 				private Long id;
+				private Abonnement selectedabonnement;
 				
+				public Abonnement getSelectedabonnement() {
+					return selectedabonnement;
+				}
+				public void setSelectedabonnement(Abonnement selectedabonnement) {
+					this.selectedabonnement = selectedabonnement;
+				}
+				public void openNew() {
+			        this.selectedabonnement = new Abonnement();
+			    }
 				public Long getId() {
 					return id;
 				}
@@ -168,6 +179,7 @@ public class AbonnementController {
 
 					
 					abservice.addAbonnement(new Abonnement(datedeb, datefin, type));
+					
 					
 					}
 				

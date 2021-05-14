@@ -15,7 +15,7 @@ import tn.esprit.spring.service.BanqueService;
 @Scope(value = "session")
 @Component(value = "bankController")
 @ELBeanName(value = "bankController")
-@Join(path = "/DariTn", to = "/banque-form.jsf")
+//@Join(path = "/banque", to = "/banque-form.jsf")
 public class BanqueControllerJsf {
 	@Autowired
 	BanqueService bs;

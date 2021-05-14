@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="layout.xhtml">
+	<ui:param name="Product" value="Accueil" />
+	<ui:define name="content">
+
+
+
+		<h:head>
+			<title>Abonnement</title>
+			<style type="text/css">
+.tg {
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-color: #ccc;
+}
+
+.tg p {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	padding: 10px 5px;
+	border-style: solid;
+	border-width: 1px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #ccc;
+	color: #333;
+	background-color: #fff;
+}
+
+.tg h {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	padding: 10px 5px;
+	border-style: solid;
+	border-width: 1px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #ccc;
+	color: #333;
+	background-color: #f0f0f0;
+}
+
+.tg .tg-4eph {
+	background-color: #f9f9f9
+}
+</style>
+		</h:head>
+		<h:form id="form">
+		<br></br>
+					<br></br>
+					<br></br>
+					
+			<div class="card crud-demo">
+
+				<p:growl id="messages" showDetail="true" />
+				<p:toolbar>
+					<p:toolbarGroup>
+
+						<f:facet name="header">
+							<div class="products-table-header">
+								<span style="font-weight: bold">Liste des Meubles a
+									vendre</span> <span class="filter-container ui-input-icon-left">
+									<i class="pi pi-search" /> <p:inputText id="globalFilter"
+										onkeyup="PF('dtProducts').SearchProductByName(nom_meuble)"
+										placeholder="Search" />
+								</span>
+							</div>
+						</f:facet>
+					</p:toolbarGroup>
+					<p:toolbarGroup align="right">
+						<p:commandButton value="Deposer votre annoce" icon="pi pi-plus"
+							actionListener="#{subscription.openNew()}"
+							oncomplete="PF('manageProductDialog').show()"
+							styleClass="ui-button-info" style="margin-right: .5rem">
+							<p:resetInput target=":form:manage-product-content" />
+						</p:commandButton>
+					</p:toolbarGroup>
+				</p:toolbar>
+
+				<p:dialog header="Ajouter une Inscription" showEffect="fade"
+					modal="true" widgetVar="manageProductDialog" responsive="true" 
+					 minHeight="40" width="350" minimizable="true" maximizable="true">
+					<p:outputPanel id="manage-product-content" class="ui-fluid">
+						<p:outputPanel rendered="#{not empty JsfMeubleController.m}">
+							<!--                     <p:graphicImage name="images/product/#{crudView.selectedProduct.image}" library="demo" -->
+							<!--                                     styleClass="product-image" -->
+							<!--                                     rendered="#{not empty crudView.selectedProduct.image}"/> -->
+							<div class="p-field">
+								  <tr>
+							<td><h:outputText value="Start date"></h:outputText></td>
+							<td><p:datePicker id="button"
+									value="#{subscription.datedeb}" showIcon="true" /></td>
+						</tr>
+							</div>
+							<div class="p-field">
+								<p:outputLabel for="description">Description</p:outputLabel>
+								<p:inputTextarea id="description"
+									value="#{JsfMeubleController.m.description_meuble}" />
+							</div>
+							<div class="p-field">
+								<p:outputLabel>Category</p:outputLabel>
+								<p:selectOneMenu value="#{JsfMeubleController.m.type_meuble}">
+									<f:selectItem itemLabel="Choisir le type du meuble"
+										itemValue="#{null}" />
+									<f:selectItems value="#{JsfMeubleController.type}" />
+								</p:selectOneMenu>
+							</div>
+							<div class="p-formgrid p-grid">
+								<div class="p-field p-col">
+									<p:outputLabel for="price">Price</p:outputLabel>
+									<p:inputNumber id="price" value="#{JsfMeubleController.m.prix}"
+										symbol=" DT" symbolPosition="s" decimalSeparator="."
+										thousandSeparator="," />
+								</div>
+							</div>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<f:facet name="footer">
+						<p:commandButton value="Valider" icon="pi pi-check"
+							actionListener="#{JsfMeubleController.save()}"
+							update="manage-product-content"
+							process="manage-product-content @this" />
+						<p:commandButton value="Annuler" icon="pi pi-times"
+							onclick="PF('manageProductDialog').hide()"
+							class="ui-button-secondary" />
+					</f:facet>
+				</p:dialog>
+
+
+
+
+
+        
+    
+				<h:form>
+	<p:dataTable id="table"  value="#{subscription.getAbonnements()}" var="abonnement">
+	<f:facet name="header">
+							<div class="products-table-header" align="center">
+								<span class="filter-container ui-input-icon-left">
+									<i class="pi pi-search"></i> <p:inputText id="globalFilter"
+										onkeyup="PF('dtProducts').SearchAbonnementByType(type)"
+										placeholder="Search" />
+								</span>
+
+							</div>
+						</f:facet>
+                   
+<p:column>
+                        <f:facet name="header">Client</f:facet>
+                        <h:outputText value="#{abonnement.client.firstName}" />
+                        
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Date Debut</f:facet>
+                        <h:outputText value="#{abonnement.date_debut}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Date Fin</f:facet>
+                        <h:outputText value="#{abonnement.date_fin}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Date Fin</f:facet>
+                        <h:outputText value="#{abonnement.type}" />
+                    </p:column>
+                    <p:column id="action">
+						<f:facet name="header"><h:outputText value="Action" /></f:facet>
+						<h:commandLink value="Edit"
+							action="#{subscription.removeSubscription(abonnement.id_b)}">
+							</h:commandLink> /
+							
+								
+								<p:commandButton class="ui-button-warning rounded-button" icon="pi pi-edit" action="#{subscription.removeSubscription(abonnement.id)}">
+                           
+      </p:commandButton>
+							
+							
+
+					</p:column>
+                   
+					</p:dataTable>
+				</h:form>
+
+			</div>
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>
