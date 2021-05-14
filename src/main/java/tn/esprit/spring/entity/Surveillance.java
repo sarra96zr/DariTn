@@ -26,12 +26,17 @@ public class Surveillance {
 	@Temporal(TemporalType.DATE)
 	@Column(name="Date_fin")
 	private Date dateFin;
-	@Column(name="Prix")
-	private Float prix;
-	@Column(name="nombre_de_cameras")
-	private Long camera;
+	@Enumerated
+	private cam camera;
 	@ManyToOne
-	User client;
+	Client client;
+	
+	public Client getClient() {
+		return client;
+	}
+	public void setClient(Client client) {
+		this.client = client;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -50,33 +55,27 @@ public class Surveillance {
 	public void setDateFin(Date dateFin) {
 		this.dateFin = dateFin;
 	}
-	public Float getPrix() {
-		return prix;
-	}
-	public void setPrix(Float prix) {
-		this.prix = prix;
-	}
-	public Long getCamera() {
+	
+	public cam getCamera() {
 		return camera;
 	}
-	public void setCamera(Long camera) {
+	public void setCamera(cam camera) {
 		this.camera = camera;
 	}
 	
 	@Override
 	public String toString() {
-		return "Surveillance [id=" + id + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", prix=" + prix + ", camera=" + camera + "]";
+		return "Surveillance [id=" + id + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + ",  camera=" + camera + "]";
 	}
 	
-	public Surveillance(Date dateDebut, Date dateFin, String code, Float prix, Long camera, Client client) {
+	public Surveillance(Date dateDebut, Date dateFin, String code, Float prix, cam camera, Client client) {
 		super();
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
-		this.prix = prix;
 		this.camera = camera;
 		this.client = client;
 	}
-	public Surveillance( Date dateDebut, Date dateFin, String code,  Long camera, Client client) {
+	public Surveillance( Date dateDebut, Date dateFin,  cam camera, Client client) {
 		super();
 		
 		this.dateDebut = dateDebut;
@@ -88,5 +87,20 @@ public class Surveillance {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	public Surveillance(Long id, cam camera, Date dateDebut, Date dateFin ) {
+		super();
+		this.id = id;
+		this.camera = camera;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		
+	}
+	public Surveillance(Date dateDebut, Date dateFin, cam camera) {
+		super();
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.camera = camera;
+	}
+	
 	
 }

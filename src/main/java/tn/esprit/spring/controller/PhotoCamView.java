@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import javax.faces.FacesException;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.imageio.stream.FileImageOutputStream;
 import javax.inject.Named;
 

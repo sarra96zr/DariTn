@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import tn.esprit.spring.entity.Abonnement;
 import tn.esprit.spring.entity.Surveillance;
 import tn.esprit.spring.entity.User;
 import tn.esprit.spring.repository.SurveillanceRepo;
@@ -16,26 +18,39 @@ public class SurveillanceServiceImpl implements SurveillanceService {
 	SurveillanceRepo surveillanceRepository;
 	
 	Surveillance sur;
-/*
+
 	@Override
-	public Long addOrUpdateSurveillance(Surveillance surveillance) {
-		
-		//surveillance.setPrix(null);
-		surveillanceRepository.save(surveillance);
-	return surveillance.getId();
+	public List<Surveillance> retrieveAllSurveillance() {
+		// TODO Auto-generated method stub
+				List<Surveillance> surveillance= (List<Surveillance>) surveillanceRepository.findAll();
+				return surveillance;
 	}
+
 	@Override
-	public List<Surveillance> affichersurveilconnecté(Long id) {
-	return surveillanceRepository.getSubById(id);}
-	
+	public long addSurveillance(Surveillance surveillance) {
+
+		surveillanceRepository.save(surveillance);
+		return surveillance.getId();
+	}
+
 	@Override
-	public List<Surveillance> affichersurveil(User user) {
-	return (List<Surveillance>) surveillanceRepository.getSubByUser(user);}
-	
-	
-	@Override
-	public void deleteSurv(String id) {
-		surveillanceRepository.deleteById(Long.parseLong(id));
+	public void deleteSurveillance(int id_ab) {
+		// TODO Auto-generated method stub
+		surveillanceRepository.deleteById((long) id_ab);
 		
-	} */
+		
+	}
+
+	@Override
+	public Surveillance updateSurveillance(Surveillance ab) {
+		// TODO Auto-generated method stub
+		return surveillanceRepository.save(ab);
+	}
+
+	@Override
+	public Surveillance retrieveSurveillance(String id_ab) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
