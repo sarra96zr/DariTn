@@ -31,8 +31,7 @@ import tn.esprit.spring.repository.CommandeRepo;
 import tn.esprit.spring.repository.UserRepo;
 import tn.esprit.spring.entity.User;
 import tn.esprit.spring.helper.GeneratePdfReport;
-
-
+import tn.esprit.spring.helper.MailService;
 import tn.esprit.spring.entity.Commande;
 import tn.esprit.spring.service.CommandeService;
 import tn.esprit.spring.service.PanierService;
@@ -48,11 +47,13 @@ public class CommandeController {
 	
 	@Autowired
 	private UserRepo ur;
-	
-	private Object user=new User();
+	@Autowired
+	private MailService notificationService;
+
+	private User user=new User();
 	// afficher les commandes par meubles
 	// http://localhost:8081/DariTn/Pi/ordersmeubles/{ref_meuble}
-			@GetMapping("/ordersmeubles/{ref_meuble}")
+			@GetMapping("/ordersmeubless/{ref_meuble}")
 			@ResponseBody
 			public List<Commande> getordersbyproducts(@PathVariable("ref_meuble") Meubles meuble) {
 				List<Commande> list = ordersService.GetOrdersByMeubles(meuble);
@@ -136,5 +137,31 @@ public class CommandeController {
 		   exporter.export(response);
 		    
 		}
-			
+		//mail
+		@RequestMapping("send-mail-attachment")
+		public  String sendWithAttachment() throws MessagingException {
+
+			/*
+			 * Creating a User with the help of User class that we have declared and setting
+			 * Email address of the sender.
+			 */
+			user.setEmail("esprit.daritn@gmail.com"); //Receiver's email address
+
+			/*
+			 * Here we will call sendEmailWithAttachment() for Sending mail to the sender
+			 * that contains a attachment.
+			 */
+			try {
+				notificationService.sendEmailWithAttachment(user);
+			} catch (MailException mailException) {
+				System.out.println(mailException);
+			}
+			return "Congratulations! Your mail has been send to the user.";
+					
+		}
+			//JSF
+		public List<Commande> getordersbyRef( Meubles meuble) {
+			List<Commande> list = ordersService.GetOrdersByMeubles(meuble);
+			return list;
+		}
 }

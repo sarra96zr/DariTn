@@ -26,8 +26,10 @@
 					<td th:text="${Meubles.Description_meuble}">Description</td>
 					<td th:text="${Meubles.prix}">Prix</td>
       				 	
+      				<td>
+      				<img th:src="@{'/images/' + ${Meubles.img}}"/>
       							
-         			<input class="btn btn-primary" type="submit" value=" Ajouter au panier" onclick="">
+         		
          			</td> 					
 			<tbody>
 		</table>

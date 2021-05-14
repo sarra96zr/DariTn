@@ -14,8 +14,9 @@ import tn.esprit.spring.entity.Meubles;
 
 
 @Repository
-public interface CommandeRepo  extends CrudRepository<Commande, Long>,JpaRepository<Commande,Long>,JpaSpecificationExecutor<Commande>  {
+public interface CommandeRepo  extends CrudRepository<Commande, Long>  {
 	@Query("SELECT c FROM Commande c WHERE c.m= :meuble")
 	List<Commande> GetOrdersByMeubles(@Param("meuble") Meubles meuble);
+	
 
 }

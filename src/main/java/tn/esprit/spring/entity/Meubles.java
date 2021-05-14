@@ -1,5 +1,6 @@
 package tn.esprit.spring.entity;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -58,7 +59,12 @@ public class Meubles implements Serializable {
 	public Meubles() {
 		super();
 	}
-
+	@Transient
+    public String getPhotosImagePath() {
+        if (img == null || ref_meuble == null) return null;
+         
+        return "/images" + ref_meuble + "/" + img;
+    }
 	public Meubles(String nom_meuble, String img, String description_meuble, float prix, Type_Meuble type_meuble) {
 		super();
 		Nom_meuble = nom_meuble;

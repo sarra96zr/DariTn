@@ -53,9 +53,9 @@
 </style>
 		</h:head>
 		<h:body>
-
+<br></br> <br></br> <br></br>
 			<div class="card">
-				<h:form>
+				<h:form id="form">
                   		<p:toolbar>
 					<p:toolbarGroup >
 						<p:commandButton  icon="pi pi-plus" styleClass="rounded-button ui-button-info ui-button-outlined" 
@@ -91,8 +91,8 @@
 							<h:outputText value="#{meuble.nom_meuble}" />
 						</p:column>
 						<p:column headerText="Image">
-							<p:graphicImage value="img/home.jpg"
-                                styleClass="product-image"             />
+						
+							<p:graphicImage value="images/#{meuble.img}" width="250" height="200" />
 						</p:column>
                         
 						<p:column headerText="Description">
@@ -105,16 +105,19 @@
 
 
 						<p:column headerText="Actions" exportable="false">
-						  <p:commandButton icon="pi pi-pencil" 
+						  <p:commandButton icon="pi pi-pencil" update=":form:manage-product-content"
                                  oncomplete="PF('manageProductDialog').show()"
-                                 styleClass="edit-button rounded-button ui-button-success" process="@this">
-                    <f:setPropertyActionListener value="#{m.ref_meuble}" target="#{JsfMeubleController.m}"/>
+                                 styleClass="edit-button rounded-button ui-button-success" process="@this" >
+                     <f:setPropertyActionListener value="#{meuble}" target="#{JsfMeubleController.m}" /> 
                      <p:resetInput target=":form:manage-product-content"/>
                 </p:commandButton>
+
 						<p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
-                                 oncomplete="PF('deleteProductDialog').show()">
-                    <f:setPropertyActionListener value="#{m.ref_meuble}" target="#{JsfMeubleController.meuble}"/>
-                </p:commandButton>
+                                 oncomplete="PF('deleteProductDialog').show()" >
+                   <f:setPropertyActionListener value="#{m.ref_meuble}" target="#{JsfMeubleController.meuble}"/> 
+      </p:commandButton>
+      
+       
 						        <p:confirmDialog widgetVar="deleteProductDialog" showEffect="fade" width="300"
                          message="Delete the product?" header="Confirm" severity="warn">
             <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{JsfMeubleController.remove(meuble.ref_meuble)}"
@@ -131,9 +134,7 @@
 					minHeight="40" width="350" minimizable="true" maximizable="true">
 					<p:outputPanel id="manage-product-content" class="ui-fluid">
 						<p:outputPanel rendered="#{not empty JsfMeubleController.m}">
-							<p:graphicImage value="img/home.jpg"
-							                                    styleClass="product-image"
-							                                    />
+						
 							                                    <div class="p-field">
 								<p:outputLabel>Type </p:outputLabel>
 								<p:selectOneMenu value="#{JsfMeubleController.m.type_meuble}">
@@ -152,6 +153,11 @@
 								<p:outputLabel for="description">Description</p:outputLabel>
 								<p:inputTextarea id="description"
 									value="#{JsfMeubleController.m.description_meuble}" />
+							</div>
+							<div class="p-field">
+								<p:outputLabel >Selectionner image</p:outputLabel>
+								  <p:fileUpload id="uploader3" mode="simple" skinSimple="true" styleClass="p-d-block p-mb-5"
+                      title="Selectionner" value="#{JsfMeubleController.upload()}" />
 							</div>
 							
 							<div class="p-formgrid p-grid">
@@ -176,6 +182,7 @@
 							class="ui-button-secondary" />
 					</f:facet>
 				</p:dialog>
+
 
 
 				</h:form>

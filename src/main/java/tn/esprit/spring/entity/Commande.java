@@ -18,22 +18,22 @@ public class Commande implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_order")
-	@JsonIgnore
+	
 	private long id_order;
-	@JsonIgnore
+	
 	private String  Statut;
-	@JsonIgnore
+	
 	private float price_order;
-	@JsonIgnore
+	
 	@Temporal (TemporalType.DATE)
 	private Date date_order;
-	@JsonIgnore
+	
 	@ManyToOne
 	private Meubles m;
-	@JsonIgnore
+	
 	@ManyToMany( cascade = CascadeType.ALL)
 	private Set<Meubles> meuble;
-	@JsonIgnore
+	
 	@ManyToOne
 	private Panier Panier;
 	public long getId_order() {
@@ -87,9 +87,8 @@ public class Commande implements Serializable {
 	public void setM(Meubles m) {
 		this.m = m;
 	}
-	
 
-	public Commande(long id_order, String statut, float price_order, Date date_order, Meubles m, Set<Meubles> meuble,
+	public Commande(long id_order, String statut, float price_order, Date date_order, Meubles m,
 			tn.esprit.spring.entity.Panier panier) {
 		super();
 		this.id_order = id_order;
@@ -97,7 +96,6 @@ public class Commande implements Serializable {
 		this.price_order = price_order;
 		this.date_order = date_order;
 		this.m = m;
-		this.meuble = meuble;
 		Panier = panier;
 	}
 

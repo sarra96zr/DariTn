@@ -21,6 +21,7 @@ import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import net.bytebuddy.asm.Advice.This;
 import tn.esprit.spring.service.MeubleService;
@@ -185,6 +186,7 @@ public void setM(Meubles m) {
 			getM();
 	
 	    }
+	 
 		
 	public void displayMeuble(Meubles meuble)
 	{
@@ -195,6 +197,7 @@ public void setM(Meubles m) {
 	this.setUpdate(meuble.getRef_meuble());
 	}
 	public void updateMeuble()
+	
 	{ ms.updateMeuble(new Meubles(update, nom_meuble, description_meuble, price, typem));
 		 }
 	public void openNew() {
@@ -244,7 +247,7 @@ public void setM(Meubles m) {
     		if(file != null){
     		Class.forName("com.mysql.jdbc.Driver");
     		Connection cn= DriverManager.getConnection("jdbc:mysql://localhost:3306/DariTn?user=root&password=");
-    		PreparedStatement st= cn.prepareStatement("INSERT INTO meuble(img) VALUES (?)");
+    		PreparedStatement st= cn.prepareStatement("INSERT INTO Meubles(img) VALUES (?)");
     		st.setBinaryStream(1,file.getInputStream());
     		st.executeUpdate();
     		cn.close();

@@ -76,13 +76,13 @@
 <br></br>
 					<br></br>
 					<br></br>
-        
+         <h:form id="form">
 				<p:toolbar >
 				<div class="p-d-inline-flex p-ai-center">
             
         </div>
 							<p:toolbarGroup  name="top">
-                                 <span style="font-weight: bold;text-align=center"> Meubles     
+                                 <span style="font-weight: bold;text-align=center">     
 									</span> <span class="filter-container ui-input-icon-left">
 									<i class="pi pi-search" /> <p:inputText id="globalFilter"
 										onkeyup="PF('dtProducts').filter()"
@@ -93,6 +93,7 @@
 					</p:toolbarGroup>
 					<p:toolbarGroup align="right" >
 						<p:commandButton value="Deposer votre annoce" icon="pi pi-plus"
+						update=":form:manage-product-content"
 							actionListener="#{JsfMeubleController.openNew()}"
 							oncomplete="PF('manageProductDialog').show()"
 							styleClass="ui-button-info" style="margin-right: .5rem">
@@ -152,15 +153,18 @@ fileUploadListener="#{JsfMeubleController.upload()}" multiple="true"/>
 							class="ui-button-secondary" />
 					</f:facet>
 				</p:dialog>
-        <h:form id="form">
+       
 
-   <div class="tab-pane container">
-        <p:carousel value="#{JsfMeubleController.meuble}" var="meubles" responsive="true" widgetVar="dtProducts"  >
+   <div class="tab-pane container" >
+        <p:carousel value="#{JsfMeubleController.meuble}" var="meubles"  
+                responsive="true" widgetVar="dtProducts" headerText="Meubles"
+                itemStyle="text-align:center" 
+                 effect="fade"  cricular="true" 
+                 >
                <div class=" col-sm-6 col-md-4">
                  <div class="sub-box">
                  <span class="product-badge status-#{meubles.type_meuble.name().toLowerCase()}">#{meubles.type_meuble.text}</span>
-                  <img class="responsive" src="img/selling-img/sel-img1.jpg" width="100" height="100" />
-                   
+                   <p:graphicImage value="images/#{meubles.img}" width="200" height="250" />
                     <div class="sub-box-content" >
                    
                         <h5 class="description text-muted">#{meubles.nom_meuble}</h5>
@@ -177,7 +181,7 @@ fileUploadListener="#{JsfMeubleController.upload()}" multiple="true"/>
                         </p:commandButton>
                       <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
             <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
-            <p:button value="Yes" type="button" styleClass="ui-confirmdialog-yes ui-button-flat" oncomplete="confirmation.hide()" outcome="panel"/>
+            <p:button value="Yes" type="button" styleClass="ui-confirmdialog-yes ui-button-flat" oncomplete="confirmation.hide()" outcome="panel" />
    
          </p:confirmDialog> 
                    </div>
@@ -185,15 +189,15 @@ fileUploadListener="#{JsfMeubleController.upload()}" multiple="true"/>
            
 
             <f:facet name="footer">
-                In total there are #{fn:length(JsfMeubleController.meuble)} meuble.
+                En total , il existe #{fn:length(JsfMeubleController.meuble)} meubles.
             </f:facet>
             
         </p:carousel>
     </div>
-
-    
+   
      
 </h:form>
+
 	</ui:define>
 </ui:composition>
 
