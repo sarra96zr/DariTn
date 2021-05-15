@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import tn.esprit.spring.entity.Abonnement;
 import tn.esprit.spring.entity.Aonnement;
 import tn.esprit.spring.entity.Banque;
+import tn.esprit.spring.entity.Client;
 import tn.esprit.spring.entity.Credit;
 import tn.esprit.spring.entity.CreditFormula;
 import tn.esprit.spring.repository.BanqueRepo;
@@ -139,12 +140,15 @@ public class CreditController {
 	}
 	
 	private List<Credit> credits; // ajouter le getter et le setter
-private int client;
+private long client;
 private int id;
 private Credit C;
 private String bank;
-private List<CreditFormula> cc =new ArrayList<>();
+private CreditFormula type;
+private List<CreditFormula> cc ;
 private Credit creto;
+private float inamount;
+private Client cli;
 
 
 
@@ -154,6 +158,41 @@ private Credit creto;
 
 
 
+
+
+
+	public Client getCli() {
+	return cli;
+}
+
+public void setCli(Client cli) {
+	this.cli = cli;
+}
+
+	public float getInamount() {
+	return inamount;
+}
+
+public void setInamount(float inamount) {
+	this.inamount = inamount;
+}
+
+	public CreditFormula getType() {
+	return type;
+}
+
+public void setType(CreditFormula type) {
+	this.type = type;
+}
+
+public List<CreditFormula> getCc() {
+	return cs.retrieveAllFormule();
+	
+}
+
+public void setCc(List<CreditFormula> cc) {
+	this.cc = cc;
+}
 
 	public Credit getCreto() {
 		if (creto == null) {
@@ -166,18 +205,6 @@ public void setCreto(Credit creto) {
 	this.creto = creto;
 }
 
-	public List<CreditFormula> getCc() {
-		if (cc == null) {
-			cc = new ArrayList<>();
-		}
-		
-		System.err.println("CC");
-	return cc;
-}
-
-public void setCc(List<CreditFormula> cc) {
-	this.cc = cc;
-}
 
 	public String getBank() {
 	return bank;
@@ -187,11 +214,11 @@ public void setBank(String bank) {
 	this.bank = bank;
 }
 
-	public int getClient() {
+	public long getClient() {
 	return client;
 }
 
-public void setClient(int client) {
+public void setClient(long client) {
 	this.client = client;
 }
 
@@ -210,11 +237,7 @@ public Credit getC() {
 public void setC(Credit c) {
 	C = c;
 }
-private CreditFormula type;
 
-public List <CreditFormula> getType() {
-   return cs.retrieveAllFormule();
-}
 
 	public List<Credit> getCredits() {
 		credits = cs.retrieveAllCredit();
@@ -267,9 +290,11 @@ public List <CreditFormula> getType() {
 		this.idbank = idbank;
 	}
 
-	public void add(){
-		
-		cs.ajouterCredit(client, id, C);
+	public void add(Credit k){
+		this.setClient(k.getClient().getId_user());
+		this.setInamount(k.getInitialamount());
+		this.setId(k.getCreditformula().getId());
+		cli.addcredit(k);
 		
 	}
 

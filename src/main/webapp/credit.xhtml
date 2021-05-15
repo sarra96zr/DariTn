@@ -21,16 +21,16 @@
                     <p:inputText id="initial" value="#{credits.cre.initialamount}" />
                     
                    <p:selectOneMenu 
-						value="#{credits.creto.creditformula}">
+						value="#{credits.type}">
 						
-						<f:selectItems value="#{credits.creto.creditformula.o}"
-						var="creditformula" itemLabel="#{creditformula.interestRate}"
+						<f:selectItems value="#{credits.cc}"
+						var="creditformula" itemLabel="#{creditformula.id}"
 							itemValue="#{creditformula}" />
 
-					</p:selectOneMenu><Br></Br>
+					</p:selectOneMenu>
 	<Br></Br>
-	<p:commandButton value="Add" update="table" actionListener="#{credits.add(cre.client.id,creditformule.id,cre.initialamount)}" styleClass="ui-button-success" /> 
-                    <p:commandButton value="Update" update="table" actionListener="#{assuranceController.updateAssurance()}" styleClass="ui-priority-primary" /> 
+	<h:commandButton value="Add" action="#{credits.add(Credit)}" />
+	
                     
       
                 </h:panelGrid>
@@ -80,7 +80,7 @@
                    <p:column id="action">
 						<f:facet name="header"><h:outputText value="Action" /></f:facet>
 						<h:commandLink value="Edit"
-							action="#{bankLists.editBanque(banque)}">
+							action="#{credits.add(Credit)}">
 							</h:commandLink> /
 							<h:commandLink value="Delete"
 								action="#{credits.removeCredit(credit.id)}">

@@ -114,11 +114,15 @@ public class Credit implements Serializable{
 				+ monthly + ", client=" + client + ", creditformula=" + creditformula.getId() + "]";
 	}
 
-	public Credit(float initialamount, Client client, CreditFormula creditformula) {
+	public Credit(Client client, float initialamount, CreditFormula creditformula) {
 		super();
-		this.initialamount = initialamount;
 		this.client = client;
+		this.initialamount = initialamount;
 		this.creditformula = creditformula;
+	}
+
+	public Credit(long client2, float inamount, int id2) {
+		// TODO Auto-generated constructor stub
 	}
 	
 	
