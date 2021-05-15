@@ -113,4 +113,13 @@ public class Credit implements Serializable{
 		return "Credit [id=" + id + ", initialamount=" + initialamount + ", finalamount=" + finalamount + ", monthly="
 				+ monthly + ", client=" + client + ", creditformula=" + creditformula.getId() + "]";
 	}
+
+	public Credit(float initialamount, Client client, CreditFormula creditformula) {
+		super();
+		this.initialamount = initialamount;
+		this.client = client;
+		this.creditformula = creditformula;
+	}
+	
+	
 }

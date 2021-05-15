@@ -36,7 +36,6 @@ public class CreditFormula implements Serializable{
 	private double interestRate;
 
 	@ManyToOne
-	@Enumerated
 	Banque bank;
 	
 

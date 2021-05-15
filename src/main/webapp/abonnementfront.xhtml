@@ -5,7 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-<ui:composition template="layout.xhtml">
+<ui:composition template="/template/template.xhtml">
 	<ui:param name="Product" value="Accueil" />
 	<ui:define name="content">
 
@@ -134,64 +134,53 @@
 							class="ui-button-secondary" />
 					</f:facet>
 				</p:dialog>
+				</div>
+				
 
+</h:form>
+                
+                 <p:dataTable id="table" widgetVar="dtProducts" var="banque" value="#{bankLists.getBanques()}"
+                     reflow="true" styleClass="products-table"
+                     selection="#{crudView.selectedProducts}" rowKey="#{product.id}" paginator="true"
+                     rows="10" rowSelectMode="add" paginatorPosition="bottom">
+            <f:facet name="header">
+                <div class="products-table-header">
+                    <span style="font-weight: bold">PRODUCTS</span>
 
+                    <span class="filter-container ui-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <p:inputText id="globalFilter" onkeyup="PF('dtProducts').filter()" placeholder="Search"/>
+                    </span>
 
-
-
-        
-    
-				<h:form>
-	<p:dataTable id="table"  value="#{subscription.getAbonnements()}" var="abonnement">
-	<f:facet name="header">
-							<div class="products-table-header" align="center">
-								<span class="filter-container ui-input-icon-left">
-									<i class="pi pi-search"></i> <p:inputText id="globalFilter"
-										onkeyup="PF('dtProducts').SearchAbonnementByType(type)"
-										placeholder="Search" />
-								</span>
-
-							</div>
-						</f:facet>
+                </div>
+            </f:facet>
                    
-<p:column>
-                        <f:facet name="header">Client</f:facet>
-                        <h:outputText value="#{abonnement.client.firstName}" />
-                        
-                    </p:column>
+
                     <p:column>
-                        <f:facet name="header">Date Debut</f:facet>
-                        <h:outputText value="#{abonnement.date_debut}" />
+                        <f:facet name="header">Name</f:facet>
+                        <h:outputText value="#{banque.nombanque}" />
                     </p:column>
-                    <p:column>
-                        <f:facet name="header">Date Fin</f:facet>
-                        <h:outputText value="#{abonnement.date_fin}" />
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">Date Fin</f:facet>
-                        <h:outputText value="#{abonnement.type}" />
-                    </p:column>
-                    <p:column id="action">
+                   <p:column id="action">
 						<f:facet name="header"><h:outputText value="Action" /></f:facet>
 						<h:commandLink value="Edit"
-							action="#{subscription.removeSubscription(abonnement.id_b)}">
+							action="#{bankController.displayBanque(banque)}">
 							</h:commandLink> /
-							
+							<h:commandLink value="Delete"
+								action="#{bankLists.removeBank(banque.id)}">
 								
-								<p:commandButton class="ui-button-warning rounded-button" icon="pi pi-edit" action="#{subscription.removeSubscription(abonnement.id)}">
-                           
-      </p:commandButton>
-							
+							</h:commandLink>
 							
 
 					</p:column>
+                    
+                    
+    
+
                    
-					</p:dataTable>
-				</h:form>
-
-			</div>
-		</h:form>
-
+                </p:dataTable>
+                </div>
+            </p:panel>
+        </h:form>
 
 	</ui:define>
 

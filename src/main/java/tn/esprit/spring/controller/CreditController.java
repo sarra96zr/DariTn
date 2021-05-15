@@ -1,5 +1,6 @@
 package tn.esprit.spring.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.ocpsoft.rewrite.annotation.Join;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tn.esprit.spring.entity.Abonnement;
@@ -139,17 +141,46 @@ public class CreditController {
 private int client;
 private int id;
 private Credit C;
-private CreditFormula bank;
+private String bank;
+private List<CreditFormula> cc =new ArrayList<>();
+private Credit creto;
 
 
 
 
-	public CreditFormula getBank() {
+
+
+
+
+	public Credit getCreto() {
+		if (creto == null) {
+			creto = new Credit();
+		}
+	return creto;
+}
+
+public void setCreto(Credit creto) {
+	this.creto = creto;
+}
+
+	public List<CreditFormula> getCc() {
+		if (cc == null) {
+			cc = new ArrayList<>();
+		}
+		
+		System.err.println("ENA L FONCTION");
+	return cc;
+}
+
+public void setCc(List<CreditFormula> cc) {
+	this.cc = cc;
+}
+
+	public String getBank() {
 	return bank;
 }
-	
 
-public void setBank(CreditFormula bank) {
+public void setBank(String bank) {
 	this.bank = bank;
 }
 
@@ -214,12 +245,27 @@ public void setC(Credit c) {
 	public void setCreditformule(CreditFormula creditformule) {
 		this.creditformule = creditformule;
 	}
+	
+	private CreditFormula idbank;
+	
+
+	public CreditFormula getIdbank() {
+		return idbank;
+	}
+	
+	
+
+	public void setIdbank(CreditFormula idbank) {
+		this.idbank = idbank;
+	}
 
 	public void add(){
 		
 		cs.ajouterCredit(client, id, C);
 		
 	}
+
+
 	
 	
 

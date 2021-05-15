@@ -1,5 +1,6 @@
 package tn.esprit.spring.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.ocpsoft.rewrite.annotation.Join;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import tn.esprit.spring.entity.Abonnement;
 import tn.esprit.spring.entity.Banque;
 import tn.esprit.spring.service.BanqueService;
@@ -34,12 +34,16 @@ import tn.esprit.spring.service.BanqueService;
 public class BanqueController {
 	@Autowired
 	BanqueService banqueService;
-
-
-	
-	
-
-	
+	private List<Banque> ban;	
+		public List<Banque> getBan() {
+			if (ban == null) {
+				ban = new ArrayList<>();
+			}
+		return ban;
+	}
+	public void setBan(List<Banque> ban) {
+		this.ban = ban;
+	}
 		// http://localhost:8081/DariTn/Pi/retrieve-all-banque
 		@GetMapping("/retrieve-all-banque")
 		@ResponseBody
@@ -90,11 +94,19 @@ public class BanqueController {
 private List<Banque> banques; // ajouter le getter et le setter
 private String nombank;
 private Integer idbanque;
+private List<Banque> search;
 
 
 
 
 
+
+public List<Banque> getSearch() {
+	return search;
+}
+public void setSearch(List<Banque> search) {
+	this.search = search;
+}
 public String getNombank() {
 	return nombank;
 }
@@ -120,7 +132,19 @@ public void removeBank(int id) {
 	getBanques();
 }
 
+private Banque b = new Banque();
 
+public Banque getB() {
+	return b;
+}
+public void setB(Banque b) {
+	this.b = b;
+}
+public String searchByName(String nombanque)
+{
+    this.search = banqueService.SearchBanqueByName(nombanque);
+    return null;
+}
 
 
 

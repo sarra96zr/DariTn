@@ -7,10 +7,14 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:sec="http://www.springframework.org/security/tags">
-<ui:composition template="layout.xhtml">
+<ui:composition template="/template/template.xhtml">
 <ui:define name="content">
         <h:form id="productForm">
-            <p:panel header="Bank Details">
+        <center>
+        <Br></Br>
+            <Br></Br>
+            <Br></Br>
+            <p:panel header="Assurance Details">
 	<div class="p-field">
 <h:panelGrid columns="1">
 
@@ -29,13 +33,16 @@
                     
         <p:selectOneMenu value="#{assuranceController.assur}">
 	<f:selectItems value="#{assuranceController.entreprises}" />
-	</p:selectOneMenu>
-	<h:commandButton value="Add" action="#{assuranceController.addAssurance()}" />
-	<h:commandButton value="Update" action="#{assuranceController.updateAssurance()}" />
+	</p:selectOneMenu><Br></Br>
+	<Br></Br>
+	<p:commandButton value="Add" update="table" actionListener="#{assuranceController.addAssurance()}" styleClass="ui-button-success" /> 
+                    <p:commandButton value="Update" update="table" actionListener="#{assuranceController.updateAssurance()}" styleClass="ui-priority-primary" /> 
+
 	</div>
 	
 	</p:panel>
-	
+
+            <Br></Br>
 	        <p:panel header="Bank List">
         
         
@@ -88,7 +95,9 @@
                    
                 </p:dataTable>
             </p:panel>
+            </center>
 	</h:form>
+	
 	</ui:define>
 	</ui:composition>
 	</html>

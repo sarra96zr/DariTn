@@ -6,11 +6,15 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-<ui:composition template="layout.xhtml">
+<ui:composition template="/template/template.xhtml">
 	<ui:param name="Product" value="Accueil" />
 	<ui:define name="content">
         <h:form id="productForm">
-            <p:panel header="Bank Details">
+        <center>
+        <Br></Br>
+            <Br></Br>
+            <Br></Br>
+            <p:panel header="Surveillance Details">
 	<div class="p-field">
 <h:panelGrid columns="1">
 
@@ -28,10 +32,12 @@
                     </h:panelGrid>
                     <p:selectOneMenu value="#{surveillances.nombrecamera}">
 	<f:selectItems value="#{surveillances.ab}" />
-	</p:selectOneMenu>
+	</p:selectOneMenu><Br></Br>
+	<Br></Br>
+	<p:commandButton value="Add" update="table" actionListener="#{surveillances.addSurveillance()}" styleClass="ui-button-success" /> 
+                    <p:commandButton value="Update" update="table" actionListener="#{surveillances.updateSurveillance()}" styleClass="ui-priority-primary" /> 
      
-	<h:commandButton value="Add" action="#{surveillances.addSurveillance()}" />
-	<h:commandButton value="Update" action="#{surveillances.updateSurveillance()}" />
+
 	</div>
 	
 	</p:panel>
@@ -88,7 +94,9 @@
                    
                 </p:dataTable>
             </p:panel>
+            </center>
 	</h:form>
+	
 	</ui:define>
 	</ui:composition>
 	</html>
