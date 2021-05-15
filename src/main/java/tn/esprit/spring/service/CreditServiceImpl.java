@@ -47,7 +47,7 @@ public class CreditServiceImpl implements CreditService {
 		double interet=F.getInterestRate();
 		float somme=C.getInitialamount();	
 		float sommefinal=(float) (somme+(somme*interet));	
-		float monthly=sommefinal/(duree*12);
+		float monthly=sommefinal/(duree);
 		C.setFinalamount(sommefinal);
 		C.setMonthly(monthly);	
 		C.setCreditformula(F);

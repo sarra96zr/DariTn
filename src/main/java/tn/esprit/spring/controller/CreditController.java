@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tn.esprit.spring.entity.Abonnement;
+import tn.esprit.spring.entity.Aonnement;
 import tn.esprit.spring.entity.Banque;
 import tn.esprit.spring.entity.Credit;
 import tn.esprit.spring.entity.CreditFormula;
@@ -152,6 +153,8 @@ private Credit creto;
 
 
 
+
+
 	public Credit getCreto() {
 		if (creto == null) {
 			creto = new Credit();
@@ -168,7 +171,7 @@ public void setCreto(Credit creto) {
 			cc = new ArrayList<>();
 		}
 		
-		System.err.println("ENA L FONCTION");
+		System.err.println("CC");
 	return cc;
 }
 
@@ -206,6 +209,11 @@ public Credit getC() {
 
 public void setC(Credit c) {
 	C = c;
+}
+private CreditFormula type;
+
+public List <CreditFormula> getType() {
+   return cs.retrieveAllFormule();
 }
 
 	public List<Credit> getCredits() {
