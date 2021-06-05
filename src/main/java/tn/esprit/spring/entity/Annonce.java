@@ -48,6 +48,9 @@ public class Annonce implements Serializable {
 	@Column(name="rating")
 	public int rating;
 	
+	@Column(name="surface")
+	public Double surface;
+	
 	
 	@Enumerated (EnumType.STRING)
 	@Column(name="disponible")
@@ -159,6 +162,16 @@ public class Annonce implements Serializable {
 	
 
 
+	public Double getSurface() {
+		return surface;
+	}
+
+
+	public void setSurface(Double surface) {
+		this.surface = surface;
+	}
+
+
 	public Type_Annonce getType_annonce() {
 		return type_annonce;
 	}
@@ -210,7 +223,8 @@ public class Annonce implements Serializable {
 
 
 	public Annonce(long id, String titre, String adresse, String video, String description, String photo, Double prix,
-			int rating, Disponible disponible, Type_Annonce type_annonce, Categorie_Annonce categorie_annonce, User user) {
+			int rating, Double surface, Disponible disponible, Type_Annonce type_annonce,
+			Categorie_Annonce categorie_annonce, User user) {
 		super();
 		this.id = id;
 		this.titre = titre;
@@ -220,6 +234,7 @@ public class Annonce implements Serializable {
 		this.photo = photo;
 		this.prix = prix;
 		this.rating = rating;
+		this.surface = surface;
 		this.disponible = disponible;
 		this.type_annonce = type_annonce;
 		this.categorie_annonce = categorie_annonce;
@@ -228,7 +243,8 @@ public class Annonce implements Serializable {
 
 
 	public Annonce(String titre, String adresse, String video, String description, String photo, Double prix,
-			int rating, Disponible disponible, Type_Annonce type_annonce, Categorie_Annonce categorie_annonce, User user) {
+			int rating, Double surface, Disponible disponible, Type_Annonce type_annonce,
+			Categorie_Annonce categorie_annonce, User user) {
 		super();
 		this.titre = titre;
 		this.adresse = adresse;
@@ -237,6 +253,7 @@ public class Annonce implements Serializable {
 		this.photo = photo;
 		this.prix = prix;
 		this.rating = rating;
+		this.surface = surface;
 		this.disponible = disponible;
 		this.type_annonce = type_annonce;
 		this.categorie_annonce = categorie_annonce;

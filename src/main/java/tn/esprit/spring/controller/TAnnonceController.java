@@ -48,7 +48,7 @@ public class TAnnonceController {
 	public Type_Annonce[] getTypea() { return Type_Annonce.values(); }
 	public Categorie_Annonce[] getTypec() { return Categorie_Annonce.values(); }
 	private Integer annonceIdToBeUpdated; 
-	Annonce a = new Annonce();
+	public Annonce a = new Annonce();
 	public Location location = new Location();
 	static Double prixLocation;
 	private String titre , adresse, video,description, photo;
@@ -58,7 +58,7 @@ public class TAnnonceController {
 	private Categorie_Annonce categorie_annonce;
 	private Long update;
 	private int rating;
-	
+	private Double surface;
 	// aff liste
 	public List<Annonce> getAnnonceVente() {
 		annonces = ann.ListeVente(Type_Annonce.Vente);
@@ -92,7 +92,7 @@ public class TAnnonceController {
 		
 		else
 			
-			{annonceService.addOrUpdateAnnonce(new Annonce(titre, adresse, null, description, null, prix, 3, disponible, type_annonce, categorie_annonce, null));
+			{annonceService.addOrUpdateAnnonce(new Annonce(titre, adresse, null, description, null, prix, 3,surface,disponible, type_annonce, categorie_annonce, null));
 			//annonceService.addOrUpdateAnnonce(new Annonce(titre, adresse, null, description, null,prix,3, disponible.Disponible,type_annonce, categorie_annonce, null));
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Annonce bien ajoutée "));
 			System.out.println("added");}
@@ -101,16 +101,16 @@ public class TAnnonceController {
 	}
 	   // methode 2
 	
-	/*public String save() {
+	public void save1() {
 		System.out.println("*********"+a.id);
 		//System.err.println("*********"+rdv.title);
 		//System.err.println("*********"+rdv.dateRDV);
 		//System.err.println("*********"+rdv.dateDeb);
 		System.out.println("*********"+a.getAdresse());
 		ann.save(a);
-		a = new Annonce();
-		return "/DariTn/welcome.xhtml";
-	}*/
+		//a = new Annonce();
+		
+	}
 	
 	//delete
 	public void removeAnnonce(@PathVariable("annonce-id") String id_a) {
@@ -136,7 +136,7 @@ public class TAnnonceController {
 	}
 	
 	public void updateAnnonce()
-	{ annonceService.updateAnnonce(new Annonce(update, titre, adresse, video, description, photo, prix, rating, Disponible.Dispo, type_annonce, categorie_annonce, null));
+	{ annonceService.updateAnnonce(new Annonce(update, titre, adresse, video, description, photo, prix, rating, surface,Disponible.Dispo, type_annonce, categorie_annonce, null));
 		 }
 	public void openNew() {
         this.a = new Annonce();
@@ -366,6 +366,15 @@ public class TAnnonceController {
 	}
 	public static void setPrixLocation(Double prixLocation) {
 		TAnnonceController.prixLocation = prixLocation;
+	}
+	public Double getSurface() {
+		return surface;
+	}
+	public void setSurface(Double surface) {
+		this.surface = surface;
+	}
+	public Disponible getDisponible() {
+		return disponible;
 	}
 
 	
