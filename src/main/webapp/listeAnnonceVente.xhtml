@@ -141,14 +141,14 @@
 						</p:outputPanel>
 					</p:outputPanel>
 
-	
+					<f:facet name="footer">
 						<p:commandButton value="Submit" update="manage-product-content"
-									action="#{annController.addAnnonce()}" icon="pi pi-check" />
+							action="#{annController.addAnnonce()}" icon="pi pi-check" />
 
 						<p:commandButton value="Annuler" icon="pi pi-times"
 							onclick="PF('manageProductDialog').hide()"
 							class="ui-button-secondary" />
-			
+					</f:facet>
 				</p:dialog>
 			</h:form>
 
@@ -182,15 +182,7 @@
 								icon="pi pi-shopping-cart"
 								disabled="#{annonceVente.type_annonce == 'Location'}">
 							</p:commandButton>
-							<p:commandButton type="button" value="Modifier"
-								icon="pi pi-shopping-cart"
-								disabled="#{annonceVente.type_annonce == 'Location'}">
-							</p:commandButton>
-							<p:commandButton type="button" value="Supprimer"
-								icon="pi pi-shopping-cart"
-								disabled="#{locationController.removeLocation(location.id)}">
-							</p:commandButton>
-
+						
 						</div>
 					</div>
 				</div>
