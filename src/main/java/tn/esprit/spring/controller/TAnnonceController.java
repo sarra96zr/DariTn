@@ -53,7 +53,7 @@ public class TAnnonceController {
 	static Double prixLocation;
 	private String titre , adresse, video,description, photo;
 	private Double prix;
-	private boolean disponible; 
+	final Disponible disponible=Disponible.Dispo; 
 	private Type_Annonce type_annonce;
 	private Categorie_Annonce categorie_annonce;
 	private Long update;
@@ -78,6 +78,7 @@ public class TAnnonceController {
 		System.err.println("dafefa");
 
 		System.out.println("hello");
+		
 		if (titre.equals("") || adresse.equals("") || description.equals("") || prix==0 || prix<0 || type_annonce==null || categorie_annonce==null)
 			
 		{
@@ -91,7 +92,8 @@ public class TAnnonceController {
 		
 		else
 			
-			{annonceService.addOrUpdateAnnonce(new Annonce(titre, adresse, null, description, null,prix,3, Disponible.Disponible,type_annonce, categorie_annonce, null));
+			{annonceService.addOrUpdateAnnonce(new Annonce(titre, adresse, null, description, null, prix, 3, disponible, type_annonce, categorie_annonce, null));
+			//annonceService.addOrUpdateAnnonce(new Annonce(titre, adresse, null, description, null,prix,3, disponible.Disponible,type_annonce, categorie_annonce, null));
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Annonce bien ajoutée "));
 			System.out.println("added");}
         
@@ -134,7 +136,7 @@ public class TAnnonceController {
 	}
 	
 	public void updateAnnonce()
-	{ annonceService.updateAnnonce(new Annonce(update, titre, adresse, video, description, photo, prix, rating, Disponible.Disponible, type_annonce, categorie_annonce, null));
+	{ annonceService.updateAnnonce(new Annonce(update, titre, adresse, video, description, photo, prix, rating, Disponible.Dispo, type_annonce, categorie_annonce, null));
 		 }
 	public void openNew() {
         this.a = new Annonce();
@@ -181,14 +183,14 @@ public class TAnnonceController {
 	public void validerLocation(@PathVariable("annonce-id") String id_a){
 		Long id = Long.valueOf(id_a);
 		Annonce a = ann.findById(id).get();
-		a.setDisponible(Disponible.Réservé);
+		a.setDisponible(Disponible.Reserve);
 		
 		
 	}
 	public void annulerLocation(@PathVariable("annonce-id") String id_a){
 		Long id = Long.valueOf(id_a);
 		Annonce a = ann.findById(id).get();
-		a.setDisponible(Disponible.Disponible);
+		a.setDisponible(Disponible.Dispo);
 		
 		
 	}
@@ -216,16 +218,6 @@ public class TAnnonceController {
 		addMessage(FacesMessage.SEVERITY_INFO, "Info Message", "Message Content");
 
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -341,13 +333,7 @@ public class TAnnonceController {
 		this.prix = prix;
 	}
 
-	public boolean isDisponible() {
-		return disponible;
-	}
-
-	public void setDisponible(boolean disponible) {
-		this.disponible = disponible;
-	}
+	
 	public Type_Annonce getType_annonce() {
 		return type_annonce;
 	}
@@ -362,6 +348,24 @@ public class TAnnonceController {
 
 	public void setCategorie_annonce(Categorie_Annonce categorie_annonce) {
 		this.categorie_annonce = categorie_annonce;
+	}
+	public LocationRepository getLocationRepository() {
+		return locationRepository;
+	}
+	public void setLocationRepository(LocationRepository locationRepository) {
+		this.locationRepository = locationRepository;
+	}
+	public Location getLocation() {
+		return location;
+	}
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+	public static Double getPrixLocation() {
+		return prixLocation;
+	}
+	public static void setPrixLocation(Double prixLocation) {
+		TAnnonceController.prixLocation = prixLocation;
 	}
 
 	

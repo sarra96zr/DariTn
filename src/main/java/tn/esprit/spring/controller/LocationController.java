@@ -38,6 +38,15 @@ public class LocationController {
 	@Autowired
 	LocationService locationService;
 	
+	List<Location> locations;
+	
+	
+
+	
+	
+	
+	
+	
 		// http://localhost:8081/DariTn/Pi/louer
 	       @PostMapping("/louer/{datedeb}/{datefin}")
 			@ResponseBody
