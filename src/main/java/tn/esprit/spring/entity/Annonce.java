@@ -48,8 +48,10 @@ public class Annonce implements Serializable {
 	@Column(name="rating")
 	public int rating;
 	
+	
+	@Enumerated (EnumType.STRING)
 	@Column(name="disponible")
-	public boolean disponible;
+	public Disponible disponible;
 	
 	@Enumerated (EnumType.STRING)
 	@Column(name="type_annonce")
@@ -98,12 +100,15 @@ public class Annonce implements Serializable {
 	}
 
 
-	public boolean isDisponible() {
+
+
+
+	public Disponible getDisponible() {
 		return disponible;
 	}
 
 
-	public void setDisponible(boolean disponible) {
+	public void setDisponible(Disponible disponible) {
 		this.disponible = disponible;
 	}
 
@@ -205,7 +210,7 @@ public class Annonce implements Serializable {
 
 
 	public Annonce(long id, String titre, String adresse, String video, String description, String photo, Double prix,
-			int rating, boolean disponible, Type_Annonce type_annonce, Categorie_Annonce categorie_annonce, User user) {
+			int rating, Disponible disponible, Type_Annonce type_annonce, Categorie_Annonce categorie_annonce, User user) {
 		super();
 		this.id = id;
 		this.titre = titre;
@@ -223,7 +228,7 @@ public class Annonce implements Serializable {
 
 
 	public Annonce(String titre, String adresse, String video, String description, String photo, Double prix,
-			int rating, boolean disponible, Type_Annonce type_annonce, Categorie_Annonce categorie_annonce, User user) {
+			int rating, Disponible disponible, Type_Annonce type_annonce, Categorie_Annonce categorie_annonce, User user) {
 		super();
 		this.titre = titre;
 		this.adresse = adresse;

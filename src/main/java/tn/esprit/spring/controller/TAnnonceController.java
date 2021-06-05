@@ -20,15 +20,17 @@ import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 import tn.esprit.spring.entity.Annonce;
 import tn.esprit.spring.entity.Categorie_Annonce;
+import tn.esprit.spring.entity.Disponible;
 import tn.esprit.spring.entity.Location;
 import tn.esprit.spring.entity.Type_Annonce;
 import tn.esprit.spring.repository.AnnonceRepository;
+import tn.esprit.spring.repository.LocationRepository;
 import tn.esprit.spring.service.AnnonceService;
 import tn.esprit.spring.service.LocationService;
 
 @Scope(value="session")
 @ELBeanName(value = "annonceController") // Name of the bean used by JSF
-@Join(path = "/", to = "/welcome.jsf")
+@Join(path = "/", to = "/listeAnnonceVente.jsf")
 @Controller(value = "annController")
 public class TAnnonceController {
 
@@ -38,6 +40,8 @@ public class TAnnonceController {
 	LocationService locationService;
 	@Autowired
 	AnnonceRepository ann;
+	@Autowired
+	LocationRepository locationRepository;
 	private List<Annonce> annonces;
 	private Date dateDebut;
 	private Date dateFin;
@@ -45,7 +49,8 @@ public class TAnnonceController {
 	public Categorie_Annonce[] getTypec() { return Categorie_Annonce.values(); }
 	private Integer annonceIdToBeUpdated; 
 	Annonce a = new Annonce();
-	
+	public Location location = new Location();
+	static Double prixLocation;
 	private String titre , adresse, video,description, photo;
 	private Double prix;
 	private boolean disponible; 
@@ -55,17 +60,23 @@ public class TAnnonceController {
 	private int rating;
 	
 	// aff liste
-	public List<Annonce> getAnnonce() {
-		annonces = annonceService.getAllAnnonces();
-		/*FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                "Your message",
-                "Message details");*/
+	public List<Annonce> getAnnonceVente() {
+		annonces = ann.ListeVente(Type_Annonce.Vente);
 		return annonces;
 		}
 	//add
+	public List<Annonce> getAnnonceLocation() {
+		annonces = ann.ListeVente(Type_Annonce.Location);
+		return annonces;
+		}
+	
+	
+	
 	
 		// methode 1
 	public void addAnnonce() {
+		System.err.println("dafefa");
+
 		System.out.println("hello");
 		if (titre.equals("") || adresse.equals("") || description.equals("") || prix==0 || prix<0 || type_annonce==null || categorie_annonce==null)
 			
@@ -80,9 +91,9 @@ public class TAnnonceController {
 		
 		else
 			
-			annonceService.addOrUpdateAnnonce(new Annonce(titre, adresse, null, description, null,prix,3, true,type_annonce, categorie_annonce, null));
+			{annonceService.addOrUpdateAnnonce(new Annonce(titre, adresse, null, description, null,prix,3, Disponible.Disponible,type_annonce, categorie_annonce, null));
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Annonce bien ajoutée "));
-			System.out.println("added");
+			System.out.println("added");}
         
 		
 	}
@@ -123,38 +134,88 @@ public class TAnnonceController {
 	}
 	
 	public void updateAnnonce()
-	{ annonceService.updateAnnonce(new Annonce(update, titre, adresse, video, description, photo, prix, rating,disponible, type_annonce, categorie_annonce, null));
+	{ annonceService.updateAnnonce(new Annonce(update, titre, adresse, video, description, photo, prix, rating, Disponible.Disponible, type_annonce, categorie_annonce, null));
 		 }
 	public void openNew() {
         this.a = new Annonce();
     }
 	//louer
 	
+	public String save() {
+
+ 		
+ 		locationRepository.save(location);
+ 		location = new Location();
+ 		location.dateDebut = GregorianCalendar.getInstance().getTime();
+ 		// = GregorianCalendar.getInstance().getTime();
+ 		location.dateFin = GregorianCalendar.getInstance().getTime();
+ 		//System.err.println("*********"+rdv.RD);
+ 		return "/DariTn/welcome.xhtml";
+ 	}
 	
 	public void louer(@PathVariable("annonce-id") String id_a) {
 		Long id = Long.valueOf(id_a);
 		
 		System.out.println("hello");
+		System.out.println(dateDebut);
+		System.out.println(dateFin);
+
 		Annonce a = ann.findById(id).get();
 		System.out.println(a.getPrix());
-		
-		dateDebut = GregorianCalendar.getInstance().getTime();
- 		dateFin = GregorianCalendar.getInstance().getTime();
- 		locationService.addOrUpdateLocation(new Location(dateDebut, dateFin, a.getPrix(), null, null) );
+ 		
+ 		System.out.println(dateDebut);
+		System.out.println(dateFin);
+ 		
+ 		
 		locationService.calculPrix(a.getPrix(), dateDebut, dateFin);
 		System.out.println(locationService.calculPrix(a.getPrix(), dateDebut, dateFin));
-		
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Annonce bien ajoutée "));
+		Double prix = locationService.calculPrix(a.getPrix(), dateDebut, dateFin);
+		locationService.addOrUpdateLocation(new Location(dateDebut, dateFin, prix, null, null) );
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Prix de votre location ",""+locationService.calculPrix(a.getPrix(), dateDebut, dateFin)));
+
 			System.out.println("added");
-        
-		
+			prixLocation = locationService.calculPrix(a.getPrix(), dateDebut, dateFin);
+			a.setDisponible(Disponible.En_cours);
 	} 
 	
+	public void validerLocation(@PathVariable("annonce-id") String id_a){
+		Long id = Long.valueOf(id_a);
+		Annonce a = ann.findById(id).get();
+		a.setDisponible(Disponible.Réservé);
+		
+		
+	}
+	public void annulerLocation(@PathVariable("annonce-id") String id_a){
+		Long id = Long.valueOf(id_a);
+		Annonce a = ann.findById(id).get();
+		a.setDisponible(Disponible.Disponible);
+		
+		
+	}
+	/*public void afficherDemande()
+	{
+		annonces = ann.ListeVente(Type_Annonce.Location);
+		for (int i=0;i<annonces.size();i++){
+			if annonces.
+		}
+		
+	}*/
 	
 	
-	
-	
-	
+	public void showInfo() {
+
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Prix de votre location ",""+prixLocation));
+
+	}
+	public void addMessage(FacesMessage.Severity severity, String summary, String detail) {
+        FacesContext.getCurrentInstance().
+                addMessage(null, new FacesMessage(severity, summary, detail));
+    }
+	public void showInfo1() {
+		System.out.println("hi");
+		addMessage(FacesMessage.SEVERITY_INFO, "Info Message", "Message Content");
+
+	}
 	
 	
 	

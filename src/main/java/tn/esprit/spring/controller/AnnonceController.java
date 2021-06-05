@@ -37,6 +37,8 @@ public class AnnonceController {
 	@Autowired
 	AnnonceService annonceService;
 	
+	@Autowired
+	AnnonceRepository ann;
 
 	private List<Annonce> annonces;
 
@@ -48,8 +50,8 @@ public class AnnonceController {
 	@GetMapping("/retrieve-all-annonces")
 		@ResponseBody
 		public List<Annonce> getAnnonces() {
-			List<Annonce> list = annonceService.retrieveAllAnnonces();
-			return list;
+		List<Annonce> list = ann.ListeVente(Type_Annonce.Vente);
+		return list;
 		}
 	
 		// http://localhost:8081/DariTn/Pi/retrieve-annonces/{annonce-id}
