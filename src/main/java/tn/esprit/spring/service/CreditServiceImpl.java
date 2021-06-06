@@ -10,10 +10,8 @@ import org.springframework.stereotype.Service;
 import tn.esprit.spring.entity.Banque;
 import tn.esprit.spring.entity.Client;
 import tn.esprit.spring.entity.Credit;
-import tn.esprit.spring.entity.CreditFormula;
 import tn.esprit.spring.entity.Expert_financier;
 import tn.esprit.spring.repository.BanqueRepo;
-import tn.esprit.spring.repository.CreditFormulaRepo;
 import tn.esprit.spring.repository.CreditRepo;
 import tn.esprit.spring.repository.UserRepo;
 import org.springframework.mail.SimpleMailMessage;
@@ -30,8 +28,6 @@ public class CreditServiceImpl implements CreditService {
 	@Autowired
 	CreditRepo crep;
 	
-	@Autowired
-	CreditFormulaRepo frep;
 	
 	@Autowired
 	UserRepo urep;
@@ -41,16 +37,16 @@ public class CreditServiceImpl implements CreditService {
 
 	@Override
 	public void ajouterCredit(int client, int id, Credit C) {
-		CreditFormula F=frep.findById(id).get();
+		Banque B=brep.findById(id).get();
 		Client cl=(Client) urep.findById((long) client).get();
-		int duree=F.getDuration();
-		double interet=F.getInterestRate();
+		int duree=B.getDuration();
+		double interet=B.getInterestRate();
 		float somme=C.getInitialamount();	
 		float sommefinal=(float) (somme+(somme*interet));	
 		float monthly=sommefinal/(duree);
 		C.setFinalamount(sommefinal);
 		C.setMonthly(monthly);	
-		C.setCreditformula(F);
+		C.setBanque(B);
 		cl.addcredit(C);
 		crep.save(C);	
 	}
@@ -68,20 +64,7 @@ public class CreditServiceImpl implements CreditService {
 		
 	}
 
-	@Override
-	public void ajouterCreditFormula(CreditFormula C, int id) {
-		Banque B=brep.findById(id).get();
-		C.setBank(B);
-		B.addFormula(C);
-		frep.save(C);
-	}
 
-
-	@Override
-	public CreditFormula affichercreditformula(int id) {
-		// TODO Auto-generated method stub
-		return frep.findById(id).orElse(null);
-	}
 
 	@Override
 	public List<Credit> getallcreditsofclient(int id_client) {
@@ -108,25 +91,20 @@ public class CreditServiceImpl implements CreditService {
 		return credit;
 	}
 
-	@Override
-	public List<CreditFormula> retrieveAllFormule() {
-		// TODO Auto-generated method stub
-		List<CreditFormula> creditformule= (List<CreditFormula>) frep.findAll();
-		return creditformule;
-	}
+
 
 	@Override
 	public void modifiercredit(int credit, int id) {
 		Credit C=crep.findById(credit).get();
-		CreditFormula F=frep.findById(id).get();
-		int duree=F.getDuration();
-		double interet=F.getInterestRate();
+		Banque B=brep.findById(id).get();
+		int duree=B.getDuration();
+		double interet=B.getInterestRate();
 		float somme=C.getInitialamount();	
 		float sommefinal=(float) (somme+(somme*interet));	
 		float monthly=sommefinal/(duree*12);
 		C.setFinalamount(sommefinal);
 		C.setMonthly(monthly);	
-		C.setCreditformula(F);
+		C.setBanque(B);
 		crep.save(C);
 }
 
@@ -134,12 +112,12 @@ public class CreditServiceImpl implements CreditService {
 	public void emailagentbancaire(int credit, String sender, String subject, String body) {
 		// TODO Auto-generated method stub
 		Credit C=crep.findById(credit).get();
-		Banque bank=C.getCreditformula().getBank();
-		Expert_financier E=urep.findbankagentbybankid(bank).get();
-		String email=E.getEmail();
+	//	Banque bank=C.getCreditformula().getBank();
+		//Expert_financier E=urep.findbankagentbybankid(bank).get();
+		//String email=E.getEmail();
 		SimpleMailMessage message = new SimpleMailMessage();		 
 		message.setFrom(sender);
-		message.setTo(email);
+	//	message.setTo(email);
 		message.setSubject(subject);
 		message.setText(body);		 
 		mailSender.send(message);

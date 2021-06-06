@@ -24,12 +24,12 @@
 						value="#{credits.type}">
 						
 						<f:selectItems value="#{credits.cc}"
-						var="creditformula" itemLabel="#{creditformula.id}"
-							itemValue="#{creditformula}" />
+						var="banque" itemLabel="#{banque.nombanque}"
+							itemValue="#{banque}" />
 
 					</p:selectOneMenu>
 	<Br></Br>
-	<h:commandButton value="Add" action="#{credits.add(Credit)}" />
+	<h:commandButton value="Add" action="#{credits.addcredit(client, id, C)}" />
 	
                     
       
@@ -58,10 +58,7 @@
                         
                     </p:column>
                     
-                    <p:column>
-                        <f:facet name="header">formule</f:facet>
-                        <h:outputText value="#{credit.creditformula.id}" />
-                    </p:column>
+                  
 
                     <p:column>
                         <f:facet name="header">initialamount</f:facet>

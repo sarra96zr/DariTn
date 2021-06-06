@@ -29,10 +29,10 @@ import tn.esprit.spring.entity.Aonnement;
 import tn.esprit.spring.entity.Banque;
 import tn.esprit.spring.entity.Client;
 import tn.esprit.spring.entity.Credit;
-import tn.esprit.spring.entity.CreditFormula;
 import tn.esprit.spring.repository.BanqueRepo;
 import tn.esprit.spring.repository.ClientRepo;
 import tn.esprit.spring.repository.CreditRepo;
+import tn.esprit.spring.service.BanqueService;
 import tn.esprit.spring.service.CreditService;
 
 @Scope (value = "session")
@@ -44,6 +44,9 @@ public class CreditController {
 	
 	@Autowired
 	CreditService cs;
+	
+	@Autowired
+	BanqueService bs;
 	
 	@Autowired
 	BanqueRepo bankrep;
@@ -63,27 +66,13 @@ public class CreditController {
 				return list;
 			}
 			
-			// http://localhost:8081/DariTn/Pi/retrieve-all-formule
-						@GetMapping("/retrieve-all-formule")
-						@ResponseBody
-						public List<CreditFormula> getFormule() {
-							List<CreditFormula> list = cs.retrieveAllFormule();
-							return list;
-						}
+			
 	
 	
-     //  http://localhost:8081/DariTn/Pi/affect/{id}/addformule
-	@PutMapping("/affect/{id}/addformule")
-	@ResponseBody
-	public ResponseEntity<String> ajouterFormule(@PathVariable("id")int id, @RequestBody CreditFormula F  )
-	{
-		cs.ajouterCreditFormula(F, id);
-		return new ResponseEntity<>("Ajout reussie.", HttpStatus.CREATED);
-		
-	}
+    
 	
     //  http://localhost:8081/DariTn/Pi/client/{client}/credit/creditformulas/{id}/addcredit
-	@PutMapping("/client/{client}/credit/creditformulas/{id}/addcredit")
+	@PutMapping("/client/{client}/credit/banque/{id}/addcredit")
 	@ResponseBody
 	public ResponseEntity<String> ajouterCredit(@PathVariable("client")int client, @PathVariable("id")int id, @RequestBody Credit C)
 	{
@@ -116,12 +105,7 @@ public class CreditController {
 		return liste;
 	}
 	
-//  http://localhost:8081/DariTn/Pi/creditformula/{id}/get
-	@GetMapping("creditformula/{id}/get")
-	public CreditFormula affichercreditformula(@PathVariable("id") int id)
-	{
-		return cs.affichercreditformula(id);
-	}
+
 	
 //  http://localhost:8081/DariTn/Pi/client/{client}/credit/{credit}/creditformula/{id}/modify
 	@PutMapping("/client/{client}/credit/{credit}/creditformula/{id}/modify")
@@ -140,12 +124,12 @@ public class CreditController {
 	}
 	
 	private List<Credit> credits; // ajouter le getter et le setter
-private long client;
+private int client;
 private int id;
 private Credit C;
 private String bank;
-private CreditFormula type;
-private List<CreditFormula> cc ;
+private Banque type;
+private List<Banque> cc ;
 private Credit creto;
 private float inamount;
 private Client cli;
@@ -177,20 +161,20 @@ public void setInamount(float inamount) {
 	this.inamount = inamount;
 }
 
-	public CreditFormula getType() {
+	public Banque getType() {
 	return type;
 }
 
-public void setType(CreditFormula type) {
+public void setType(Banque type) {
 	this.type = type;
 }
 
-public List<CreditFormula> getCc() {
-	return cs.retrieveAllFormule();
+public List<Banque> getCc() {
+	return bs.retrieveAllBanque();
 	
 }
 
-public void setCc(List<CreditFormula> cc) {
+public void setCc(List<Banque> cc) {
 	this.cc = cc;
 }
 
@@ -218,7 +202,7 @@ public void setBank(String bank) {
 	return client;
 }
 
-public void setClient(long client) {
+public void setClient(int client) {
 	this.client = client;
 }
 
@@ -268,34 +252,28 @@ public void setC(Credit c) {
 		cs.supprimerCredit(id);
 		getCre();
 	}
-	private CreditFormula creditformule = new CreditFormula();
-	public CreditFormula getCreditformule() {
-		return creditformule;
+	private Banque banque = new Banque();
+	public Banque getCreditformule() {
+		return banque;
 	}
 
-	public void setCreditformule(CreditFormula creditformule) {
-		this.creditformule = creditformule;
-	}
-	
-	private CreditFormula idbank;
-	
-
-	public CreditFormula getIdbank() {
-		return idbank;
+	public void setCreditformule(Banque creditformule) {
+		this.banque = creditformule;
 	}
 	
 	
-
-	public void setIdbank(CreditFormula idbank) {
-		this.idbank = idbank;
-	}
 
 	public void add(Credit k){
-		this.setClient(k.getClient().getId_user());
+	//	this.setClient(k.getClient().getId_user());
 		this.setInamount(k.getInitialamount());
-		this.setId(k.getCreditformula().getId());
+		// this.setId(k.getCreditformula().getId());
 		cli.addcredit(k);
 		
+		
+	}
+	
+	public void addcredit() { 
+		cs.ajouterCredit(client, id, C);
 	}
 
 

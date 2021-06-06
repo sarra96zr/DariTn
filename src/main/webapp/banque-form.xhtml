@@ -27,6 +27,10 @@
                 <h:panelGrid columns="1">
                     <p:outputLabel for="name" value="Name: " />
                     <p:inputText id="name" value="#{bankController.nombank}" />
+                    <p:outputLabel for="duration" value="Durations: " />
+                    <p:inputText id="duration" value="#{bankController.dur}" />
+                    <p:outputLabel for="intrestrate" value="intrestrate: " />
+                    <p:inputText id="intrestrate" value="#{bankController.intrate}" />
                    
                 </h:panelGrid>
                 <p:commandButton value="Add" update="table" actionListener="#{bankController.add()}" styleClass="ui-button-success" /> 
@@ -44,6 +48,16 @@
                     <p:column>
                         <f:facet name="header">Name</f:facet>
                         <h:outputText value="#{banque.nombanque}" />
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">Credit duration</f:facet>
+                        <h:outputText value="#{banque.duration}" />
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">IntrestRate</f:facet>
+                        <h:outputText value="#{banque.interestRate}" />
                     </p:column>
                    <p:column id="action">
 						<f:facet name="header"><h:outputText value="Action" /></f:facet>

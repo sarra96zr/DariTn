@@ -28,11 +28,11 @@ public class Credit implements Serializable{
 		super();
 	}
 	
-	public Credit(Client client, CreditFormula creditformula, float initialamount, float monthly) 
+	public Credit(Client client, Banque banque, float initialamount, float monthly) 
 	{
 		super();
 		this.client=client;
-		this.creditformula=creditformula;
+		this.banque=banque;
 		this.initialamount = initialamount;
 		this.monthly=monthly;
 	}
@@ -55,7 +55,12 @@ public class Credit implements Serializable{
 	private Client client;
 	
 	@OneToOne
-	private CreditFormula creditformula;
+	private Banque banque;
+	
+
+	public void setBanque(Banque banque) {
+		this.banque = banque;
+	}
 
 	public int getId() {
 		return id;
@@ -64,7 +69,6 @@ public class Credit implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	
 	
 	@JsonBackReference(value="credit-client")
 	
@@ -76,12 +80,12 @@ public class Credit implements Serializable{
 		this.client=C;
 	}
 
-	public CreditFormula getCreditformula() {
-		return creditformula;
+	public Banque getBanque() {
+		return banque;
 	}
 
-	public void setCreditformula(CreditFormula creditformula) {
-		this.creditformula = creditformula;
+	public void setCreditformula(Banque banque) {
+		this.banque = banque;
 	}
 
 	public float getMonthly() {
@@ -111,14 +115,14 @@ public class Credit implements Serializable{
 	@Override
 	public String toString() {
 		return "Credit [id=" + id + ", initialamount=" + initialamount + ", finalamount=" + finalamount + ", monthly="
-				+ monthly + ", client=" + client + ", creditformula=" + creditformula.getId() + "]";
+				+ monthly + ", client=" + client + ", creditformula=" + banque.getId() + "]";
 	}
 
-	public Credit(Client client, float initialamount, CreditFormula creditformula) {
+	public Credit(Client client, float initialamount, Banque banque) {
 		super();
 		this.client = client;
 		this.initialamount = initialamount;
-		this.creditformula = creditformula;
+		this.banque = banque;
 	}
 
 	public Credit(long client2, float inamount, int id2) {

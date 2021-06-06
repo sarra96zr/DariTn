@@ -23,7 +23,26 @@ public class BanqueControllerJsf {
     private BanqueRepo banqueRepository;
     private String nombank;
     private Integer idbanque;
-    public String getNombank() {
+    private Integer dur;
+    private double intrate;
+    
+    public Integer getDur() {
+		return dur;
+	}
+
+	public void setDur(Integer dur) {
+		this.dur = dur;
+	}
+
+	public double getIntrate() {
+		return intrate;
+	}
+
+	public void setIntrate(double intrate) {
+		this.intrate = intrate;
+	}
+
+	public String getNombank() {
 		return nombank;
 	}
 
@@ -44,16 +63,18 @@ public class BanqueControllerJsf {
     
     
     public void update() { 
-		bs.updateBanque(new Banque(idbanque,nombank));
+		bs.updateBanque(new Banque(idbanque,nombank,dur,intrate));
 	}
     
     public void add() { 
-		bs.addBanque(new Banque(nombank));
+		bs.addBanque(new Banque(nombank,dur,intrate));
 	}
     
     public void displayBanque(Banque bank){
     	this.setNombank(bank.getNombanque());
     	this.setIdbanque(bank.getId());
+    	this.setDur(bank.getDuration());
+    	this.setIntrate(bank.getInterestRate());
 
     	
     	
