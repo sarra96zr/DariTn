@@ -87,36 +87,36 @@
 					modal="true" widgetVar="manageProductDialog" responsive="true"
 					minHeight="40" width="350" minimizable="true" maximizable="true">
 					<p:outputPanel id="manage-product-content" class="ui-fluid">
-						<p:outputPanel rendered="#{not empty annController.a}">
+						<p:outputPanel rendered="#{not empty annController}">
 
 
 							<div class="p-field">
 								<p:outputLabel for="titre">Titre</p:outputLabel>
-								<p:inputText id="titre" value="#{annController.a.titre}"
+								<p:inputText id="titre" value="#{annController.titre}"
 									required="true" />
 							</div>
 
 							<div class="p-field">
 								<p:outputLabel for="adresse">Adresse</p:outputLabel>
-								<p:inputText id="adresse" value="#{annController.a.adresse}"
+								<p:inputText id="adresse" value="#{annController.adresse}"
 									required="true" />
 							</div>
 
 							<div class="p-field">
 								<p:outputLabel for="description">Description</p:outputLabel>
 								<p:inputTextarea id="description"
-									value="#{annController.a.description}" required="true" />
+									value="#{annController.description}" required="true" />
 							</div>
 
 							<div class="p-field">
 								<p:outputLabel for="prix">Prix</p:outputLabel>
-								<p:inputNumber id="prix" value="#{annController.a.prix}"
+								<p:inputNumber id="prix" value="#{annController.prix}"
 									required="true" />
 							</div>
 
 							<div class="p-field">
 								<p:outputLabel for="surface">Surface (m2)</p:outputLabel>
-								<p:inputNumber id="surface" value="#{annController.a.surface}"
+								<p:inputNumber id="surface" value="#{annController.surface}"
 									required="true" />
 							</div>
 
@@ -142,8 +142,8 @@
 					</p:outputPanel>
 
 					<f:facet name="footer">
-						<p:commandButton value="Submit" update="manage-product-content"
-							action="#{annController.addAnnonce()}" icon="pi pi-check" />
+									<p:commandButton value="Submit" 
+									action="#{annController.addAnnonce()}" icon="pi pi-check" />
 
 						<p:commandButton value="Annuler" icon="pi pi-times"
 							onclick="PF('manageProductDialog').hide()"
@@ -179,10 +179,13 @@
 							<br></br>
 
 							<p:commandButton type="button" value="Acheter"
-								icon="pi pi-shopping-cart"
-								disabled="#{annonceVente.type_annonce == 'Location'}">
+								icon="pi pi-shopping-cart">
 							</p:commandButton>
-						
+							
+
+								<h:commandButton
+								action="#{annController.removeAnnonce(annonceVente.id)}"
+								value="Supprimer" />
 						</div>
 					</div>
 				</div>

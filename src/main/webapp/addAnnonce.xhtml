@@ -82,7 +82,10 @@ PrimeFaces.locales ['fr'] = {
 							<td><p:outputLabel for="prix" value="Prix:" /></td>
 							<td><p:inputNumber id="prix" value="#{annController.prix}" /></td>
 						</tr>
-
+<tr>
+							<td><p:outputLabel for="surface" value="Surface (m2)" /></td>
+							<td><p:inputNumber id="surface" value="#{annController.surface}" /></td>
+						</tr>
 						<tr>
 							<td><h:outputText value="Type Annonce"></h:outputText></td>
 							<td><h:selectOneMenu value="#{annController.type_annonce}">

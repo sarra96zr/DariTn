@@ -119,8 +119,12 @@ public class TAnnonceController {
 		System.out.println("hello");
 		Annonce a = ann.findById(id).get();
 		System.out.print(a.getPrix());
-		annonceService.deleteAnnonce(id_a);}
-	
+		annonceService.deleteAnnonce(id_a);
+		
+	}
+	public void removeAnnoncee(String a)
+	{
+	annonceService.deleteAnnonce(a);}
 	// update
 	
 

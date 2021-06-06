@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.entity.Annonce;
+import tn.esprit.spring.entity.Disponible;
 import tn.esprit.spring.entity.Location;
+import tn.esprit.spring.repository.AnnonceRepository;
 import tn.esprit.spring.repository.LocationRepository;
 import tn.esprit.spring.service.LocationService;
 
@@ -37,16 +39,10 @@ public class LocationController {
 
 	@Autowired
 	LocationService locationService;
-	
+	@Autowired
+	AnnonceRepository ann;
 	List<Location> locations;
-	
-	
-
-	
-	
-	
-	
-	
+		
 		// http://localhost:8081/DariTn/Pi/louer
 	       @PostMapping("/louer/{datedeb}/{datefin}")
 			@ResponseBody
@@ -57,7 +53,6 @@ public class LocationController {
 	    	   Location l = locationService.addLocation(date1, date2);
 				return l;}
 	    	   else return null;
-	    	   
 			}
 			
 	    // http://localhost:8081/DariTn/Pi/retrieve-all-location
@@ -90,6 +85,27 @@ public class LocationController {
 	 		locationService.addOrUpdateLocation(new Location(dateDebut, dateFin, null, null, null) );
 	 		//rdvService.addOrUpdateRDV(new RDV(rdv.dateRDV, rdv.dateDeb, rdv.dateFin));
 	 	}
+	 	
+	 	
+		public void validerLocation(@PathVariable("annonce-id") String id_a){
+			System.err.println("hello1");
+			Long id = Long.valueOf(id_a);
+			Annonce a = ann.findById(id).get();
+			
+			System.err.println("hello2");
+			a.setDisponible(Disponible.Reserve);
+			System.err.println("hello3");
+			
+			
+		}
+		public void annulerLocation(@PathVariable("annonce-id") String id_a){
+			System.err.println("hello1");
+			Long id = Long.valueOf(id_a);
+			Annonce a = ann.findById(id).get();
+			a.setDisponible(Disponible.Dispo);
+			System.err.println("hello2");
+			
+		}
 
 	 	public String save() {
 
