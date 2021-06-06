@@ -3,6 +3,7 @@ package tn.esprit.spring.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -22,4 +23,8 @@ public interface AnnonceRepository extends JpaRepository<Annonce, Long> {
 	
 	@Query("SELECT a FROM Annonce a WHERE a.type_annonce = :type")
 	List<Annonce> ListeVente(@Param("type") Type_Annonce type );
+	
+	@Query("SELECT a FROM Annonce a WHERE a.type_annonce = :type and a.disponible = :dispo")
+	List<Annonce> ListeLocation(@Param("type") Type_Annonce type,  @Param("dispo") Disponible dispo);
+	
 }

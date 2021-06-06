@@ -56,42 +56,77 @@
 		<br></br>
 		<br></br>
 
-<h:form>
+		<h:form>
 
-				<p:dataTable id="dt-products" widgetVar="dtProducts"
-					value="#{locationController.getLocation()}" var="loc" reflow="true"
-					styleClass="products-table" paginator="true" rows="5"
-					rowSelectMode="add" paginatorPosition="bottom">
-			
+			<h1>
+				<center>Liste des demandes de locations</center>
+			</h1>
+			<p:dataTable id="dt-products" widgetVar="dtProducts"
+				value="#{locationController.getLocationEn()}" var="loc"
+				reflow="true" styleClass="products-table" paginator="true" rows="5"
+				rowSelectMode="add" paginatorPosition="bottom">
 
-					<p:column headerText="Date debut">
-						<h:outputText value="#{loc.dateDebut}" />
-					</p:column>
 
-					<p:column headerText="date fin">
-						<h:outputText value="#{loc.dateFin}" />
-					</p:column>
+				<p:column headerText="Date debut">
+					<h:outputText value="#{loc.dateDebut}" />
+				</p:column>
 
-					<p:column headerText="prix">
-						<h:outputText value="#{loc.prixLocation}" />
-					</p:column>
+				<p:column headerText="date fin">
+					<h:outputText value="#{loc.dateFin}" />
+				</p:column>
 
-					<p:column exportable="false">
-						<p:commandButton
-							action="#{locationController.validerLocation(loc.annonce.id)}"
-							icon="pi pi-times"
-							value="Valider"
-							update="dt-products" />
-					</p:column>
-					<p:column exportable="false">
-						<p:commandButton
-							action="#{locationController.annulerLocation(loc.annonce.id)}"
-							icon="pi pi-times"
-							value="Annuler"
-							update="dt-products" />
-					</p:column>
-				</p:dataTable>
-			</h:form>
+				<p:column headerText="prix">
+					<h:outputText value="#{loc.prixLocation}" />
+				</p:column>
+
+				<p:column exportable="false">
+					<p:commandButton
+						action="#{locationController.validerLocation(loc.annonce.id)}"
+						icon="pi pi-times" value="Valider" update="dt-products" />
+				</p:column>
+				<p:column exportable="false">
+					<p:commandButton
+						action="#{locationController.annulerLocation(loc.annonce.id)}"
+						icon="pi pi-times" value="Annuler" update="dt-products" />
+				</p:column>
+			</p:dataTable>
+
+		</h:form>
+		<h:form>
+			<h1>
+				<center>Liste des demandes d'achats</center>
+			</h1>
+			<p:dataTable id="dt-products" widgetVar="dtProducts"
+				value="#{venteController.getVente()}" var="vente" reflow="true"
+				styleClass="products-table" paginator="true" rows="5"
+				rowSelectMode="add" paginatorPosition="bottom">
+
+
+				<p:column headerText="Prix de vente ">
+					<h:outputText value="#{vente.prixVente}" />
+				</p:column>
+
+				<p:column headerText="Surface">
+					<h:outputText value="#{vente.annonce.surface}" />
+				</p:column>
+
+				<p:column headerText="Annonce">
+					<h:outputText value="#{vente.annonce.titre}" />
+				</p:column>
+
+				<p:column exportable="false">
+					<p:commandButton
+						action="#{locationController.validerVente(vente.annonce.id)}"
+						icon="pi pi-times" value="Valider" update="dt-products" />
+				</p:column>
+				<p:column exportable="false">
+					<p:commandButton
+						action="#{locationController.annulerVente(vente.annonce.id)}"
+						icon="pi pi-times" value="Annuler" update="dt-products" />
+				</p:column>
+			</p:dataTable>
+
+		</h:form>
 
 
 	</ui:define>

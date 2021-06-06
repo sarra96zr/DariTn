@@ -24,8 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 import tn.esprit.spring.entity.Annonce;
 import tn.esprit.spring.entity.Disponible;
 import tn.esprit.spring.entity.Location;
+import tn.esprit.spring.entity.Type_Annonce;
 import tn.esprit.spring.repository.AnnonceRepository;
 import tn.esprit.spring.repository.LocationRepository;
+import tn.esprit.spring.service.AnnonceService;
 import tn.esprit.spring.service.LocationService;
 
 
@@ -40,9 +42,23 @@ public class LocationController {
 	@Autowired
 	LocationService locationService;
 	@Autowired
+	AnnonceService annonceService;
+	@Autowired
 	AnnonceRepository ann;
+
 	List<Location> locations;
 		
+	
+	
+	
+	
+	public List<Location> getLocationEn() {
+		locations = locationRepository.Listelocation(Disponible.En_cours);
+		return locations;
+		}
+	
+	
+	
 		// http://localhost:8081/DariTn/Pi/louer
 	       @PostMapping("/louer/{datedeb}/{datefin}")
 			@ResponseBody
@@ -64,7 +80,7 @@ public class LocationController {
 	   		}
 	   	    //jsf
 	   	    
-	   	
+	   	@Autowired
 	 	LocationRepository locationRepository;
 	 	public Location location = new Location();
 
@@ -88,22 +104,30 @@ public class LocationController {
 	 	
 	 	
 		public void validerLocation(@PathVariable("annonce-id") String id_a){
+			
+			System.err.println(id_a);
 			System.err.println("hello1");
 			Long id = Long.valueOf(id_a);
 			Annonce a = ann.findById(id).get();
 			
-			System.err.println("hello2");
+			System.err.println(a.getDisponible());
 			a.setDisponible(Disponible.Reserve);
-			System.err.println("hello3");
+			//locationRepository.setReserve("Reserve", id_a);
+			annonceService.addAnnonce(a);
+			System.err.println(a.getDisponible());
 			
 			
 		}
 		public void annulerLocation(@PathVariable("annonce-id") String id_a){
+			System.err.println(id_a);
 			System.err.println("hello1");
 			Long id = Long.valueOf(id_a);
 			Annonce a = ann.findById(id).get();
 			a.setDisponible(Disponible.Dispo);
-			System.err.println("hello2");
+			
+			//locationRepository.setDispo("Dispo", id_a);
+			annonceService.addOrUpdateAnnonce(a);
+			System.err.println(a.getDisponible());
 			
 		}
 

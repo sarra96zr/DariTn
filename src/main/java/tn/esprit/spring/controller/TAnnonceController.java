@@ -66,7 +66,8 @@ public class TAnnonceController {
 		}
 	//add
 	public List<Annonce> getAnnonceLocation() {
-		annonces = ann.ListeVente(Type_Annonce.Location);
+		annonces = ann.ListeLocation(Type_Annonce.Location,Disponible.Dispo);
+				//ListeVente(Type_Annonce.Location);
 		return annonces;
 		}
 	
@@ -172,16 +173,23 @@ public class TAnnonceController {
  		System.out.println(dateDebut);
 		System.out.println(dateFin);
  		
- 		
+		//locationRepository.setReserve("En_cours", id_a);
 		locationService.calculPrix(a.getPrix(), dateDebut, dateFin);
+		
 		System.out.println(locationService.calculPrix(a.getPrix(), dateDebut, dateFin));
+		
 		Double prix = locationService.calculPrix(a.getPrix(), dateDebut, dateFin);
-		locationService.addOrUpdateLocation(new Location(dateDebut, dateFin, prix, null, null) );
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Prix de votre location ",""+locationService.calculPrix(a.getPrix(), dateDebut, dateFin)));
+		
+		locationService.addOrUpdateLocation(new Location(dateDebut, dateFin, prix, null, a) );
+		
+		//FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Prix de votre location ",""+locationService.calculPrix(a.getPrix(), dateDebut, dateFin)));
 
 			System.out.println("added");
 			prixLocation = locationService.calculPrix(a.getPrix(), dateDebut, dateFin);
+			
 			a.setDisponible(Disponible.En_cours);
+			annonceService.addOrUpdateAnnonce(a);
+			System.out.println(a.getDisponible());
 	} 
 	
 	public void validerLocation(@PathVariable("annonce-id") String id_a){

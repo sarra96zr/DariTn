@@ -25,10 +25,10 @@ public class Vente implements Serializable{
 	public long id;
 
 	
-	@Column(name="prixLocation")
-	public float prixLocation;
-	@Column(name="surface_m2")
-	public float surface;
+	@Column(name="prixVente")
+	public float prixVente;
+	
+
 	
 	@OneToOne
 	private User user;
