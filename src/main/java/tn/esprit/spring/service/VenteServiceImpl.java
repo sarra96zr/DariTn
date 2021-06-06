@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 public class VenteServiceImpl implements VenteService {
 
 	@Override
-	public Double calculPrix(Double prix, Float surface) {
+	public Double calculPrix(Double prix, Double surface) {
 		
 		return prix*surface;
 	}

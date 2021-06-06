@@ -21,8 +21,8 @@ public interface AnnonceRepository extends JpaRepository<Annonce, Long> {
 	@Query("SELECT a FROM Annonce a WHERE a.id= :id_user")
 	List<Annonce> ListeParUser(@Param("id_user") String id_user);
 	
-	@Query("SELECT a FROM Annonce a WHERE a.type_annonce = :type")
-	List<Annonce> ListeVente(@Param("type") Type_Annonce type );
+	@Query("SELECT a FROM Annonce a WHERE a.type_annonce = :type and a.disponible= :dispo")
+	List<Annonce> ListeVente(@Param("type") Type_Annonce type,  @Param("dispo") Disponible dispo );
 	
 	@Query("SELECT a FROM Annonce a WHERE a.type_annonce = :type and a.disponible = :dispo")
 	List<Annonce> ListeLocation(@Param("type") Type_Annonce type,  @Param("dispo") Disponible dispo);

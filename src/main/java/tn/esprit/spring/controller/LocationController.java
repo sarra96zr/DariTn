@@ -30,8 +30,6 @@ import tn.esprit.spring.repository.LocationRepository;
 import tn.esprit.spring.service.AnnonceService;
 import tn.esprit.spring.service.LocationService;
 
-
-
 @Scope(value="session")
 @ELBeanName(value = "locationController") // Name of the bean used by JSF
 @Join(path = "/", to = "/welcome.jsf")
@@ -45,143 +43,129 @@ public class LocationController {
 	AnnonceService annonceService;
 	@Autowired
 	AnnonceRepository ann;
-
 	List<Location> locations;
-		
-	
-	
-	
-	
+	@Autowired
+	LocationRepository locationRepository;
+	public Location location = new Location();
+	public Date dateDebut;
+	public Date dateFin;
+
+
+
 	public List<Location> getLocationEn() {
 		locations = locationRepository.Listelocation(Disponible.En_cours);
 		return locations;
-		}
+	}
+
+
+	// http://localhost:8081/DariTn/Pi/louer
+	@PostMapping("/louer/{datedeb}/{datefin}")
+	@ResponseBody
+	public Location addLocation(@PathVariable("datedeb") String datedeb,@PathVariable("datefin") String datefin) throws ParseException {
+		Date date1=new SimpleDateFormat("dd-MM-yyyy").parse(datedeb);
+		Date date2=new SimpleDateFormat("dd-MM-yyyy").parse(datefin);
+		if (date1.before(date2)){
+			Location l = locationService.addLocation(date1, date2);
+			return l;}
+		else return null;
+	}
+
+	// http://localhost:8081/DariTn/Pi/retrieve-all-location
+	@GetMapping("/retrieve-all-location")
+	@ResponseBody
+	public List<Location> getLocation() {
+		List<Location> list = locationService.retrieveAllLocation();
+		return list;
+	}
 	
-	
-	
-		// http://localhost:8081/DariTn/Pi/louer
-	       @PostMapping("/louer/{datedeb}/{datefin}")
-			@ResponseBody
-			public Location addLocation(@PathVariable("datedeb") String datedeb,@PathVariable("datefin") String datefin) throws ParseException {
-	    	   Date date1=new SimpleDateFormat("dd-MM-yyyy").parse(datedeb);
-	    	   Date date2=new SimpleDateFormat("dd-MM-yyyy").parse(datefin);
-	    	   if (date1.before(date2)){
-	    	   Location l = locationService.addLocation(date1, date2);
-				return l;}
-	    	   else return null;
-			}
-			
-	    // http://localhost:8081/DariTn/Pi/retrieve-all-location
-	   	    @GetMapping("/retrieve-all-location")
-	   		@ResponseBody
-	   		public List<Location> getLocation() {
-	   			List<Location> list = locationService.retrieveAllLocation();
-	   			return list;
-	   		}
-	   	    //jsf
-	   	    
-	   	@Autowired
-	 	LocationRepository locationRepository;
-	 	public Location location = new Location();
-
-	 	
-	 	public Date dateDebut;
-	 	public Date dateFin;
 
 
-	 	public void ajoutLocation() {
-	 		System.err.println("*********"+location.id);
-	 		//System.err.println("*********"+rdv.title);
-	 		System.err.println("*********"+location.dateDebut);
-	 		System.err.println("*********"+location.dateFin);
-	 		MouseListener an;
-	 		
-	 	    location.dateDebut = GregorianCalendar.getInstance().getTime();
-	 		location.dateFin = GregorianCalendar.getInstance().getTime();
-	 		locationService.addOrUpdateLocation(new Location(dateDebut, dateFin, null, null, null) );
-	 		//rdvService.addOrUpdateRDV(new RDV(rdv.dateRDV, rdv.dateDeb, rdv.dateFin));
-	 	}
-	 	
-	 	
-		public void validerLocation(@PathVariable("annonce-id") String id_a){
-			
-			System.err.println(id_a);
-			System.err.println("hello1");
-			Long id = Long.valueOf(id_a);
-			Annonce a = ann.findById(id).get();
-			
-			System.err.println(a.getDisponible());
-			a.setDisponible(Disponible.Reserve);
-			//locationRepository.setReserve("Reserve", id_a);
-			annonceService.addAnnonce(a);
-			System.err.println(a.getDisponible());
-			
-			
-		}
-		public void annulerLocation(@PathVariable("annonce-id") String id_a){
-			System.err.println(id_a);
-			System.err.println("hello1");
-			Long id = Long.valueOf(id_a);
-			Annonce a = ann.findById(id).get();
-			a.setDisponible(Disponible.Dispo);
-			
-			//locationRepository.setDispo("Dispo", id_a);
-			annonceService.addOrUpdateAnnonce(a);
-			System.err.println(a.getDisponible());
-			
-		}
 
-	 	public String save() {
+	public void ajoutLocation() {
+		System.err.println("*********"+location.id);
+		//System.err.println("*********"+rdv.title);
+		System.err.println("*********"+location.dateDebut);
+		System.err.println("*********"+location.dateFin);
+		MouseListener an;
 
-	 		
-	 		locationRepository.save(location);
-	 		location = new Location();
-	 		location.dateDebut = GregorianCalendar.getInstance().getTime();
-	 		// = GregorianCalendar.getInstance().getTime();
-	 		location.dateFin = GregorianCalendar.getInstance().getTime();
-	 		//System.err.println("*********"+rdv.RD);
-	 		return "/DariTn/welcome.xhtml";
-	 	}
+		location.dateDebut = GregorianCalendar.getInstance().getTime();
+		location.dateFin = GregorianCalendar.getInstance().getTime();
+		locationService.addOrUpdateLocation(new Location(dateDebut, dateFin, null, null, null) );
+		//rdvService.addOrUpdateRDV(new RDV(rdv.dateRDV, rdv.dateDeb, rdv.dateFin));
+	}
 
-		public LocationService getLocationService() {
-			return locationService;
-		}
+	public void validerLocation(@PathVariable("annonce-id") String id_a){
 
-		public void setLocationService(LocationService locationService) {
-			this.locationService = locationService;
-		}
+		System.err.println(id_a);
+		System.err.println("hello1");
+		Long id = Long.valueOf(id_a);
+		Annonce a = ann.findById(id).get();
 
-		public LocationRepository getLocationRepository() {
-			return locationRepository;
-		}
+		System.err.println(a.getDisponible());
+		a.setDisponible(Disponible.Reserve);
+		//locationRepository.setReserve("Reserve", id_a);
+		annonceService.addAnnonce(a);
+		System.err.println(a.getDisponible());
 
-		public void setLocationRepository(LocationRepository locationRepository) {
-			this.locationRepository = locationRepository;
-		}
+	}
 
-		public Date getDateDebut() {
-			return dateDebut;
-		}
+	public void annulerLocation(@PathVariable("annonce-id") String id_a){
+		System.err.println(id_a);
+		System.err.println("hello1");
+		Long id = Long.valueOf(id_a);
+		Annonce a = ann.findById(id).get();
+		a.setDisponible(Disponible.Dispo);
 
-		public void setDateDebut(Date dateDebut) {
-			this.dateDebut = dateDebut;
-		}
+		//locationRepository.setDispo("Dispo", id_a);
+		annonceService.addOrUpdateAnnonce(a);
+		System.err.println(a.getDisponible());
 
-		public Date getDateFin() {
-			return dateFin;
-		}
+	}
 
-		public void setDateFin(Date dateFin) {
-			this.dateFin = dateFin;
-		}
+	public String save() {
 
-		public void setLocation(Location location) {
-			this.location = location;
-		}
+		locationRepository.save(location);
+		location = new Location();
+		location.dateDebut = GregorianCalendar.getInstance().getTime();
+		// = GregorianCalendar.getInstance().getTime();
+		location.dateFin = GregorianCalendar.getInstance().getTime();
+		//System.err.println("*********"+rdv.RD);
+		return "/DariTn/welcome.xhtml";
+	}
 
-	 	
-	 	
-	 	
-	 	
-	 	
+	public LocationService getLocationService() {
+		return locationService;
+	}
+
+	public void setLocationService(LocationService locationService) {
+		this.locationService = locationService;
+	}
+
+	public LocationRepository getLocationRepository() {
+		return locationRepository;
+	}
+
+	public void setLocationRepository(LocationRepository locationRepository) {
+		this.locationRepository = locationRepository;
+	}
+
+	public Date getDateDebut() {
+		return dateDebut;
+	}
+
+	public void setDateDebut(Date dateDebut) {
+		this.dateDebut = dateDebut;
+	}
+
+	public Date getDateFin() {
+		return dateFin;
+	}
+
+	public void setDateFin(Date dateFin) {
+		this.dateFin = dateFin;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}	 	
 }

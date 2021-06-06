@@ -60,48 +60,51 @@ public class TAnnonceController {
 	private int rating;
 	private Double surface;
 	// aff liste
+	
+	
+	
 	public List<Annonce> getAnnonceVente() {
-		annonces = ann.ListeVente(Type_Annonce.Vente);
+		annonces = ann.ListeVente(Type_Annonce.Vente,Disponible.Dispo);
 		return annonces;
-		}
+	}
 	//add
 	public List<Annonce> getAnnonceLocation() {
 		annonces = ann.ListeLocation(Type_Annonce.Location,Disponible.Dispo);
-				//ListeVente(Type_Annonce.Location);
+		//ListeVente(Type_Annonce.Location);
 		return annonces;
-		}
-	
-	
-	
-	
-		// methode 1
+	}
+
+
+
+
+	// methode 1
 	public void addAnnonce() {
 		System.err.println("dafefa");
 
 		System.out.println("hello");
-		
+
 		if (titre.equals("") || adresse.equals("") || description.equals("") || prix==0 || prix<0 || type_annonce==null || categorie_annonce==null)
-			
+
 		{
 			System.out.println("not added");
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Vérifier "));
-        //PrimeFaces.current().executeScript("PF('manageProductDialog').hide()");
-        //PrimeFaces.current().ajax().update("form:messages", "form:dt-products");
-			
-		
+			//PrimeFaces.current().executeScript("PF('manageProductDialog').hide()");
+			//PrimeFaces.current().ajax().update("form:messages", "form:dt-products");
+
+
 		}
-		
+
 		else
-			
-			{annonceService.addOrUpdateAnnonce(new Annonce(titre, adresse, null, description, null, prix, 3,surface,disponible, type_annonce, categorie_annonce, null));
-			//annonceService.addOrUpdateAnnonce(new Annonce(titre, adresse, null, description, null,prix,3, disponible.Disponible,type_annonce, categorie_annonce, null));
+
+		{annonceService.addOrUpdateAnnonce(new Annonce(titre, adresse, null, description, null, prix, 3,surface,disponible, type_annonce, categorie_annonce, null));
+		//annonceService.addOrUpdateAnnonce(new Annonce(titre, adresse, null, description, null,prix,3, disponible.Disponible,type_annonce, categorie_annonce, null));
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Annonce bien ajoutée "));
-			System.out.println("added");}
-        
-		
+		System.out.println("added");}
+
+
 	}
-	   // methode 2
-	
+	// methode 2
+
 	public void save1() {
 		System.out.println("*********"+a.id);
 		//System.err.println("*********"+rdv.title);
@@ -110,9 +113,9 @@ public class TAnnonceController {
 		System.out.println("*********"+a.getAdresse());
 		ann.save(a);
 		//a = new Annonce();
-		
+
 	}
-	
+
 	//delete
 	public void removeAnnonce(@PathVariable("annonce-id") String id_a) {
 		Long id = Long.valueOf(id_a);
@@ -121,90 +124,90 @@ public class TAnnonceController {
 		Annonce a = ann.findById(id).get();
 		System.out.print(a.getPrix());
 		annonceService.deleteAnnonce(id_a);
-		
+
 	}
 	public void removeAnnoncee(String a)
 	{
-	annonceService.deleteAnnonce(a);}
+		annonceService.deleteAnnonce(a);}
 	// update
-	
+
 
 	public void displayEmploye(Annonce a) 
 	{
-	this.setTitre(a.getTitre());
-	this.setDescription(a.getDescription());
-	this.setAdresse(a.getAdresse()); 
-	this.setPrix(a.getPrix());
-	this.setType_annonce(a.getType_annonce());
-	this.setCategorie_annonce(a.getCategorie_annonce());
-	this.setUpdate(a.getId());
+		this.setTitre(a.getTitre());
+		this.setDescription(a.getDescription());
+		this.setAdresse(a.getAdresse()); 
+		this.setPrix(a.getPrix());
+		this.setType_annonce(a.getType_annonce());
+		this.setCategorie_annonce(a.getCategorie_annonce());
+		this.setUpdate(a.getId());
 	}
-	
+
 	public void updateAnnonce()
 	{ annonceService.updateAnnonce(new Annonce(update, titre, adresse, video, description, photo, prix, rating, surface,Disponible.Dispo, type_annonce, categorie_annonce, null));
-		 }
+	}
 	public void openNew() {
-        this.a = new Annonce();
-    }
+		this.a = new Annonce();
+	}
 	//louer
-	
+
 	public String save() {
 
- 		
- 		locationRepository.save(location);
- 		location = new Location();
- 		location.dateDebut = GregorianCalendar.getInstance().getTime();
- 		// = GregorianCalendar.getInstance().getTime();
- 		location.dateFin = GregorianCalendar.getInstance().getTime();
- 		//System.err.println("*********"+rdv.RD);
- 		return "/DariTn/welcome.xhtml";
- 	}
-	
+
+		locationRepository.save(location);
+		location = new Location();
+		location.dateDebut = GregorianCalendar.getInstance().getTime();
+		// = GregorianCalendar.getInstance().getTime();
+		location.dateFin = GregorianCalendar.getInstance().getTime();
+		//System.err.println("*********"+rdv.RD);
+		return "/DariTn/welcome.xhtml";
+	}
+
 	public void louer(@PathVariable("annonce-id") String id_a) {
 		Long id = Long.valueOf(id_a);
-		
+
 		System.out.println("hello");
 		System.out.println(dateDebut);
 		System.out.println(dateFin);
 
 		Annonce a = ann.findById(id).get();
 		System.out.println(a.getPrix());
- 		
- 		System.out.println(dateDebut);
+
+		System.out.println(dateDebut);
 		System.out.println(dateFin);
- 		
+
 		//locationRepository.setReserve("En_cours", id_a);
 		locationService.calculPrix(a.getPrix(), dateDebut, dateFin);
-		
+
 		System.out.println(locationService.calculPrix(a.getPrix(), dateDebut, dateFin));
-		
+
 		Double prix = locationService.calculPrix(a.getPrix(), dateDebut, dateFin);
-		
+
 		locationService.addOrUpdateLocation(new Location(dateDebut, dateFin, prix, null, a) );
-		
+
 		//FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Prix de votre location ",""+locationService.calculPrix(a.getPrix(), dateDebut, dateFin)));
 
-			System.out.println("added");
-			prixLocation = locationService.calculPrix(a.getPrix(), dateDebut, dateFin);
-			
-			a.setDisponible(Disponible.En_cours);
-			annonceService.addOrUpdateAnnonce(a);
-			System.out.println(a.getDisponible());
+		System.out.println("added");
+		prixLocation = locationService.calculPrix(a.getPrix(), dateDebut, dateFin);
+
+		a.setDisponible(Disponible.En_cours);
+		annonceService.addOrUpdateAnnonce(a);
+		System.out.println(a.getDisponible());
 	} 
-	
+
 	public void validerLocation(@PathVariable("annonce-id") String id_a){
 		Long id = Long.valueOf(id_a);
 		Annonce a = ann.findById(id).get();
 		a.setDisponible(Disponible.Reserve);
-		
-		
+
+
 	}
 	public void annulerLocation(@PathVariable("annonce-id") String id_a){
 		Long id = Long.valueOf(id_a);
 		Annonce a = ann.findById(id).get();
 		a.setDisponible(Disponible.Dispo);
-		
-		
+
+
 	}
 	/*public void afficherDemande()
 	{
@@ -212,28 +215,28 @@ public class TAnnonceController {
 		for (int i=0;i<annonces.size();i++){
 			if annonces.
 		}
-		
+
 	}*/
-	
-	
+
+
 	public void showInfo() {
 
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Prix de votre location ",""+prixLocation));
 
 	}
 	public void addMessage(FacesMessage.Severity severity, String summary, String detail) {
-        FacesContext.getCurrentInstance().
-                addMessage(null, new FacesMessage(severity, summary, detail));
-    }
+		FacesContext.getCurrentInstance().
+		addMessage(null, new FacesMessage(severity, summary, detail));
+	}
 	public void showInfo1() {
 		System.out.println("hi");
 		addMessage(FacesMessage.SEVERITY_INFO, "Info Message", "Message Content");
 
 	}
-	
-	
-	
-	
+
+
+
+
 	public LocationService getLocationService() {
 		return locationService;
 	}
@@ -282,7 +285,7 @@ public class TAnnonceController {
 	public AnnonceRepository getAnn() {
 		return ann;
 	}
-	
+
 	public void setAnn(AnnonceRepository ann) {
 		this.ann = ann;
 	}
@@ -295,7 +298,7 @@ public class TAnnonceController {
 	public void setA(Annonce a) {
 		this.a = a;
 	}
-	
+
 
 	public String getTitre() {
 		return titre;
@@ -345,7 +348,7 @@ public class TAnnonceController {
 		this.prix = prix;
 	}
 
-	
+
 	public Type_Annonce getType_annonce() {
 		return type_annonce;
 	}
@@ -389,5 +392,5 @@ public class TAnnonceController {
 		return disponible;
 	}
 
-	
+
 }

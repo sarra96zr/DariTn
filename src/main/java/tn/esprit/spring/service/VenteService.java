@@ -5,7 +5,7 @@ import java.util.Date;
 public interface VenteService {
 	
 	
-	public Double calculPrix (Double prix, Float surface);
+	public Double calculPrix (Double prix, Double surface);
 
 
 }

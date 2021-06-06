@@ -116,12 +116,12 @@
 
 				<p:column exportable="false">
 					<p:commandButton
-						action="#{locationController.validerVente(vente.annonce.id)}"
+						action="#{venteController.validerVente(vente.annonce.id)}"
 						icon="pi pi-times" value="Valider" update="dt-products" />
 				</p:column>
 				<p:column exportable="false">
 					<p:commandButton
-						action="#{locationController.annulerVente(vente.annonce.id)}"
+						action="#{venteController.annulerVente(vente.annonce.id)}"
 						icon="pi pi-times" value="Annuler" update="dt-products" />
 				</p:column>
 			</p:dataTable>

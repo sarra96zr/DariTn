@@ -26,7 +26,7 @@ public class Vente implements Serializable{
 
 	
 	@Column(name="prixVente")
-	public float prixVente;
+	public Double prixVente;
 	
 
 	
@@ -34,4 +34,54 @@ public class Vente implements Serializable{
 	private User user;
 	@OneToOne
 	private Annonce annonce;
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public Double getPrixVente() {
+		return prixVente;
+	}
+	public void setPrixVente(Double prixVente) {
+		this.prixVente = prixVente;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Annonce getAnnonce() {
+		return annonce;
+	}
+	public void setAnnonce(Annonce annonce) {
+		this.annonce = annonce;
+	}
+	public Vente(long id, Double prixVente, User user, Annonce annonce) {
+		super();
+		this.id = id;
+		this.prixVente = prixVente;
+		this.user = user;
+		this.annonce = annonce;
+	}
+	public Vente(Double prixVente, User user, Annonce annonce) {
+		super();
+		this.prixVente = prixVente;
+		this.user = user;
+		this.annonce = annonce;
+	}
+	public Vente() {
+		super();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
