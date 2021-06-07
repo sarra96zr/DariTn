@@ -52,7 +52,12 @@ public class MeubleServiceImpl implements MeubleService {
 		// TODO Auto-generated method stub
 		return MeubleDAO.findById(Long.parseLong(id_m)).orElse(null);
 	}
-
+//	
+//	@Override
+//	public Meubles retrieveMeubles(long id_m) {
+//		// TODO Auto-generated method stub
+//		return MeubleDAO.findById(id_m).orElse(null);
+//	}
 	@Override
 	public List<Meubles> SearchMeublesByName(String name_meuble) {
 		// TODO Auto-generated method stub
@@ -84,5 +89,7 @@ public class MeubleServiceImpl implements MeubleService {
 		MeubleDAO.deleteById(Long.parseLong(id_m));
 		
 	}
+
+	
 
 	}

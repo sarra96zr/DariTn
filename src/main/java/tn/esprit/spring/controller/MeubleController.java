@@ -49,6 +49,12 @@ public class MeubleController {
 		return list;
 	}
 
+//	// http://localhost:8081/DariTn/Pi/retrieve-furniture/{meuble-id}
+//	@GetMapping("/retrieve-furniture/{meuble-id}")
+//	@ResponseBody
+//	public Meubles retrieveMeuble(@PathVariable("meuble-id") String id_m) {
+//		return meubleService.retrieveMeubles(id_m);
+//	}
 	// http://localhost:8081/DariTn/Pi/retrieve-furniture/{meuble-id}
 	@GetMapping("/retrieve-furniture/{meuble-id}")
 	@ResponseBody

@@ -15,6 +15,7 @@ public interface MeubleService {
 	void deleteMeubles(long id_m);
 	Meubles updateMeuble(Meubles  m);
 	Meubles retrieveMeubles(String id_m);
+	//Meubles retrieveMeubles(long id_m);
 	List<Meubles> SearchMeublesByName(String name_meuble);
 	List<Meubles> Range(float min, float max);
 	List<Meubles> findAll();

@@ -160,6 +160,7 @@ public class CommandeController {
 					
 		}
 			//JSF
+		
 		public List<Commande> getordersbyRef( Meubles meuble) {
 			List<Commande> list = ordersService.GetOrdersByMeubles(meuble);
 			return list;

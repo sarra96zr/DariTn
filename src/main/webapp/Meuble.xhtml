@@ -7,9 +7,10 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 <ui:composition template="/template/template.xhtml">
+
 	<ui:param name="Product" value="Accueil" />
 	<ui:define name="content">
-	<h:head>
+		<h:head>
 			<title>Meubles</title>
 			<style type="text/css">
 .tg {
@@ -44,159 +45,154 @@
 	color: #333;
 	background-color: #f0f0f0;
 }
-<!-- Theme Informations -->	
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content=""/>
-    <meta name="keywords" content=""/>
-    <meta name="author" content=""/>
-<!-- Theme Informations -->
 
-	<title>Real Estate-Responsive Theme</title>
-
-<!-- Stylesheets -->
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>	
-	<link rel="stylesheet" href="css/common-style.css"/>
-  <link rel="stylesheet" href="css/magnific-popup.css"/>
-  <link rel="stylesheet" href="css/style_third_theme.css"/>
-<!-- Stylesheets -->
-  
-<!-- Icons & Fonts -->
-    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"/>
-<!-- Icons & Fonts -->
-
-.tg .tg-4eph {
+<!--
+Theme Informations --> <meta name ="viewport " content
+	 ="width =device-width, initial-scale =1"/> <meta name ="description "
+	content
+	 =""/> <meta name ="keywords " content =""/> <meta name ="author "
+	content
+	 =""/><!--Theme Informations --> <title>Real Estate-Responsive Theme
+	 </title><!--Stylesheets --> <link rel ="stylesheet " href
+	 ="bootstrap /css/bootstrap.css "/> <link rel ="stylesheet " href
+	 ="css /common-style.css "/> <link rel ="stylesheet " href
+	 ="css /magnific-popup.css "/> <link rel ="stylesheet " href
+	 ="css /style_third_theme.css "/><!--Stylesheets --><!--Icons & Fonts -->
+	<link rel ="stylesheet " href ="font-awesome /css/font-awesome.min.css 
+	 "/><!--Icons 
+	 & Fonts -->.tg .tg-4eph {
 	background-color: #f9f9f9
 }
-   .yui-carousel-element li {
-                height: 321px;
-          }
 
+.yui-carousel-element li {
+	height: 321px;
+}
 </style>
 		</h:head>
-<br></br>
-					<br></br>
-					<br></br>
-         <h:form id="form">
-				<p:toolbar >
-				<div class="p-d-inline-flex p-ai-center">
-            
-        </div>
-							<p:toolbarGroup  name="top">
-                                 <span style="font-weight: bold;text-align=center">     
-									</span> <span class="filter-container ui-input-icon-left">
-									<i class="pi pi-search" /> <p:inputText id="globalFilter"
-										onkeyup="PF('dtProducts').filter()"
-										
-										placeholder="Search" />
-								</span>
-							
-					</p:toolbarGroup>
-					<p:toolbarGroup align="right" >
-						<p:commandButton value="Deposer votre annoce" icon="pi pi-plus"
+		<br></br>
+		<br></br>
+		<br></br>
+		<h:form id="form">
+			<p:toolbar>
+				<div class="p-d-inline-flex p-ai-center"></div>
+				<p:toolbarGroup name="top">
+					<span style="font-weight: bold;text-align=center"> </span>
+					<span class="filter-container ui-input-icon-left"> <i
+						class="pi pi-search" /> <p:inputText id="globalFilter"
+							onkeyup="PF('dtProducts').filter()" placeholder="Search" />
+					</span>
+
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:commandButton value="Deposer votre annoce" icon="pi pi-plus"
 						update=":form:manage-product-content"
-							actionListener="#{JsfMeubleController.openNew()}"
-							oncomplete="PF('manageProductDialog').show()"
-							styleClass="ui-button-info" style="margin-right: .5rem">
-							<p:resetInput target=":form:manage-product-content" />
-						</p:commandButton>
-					</p:toolbarGroup>
-				</p:toolbar>
+						actionListener="#{JsfMeubleController.openNew()}"
+						oncomplete="PF('manageProductDialog').show()"
+						styleClass="ui-button-info" style="margin-right: .5rem">
+						<p:resetInput target=":form:manage-product-content" />
+					</p:commandButton>
+				</p:toolbarGroup>
+			</p:toolbar>
 
-				<p:dialog header="Ajouter une nouvelle annonce" showEffect="fade"
-					modal="true" widgetVar="manageProductDialog" responsive="true" 
-					 minHeight="40" width="350" minimizable="true" maximizable="true">
-					<p:outputPanel id="manage-product-content" class="ui-fluid">
-						<p:outputPanel rendered="#{not empty JsfMeubleController.m}">
-							                    <h:form enctype="multipart/form-data">
-   <p:growl id="msj" showDetail="true"/>
-   <p:fileUpload value="#{JsfMeubleController.file}" mode="advanced" cancelLabel="cancelar" label="selectionner"
-fileUploadListener="#{JsfMeubleController.upload()}" multiple="true"/>
-    </h:form>
-							                                    <div class="p-field">
-								<p:outputLabel >Category</p:outputLabel>
-								<p:selectOneMenu required="true"  value="#{JsfMeubleController.m.type_meuble}">
-									<f:selectItem itemLabel="Choisir le type du meuble"
-										itemValue="#{null}" />
-									<f:selectItems value="#{JsfMeubleController.type}" />
-								</p:selectOneMenu>
+			<p:dialog header="Ajouter une nouvelle annonce" showEffect="fade"
+				modal="true" widgetVar="manageProductDialog" responsive="true"
+				minHeight="40" width="350" minimizable="true" maximizable="true">
+				<p:outputPanel id="manage-product-content" class="ui-fluid">
+					<p:outputPanel rendered="#{not empty JsfMeubleController.m}">
+						<h:form enctype="multipart/form-data">
+Photo <h:inputFile value="#{JsfMeubleController.file}"></h:inputFile>
+
+							<br></br>
+							<h:commandButton value="Upload"
+								action="#{JsfMeubleController.saveFile()}"></h:commandButton>
+						</h:form>
+						<div class="p-field">
+							<p:outputLabel>Category</p:outputLabel>
+							<p:selectOneMenu required="true"
+								value="#{JsfMeubleController.m.type_meuble}">
+								<f:selectItem itemLabel="Choisir le type du meuble"
+									itemValue="#{null}" />
+								<f:selectItems value="#{JsfMeubleController.type}" />
+							</p:selectOneMenu>
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="name">Name</p:outputLabel>
+							<p:inputText id="name"
+								value="#{JsfMeubleController.m.nom_meuble}" required="true" />
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="description">Description</p:outputLabel>
+							<p:inputTextarea id="description"
+								value="#{JsfMeubleController.m.description_meuble}" />
+						</div>
+
+						<div class="p-formgrid p-grid">
+							<div class="p-field p-col">
+								<p:outputLabel for="price">Price</p:outputLabel>
+								<p:inputNumber required="true" id="price"
+									value="#{JsfMeubleController.m.prix}" symbol=" DT"
+									symbolPosition="s" decimalSeparator="." thousandSeparator="," />
 							</div>
-							<div class="p-field">
-								<p:outputLabel for="name">Name</p:outputLabel>
-								<p:inputText id="name"
-									value="#{JsfMeubleController.m.nom_meuble}" required="true" />
-							</div>
-							<div class="p-field">
-								<p:outputLabel for="description">Description</p:outputLabel>
-								<p:inputTextarea id="description"
-									value="#{JsfMeubleController.m.description_meuble}" />
+						</div>
+
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<f:facet name="footer">
+					<p:commandButton value="Valider" icon="pi pi-check"
+						actionListener="#{JsfMeubleController.save()}"
+						update="manage-product-content"
+						process="manage-product-content @this" />
+					<p:commandButton value="Annuler" icon="pi pi-times"
+						onclick="PF('manageProductDialog').hide()"
+						class="ui-button-secondary" />
+				</f:facet>
+			</p:dialog>
+
+
+			<div class="tab-pane container">
+				<p:carousel value="#{JsfMeubleController.meuble}" var="meubles"
+					responsive="true" widgetVar="dtProducts" headerText="Meubles"
+					itemStyle="text-align:center" effect="fade" cricular="true">
+					<div class=" col-sm-6 col-md-4">
+						<div class="sub-box">
+							<span
+								class="product-badge status-#{meubles.type_meuble.name().toLowerCase()}">#{meubles.type_meuble.text}</span>
+							<p:graphicImage value="images/#{meubles.img}" width="200"
+								height="250" />
+							<div class="sub-box-content">
+
+								<h5 class="description text-muted">#{meubles.nom_meuble}</h5>
+								<div class="description text-muted">#{meubles.description_meuble}</div>
+
 							</div>
 							
-							<div class="p-formgrid p-grid">
-								<div class="p-field p-col">
-									<p:outputLabel for="price">Price</p:outputLabel>
-									<p:inputNumber required="true" id="price" value="#{JsfMeubleController.m.prix}"
-										symbol=" DT" symbolPosition="s" decimalSeparator="."
-										thousandSeparator="," />
-								</div>
-							</div>
-
-						</p:outputPanel>
-					</p:outputPanel>
-
-						<f:facet name="footer">
-						<p:commandButton value="Valider" icon="pi pi-check"
-							actionListener="#{JsfMeubleController.save()}"
-							update="manage-product-content"
-							process="manage-product-content @this" />
-						<p:commandButton value="Annuler" icon="pi pi-times"
-							onclick="PF('manageProductDialog').hide()"
-							class="ui-button-secondary" />
-					</f:facet>
-				</p:dialog>
-       
-
-   <div class="tab-pane container" >
-        <p:carousel value="#{JsfMeubleController.meuble}" var="meubles"  
-                responsive="true" widgetVar="dtProducts" headerText="Meubles"
-                itemStyle="text-align:center" 
-                 effect="fade"  cricular="true" 
-                 >
-               <div class=" col-sm-6 col-md-4">
-                 <div class="sub-box">
-                 <span class="product-badge status-#{meubles.type_meuble.name().toLowerCase()}">#{meubles.type_meuble.text}</span>
-                   <p:graphicImage value="images/#{meubles.img}" width="200" height="250" />
-                    <div class="sub-box-content" >
-                   
-                        <h5 class="description text-muted">#{meubles.nom_meuble}</h5>
-                        <div class="description text-muted">#{meubles.description_meuble}</div>
-             
+							
+								<div class="product-grid-item-bottom">
+                        <h:outputText value="#{meubles.prix}" styleClass="infos">
+								<f:convertNumber currencySymbol="DT" type="currency" />
+							</h:outputText>
+                        <p:linkButton type="button" value="Add To Cart"
+                                         icon="pi pi-shopping-cart" 
+                                         outcome="panier">
+                        <f:param name="panier" value="#{meubles.ref_meuble}" />
+                        </p:linkButton>
+                       
                     </div>
-                  <h:outputText value="#{meubles.prix}" styleClass="infos" >
-                  <f:convertNumber currencySymbol="DT" type="currency"/>
-                  </h:outputText>
-                  
-                     <p:commandButton  class="link  text-right" value="Commander"   > 
-                                                            
-                          <p:confirm header="Confirmation" message="Are you sure you want to proceed?" icon="pi pi-exclamation-triangle"/> 
-                        </p:commandButton>
-                      <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
-            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
-            <p:button value="Yes" type="button" styleClass="ui-confirmdialog-yes ui-button-flat" oncomplete="confirmation.hide()" outcome="panel" />
-   
-         </p:confirmDialog> 
-                   </div>
-                    </div>
-           
+						</div>
+						
+					</div>
 
-            <f:facet name="footer">
+
+					<f:facet name="footer">
                 En total , il existe #{fn:length(JsfMeubleController.meuble)} meubles.
             </f:facet>
-            
-        </p:carousel>
-    </div>
-   
-     
-</h:form>
+
+				</p:carousel>
+			</div>
+
+
+		</h:form>
 
 	</ui:define>
 </ui:composition>

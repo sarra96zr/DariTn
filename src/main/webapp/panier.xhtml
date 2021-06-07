@@ -1,38 +1,175 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<ui:composition template="/template/template.xhtml">
+	<ui:param name="Product" value="Accueil" />
+	<ui:define name="content">
+		<h:head>
+			<title>Meubles</title>
+			<style type="text/css">
+.tg {
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-color: #ccc;
+}
 
-<h:head>
-	<title>Products</title>
-	<style type="text/css">
-html {
+.tg p {
+	font-family: Arial, sans-serif;
 	font-size: 14px;
+	padding: 10px 5px;
+	border-style: solid;
+	border-width: 1px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #ccc;
+	color: #333;
+	background-color: #fff;
+}
+
+.tg h {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	padding: 10px 5px;
+	border-style: solid;
+	border-width: 1px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #ccc;
+	color: #333;
+	background-color: #f0f0f0;
+}
+
+<!--
+Theme Informations --> <meta name ="viewport" content
+	="width=device-width, initial-scale =1"/> <meta name ="description" content
+	=""/> <meta name ="keywords" content =""/> <meta name ="author" content
+	=""/><!--Theme Informations --> <title>Real Estate-Responsive Theme
+	</title><!--Stylesheets --> <link rel ="stylesheet" href
+	="bootstrap/css/bootstrap.css "/> <link rel ="stylesheet" href
+	="css/common-style.css "/> <link rel ="stylesheet" href
+	="css/magnific-popup.css "/> <link rel ="stylesheet" href
+	="css/style_third_theme.css "/><!--Stylesheets --><!--Icons & Fonts -->
+	<link rel ="stylesheet" href ="font-awesome/css/font-awesome.min.css "/><!--Icons 
+	& Fonts -->.tg .tg-4eph {
+	background-color: #f9f9f9
+}
+
+.yui-carousel-element li {
+	height: 321px;
 }
 </style>
-</h:head>
+		</h:head>
+		<br></br>
+		<br></br>
+		<br></br>
+		<!-- 	<div class="card"> -->
+		<!--     <p class="p-m-0">You've been redirected to this bookmarkable page with button. -->
+		<!--         ViewParameter you've passed is <strong> #{param['panier']} </strong> -->
+		<!--     </p> -->
+		<!-- </div> -->
+		<div class="page-content">
+			<div class="cart">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-9">
+							<p:growl id="messages" showDetail="true" />
 
-<h:body>
-	<br> </br>
-	<br></br>
-	<br></br>
-	<p:dataTable var="product" value="#{dfProductsView.products}">
-		<p:column headerText="Code">
-			<h:outputText value="#{product.code}" />
-		</p:column>
+							<h:form id="form">
+								<p:dataTable id="dt-products" emptyMessage="No Products Found"
+									widgetVar="dtProducts"
+									value="#{JsfMeubleController.saveById(param['panier'])}"
+									selection="#{JsfMeubleController.cmd_m.ref_meuble}" var="cmd_m"
+									reflow="true" styleClass="products-table"
+									rowKey="#{cmd_m.ref_meuble}" paginator="true" rows="10"
+									rowSelectMode="add" paginatorPosition="bottom">
 
-		<p:column headerText="Name">
-			<h:outputText value="#{product.name}" />
-		</p:column>
+									<f:facet name="header">
+										<div class="products-table-header">
+											<span style="font-weight: bold">PRODUCTS</span>
+										</div>
+									</f:facet>
+									<p:column sortBy="#{meubles.nom_meuble}"
+										headerText="Product Name" sortOrder="asc">
+										<h:outputText value="#{cmd_m.nom_meuble}" />
+									</p:column>
 
-		<p:column headerText="Category">
-			<h:outputText value="#{product.category}" />
-		</p:column>
+									<p:column>
+										<f:facet name="header">
+											<h:outputText value="Image" />
+										</f:facet>
+										<h:graphicImage value="/images/#{cmd_m.img}" width="100"
+											height="100" />
+									</p:column>
 
-		<p:column headerText="Quantity">
-			<h:outputText value="#{product.quantity}" />
-		</p:column>
-	</p:dataTable>
-</h:body>
+									<p:column sortBy="#{cmd_m.Prix}" class="total-col"
+										headerText="Price">
+										<h:outputText value="#{cmd_m.prix}" />
+									</p:column>
 
+									<p:column headerText="Action" class="remove-col">
+										<p:linkButton class="ui-button-warning rounded-button" type="button" icon="pi pi-pi-check" outcome="panel"  >
+                     
+                     
+                </p:linkButton>
+
+						<p:commandButton class="ui-button-warning rounded-button" icon="pi pi-times" process="@this"
+                                 oncomplete="PF('deleteProductDialog').show()" >
+                   
+      </p:commandButton>
+      
+       
+						        <p:confirmDialog widgetVar="deleteProductDialog" showEffect="fade" width="300"
+                         message="Voulez-vous annuler cette commande?" header="Confirm" severity="warn">
+            <p:commandButton value="Oui" icon="pi pi-check" 
+                             process="@this" action="Meuble?faces-redirect=true"/>
+            <p:commandButton value="Non" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                             onclick="PF('deleteProductDialog').hide()"/>
+        </p:confirmDialog>
+									</p:column>
+
+
+								</p:dataTable>
+							</h:form>
+							<!--  End .table table-wishlist -->
+							<div class="cart-bottom">
+								<div class="cart-discount">
+									<form action="#">
+										<div class="input-group">
+											<input type="text" class="form-control" />
+											<div class="input-group-append">
+												<button class="btn btn-outline-primary-2" type="submit">
+													<i class="icon-long-arrow-right"></i>
+												</button>
+											</div>
+											<!--  .End .input-group-append -->
+										</div>
+										<!--  End .input-group -->
+									</form>
+								</div>
+								<!--  End .cart-discount -->
+								<p:commandLink action="#{produitcontrollerImp.ClearPanier()}"
+									class="btn btn-outline-dark-2">
+									<span>UPDATE CART</span>
+									<i class="icon-refresh"></i>
+								</p:commandLink>
+							</div>
+							<!--  End .cart-bottom -->
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!--  End .cart -->
+		</div>
+		<!--  End .page-content -->
+
+
+	</ui:define>
+</ui:composition>
 </html>
