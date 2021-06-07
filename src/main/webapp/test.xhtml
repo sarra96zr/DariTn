@@ -12,7 +12,7 @@
 
 
 		<h:head>
-			<title>Meubles</title>
+			<title>Reclamations</title>
 			<style type="text/css">
 .tg {
 	border-collapse: collapse;
@@ -59,30 +59,30 @@
 
 		<div class="card crud-demo">
 			<h:form id="form">
-			<p:growl id="messages" showDetail="true" />
-			<p:toolbar>
-				<p:toolbarGroup>
+				<p:growl id="messages" showDetail="true" />
+				<p:toolbar>
+					<p:toolbarGroup>
 
-					<f:facet name="header">
-						<div class="products-table-header">
-							<span style="font-weight: bold">Liste des reclamations</span> <span
-								class="filter-container ui-input-icon-left"> <i
-								class="pi pi-search" /> <p:inputText id="globalFilter"
-									onkeyup="PF('dtProducts').SearchProductByName(nom_meuble)"
-									placeholder="Search" />
-							</span>
-						</div>
-					</f:facet>
-				</p:toolbarGroup>
-				<p:toolbarGroup align="right">
-					<p:commandButton value="Deposer votre reclamation"
-						icon="pi pi-plus" oncomplete="PF('manageProductDialog').show()"
-						styleClass="ui-button-info" style="margin-right: .5rem">
-						<p:resetInput target=":form:manage-product-content" />
-					</p:commandButton>
-				</p:toolbarGroup>
-			</p:toolbar>
-			
+						<f:facet name="header">
+							<div class="products-table-header">
+								<span style="font-weight: bold">Liste des reclamations</span> <span
+									class="filter-container ui-input-icon-left"> <i
+									class="pi pi-search" /> <p:inputText id="globalFilter"
+										onkeyup="PF('dtProducts').SearchProductByName(nom_meuble)"
+										placeholder="Search" />
+								</span>
+							</div>
+						</f:facet>
+					</p:toolbarGroup>
+					<p:toolbarGroup align="right">
+						<p:commandButton value="Deposer votre reclamation"
+							icon="pi pi-plus" oncomplete="PF('manageProductDialog').show()"
+							styleClass="ui-button-info" style="margin-right: .5rem">
+							<p:resetInput target=":form:manage-product-content" />
+						</p:commandButton>
+					</p:toolbarGroup>
+				</p:toolbar>
+
 				<p:dialog header="Ajouter une nouvelle reclamation"
 					showEffect="fade" modal="true" widgetVar="manageProductDialog"
 					responsive="true" minHeight="40" width="350" minimizable="true"
@@ -124,46 +124,71 @@
 
 
 			<h:form>
-
-				<p:dataTable id="dt-products" widgetVar="dtProducts"
-					value="#{RecController.findClientById1()}" var="rec" reflow="true"
-					styleClass="products-table" paginator="true" rows="5"
-					rowSelectMode="add" paginatorPosition="bottom">
+				<p:dataTable id="products1" 
+					value="#{RecController.findClientById1()}" var="rec" editable="true"
+					style="margin-bottom:20px"> 
 					
+					
+					 <p:ajax event="rowEdit" listener="#{RecController.onRowEdit(rec)}"/>
+            		 <p:ajax event="rowEditCancel" listener="#{RecController.onRowCancel}"/>
+					
+					<p:column headerText="Nom du client">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{rec.client.firstName}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="modelInput" value="#{rec.client.firstName}"
+									style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
 					<p:column headerText="Titre">
-						<h:outputText value="#{rec.titreReclam}" />
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{rec.titreReclam}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{rec.titreReclam}" style="width:100%"
+									label="Name" />
+							</f:facet>
+						</p:cellEditor>
 					</p:column>
 
 					<p:column headerText="Type">
-						<h:outputText value="#{rec.type}" />
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{rec.type}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:selectOneMenu value="#{RecController.type}" required="true">
+									<f:selectItem itemLabel="Type de reclamation"
+										itemValue="#{null}" />
+									<f:selectItems value="#{RecController.types}" />
+								</p:selectOneMenu>
+							</f:facet>
+						</p:cellEditor>
 					</p:column>
 
 					<p:column headerText="Description">
-						<h:outputText value="#{rec.descriptionReclam}" />
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{rec.descriptionReclam}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{rec.descriptionReclam}" style="width:100%"
+									label="Price" />
+							</f:facet>
+						</p:cellEditor>
 					</p:column>
 
-					<p:column exportable="false">
-						<p:commandButton
-							action="#{RecController.removeProduct(rec.id_reclam)}"
-							icon="pi pi-times"
-							value="Supprimer"
-							update="dt-products" />
+					<p:column style="width:6rem">
+						<p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit"
+							saveTitle="Save Row" />
 					</p:column>
-					
-					<p:column exportable="false">
-						<p:commandButton
-						value="Modifier"
-						update="dt-products"	
-						icon="pi pi-times" oncomplete="PF('manageProductDialog').show()"
-						styleClass="ui-button-info" style="margin-right: .5rem">
-						<p:resetInput target=":form:manage-product-content" />
-						</p:commandButton>
-					</p:column>
-					
 				</p:dataTable>
 			</h:form>
-
-
 		</div>
 	</ui:define>
 

@@ -22,13 +22,11 @@ public class Notifications implements Serializable{
 	private String etat;
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
-	private  Annonce annonce;
+	private  Reclamations reclamations;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JsonIgnore
 	private User user;
-//	@OneToOne
-//	@JoinColumn(name="Notif_annonces")
-//	private Annonce annonces;
+
 	
 	public Long getIdNotif() {
 		return idNotif;
@@ -60,13 +58,12 @@ public class Notifications implements Serializable{
 		return serialVersionUID;
 	}
 	
-
-	public Annonce getAnnonce() {
-		return annonce;
+	public Reclamations getReclamations() {
+		return reclamations;
 	}
 
-	public void setAnnonce(Annonce annonce) {
-		this.annonce = annonce;
+	public void setReclamations(Reclamations reclamations) {
+		this.reclamations = reclamations;
 	}
 
 	public User getUser() {
@@ -81,13 +78,13 @@ public class Notifications implements Serializable{
 		super();
 	}
 
-	public Notifications(Long idNotif, String titre, String description_notif, Annonce annonce,
+	public Notifications(Long idNotif, String titre, String description_notif, Reclamations reclamations,
 			User user, Annonce annonces) {
 		super();
 		this.idNotif = idNotif;
 		this.titre = titre;
 		this.description_notif = description_notif;
-		this.annonce = annonce;
+		this.reclamations = reclamations;
 		this.user = user;
 	}
 

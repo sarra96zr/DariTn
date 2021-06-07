@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tn.esprit.spring.entity.Annonce;
 import tn.esprit.spring.entity.Notifications;
+import tn.esprit.spring.entity.Reclamations;
 import tn.esprit.spring.entity.User;
-import tn.esprit.spring.repository.AnnonceRepo;
 import tn.esprit.spring.repository.NotRepo;
+import tn.esprit.spring.repository.RecRepo;
 import tn.esprit.spring.repository.UserRepo;
 
 
@@ -18,7 +18,7 @@ public class NotServiceImpl implements NotService {
 	@Autowired
 	NotRepo NotDAO;
 	@Autowired
-	AnnonceRepo AnoDAO;
+	RecRepo RecDAO;
 	@Autowired
 	UserRepo UserDAO;
 	
@@ -34,14 +34,14 @@ public class NotServiceImpl implements NotService {
 
 	@Override
 	public String addNot(Notifications n,Long idA) throws Exception  {
-		Annonce a = AnoDAO.findById(idA).get();
+		Reclamations r = RecDAO.findById(idA).get();
 		long idd = 1 ; 
 		//p.setParent(currentParent());
 		User u = UserDAO.findById(idd).get() ;
 		//long iduser = u.getId_user() ; 
 		n.setUser(u);
-		n.setAnnonce(a);
-		if (n.getUser().getId_user() == n.getAnnonce().getUser().getId_user() )
+		n.setReclamations(r);
+		if (n.getUser().getId_user() == n.getReclamations().getClient().getId_user() )
 		{
 			 NotDAO.save(n);
 			 return ("Ajouté");

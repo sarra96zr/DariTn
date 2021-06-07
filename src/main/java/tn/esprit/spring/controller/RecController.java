@@ -5,8 +5,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +13,7 @@ import org.dom4j.DocumentException;
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.primefaces.PrimeFaces;
+import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
@@ -24,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,7 +56,6 @@ public class RecController {
 	private String titreReclam;
 	private String descriptionReclam;
 	private Type_Rec type;
-	private long id_reclam;
 	private long id_reclamSelected;
 	Client client;
 	@Autowired
@@ -147,15 +146,6 @@ public class RecController {
 
 	}
 
-	// http://localhost:8081/DariTn/reclamations/panier/{panier}			
-	//@GetMapping("/reclamations/panier1/{panier}")
-	//@ResponseBody
-	//public List<Long> findRecWithPID1(@PathVariable("panier") long id_panier)
-	//{
-	//	return RecService.findRecWithPID1(id_panier);
-
-	//}
-
 	@RequestMapping("/")
 	public String viewHomePage(Model model) {
 		List<Reclamations> rec = RecService.retrieveAllRecs();
@@ -188,15 +178,6 @@ public class RecController {
     clear();    
    	}
 
-	public String saveRec() {
-		System.err.println("*********");
-		//rec.setTitreReclam(titreReclam);
-		//rec.setDescriptionReclam(descriptionReclam);
-		rec.setType(type);
-		RecService.addOrUpdateRec(1,rec);
-		return "/DariTn/Reclamations.xhtml";
-	}
-
 	public void show(Reclamations r ) throws Exception {
 		System.err.println("*********"+r);
 		this.rec.setId_reclam(r.getId_reclam());
@@ -213,7 +194,14 @@ public class RecController {
 		clear();
 	}
 	
-
+	
+	public List<Reclamations> findClientById1()
+	{
+		List<Reclamations> liste=RecService.findByClientId(1);
+		return liste;
+	}
+	
+	
 	//PDF
 	// http://localhost:8083/orders/export/pdf
 	@RequestMapping("/export/pdf")
@@ -233,6 +221,37 @@ public class RecController {
 	}
 
 
+	@PostMapping(value="/textemail",consumes = "application/json", produces = "application/json")
+	public String sendEmail(@RequestBody Reclamations emailTemplate) {
+		try {
+			//log.info("Sending Simple Text Email....");
+			RecService.sendTextEmail(emailTemplate);
+			return "Email Sent!";
+		} catch (Exception ex) {
+			return "Error in sending email: " + ex;
+		}
+	}
+	
+	
+	public void onRowEdit(RowEditEvent<Reclamations> event, Reclamations r) {
+		System.err.println("*********"+r);
+		this.rec.setId_reclam(r.getId_reclam());
+		this.rec.setTitreReclam(r.getTitreReclam());
+		this.rec.setDescriptionReclam(r.getDescriptionReclam());
+		this.rec.setClient(r.getClient1());
+		rec.setType(type);
+		RecService.update(rec);
+		clear();
+        FacesMessage msg = new FacesMessage("Product Edited", String.valueOf(event.getObject().getTitreReclam()));
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public void onRowCancel(RowEditEvent<Reclamations> event) {
+        FacesMessage msg = new FacesMessage("Edit Cancelled", String.valueOf(event.getObject().getTitreReclam()));
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+	
+	
 	public void clear(){
 		rec.setClient(null);
 	    rec.setDescriptionReclam(null);

@@ -3,6 +3,8 @@ package tn.esprit.spring.service;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import tn.esprit.spring.entity.Client;
 import tn.esprit.spring.entity.Reclamations;
@@ -13,10 +15,19 @@ import tn.esprit.spring.repository.UserRepo;
 
 @Service
 public class RecServiceImpl implements RecService {
+	
 	@Autowired
 	private RecRepo RecDAO;
+	
 	@Autowired
 	UserRepo urep;
+	
+	@Autowired
+	private JavaMailSender javaMailSender;
+
+	
+	
+	
 	//private static final Logger L= LogManager.getLogger(RecServiceImpl.class);
 	@Override
 	public List<Reclamations> retrieveAllRecs() {
@@ -131,6 +142,38 @@ public class RecServiceImpl implements RecService {
 	@Override
 	public void update(Reclamations r) {
 		RecDAO.save(r);
+	}
+	
+	
+	public void sendTextEmail(Reclamations emailTemplate) {
+
+		SimpleMailMessage msg = new SimpleMailMessage();
+		try {
+			if (emailTemplate.getClient().getEmail().contains(",")) {
+				String[] emails = emailTemplate.getClient().getEmail().split(",");
+				int receipantSize = emails.length;
+				for (int i = 0; i < receipantSize; i++) {
+
+					msg.setTo(emails[i]);
+					msg.setSubject("Votre réclamation au sujet: "+emailTemplate.getTitreReclam());
+					msg.setText("Cher client,"+(emailTemplate.getClient().getFirstName()+emailTemplate.getClient().getLastName()+"nous vous informons que votre réclamation est prise en considération."));
+					javaMailSender.send(msg);
+				}
+
+			} else {
+				msg.setTo(emailTemplate.getClient().getEmail());
+				msg.setSubject("Votre réclamation"+emailTemplate.getTitreReclam());
+				msg.setText("Cher client, "+(emailTemplate.getClient().getFirstName()+" "+emailTemplate.getClient().getLastName()+" nous vous informons que votre réclamation est prise en considération."));
+				javaMailSender.send(msg);
+				javaMailSender.send(msg);
+			}
+
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 	
 	

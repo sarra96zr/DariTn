@@ -23,5 +23,6 @@ public interface RecService {
 	//List<Long> findRecWithPID1(long id);
 	void addOrUpdateRec(int client,Reclamations rec);
 	void update(Reclamations r);
+	public void sendTextEmail(Reclamations r);
 
 }

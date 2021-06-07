@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+ <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:f="http://java.sun.com/jsf/core"
@@ -59,29 +59,25 @@
 
 		<div class="card crud-demo">
 			<h:form id="form">
-			<p:growl id="messages" showDetail="true" />
-			<p:toolbar>
-				<p:toolbarGroup>
+				<p:growl id="messages" showDetail="true" />
+				<p:toolbar>
+					<p:toolbarGroup>
 
-					<f:facet name="header">
-						<div class="products-table-header">
-							<span style="font-weight: bold">Liste des reclamations</span> <span
-								class="filter-container ui-input-icon-left"> <i
-								class="pi pi-search" /> <p:inputText id="globalFilter"
-									onkeyup="PF('dtProducts').SearchProductByName(nom_meuble)"
-									placeholder="Search" />
-							</span>
-						</div>
-					</f:facet>
-				</p:toolbarGroup>
-				<p:toolbarGroup align="right">
-					<p:commandButton value="Generer PDF"
-						icon="pi pi-file-pdf" oncomplete="PF('manageProductDialog').show()"
-						styleClass="ui-button-info" style="margin-right: .5rem">
-						<p:resetInput target=":form:manage-product-content" />
-					</p:commandButton>
-				</p:toolbarGroup>
-			</p:toolbar>
+						<f:facet name="header">
+							<div class="products-table-header">
+								<span style="font-weight: bold">Liste des reclamations</span> <span
+									class="filter-container ui-input-icon-left"> <i
+									class="pi pi-search" /> <p:inputText id="globalFilter"
+										onkeyup="PF('dtProducts').findRecWithPID(1)"
+										placeholder="Search" />
+								</span>
+							</div>
+						</f:facet>
+					</p:toolbarGroup>
+					<p:toolbarGroup align="right">
+						<a href="http://localhost:8081/DariTn/export/pdf">Generer PDF</a>
+					</p:toolbarGroup>
+				</p:toolbar>
 			</h:form>
 
 
@@ -93,34 +89,49 @@
 					rowSelectMode="add" paginatorPosition="bottom">
 					<f:facet name="header">
 						<div class="products-table-header" align="center">
-							<span style="font-weight: bold">Rechercher un reclamation</span>
+							<span style="font-weight: bold">Rechercher une reclamation</span>
 							<span class="filter-container ui-input-icon-left"> <i
 								class="pi pi-search"></i> <p:inputText id="globalFilter"
-									onkeyup="PF('dtProducts').SearchProductByName(nom_meuble)"
+									onkeyup="PF('dtProducts').findRecWithPID(1)"
 									placeholder="Search" />
 							</span>
 
 						</div>
 					</f:facet>
 
-					<p:column headerText="Titre">
+
+					<p:column headerText="Nom du cLient"
+						sortBy="#{rec.client.firstName}"
+						filterBy="#{rec.client.firstName}">
+						<h:outputText value="#{rec.client.firstName}" />
+					</p:column>
+
+					<p:column headerText="Titre" sortBy="#{rec.titreReclam}"
+						filterBy="#{rec.titreReclam}">
 						<h:outputText value="#{rec.titreReclam}" />
 					</p:column>
 
-					<p:column headerText="Type">
+					<p:column headerText="Type" sortBy="#{rec.type}"
+						filterBy="#{rec.type}">
 						<h:outputText value="#{rec.type}" />
 					</p:column>
 
-					<p:column headerText="Description">
+					<p:column headerText="Description"
+						sortBy="#{rec.descriptionReclam}"
+						filterBy="#{rec.descriptionReclam}">
 						<h:outputText value="#{rec.descriptionReclam}" />
 					</p:column>
 
 					<p:column exportable="false">
 						<p:commandButton
 							action="#{RecController.removeProduct(rec.id_reclam)}"
-							icon="pi pi-times"
-							value="Supprimer"
-							update="dt-products" />
+							icon="pi pi-times" value="Supprimer" update="dt-products" />
+					</p:column>
+
+					<p:column exportable="false">
+						<p:commandButton
+							action="#{RecController.sendEmail(rec)}"
+							icon="pi pi-check" value="Traite" update="dt-products" />
 					</p:column>
 				</p:dataTable>
 			</h:form>
