@@ -142,7 +142,8 @@ Photo <h:inputFile value="#{JsfMeubleController.file}"></h:inputFile>
 					<p:commandButton value="Valider" icon="pi pi-check"
 						actionListener="#{JsfMeubleController.save()}"
 						update="manage-product-content"
-						process="manage-product-content @this" />
+						process="manage-product-content @this" 
+						oncomplete="javascript:window.location.reload()"  />
 					<p:commandButton value="Annuler" icon="pi pi-times"
 						onclick="PF('manageProductDialog').hide()"
 						class="ui-button-secondary" />

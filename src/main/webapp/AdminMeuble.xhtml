@@ -123,7 +123,7 @@
             <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{JsfMeubleController.remove(meuble.ref_meuble)}"
                              process="@this" oncomplete="PF('deleteProductDialog').hide()"/>
             <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
-                             onclick="PF('deleteProductDialog').hide()"/>
+                             onclick="PF('deleteProductDialog').hide()" oncomplete="javascript:window.location.reload()" />
         </p:confirmDialog>
 						
 							 

@@ -125,31 +125,31 @@ Theme Informations --> <meta name ="viewport " content
 										<p:dialog header="Votre commande" showEffect="fade"
 											modal="true" widgetVar="manageProductDialog"
 											responsive="true" minHeight="40" width="350"
-											minimizable="true" maximizable="true">
-											<p:outputPanel id="manage-product-content" class="ui-fluid">
-												<p:outputPanel value="#{JsfMeubleController.cmd_m.img}">
+											minimizable="true" maximizable="true" position="center">
+											<p:outputPanel id="manage-product-content" class="ui-fluid"  >
+												<p:outputPanel value="#{JsfMeubleController.cmd_m.img}" >
 													<h:graphicImage value="/images/#{cmd_m.img}" width="100"
-														height="100" />
+														height="100" style="text-align:center"/>
 
 													<div class="p-field">
-														<p:outputLabel
+														<p:outputLabel  style="text-align:center"
 															value="#{JsfMeubleController.m.type_meuble}"></p:outputLabel>
 
 													</div>
 													<div class="p-field">
-														<p:outputLabel
-															value="#{JsfMeubleController.cmd_m.nom_meuble}">e</p:outputLabel>
+														<p:outputLabel style="text-align:center;"
+															value="#{JsfMeubleController.cmd_m.nom_meuble}"></p:outputLabel>
 
 													</div>
 													<div class="p-field">
-														<p:outputLabel
+														<p:outputLabel style="text-align:center;"
 															value="#{JsfMeubleController.m.description_meuble}"></p:outputLabel>
 
 													</div>
 
 													<div class="p-formgrid p-grid">
 														<div class="p-field p-col">
-															<p:outputLabel value="#{JsfMeubleController.m.prix}"
+															<p:outputLabel value="#{JsfMeubleController.m.prix}" style="text-align:center;"
 																symbol=" DT"></p:outputLabel>
 														</div>
 													</div>
@@ -162,41 +162,29 @@ Theme Informations --> <meta name ="viewport " content
 													icon="pi pi-check" action="panel?faces-redirect=true"
 													update="manage-product-content"
 													process="manage-product-content @this" />
-												<p:commandButton icon="pi pi-credit-card">
-													<p:link href="/DariTn/charge" value="Carte Bancaire">
+												<p:button icon="pi pi-credit-card" href="/DariTn/charge" value="Carte Bancaire" type="button">
+<!-- 													<p:link href="/DariTn/charge" value="Carte Bancaire"> -->
 
-													</p:link>
-												</p:commandButton>
-												<script type="text/javascript"
-													src="https://maps.google.com/maps/api/js?sensor=false"></script>
-
-
-												<div class="card">
-													
-
-														<p:commandButton id="btn" type="button" icon="pi pi-globe"
-															value="Sur place" onclick="PF('dlg').show();" />
-													
-												</div>
-
-												<p:dialog id="gmapDialog" widgetVar="dlg" width="625"
-													height="400" modal="true">
-													<h6>
-														Lot 13, Residence Essalem II, Avenue Fethi Zouhir, Cebalat
-														Ben Ammar 2083
-														</h6>
-													<iframe
-														src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d102100.0016643796!2d10.119663334289806!3d36.8993171265492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e0!4m0!4m5!1s0x12e2cb75abbb1733%3A0x557a99cdf6c13b7b!2slot%2013%2C%20esprit%20ecole%20d&#39;ing%C3%A9nieurs%2C%20R%C3%A9sidence%20Essalem%20II%2C%20Avenue%20Fethi%20Zouhir%2C%20Cebalat%20Ben%20Ammar%202083!3m2!1d36.8992004!2d10.1897039!5e0!3m2!1sfr!2stn!4v1620946693911!5m2!1sfr!2stn"
-														width="600" height="450" style="border: 0;"></iframe>
-													<!--   <p:gmap id="gmap" center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px"/> -->
-												</p:dialog>
-
-
+<!-- 													</p:link> -->
+												</p:button>
+												<p:commandButton id="btn" type="button" icon="pi pi-globe" value="Show Map" onclick="PF('dlg').show();"/>
+  
 											</f:facet>
+											 <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+  
+
+
+    
+
+
+<p:dialog id="gmapDialog" widgetVar="dlg" width="625" height="400" modal="true">
+<iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d102100.0016643796!2d10.119663334289806!3d36.8993171265492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e0!4m0!4m5!1s0x12e2cb75abbb1733%3A0x557a99cdf6c13b7b!2slot%2013%2C%20esprit%20ecole%20d&#39;ing%C3%A9nieurs%2C%20R%C3%A9sidence%20Essalem%20II%2C%20Avenue%20Fethi%20Zouhir%2C%20Cebalat%20Ben%20Ammar%202083!3m2!1d36.8992004!2d10.1897039!5e0!3m2!1sfr!2stn!4v1620946693911!5m2!1sfr!2stn" width="600" height="450" style="border:0;" ></iframe>
+<!--   <p:gmap id="gmap" center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px"/> -->
+</p:dialog>
 										</p:dialog>
 
 
-										<p:commandButton class="ui-button-warning rounded-button"
+										<p:commandButton value="annuler"
 											icon="pi pi-times" process="@this"
 											oncomplete="PF('deleteProductDialog').show()">
 
