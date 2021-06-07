@@ -18,20 +18,20 @@
                 <h:panelGrid columns="1">
  
                 <p:outputLabel for="initial" value="Name: " />
-                    <p:inputText id="initial" value="#{credits.cre.initialamount}" />
+                    <p:inputText id="initial" value="#{credits.inamount}" />
                     
                    <p:selectOneMenu 
-						value="#{credits.type}">
+						value="#{credits.bank}">
 						
 						<f:selectItems value="#{credits.cc}"
 						var="banque" itemLabel="#{banque.nombanque}"
-						itemValue=""
+						itemValue="#{banque.id}"
 						
 							 />
 
 					</p:selectOneMenu>
 	<Br></Br>
-	<h:commandButton value="Add" action="#{credits.add()}" />
+	<h:commandButton value="Add" action="#{credits.ajouterCredits()}" />
 	
                     
       

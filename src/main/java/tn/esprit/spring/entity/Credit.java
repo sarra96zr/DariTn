@@ -51,7 +51,7 @@ public class Credit implements Serializable{
 	@Column
 	private float monthly;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Client client;
 	
 	@OneToOne

@@ -140,7 +140,7 @@ private Banque type;
 
 private List<Banque> cc ;
 private Credit creto;
-private float inamount;
+private String inamount;
 
 
 
@@ -169,11 +169,11 @@ public void setCc(List<Banque> cc) {
 
 
 
-	public float getInamount() {
+	public String getInamount() {
 	return inamount;
 }
 
-public void setInamount(float inamount) {
+public void setInamount(String inamount) {
 	this.inamount = inamount;
 }
 
@@ -270,6 +270,20 @@ public void setC(Credit c) {
 		
 		cs.ajouterCredit(client,id,C);
 		
+		
+	}
+
+	public void ajouterCredits()
+	{
+		System.err.println("111");
+		System.err.println("--"+inamount);
+		System.err.println("--"+bank);
+
+		Credit C= new Credit();
+		C.setInitialamount(Float.valueOf(inamount));
+		cs.ajouterCredit(1, Integer.valueOf(bank) , C);
+		/*return new ResponseEntity<>("Ajout reussie.", HttpStatus.CREATED);*/
+	
 		
 	}
 	
