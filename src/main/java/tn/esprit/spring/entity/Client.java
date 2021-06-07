@@ -23,9 +23,11 @@ public class Client extends User implements Serializable {
 	private Set<Credit> credit;
 	@OneToMany(mappedBy="client")
 	private Set<Reclamations> reclam;
+	
 	@OneToOne
 	@JoinColumn(name="T_RDV_client")
 	private RDV rdv;
+	
 	@OneToMany(cascade= CascadeType.ALL , mappedBy="client")
 	private Set<Meubles> meuble;
 //	public int getId_client() {

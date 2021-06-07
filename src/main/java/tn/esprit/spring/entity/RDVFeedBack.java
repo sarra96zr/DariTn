@@ -16,8 +16,8 @@ public class RDVFeedBack implements Serializable{
 	@Column(name="descRDV")
 	public String descRDV;
 	
-	@OneToOne(mappedBy="RDVF")
-	@JoinColumn/*(nullable = false)*/
+	@OneToOne
+	@JoinColumn
 	private RDV rdv;
 
 	public long getId() {
@@ -49,6 +49,11 @@ public class RDVFeedBack implements Serializable{
 		this.id = id;
 		this.descRDV = descRDV;
 		this.rdv = rdv;
+	}
+
+	public RDVFeedBack(String descRDV) {
+		super();
+		this.descRDV = descRDV;
 	}
 
 	public RDVFeedBack() {

@@ -6,6 +6,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="RDV")
 public class RDV implements Serializable{
@@ -15,8 +17,6 @@ private static final long serialVersionUID = 1L;
     @Column(name="id")
 	public long id_rdv;
 	
-	
-	
 	@Column(name="dateRDV")
 	public Date dateRDV;
 	
@@ -24,12 +24,12 @@ private static final long serialVersionUID = 1L;
 	@OneToOne(mappedBy="rdv")
 	private Client client;
 	
-	/*@ManyToOne
-	@JoinColumn(name="Annonce_id")
-	private Annonce annonce;*/
+	@ManyToOne(cascade = CascadeType.ALL)
+	private  Annonce annonce;
 	
+	/*
 	@OneToOne
-	private RDVFeedBack RDVF;
+	private RDVFeedBack RDVF;*/
 
 	public long getId_rdv() {
 		return id_rdv;
@@ -38,8 +38,6 @@ private static final long serialVersionUID = 1L;
 	public void setId_rdv(long id_rdv) {
 		this.id_rdv = id_rdv;
 	}
-
-	
 
 	public Date getDateRDV() {
 		return dateRDV;
@@ -55,26 +53,28 @@ private static final long serialVersionUID = 1L;
 
 	public void setClient(Client client) {
 		this.client = client;
-	}
-
-	public RDVFeedBack getRDVF() {
-		return RDVF;
-	}
-
-	public void setRDVF(RDVFeedBack rDVF) {
-		RDVF = rDVF;
-	}
+	}	
 	
+	public Annonce getAnnonce() {
+		return annonce;
+	}
+
+	public void setAnnonce(Annonce annonce) {
+		this.annonce = annonce;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	public RDV(long id_rdv,  Date dateRDV, Client client, RDVFeedBack rDVF ) {
+
+
+	public RDV(long id_rdv, Date dateRDV, Client client, Annonce annonce /*RDVFeedBack rDVF*/) {
 		super();
-		this.id_rdv = id_rdv;	
+		this.id_rdv = id_rdv;
 		this.dateRDV = dateRDV;
 		this.client = client;
-		RDVF = rDVF;
+		this.annonce = annonce;
 	}
 
 	public RDV( Date dateRDV) {

@@ -36,7 +36,6 @@ public class RDVServiceImpl implements RDVService {
 		RDV rdv_updated =RDVDAO.findById(id_rdv).orElse(null); 
 		rdv_updated.setClient(r.getClient());
 		rdv_updated.setDateRDV(r.getDateRDV());
-		//rdv_updated.setTitle(r.getTitle());
 		return RDVDAO.save(rdv_updated);
 	}
 

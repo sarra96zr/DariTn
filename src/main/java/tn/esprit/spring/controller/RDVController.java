@@ -32,7 +32,7 @@ import tn.esprit.spring.service.RDVService;
 @Scope(value = "session")
 @Controller(value = "RDVController") // Name of the bean in Spring IoC
 @ELBeanName(value = "RDVController") // Name of the bean used by JSF
-@Join(path = "/", to = "/RDV.jsf")
+@Join(path = "/", to = "/AddRDV2.jsf")
 @RestController
 
 public class RDVController {
@@ -42,12 +42,12 @@ public class RDVController {
 	RDVRepository rdvr;
 	public RDV rdv = new RDV();
 
-	
+
 	public Date dateRDV;
 
 
 	public void ajoutRDV() {
-		System.err.println("*********"+rdv.id_rdv);
+		System.err.println("*********"+rdv.getId_rdv());
 		System.err.println("*********"+rdv.dateRDV);
 		rdvService.addOrUpdateRDV(new RDV(rdv.dateRDV));
 	}
@@ -131,13 +131,9 @@ public class RDVController {
 		this.rdvr = rdvr;
 	}
 
-
-
-
 	public RDV getRdv() {
 		return rdv;
 	}
-
 
 
 

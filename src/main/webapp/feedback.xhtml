@@ -17,12 +17,6 @@
 						
 						<h:column>
 							<f:facet name="header">
-								<h:outputText value="Nom" />
-							</f:facet>
-							<h:outputText value="#{RDV.dateRDV}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">
 								<h:outputText value="dateRDV" />
 							</f:facet>
 							<h:outputText value="#{RDV.dateRDV}" />
@@ -33,13 +27,7 @@
 							</f:facet>
 							<h:commandButton
 								action="#{RDVController.removeRDV(RDV.id_rdv)}"
-								value="Update" />
-							<h:commandButton
-								action="#{RDVController.removeRDV(RDV.id_rdv)}"
-								value="Delete" />
-							<h:commandButton
-								action="#{RDVFeedBackController.getRDVFeedBack()}"
-								value="FeedBack" />
+								value="Supprimer" />
 						</h:column>
 					</h:dataTable>
 				</h:form>

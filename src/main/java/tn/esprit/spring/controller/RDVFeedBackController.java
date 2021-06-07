@@ -2,7 +2,11 @@ package tn.esprit.spring.controller;
 
 import java.util.List;
 
+import org.ocpsoft.rewrite.annotation.Join;
+import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,14 +16,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import tn.esprit.spring.entity.RDVFeedBack;
+import tn.esprit.spring.repository.RDVFeedBackRepository;
 import tn.esprit.spring.service.RDVFeedBackService;
+import tn.esprit.spring.entity.RDV;
 
+
+@Scope(value = "session")
+@Controller(value = "RDVFController") // Name of the bean in Spring IoC
+@ELBeanName(value = "RDVFController") // Name of the bean used by JSF
+@Join(path = "/", to = "/feedback.jsf")
 @RestController
+
 public class RDVFeedBackController {
 	
 	@Autowired
 	RDVFeedBackService rdvFeedBackService;
+	RDVFeedBackRepository rdvfr;
+	RDVFeedBack rf;
+	public RDVFeedBack rdvf = new RDVFeedBack();
 	
+	public String descRDV;
+	
+	public void ajoutRDV() {
+		System.err.println("*********"+rf.getDescRDV());
+		rdvFeedBackService.addOrUpdateRDV(new RDVFeedBack(rdvf.descRDV));
+	}
 	
 	
 	// http://localhost:8081/DariTn/Pi/retrieve-all-RDVFeedBack
@@ -65,4 +86,37 @@ public class RDVFeedBackController {
 					rdvFeedBackService.affecteFeedToRdv(id_feedback, id_rdv);
 				}
 				*/
+
+
+				public RDVFeedBackRepository getRdvfr() {
+					return rdvfr;
+				}
+
+
+				public void setRdvfr(RDVFeedBackRepository rdvfr) {
+					this.rdvfr = rdvfr;
+				}
+
+
+				public RDVFeedBack getRdvf() {
+					return rdvf;
+				}
+
+
+				public void setRdvf(RDVFeedBack rdvf) {
+					this.rdvf = rdvf;
+				}
+
+
+				public String getDescRDV() {
+					return descRDV;
+				}
+
+
+				public void setDescRDV(String descRDV) {
+					this.descRDV = descRDV;
+				}
+				
+				
+				
 }

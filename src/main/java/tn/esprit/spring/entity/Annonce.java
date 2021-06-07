@@ -49,13 +49,13 @@ public class Annonce implements Serializable {
 		@Column(name="type_annonce")
 		public Type_Annonce type_annonce;
 		
-		/*@OneToMany(mappedBy="Annonce")
-	    private Set<RDV> rdv;*/
-		
 		
 		@ManyToOne
 		
 		public User user;
+		
+		@OneToMany(cascade = CascadeType.ALL, mappedBy="Annonce")
+		private Set<RDV> rdv;        
 	
 
 		public long getId() {
@@ -126,10 +126,6 @@ public class Annonce implements Serializable {
 		public void setPrice(float price) {
 			this.price = price;
 		}
-
-
-		
-
 
 		public Type_Annonce getType_annonce() {
 			return type_annonce;
