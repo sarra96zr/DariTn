@@ -3,6 +3,10 @@ package tn.esprit.spring.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +44,8 @@ import tn.esprit.spring.service.CreditService;
 @ELBeanName(value = "credits")
 //@Join(path = "/", to = "/bank-lists.jsf")
 @Controller
+@ManagedBean
+@RequestScoped
 public class CreditController {
 	
 	@Autowired
@@ -81,6 +87,7 @@ public class CreditController {
 	
 		
 	}
+	
 	
 	//  http://localhost:8081/DariTn/Pi/credit/{id}/get
 	@GetMapping("credit/{id}/get")
@@ -129,29 +136,38 @@ private int id;
 private Credit C;
 private String bank;
 private Banque type;
+
+
 private List<Banque> cc ;
 private Credit creto;
 private float inamount;
-private Client cli;
 
 
 
 
-
-
-
-
-
-
-
-
-	public Client getCli() {
-	return cli;
+public int getClient() {
+	return client;
 }
 
-public void setCli(Client cli) {
-	this.cli = cli;
+
+
+
+
+
+public void setClient(int client) {
+	this.client = client;
 }
+
+
+
+
+
+
+public void setCc(List<Banque> cc) {
+	this.cc = cc;
+}
+
+
 
 	public float getInamount() {
 	return inamount;
@@ -174,9 +190,6 @@ public List<Banque> getCc() {
 	
 }
 
-public void setCc(List<Banque> cc) {
-	this.cc = cc;
-}
 
 	public Credit getCreto() {
 		if (creto == null) {
@@ -198,13 +211,7 @@ public void setBank(String bank) {
 	this.bank = bank;
 }
 
-	public long getClient() {
-	return client;
-}
 
-public void setClient(int client) {
-	this.client = client;
-}
 
 public int getId() {
 	return id;
@@ -253,28 +260,20 @@ public void setC(Credit c) {
 		getCre();
 	}
 	private Banque banque = new Banque();
-	public Banque getCreditformule() {
-		return banque;
-	}
-
-	public void setCreditformule(Banque creditformule) {
-		this.banque = creditformule;
-	}
+	
 	
 	
 
-	public void add(Credit k){
-	//	this.setClient(k.getClient().getId_user());
-		this.setInamount(k.getInitialamount());
-		// this.setId(k.getCreditformula().getId());
-		cli.addcredit(k);
+	public void add(){
+		
+		
+		
+		cs.ajouterCredit(client,id,C);
 		
 		
 	}
 	
-	public void addcredit() { 
-		cs.ajouterCredit(client, id, C);
-	}
+
 
 
 	

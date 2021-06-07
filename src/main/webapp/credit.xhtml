@@ -25,11 +25,13 @@
 						
 						<f:selectItems value="#{credits.cc}"
 						var="banque" itemLabel="#{banque.nombanque}"
-							itemValue="#{banque}" />
+						itemValue=""
+						
+							 />
 
 					</p:selectOneMenu>
 	<Br></Br>
-	<h:commandButton value="Add" action="#{credits.addcredit(client, id, C)}" />
+	<h:commandButton value="Add" action="#{credits.add()}" />
 	
                     
       

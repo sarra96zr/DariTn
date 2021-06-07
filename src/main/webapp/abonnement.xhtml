@@ -87,14 +87,19 @@
         <Br></Br>
             <Br></Br>
             <Br></Br>
+            
             <p:panel header="Subscription Details">
+            
 	<div class="p-field">
+	<a href="http://localhost:8081/DariTn/export/pdf">Generer PDF</a>
 <h:panelGrid columns="1">
 
                      <tr>
 							<td><h:outputText value="Start date"></h:outputText></td>
 							<td><p:datePicker id="button"
-									value="#{subscription.datedeb}" showIcon="true" /></td>
+							
+									value="#{subscription.datedeb}" showIcon="true" />
+									</td>
 						</tr>
 						<tr>
 							<td><h:outputText value="End date"></h:outputText></td>
@@ -153,7 +158,10 @@
 							</h:commandLink> /
 							<h:commandLink value="Delete"
 							action="#{subscription.removeSubscription(abonnement.id)}">
-							</h:commandLink>
+							</h:commandLink> /
+							
+							<a href="http://localhost:8081/DariTn/export/pdf">Generer contrat</a>
+							
 							
 								
 							

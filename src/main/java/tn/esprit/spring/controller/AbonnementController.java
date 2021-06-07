@@ -1,8 +1,14 @@
 package tn.esprit.spring.controller;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.dom4j.DocumentException;
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +21,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tn.esprit.spring.entity.Abonnement;
 import tn.esprit.spring.entity.Aonnement;
+import tn.esprit.spring.entity.Reclamations;
+import tn.esprit.spring.helper.GeneratePdfRec;
 import tn.esprit.spring.repository.AbonnementRepo;
 import tn.esprit.spring.service.AbonnementService;
 
@@ -104,6 +113,24 @@ public class AbonnementController {
 				public List<Abonnement> orderByDescendingId() {
 					List<Abonnement> list = abservice.orderByDescendingId();
 					return list;
+				}
+				
+				//PDF
+				// http://localhost:8081/DariTn/orders/export/pdf
+				@RequestMapping("/export/pdf")
+				public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException, com.itextpdf.text.DocumentException {
+					response.setContentType("application/pdf");
+					DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+					String currentDateTime = dateFormatter.format(new Date());
+
+					String headerKey = "Content-Disposition";
+					String headerValue = "attachment; filename=users_" + currentDateTime + ".pdf";
+					response.setHeader(headerKey, headerValue);
+
+					List<Abonnement> listorders = abservice.retrieveAllAbonnement();
+
+					GeneratePdfRec exporter = new GeneratePdfRec(listorders);
+					exporter.export(response);
 				}
 				private Date datedeb;
 				private Date datefin;

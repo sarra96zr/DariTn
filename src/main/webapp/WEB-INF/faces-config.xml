@@ -12,4 +12,9 @@ version="2.2">
 org.springframework.web.jsf.el.SpringBeanFacesELResolver
 </el-resolver>
 </application>
+
+<converter>
+    <converter-id>defaultDateTimeConverter</converter-id>
+    <converter-class>com.example.DefaultDateTimeConverter</converter-class>
+</converter>
 </faces-config>
