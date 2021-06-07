@@ -45,6 +45,12 @@ public class Credit implements Serializable{
 	@Column(name="initialamount")
 	private float initialamount;
 	
+	@Column(name="salaire")
+	private float salaire;
+	
+	@Column(name="partmensuel")
+	private float partmensuel;
+	
 	@Column(name="finalamount")
 	private float finalamount;
 	
@@ -84,10 +90,6 @@ public class Credit implements Serializable{
 		return banque;
 	}
 
-	public void setCreditformula(Banque banque) {
-		this.banque = banque;
-	}
-
 	public float getMonthly() {
 		return monthly;
 	}
@@ -112,6 +114,22 @@ public class Credit implements Serializable{
 		this.finalamount = finalamount;
 	}
 
+	public float getSalaire() {
+		return salaire;
+	}
+
+	public void setSalaire(float salaire) {
+		this.salaire = salaire;
+	}
+
+	public float getPartmensuel() {
+		return partmensuel;
+	}
+
+	public void setPartmensuel(float partmensuel) {
+		this.partmensuel = partmensuel;
+	}
+
 	@Override
 	public String toString() {
 		return "Credit [id=" + id + ", initialamount=" + initialamount + ", finalamount=" + finalamount + ", monthly="
@@ -127,6 +145,26 @@ public class Credit implements Serializable{
 
 	public Credit(long client2, float inamount, int id2) {
 		// TODO Auto-generated constructor stub
+	}
+
+	public Credit(int id, float initialamount, float salaire, float partmensuel, float finalamount, float monthly,
+			Client client, Banque banque) {
+		super();
+		this.id = id;
+		this.initialamount = initialamount;
+		this.salaire = salaire;
+		this.partmensuel = partmensuel;
+		this.finalamount = finalamount;
+		this.monthly = monthly;
+		this.client = client;
+		this.banque = banque;
+	}
+
+	public Credit(int id, float salaire, float partmensuel) {
+		super();
+		this.id = id;
+		this.salaire = salaire;
+		this.partmensuel = partmensuel;
 	}
 	
 	

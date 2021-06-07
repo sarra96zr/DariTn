@@ -42,7 +42,7 @@ public class CreditServiceImpl implements CreditService {
 		int duree=B.getDuration();
 		double interet=B.getInterestRate();
 		float somme=C.getInitialamount();	
-		float sommefinal=(float) (somme+(somme*interet));	
+		float sommefinal=(float) (somme*interet);	
 		float monthly=sommefinal/(duree);
 		C.setFinalamount(sommefinal);
 		C.setMonthly(monthly);	
@@ -50,6 +50,17 @@ public class CreditServiceImpl implements CreditService {
 		cl.addcredit(C);
 		crep.save(C);	
 	}
+	
+	@Override
+	public void capaciteClient(int client, Credit C) {
+		Client cl=(Client) urep.findById((long) client).get();
+		float somme=C.getSalaire();
+		float sommefinal=(float) (somme*0.4);	
+		C.setPartmensuel(sommefinal);
+		cl.addcredit(C);
+		crep.save(C);	
+	}
+	
 
 	@Override
 	public Credit afficherCredit(int id) {

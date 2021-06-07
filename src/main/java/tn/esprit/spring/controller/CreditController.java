@@ -141,6 +141,26 @@ private Banque type;
 private List<Banque> cc ;
 private Credit creto;
 private String inamount;
+private String salary;
+
+
+
+
+
+public String getSalary() {
+	return salary;
+}
+
+
+
+
+
+
+public void setSalary(String salary) {
+	this.salary = salary;
+}
+
+
 
 
 
@@ -259,19 +279,7 @@ public void setC(Credit c) {
 		cs.supprimerCredit(id);
 		getCre();
 	}
-	private Banque banque = new Banque();
-	
-	
-	
 
-	public void add(){
-		
-		
-		
-		cs.ajouterCredit(client,id,C);
-		
-		
-	}
 
 	public void ajouterCredits()
 	{
@@ -282,7 +290,20 @@ public void setC(Credit c) {
 		Credit C= new Credit();
 		C.setInitialamount(Float.valueOf(inamount));
 		cs.ajouterCredit(1, Integer.valueOf(bank) , C);
-		/*return new ResponseEntity<>("Ajout reussie.", HttpStatus.CREATED);*/
+		
+	
+		
+	}
+	
+	public void capaciteClient()
+	{
+		System.err.println("111");
+		System.err.println("--"+salary);
+
+		Credit C= new Credit();
+		C.setSalaire(Float.valueOf(salary));
+		cs.capaciteClient(1, C);
+		
 	
 		
 	}

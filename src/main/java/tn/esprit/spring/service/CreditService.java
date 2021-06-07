@@ -9,6 +9,7 @@ import tn.esprit.spring.entity.Credit;
 public interface CreditService {
 
 	public void ajouterCredit(int client, int id, Credit C);
+	public void capaciteClient(int client, Credit C);
 	public Credit afficherCredit(int id);
 	public void supprimerCredit(int id);
 	public void modifiercredit(int id, int credit);

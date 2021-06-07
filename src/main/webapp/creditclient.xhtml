@@ -17,21 +17,11 @@
             <p:panel header="Credit Details">
                 <h:panelGrid columns="1">
  
-                <p:outputLabel for="initial" value="InitialAmount " />
-                    <p:inputText id="initial" value="#{credits.inamount}" />
-                    
-                   <p:selectOneMenu 
-						value="#{credits.bank}">
-						
-						<f:selectItems value="#{credits.cc}"
-						var="banque" itemLabel="#{banque.nombanque}"
-						itemValue="#{banque.id}"
-						
-							 />
-
-					</p:selectOneMenu>
+                <p:outputLabel for="initial" value="Salaire " />
+                    <p:inputText id="initial" value="#{credits.salary}" />
+                   
 	<Br></Br>
-	<p:commandButton value="Calculate" update="table" actionListener="#{credits.ajouterCredits()}" styleClass="ui-button-success" /> 
+	<p:commandButton value="Calculate" update="table" actionListener="#{credits.capaciteClient()}" styleClass="ui-button-success" /> 
 	
                     
       
@@ -63,17 +53,13 @@
                   
 
                     <p:column>
-                        <f:facet name="header">initialamount</f:facet>
-                        <h:outputText value="#{credit.initialamount}" />
+                        <f:facet name="header">Salaire</f:facet>
+                        <h:outputText value="#{credit.salaire}" />
                     </p:column>
                     
                     <p:column>
-                        <f:facet name="header">finalamount</f:facet>
-                        <h:outputText value="#{credit.finalamount}" />
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">monthly</f:facet>
-                        <h:outputText value="#{credit.monthly}" />
+                        <f:facet name="header">PartMensuel Maximal</f:facet>
+                        <h:outputText value="#{credit.partmensuel}" />
                     </p:column>
                   
                    <p:column id="action">
