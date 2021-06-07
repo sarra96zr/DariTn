@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+    <ui:composition template="/template/template.xhtml">
+    <ui:param name="Product" value="Accueil" />
+	<ui:define name="content">
+		<h:head>
+		</h:head>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+		<h:body>
+			<h:form>
+   <div>
+           <div>
+             <h:outputLabel for="email" value="E-mail"/>
+            <p:inputText id="email" placeholder="name@gmail.com" required="true" value="#{userController.email}"/>
+            </div>
+            <div>
+             <h:outputLabel for="password" value="Password"/>
+             <p:password id="password" value="#{userController.password}" toggleMask="true" redisplay="true"/>
+            </div>
+            <div>
+			<h:commandLink value="Login" action="#{userController.authenticateUser()}"/>
+			<!-- <p:linkButton type="button" value="Add To Cart"
+                                         icon="pi pi-shopping-cart" 
+                                         outcome="profil">
+                        <f:param name="panier" value="#{meubles.ref_meuble}" />
+                        </p:linkButton> -->
+			</div>
+			</div>
+			</h:form>
+		</h:body>
+	  </ui:define>
+      </ui:composition>
+</html>
