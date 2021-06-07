@@ -50,7 +50,7 @@ public class TAnnonceController {
 	private Integer annonceIdToBeUpdated; 
 	public Annonce a = new Annonce();
 	public Location location = new Location();
-	static Double prixLocation;
+	static Double prixLoc;
 	private String titre , adresse, video,description, photo;
 	private Double prix;
 	final Disponible disponible=Disponible.Dispo; 
@@ -60,9 +60,9 @@ public class TAnnonceController {
 	private int rating;
 	private Double surface;
 	// aff liste
-	
-	
-	
+
+
+
 	public List<Annonce> getAnnonceVente() {
 		annonces = ann.ListeVente(Type_Annonce.Vente,Disponible.Dispo);
 		return annonces;
@@ -163,36 +163,86 @@ public class TAnnonceController {
 		return "/DariTn/welcome.xhtml";
 	}
 
-	public void louer(@PathVariable("annonce-id") String id_a) {
+
+	public Double calcul(@PathVariable("annonce-id") String id_a) {
 		Long id = Long.valueOf(id_a);
-
-		System.out.println("hello");
-		System.out.println(dateDebut);
-		System.out.println(dateFin);
-
 		Annonce a = ann.findById(id).get();
-		System.out.println(a.getPrix());
+		String datedeb = String.valueOf(dateDebut);
+		System.err.println(datedeb);
+		String date1=datedeb.substring(4,7);
+		System.err.println(date1);
+		
+		if (date1.equals("Jan") || date1.equals("Feb") || date1.equals("Mar") ){
+			return prixLoc = locationService.calculPrix(a.getPrix(), dateDebut, dateFin);
+			
+			
+		}else if (date1.equals("May") || date1.equals("Apr") || date1.equals("Jun")){
+			
+			return prixLoc = locationService.calculPrix(a.getPrix(), dateDebut, dateFin)+20;
+			
 
-		System.out.println(dateDebut);
-		System.out.println(dateFin);
+			
+			
+		}else if (date1.equals("Aug") || date1.equals("Jul")|| date1.equals("Sep")){
+			
+			return prixLoc = locationService.calculPrix(a.getPrix(), dateDebut, dateFin)+40;
+			
 
-		//locationRepository.setReserve("En_cours", id_a);
-		locationService.calculPrix(a.getPrix(), dateDebut, dateFin);
+			
+		} 
+		else{
+			
+			
+			return prixLoc = locationService.calculPrix(a.getPrix(), dateDebut, dateFin)+30;
+			
+		}
+		
+		//System.err.println(prixLoc);
+		//return prixLoc;
 
-		System.out.println(locationService.calculPrix(a.getPrix(), dateDebut, dateFin));
+	}
 
-		Double prix = locationService.calculPrix(a.getPrix(), dateDebut, dateFin);
 
-		locationService.addOrUpdateLocation(new Location(dateDebut, dateFin, prix, null, a) );
+	public void louer(@PathVariable("annonce-id") String id_a) {
 
-		//FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Prix de votre location ",""+locationService.calculPrix(a.getPrix(), dateDebut, dateFin)));
 
-		System.out.println("added");
-		prixLocation = locationService.calculPrix(a.getPrix(), dateDebut, dateFin);
+		if (dateDebut.before(dateFin)){
 
-		a.setDisponible(Disponible.En_cours);
-		annonceService.addOrUpdateAnnonce(a);
-		System.out.println(a.getDisponible());
+
+			System.err.println("hello1");
+
+			Long id = Long.valueOf(id_a);
+			Annonce a = ann.findById(id).get();
+			
+				locationService.calculPrix(a.getPrix(), dateDebut, dateFin);
+				Double prix = locationService.calculPrix(a.getPrix(), dateDebut, dateFin);
+				System.out.println(prixLoc);
+				
+				locationService.addOrUpdateLocation(new Location(dateDebut, dateFin, TAnnonceController.getPrixLoc() , null, a) );
+				System.out.println(getPrixLoc());
+				System.err.println("hello2");
+				prixLoc = locationService.calculPrix(a.getPrix(), dateDebut, dateFin);
+				a.setDisponible(Disponible.En_cours);
+				annonceService.addOrUpdateAnnonce(a);
+				System.out.println("ad");
+
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Location ajoutée"));
+				PrimeFaces.current().executeScript("PF('manageProductDialog').hide()");
+				
+			
+			
+
+		} else
+		{
+
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Vérifier les dates"));
+			// PrimeFaces.current().executeScript("PF('manageProductDialog').hide()");
+			//PrimeFaces.current().ajax().update("form:messages", "form:dt-products");
+			// clear();    
+
+		}
+
+
 	} 
 
 	public void validerLocation(@PathVariable("annonce-id") String id_a){
@@ -221,7 +271,7 @@ public class TAnnonceController {
 
 	public void showInfo() {
 
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Prix de votre location ",""+prixLocation));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Prix de votre location ",""+prixLoc));
 
 	}
 	public void addMessage(FacesMessage.Severity severity, String summary, String detail) {
@@ -376,11 +426,11 @@ public class TAnnonceController {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
-	public static Double getPrixLocation() {
-		return prixLocation;
+	public static Double getPrixLoc() {
+		return prixLoc;
 	}
-	public static void setPrixLocation(Double prixLocation) {
-		TAnnonceController.prixLocation = prixLocation;
+	public static void setPrixLoc(Double prixLocation) {
+		TAnnonceController.prixLoc = prixLocation;
 	}
 	public Double getSurface() {
 		return surface;

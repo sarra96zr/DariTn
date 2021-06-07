@@ -4,15 +4,15 @@
 <html xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 <ui:composition template="/template/template.xhtml">
 	<ui:param name="Product" value="Accueil" />
 	<ui:define name="content">
 
 
-
 		<h:head>
-			<title>Annonce</title>
+			<title>Annonces</title>
 			<style type="text/css">
 .tg {
 	border-collapse: collapse;
@@ -47,11 +47,30 @@
 	background-color: #f0f0f0;
 }
 
-.tg .tg-4eph {
+<!--
+Theme Informations --> <meta name ="viewport " content
+	 ="width =device-width, initial-scale =1"/> <meta name ="description "
+	content
+	 =""/> <meta name ="keywords " content =""/> <meta name ="author "
+	content
+	 =""/><!--Theme Informations --> <title>Real Estate-Responsive Theme
+	 </title><!--Stylesheets --> <link rel ="stylesheet " href
+	 ="bootstrap /css/bootstrap.css "/> <link rel ="stylesheet " href
+	 ="css /common-style.css "/> <link rel ="stylesheet " href
+	 ="css /magnific-popup.css "/> <link rel ="stylesheet " href
+	 ="css /style_third_theme.css "/><!--Stylesheets --><!--Icons & Fonts -->
+	<link rel ="stylesheet " href ="font-awesome /css/font-awesome.min.css 
+	 "/><!--Icons 
+	 & Fonts -->.tg .tg-4eph {
 	background-color: #f9f9f9
+}
+
+.yui-carousel-element li {
+	height: 321px;
 }
 </style>
 		</h:head>
+
 		<br></br>
 		<br></br>
 		<br></br>
@@ -87,36 +106,36 @@
 					modal="true" widgetVar="manageProductDialog" responsive="true"
 					minHeight="40" width="350" minimizable="true" maximizable="true">
 					<p:outputPanel id="manage-product-content" class="ui-fluid">
-						<p:outputPanel rendered="#{not empty annController}">
+						<p:outputPanel rendered="#{not empty annController.a}">
 
 
 							<div class="p-field">
 								<p:outputLabel for="titre">Titre</p:outputLabel>
-								<p:inputText id="titre" value="#{annController.titre}"
+								<p:inputText id="titre" value="#{annController.a.titre}"
 									required="true" />
 							</div>
 
 							<div class="p-field">
 								<p:outputLabel for="adresse">Adresse</p:outputLabel>
-								<p:inputText id="adresse" value="#{annController.adresse}"
+								<p:inputText id="adresse" value="#{annController.a.adresse}"
 									required="true" />
 							</div>
 
 							<div class="p-field">
 								<p:outputLabel for="description">Description</p:outputLabel>
 								<p:inputTextarea id="description"
-									value="#{annController.description}" required="true" />
+									value="#{annController.a.description}" required="true" />
 							</div>
 
 							<div class="p-field">
 								<p:outputLabel for="prix">Prix</p:outputLabel>
-								<p:inputNumber id="prix" value="#{annController.prix}"
+								<p:inputNumber id="prix" value="#{annController.a.prix}"
 									required="true" />
 							</div>
 
 							<div class="p-field">
 								<p:outputLabel for="surface">Surface (m2)</p:outputLabel>
-								<p:inputNumber id="surface" value="#{annController.surface}"
+								<p:inputNumber id="surface" value="#{annController.a.surface}"
 									required="true" />
 							</div>
 
@@ -141,10 +160,12 @@
 						</p:outputPanel>
 					</p:outputPanel>
 
-					<f:facet name="footer">
-									<p:commandButton value="Submit" 
-									action="#{annController.addAnnonce()}" icon="pi pi-check" />
 
+					<f:facet name="footer">
+						<p:commandButton value="Valider" icon="pi pi-check"
+							actionListener="#{annController.save1()}"
+							update="manage-product-content"
+							process="manage-product-content @this" />
 						<p:commandButton value="Annuler" icon="pi pi-times"
 							onclick="PF('manageProductDialog').hide()"
 							class="ui-button-secondary" />
@@ -181,16 +202,18 @@
 							<p:commandButton type="button" value="Acheter"
 								icon="pi pi-shopping-cart">
 							</p:commandButton>
-							
 
-								<h:commandButton
+
+							<h:commandButton
 								action="#{annController.removeAnnonce(annonceVente.id)}"
 								value="Supprimer" />
 						</div>
 					</div>
 				</div>
 
-
+				<f:facet name="footer">
+                In total there are #{fn:length(annController.annonceVente)} annonces.
+            </f:facet>
 			</p:carousel>
 		</div>
 

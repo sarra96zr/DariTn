@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.entity.Annonce;
 import tn.esprit.spring.entity.Categorie_Annonce;
+import tn.esprit.spring.entity.Disponible;
 import tn.esprit.spring.entity.Type_Annonce;
 import tn.esprit.spring.repository.AnnonceRepository;
 import tn.esprit.spring.service.AnnonceService;
@@ -50,7 +51,7 @@ public class AnnonceController {
 	@GetMapping("/retrieve-all-annonces")
 		@ResponseBody
 		public List<Annonce> getAnnonces() {
-		List<Annonce> list = ann.ListeVente(Type_Annonce.Vente);
+		List<Annonce> list = ann.ListeVente(Type_Annonce.Vente,Disponible.Dispo);
 		return list;
 		}
 	

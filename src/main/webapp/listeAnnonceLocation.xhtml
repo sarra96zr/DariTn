@@ -75,120 +75,120 @@ Theme Informations --> <meta name ="viewport " content
 		<br></br>
 
 
+		<center>
 
-		<h:form id="form">
-			<center>
-				<div class="card">
-					<h1>Annonces</h1>
-					<div class="card">
+			<h:form id="form">
+
+				<h1>Annonces</h1>
+
+				<div class="products-table-header" align="center">
+					<span style="font-weight: bold">Cherchez votre annonce</span> <span
+						class="filter-container ui-input-icon-left"> <i
+						class="pi pi-search" /> <p:inputText id="globalFilter"
+							onkeyup="PF('dtProducts').RechercheAnnonce(titre)"
+							placeholder="Search" />
+					</span>
+				</div>
 
 
-						<div class="products-table-header" align="center">
-							<span style="font-weight: bold">Cherchez votre annonce</span> <span
-								class="filter-container ui-input-icon-left"> <i
-								class="pi pi-search" /> <p:inputText id="globalFilter"
-									onkeyup="PF('dtProducts').RechercheAnnonce(titre)"
-									placeholder="Search" />
-							</span>
+				<p:carousel value="#{annController.getAnnonceLocation()}"
+					var="annonceLocation" responsive="true">
+
+
+					<div class="product-grid-item-top">
+						<div>
+							<i class="pi pi-tag product-category-icon" /> <span
+								class="product-category"><h2>#{annonceLocation.titre}</h2></span>
 						</div>
+					</div>
+					<div class="product-grid-item-content">
+						<img class="responsive" src="img/selling-img/sel-img1.jpg"
+							width="100" height="100" />
+						<div class="product-name">#{annonceLocation.description}</div>
+						<div class="product-description">#{annonceLocation.adresse}</div>
 
+					</div>
 
-						<p:carousel value="#{annController.getAnnonceLocation()}"
-							var="annonceLocation" responsive="true">
-							<div class="product">
-								<div class="product-grid-item p-p-5">
-									<div class="product-grid-item-top">
-										<div>
-											<i class="pi pi-tag product-category-icon" /> <span
-												class="product-category"><h2>#{annonceLocation.titre}</h2></span>
-										</div>
-									</div>
-									<div class="product-grid-item-content">
-										<img class="responsive" src="img/selling-img/sel-img1.jpg"
-											width="100" height="100" />
-										<div class="product-name">#{annonceLocation.description}</div>
-										<div class="product-description">#{annonceLocation.adresse}</div>
-
-									</div>
-									<div class="product-grid-item-bottom">
-										<h:outputText value="#{annonceLocation.prix}"
-											styleClass="product-price">
-											<f:convertNumber currencySymbol="DT" type="currency" />
-										</h:outputText>
-										<br></br>
-										<p:rating readonly="true" value="#{annonceLocation.rating}" />
-										<br></br>
-										<p:commandButton value="Louer" icon="pi pi-plus"
-											oncomplete="PF('manageProductDialog').show()"
-											styleClass="ui-button-info" style="margin-right: .5rem">
-											<p:resetInput target=":form:manage-product-content" />
-										</p:commandButton>
-										<h:form>
-											<p:growl id="growl" showDetail="true" />
-											<p:growl id="growl-sticky" for="sticky-key" showDetail="true"
-												sticky="true" />
-											<p:commandButton actionListener="#{growlView.showInfo1()}"
-												update="growl" value="Afficher prix de location"
-												styleClass="p-mr-2" style="width: 10rem" />
-										</h:form>
-										<p:dialog header="Deposer votre demande de location"
-											showEffect="fade" modal="true"
-											widgetVar="manageProductDialog" responsive="true"
-											minHeight="40" width="350" minimizable="true"
-											maximizable="true">
-											<p:outputPanel id="manage-product-content" class="ui-fluid">
-												<p:outputPanel rendered="#{not empty annController}">
+					<h:outputText value="#{annonceLocation.prix}"
+						styleClass="product-price">
+						<f:convertNumber currencySymbol="DT" type="currency" />
+					</h:outputText>
+					<br></br>
+					<p:rating readonly="true" value="#{annonceLocation.rating}" />
+					<br></br>
+					<p:commandButton value="Louer" icon="pi pi-plus"
+						oncomplete="PF('manageProductDialog').show()"
+						styleClass="ui-button-info" style="margin-right: .5rem">
+						<p:resetInput target=":form:manage-product-content" />
+					</p:commandButton>
+					<h:form>
+						<p:growl id="growl" showDetail="true" />
+						<p:growl id="growl-sticky" for="sticky-key" showDetail="true"
+							sticky="true" />
+					</h:form>
 
 
 
+					<p:dialog header="Deposer votre demande de location"
+						showEffect="fade" modal="true" widgetVar="manageProductDialog"
+						responsive="true" minHeight="40" width="350" minimizable="true"
+						maximizable="true">
+						<p:outputPanel id="manage-product-content" class="ui-fluid">
+							<p:outputPanel rendered="#{not empty annController}">
 
-													<div class="p-field">
-														<p:outputLabel for="dateDebut">Date debut :</p:outputLabel>
-														<p:calendar id="dateDebut"
-															value="#{annController.dateDebut}" locale="fr"
-															pattern="dd.MM.yyyy HH:mm" />
-													</div>
-													<div class="p-field">
-														<p:outputLabel for="dateFin">Date fin :</p:outputLabel>
-														<p:calendar id="dateFin" value="#{annController.dateFin}"
-															locale="fr" pattern="dd.MM.yyyy HH:mm" />
-													</div>
-
-
-												</p:outputPanel>
-											</p:outputPanel>
-
-											<f:facet name="footer">
-												<h:form>
-													<p:growl id="growl" showDetail="true" />
-													<p:growl id="growl-sticky" for="sticky-key"
-														showDetail="true" sticky="true" />
-													<p:commandButton actionListener="#{growlView.showInfo()}"
-														update="growl" value="Afficher prix de location"
-														styleClass="p-mr-2" style="width: 10rem" />
-												</h:form>
-												<p:commandButton value="Valider" icon="pi pi-check"
-													action="#{annController.louer(annonceLocation.id)}"
-													update="manage-product-content"
-													process="manage-product-content @this" />
-
-												<p:commandButton value="Annuler" icon="pi pi-times"
-													onclick="PF('manageProductDialog').hide()"
-													class="ui-button-secondary" />
-											</f:facet>
-										</p:dialog>
-									</div>
+								<div class="p-field">
+									<p:outputLabel for="dateDebut">Date debut :</p:outputLabel>
+									<p:calendar id="dateDebut" value="#{annController.dateDebut}"
+										locale="fr" pattern="dd.MM.yyyy HH:mm" />
 								</div>
-							</div>
+								<div class="p-field">
+									<p:outputLabel for="dateFin">Date fin :</p:outputLabel>
+									<p:calendar id="dateFin" value="#{annController.dateFin}"
+										locale="fr" pattern="dd.MM.yyyy HH:mm" />
+								</div>
+								<div class="p-field">
+									<p:outputLabel for="dateDebut">Prix de la location :</p:outputLabel>
+									<br />
+									<h:outputText value="#{annController.getPrixLoc()}"
+										styleClass="product-price">
+										<f:convertNumber currencySymbol="DT" type="currency" />
+									</h:outputText>
+								</div>
 
-							<f:facet name="footer">
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<f:facet name="footer">
+
+
+
+							<p:commandButton value="Afficher prix" icon="pi pi-check"
+								action="#{annController.calcul(annonceLocation.id)}"
+								update="manage-product-content"
+								process="manage-product-content @this" />
+
+							<p:commandButton value="Valider" icon="pi pi-check"
+								action="#{annController.louer(annonceLocation.id)}"
+								update="manage-product-content"
+								process="manage-product-content @this" 
+								oncomplete="javascript:window.location.reload()"/>
+
+							<p:commandButton value="Annuler" icon="pi pi-times"
+								onclick="PF('manageProductDialog').hide()"
+								class="ui-button-secondary" />
+						</f:facet>
+					</p:dialog>
+
+
+					<f:facet name="footer">
                 In total there are #{fn:length(annController.annonceLocation)} annonces.
             </f:facet>
-						</p:carousel>
-					</div>
-				</div>
-			</center>
-		</h:form>
+				</p:carousel>
+
+			</h:form>
+
+		</center>
+
 
 	</ui:define>
 </ui:composition>
