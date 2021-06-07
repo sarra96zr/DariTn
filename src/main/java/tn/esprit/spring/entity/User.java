@@ -1,12 +1,18 @@
 package tn.esprit.spring.entity;
-import java.io.Serializable;
+
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
-@Table(name="T_User")
-public class User implements Serializable {
+public class User {
 	private static final long serialVersionUID = 1L;
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +24,17 @@ private String lastName ;
 private String email;
 
 private String password;
+private String roles;
 
- private Date date_de_naissance;
+
+ public String getRoles() {
+	return roles;
+}
+public void setRoles(String roles) {
+	this.roles = roles;
+}
+
+private Date date_de_naissance;
 
 	public long getId_user() {
 	return id_user;
@@ -79,14 +94,15 @@ public static long getSerialversionuid() {
 	@OneToMany (cascade= CascadeType.ALL , mappedBy="user")
 	private Set<Notifications> notifications;
 
-	public User(long id_user, String firstName, String lastName, String email, String password, Date date_de_naissance,
-			 Set<Annonce> annonces, Set<Notifications> notifications) {
+
+	public User(String firstName, String lastName, String email, String password, String roles,
+			Date date_de_naissance, Set<Annonce> annonces, Set<Notifications> notifications) {
 		super();
-		this.id_user = id_user;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+		this.roles = roles;
 		this.date_de_naissance = date_de_naissance;
 		this.annonces = annonces;
 		this.notifications = notifications;
@@ -97,5 +113,7 @@ public static long getSerialversionuid() {
 	
 	
 	
+
+
 
 }
