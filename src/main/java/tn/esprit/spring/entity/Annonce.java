@@ -1,6 +1,7 @@
 package tn.esprit.spring.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -54,8 +55,8 @@ public class Annonce implements Serializable {
 		
 		public User user;
 		
-		@OneToMany(cascade = CascadeType.ALL, mappedBy="Annonce")
-		private Set<RDV> rdv;        
+		@OneToMany(cascade = CascadeType.ALL)
+		private List<RDV> rdv;        
 	
 
 		public long getId() {
@@ -144,6 +145,18 @@ public class Annonce implements Serializable {
 
 		public void setUser(User user) {
 			this.user = user;
+		}
+		
+		
+
+
+		public List<RDV> getRdv() {
+			return rdv;
+		}
+
+
+		public void setRdv(List<RDV> rdv) {
+			this.rdv = rdv;
 		}
 
 

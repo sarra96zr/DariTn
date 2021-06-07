@@ -32,7 +32,7 @@ import tn.esprit.spring.service.RDVService;
 @Scope(value = "session")
 @Controller(value = "RDVController") // Name of the bean in Spring IoC
 @ELBeanName(value = "RDVController") // Name of the bean used by JSF
-@Join(path = "/", to = "/AddRDV2.jsf")
+@Join(path = "/", to = "/RDV.jsf")
 @RestController
 
 public class RDVController {
