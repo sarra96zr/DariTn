@@ -133,7 +133,7 @@ public class CreditServiceImpl implements CreditService {
 
 					msg.setTo(emails[i]);
 					msg.setSubject("Votre demande de crédit a été accepté  ");
-					msg.setText("Cher client,"+(emailTemplate.getClient().getFirstName()+emailTemplate.getClient().getLastName()+"nous vous informons que votre demande de crédit"+emailTemplate.getFinalamount()+"a été accepté"));
+					msg.setText("Cher "+(emailTemplate.getClient().getFirstName()+emailTemplate.getClient().getLastName()+"nous vous informons que votre demande de crédit"+emailTemplate.getFinalamount()+"a été accepté"));
 					mailSender.send(msg);
 				}
 
