@@ -27,7 +27,7 @@ private static final long serialVersionUID = 1L;
 	@ManyToOne(cascade = CascadeType.ALL)
 	private  Annonce annonce;
 	
-	/*
+	/*@JsonIgnore
 	@OneToOne
 	private RDVFeedBack RDVF;*/
 

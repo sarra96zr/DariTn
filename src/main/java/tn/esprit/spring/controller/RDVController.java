@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import tn.esprit.spring.entity.Annonce;
 import tn.esprit.spring.entity.RDV;
 import tn.esprit.spring.repository.RDVRepository;
 import tn.esprit.spring.service.RDVService;
@@ -41,15 +42,15 @@ public class RDVController {
 	RDVService rdvService;
 	RDVRepository rdvr;
 	public RDV rdv = new RDV();
-
-
 	public Date dateRDV;
 
 
 	public void ajoutRDV() {
 		System.err.println("*********"+rdv.getId_rdv());
 		System.err.println("*********"+rdv.dateRDV);
-		rdvService.addOrUpdateRDV(new RDV(rdv.dateRDV));
+		RDV r = new RDV(rdv.dateRDV);
+		
+		rdvService.addOrUpdateRDV(r);
 	}
 
 	public void onDateSelect(SelectEvent<Date> event) {

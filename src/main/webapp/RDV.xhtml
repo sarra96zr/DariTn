@@ -9,17 +9,15 @@
 	<ui:define name="menu">
 		<h:panelGroup columns="2">
 			<center>
-				<br/>
-				<br/>
-				<br/>
+				<br /> <br /> <br />
 				<h:form>
 					<h:dataTable value="#{RDVController.getRDV()}" var="RDV" border="1">
-						
+
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Nom" />
 							</f:facet>
-							<h:outputText value="#{RDV.dateRDV}" />
+							<h:outputText value="#{RDV.annonce.title}" />
 						</h:column>
 						<h:column>
 							<f:facet name="header">
@@ -31,15 +29,19 @@
 							<f:facet name="header">
 								<h:outputText value="Action" />
 							</f:facet>
-							<h:commandButton
-								action="#{RDVController.removeRDV(RDV.id_rdv)}"
+							<h:commandButton action="#{RDVController.removeRDV(RDV.id_rdv)}"
 								value="Update" />
-							<h:commandButton
-								action="#{RDVController.removeRDV(RDV.id_rdv)}"
+							<h:commandButton action="#{RDVController.removeRDV(RDV.id_rdv)}"
 								value="Delete" />
-							<h:commandButton
-								action="#{RDVFeedBackController.getRDVFeedBack()}"
-								value="FeedBack" />
+ 							<h:commandButton
+								action="/feedback.xhtml"
+								value="FeedBack"
+								actionListener="#{RDVFeedBackController.ajoutRDV()}">
+								<f:param name="feed" value="RDV.id_rdv" />
+								</h:commandButton>
+							
+						
+
 						</h:column>
 					</h:dataTable>
 				</h:form>

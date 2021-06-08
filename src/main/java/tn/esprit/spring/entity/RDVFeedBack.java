@@ -7,13 +7,13 @@ import javax.persistence.*;
 @Entity
 @Table(name="RDVFeedBack")
 public class RDVFeedBack implements Serializable{
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column(name="id_rdv_feedback")
+    @Column(name="id")
 	public long id;
 	
-	@Column(name="descRDV")
+	@Column(name="description")
 	public String descRDV;
 	
 	@OneToOne

@@ -4,35 +4,37 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/template/template.xhtml">
+	xmlns:p="http://primefaces.org/ui" template="/template/template.xhtml">
 	<ui:param name="page_name" value="Connexion" />
 	<ui:define name="menu">
 		<h:panelGroup columns="2">
 			<center>
-				<br/>
-				<br/>
-				<br/>
+				<br /> <br /> <br /> <br /> <br /> <br />
 				<h:form>
-					<h:dataTable value="#{RDVController.getRDV()}" var="RDV" border="1">
+					<h:panelGrid columns="2" cellpadding="5">
+						<tr>
+							<td><p:outputLabel value="FeedBack sur le rendez-vous:" /></td>
+							<td><p:inputTextarea for="descRDV"
+									value="#{RDVFeedBackController.rdvf.descRDV}" /></td>
+						</tr>
+					</h:panelGrid>
+					<p:commandButton value="Submit"
+						action="#{RDVFeedBackController.ajoutRDV()}" icon="pi pi-check" />
 						
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="dateRDV" />
-							</f:facet>
-							<h:outputText value="#{RDV.dateRDV}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Action" />
-							</f:facet>
-							<h:commandButton
-								action="#{RDVController.removeRDV(RDV.id_rdv)}"
-								value="Supprimer" />
-						</h:column>
-					</h:dataTable>
+					<p:dialog modal="true" resizable="false" header="Values"
+						widgetVar="dlg" showEffect="fold">
+						
+						<p:panelGrid id="display" columns="2" columnClasses="label,value">
+						
+							<h:outputText value="FeedBack sur le rendez-vous:" />
+							<h:inputTextarea value="#{RDVFeedBackController.rdvf.descRDV}" />
+							
+						</p:panelGrid>
+						
+					</p:dialog>
+
 				</h:form>
 			</center>
-
 		</h:panelGroup>
 	</ui:define>
 </ui:composition>

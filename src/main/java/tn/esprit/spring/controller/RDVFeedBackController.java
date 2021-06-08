@@ -20,11 +20,6 @@ import tn.esprit.spring.repository.RDVFeedBackRepository;
 import tn.esprit.spring.service.RDVFeedBackService;
 import tn.esprit.spring.entity.RDV;
 
-
-@Scope(value = "session")
-@Controller(value = "RDVFController") // Name of the bean in Spring IoC
-@ELBeanName(value = "RDVFController") // Name of the bean used by JSF
-@Join(path = "/", to = "/feedback.jsf")
 @RestController
 
 public class RDVFeedBackController {
@@ -32,13 +27,11 @@ public class RDVFeedBackController {
 	@Autowired
 	RDVFeedBackService rdvFeedBackService;
 	RDVFeedBackRepository rdvfr;
-	RDVFeedBack rf;
 	public RDVFeedBack rdvf = new RDVFeedBack();
-	
 	public String descRDV;
 	
 	public void ajoutRDV() {
-		System.err.println("*********"+rf.getDescRDV());
+		System.err.println("*********"+rdvf.descRDV);
 		rdvFeedBackService.addOrUpdateRDV(new RDVFeedBack(rdvf.descRDV));
 	}
 	
