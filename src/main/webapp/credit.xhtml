@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/tags">
+<ui:composition template="layout.xhtml">
+	<ui:define name="content">
+        <h:form id="productForm">
+            <p:panel header="Bank Details">
+                <h:panelGrid columns="1">
+ 
+                <p:outputLabel for="initial" value="Name: " />
+                    <p:inputText id="initial" value="#{credits.cre.initialamount}" />
+                    
+                    <h:commandButton value="Add" action="#{credits.save()}" />
+                </h:panelGrid>
+            </p:panel>
+        <p:panel header="Bank List">
+        
+        
+        <f:facet name="header">
+<div class="products-table-header">
+
+<span class="filter-container ui-input-icon-left">
+<i class="pi pi-search"/>
+<p:inputText id="globalFilter" onkeyup="PF('dtProducts').SearchProductByName(nom_meuble)" placeholder="Search"/>
+</span>
+</div>
+</f:facet>
+        
+        
+        
+                <p:dataTable id="table"  value="#{credits.getCredits()}" var="credit">
+                    <p:column>
+                        <f:facet name="header">Client</f:facet>
+                        <h:outputText value="#{credit.client.firstName}" />
+                        
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">formule</f:facet>
+                        <h:outputText value="#{credit.creditformula.id}" />
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">initialamount</f:facet>
+                        <h:outputText value="#{credit.initialamount}" />
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">finalamount</f:facet>
+                        <h:outputText value="#{credit.finalamount}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">monthly</f:facet>
+                        <h:outputText value="#{credit.monthly}" />
+                    </p:column>
+                  
+                   <p:column id="action">
+						<f:facet name="header"><h:outputText value="Action" /></f:facet>
+						<h:commandLink value="Edit"
+							action="#{bankLists.editBanque(banque)}">
+							</h:commandLink> /
+							<h:commandLink value="Delete"
+								action="#{credits.removeCredit(credit.id)}">
+								
+							</h:commandLink>
+							
+
+					</p:column>
+                    
+                    
+    
+
+                   
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
