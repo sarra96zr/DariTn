@@ -13,4 +13,5 @@ public interface LocationService {
 	List<Location> retrieveAllLocation();
 	Long addOrUpdateLocation(Location l);
 	void deleteLocation(String id);
+	public void sendTextEmail(Location r);
 }

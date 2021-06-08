@@ -56,7 +56,8 @@ PrimeFaces.locales ['fr'] = {
 
 					<tr>
 						<td><p:outputLabel for="titre" value="Titre:" /></td>
-						<td><p:inputText id="titre" value="#{annController.getTitreID(param['id'])}" /></td>
+						<td><p:inputText id="titre"
+								value="#{annController.getTitreID(param['id'])}" /></td>
 					</tr>
 					<tr>
 						<td><p:outputLabel for="description" value="Description:" /></td>
@@ -74,7 +75,8 @@ PrimeFaces.locales ['fr'] = {
 
 					<tr>
 						<td><p:outputLabel for="prix" value="Prix:" /></td>
-						<td><p:inputNumber id="prix" value="#{annController.getPrixID(param['id'])}" /></td>
+						<td><p:inputNumber id="prix"
+								value="#{annController.getPrixID(param['id'])}" /></td>
 					</tr>
 					<tr>
 						<td><p:outputLabel for="surface" value="Surface (m2)" /></td>
@@ -97,12 +99,15 @@ PrimeFaces.locales ['fr'] = {
 								<f:selectItems value="#{annController.typec}" />
 							</h:selectOneMenu></td>
 					</tr>
-					<tr>
+					
 						<center>
-							<p:commandButton value="Submit" update="msgs"
+							<p:button value="Submit" update="msgs"
 								action="#{annController.updateAnnonce()}" icon="pi pi-check" />
+							<p:button
+								action="#{annController.removeAnnoncee(param['id'])}"
+								value="Supprimer" />
 						</center>
-					</tr>
+				
 					<br />
 					<br></br>
 					<br></br>

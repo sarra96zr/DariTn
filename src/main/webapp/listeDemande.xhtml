@@ -55,9 +55,7 @@
 		<br></br>
 		<br></br>
 		<br></br>
-
 		<h:form>
-
 			<h1>
 				<center>Liste des demandes de locations</center>
 			</h1>
@@ -82,7 +80,8 @@
 				<p:column exportable="false">
 					<p:commandButton
 						action="#{locationController.validerLocation(loc.annonce.id)}"
-						icon="pi pi-times" value="Valider" update="dt-products" />
+						icon="pi pi-times" value="Valider" update="dt-products" 
+						actionListener="#{annController.sendEmail(loc)}"/>
 				</p:column>
 				<p:column exportable="false">
 					<p:commandButton

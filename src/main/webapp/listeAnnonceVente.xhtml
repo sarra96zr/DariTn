@@ -157,9 +157,11 @@ Theme Informations --> <meta name ="viewport " content
 						<f:param name="id" value="#{annonceVente.id}" />
 					</p:linkButton>
 
-					<h:commandButton
-						action="#{annController.removeAnnonce(annonceVente.id)}"
-						value="Supprimer" />
+					<h:commandButton value="supprimer" icon="pi pi-check"
+						action="#{annController.remove(annonceVente.id)}"
+						update="manage-product-content"
+						process="manage-product-content @this"
+						oncomplete="javascript:window.location.reload()" />
 
 
 					<h:form>

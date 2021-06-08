@@ -20,7 +20,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.primefaces.*;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
@@ -38,9 +41,10 @@ import tn.esprit.spring.service.LocationService;
 import tn.esprit.spring.service.VenteService;
 
 @Scope(value="session")
-@ELBeanName(value = "annonceController") // Name of the bean used by JSF
+@ELBeanName(value = "annController") // Name of the bean used by JSF
 @Join(path = "/", to = "/listeAnnonceVente.jsf")
 @Controller(value = "annController")
+@RestController
 public class TAnnonceController {
 
 	@Autowired
@@ -71,7 +75,20 @@ public class TAnnonceController {
 	private Long update;
 	private int rating;
 	private Double surface;
-
+	
+	
+	//mail
+	@PostMapping(value="/textemail",consumes = "application/json", produces = "application/json")
+	public String sendEmail(@RequestBody Location emailTemplate) {
+		try {
+			//log.info("Sending Simple Text Email....");
+			locationService.sendTextEmail(emailTemplate);
+			return "Email Sent!";
+		} catch (Exception ex) {
+			return "Error in sending email: " + ex;
+		}
+	}
+	
 
 
 
@@ -163,7 +180,7 @@ public class TAnnonceController {
 	}
 
 	public String getTitreID(String id_a){
-		Long id = Long.valueOf(id_a);
+		Long id = Long.parseLong(id_a);
 		Annonce a = ann.findById(id).get();
 		System.err.println(a.getId());
 		System.err.println(a.getTitre());
@@ -180,7 +197,7 @@ public class TAnnonceController {
 		return a.getDescription();
 	}
 	public String getAddID(String id_a){
-		Long id = Long.valueOf(id_a);
+		Long id = Long.parseLong(id_a);
 		Annonce a = ann.findById(id).get();
 		System.err.println(a.getId());
 		System.err.println(a.getTitre());
@@ -228,16 +245,16 @@ public class TAnnonceController {
 	}
 
 	//delete
-	public void removeAnnonce(@PathVariable("annonce-id") String id_a) {
-		Long id = Long.valueOf(id_a);
+	public void removeAnnonce(String id_a) {
+
 		System.out.print(id_a);
 		System.out.println("hello");
 		annonceService.deleteAnnonce(id_a);
 
 	}
 	//methode 2
-	public void delete(@PathVariable("annonce-id") String id_a) {
-		addMessage("Confirmed", "Record deleted");
+	public void delete(String id_a) {
+		
 		Long id = Long.valueOf(id_a);
 		System.out.print(id_a);
 		System.out.println("hello");

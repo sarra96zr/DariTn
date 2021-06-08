@@ -5,15 +5,22 @@ import java.util.List;
 
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.entity.Annonce;
 import tn.esprit.spring.entity.Location;
 import tn.esprit.spring.repository.AnnonceRepository;
 import tn.esprit.spring.repository.LocationRepository;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.SimpleMailMessage;
 
 @Service
 public class LocationServiceImpl implements LocationService{
+	
+	@Autowired
+	private JavaMailSender javaMailSender;
 	
 	@Autowired
 	LocationRepository locarepo;
@@ -54,7 +61,36 @@ public class LocationServiceImpl implements LocationService{
 		locarepo.deleteById(Long.parseLong(id));
 		
 	}
-	
-	
+	@Override
+	public void sendTextEmail(Location emailTemplate) {
+
+		SimpleMailMessage msg = new SimpleMailMessage();
+		try {
+			if (emailTemplate.getUser().getEmail().contains(",")) {
+				String[] emails = emailTemplate.getUser().getEmail().split(",");
+				int receipantSize = emails.length;
+				for (int i = 0; i < receipantSize; i++) {
+
+					msg.setTo(emails[i]);
+					msg.setSubject("Votre demande de location de l'annonce : "+emailTemplate.getAnnonce().titre);
+					msg.setText("Cher client,"+(emailTemplate.getUser().getFirstName()+emailTemplate.getUser().getLastName()+"nous vous informons que votre demande de location est prise en considération avec un prix de ")+emailTemplate.getPrixLocation());
+					javaMailSender.send(msg);
+				}
+
+			} else {
+				msg.setTo(emailTemplate.getUser().getEmail());
+				msg.setSubject("Votre réclamation"+emailTemplate.getPrixLocation());
+				msg.setText("Cher client, "+(emailTemplate.getUser().getFirstName()+" "+emailTemplate.getUser().getLastName()+" nous vous informons que votre réclamation est prise en considération."));
+				javaMailSender.send(msg);
+				javaMailSender.send(msg);
+			}
+
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 
 }
