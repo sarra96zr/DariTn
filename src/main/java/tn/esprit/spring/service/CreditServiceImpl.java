@@ -119,23 +119,41 @@ public class CreditServiceImpl implements CreditService {
 		crep.save(C);
 }
 
-	@Override
-	public void emailagentbancaire(int credit, String sender, String subject, String body) {
-		// TODO Auto-generated method stub
-		Credit C=crep.findById(credit).get();
-	//	Banque bank=C.getCreditformula().getBank();
-		//Expert_financier E=urep.findbankagentbybankid(bank).get();
-		//String email=E.getEmail();
-		SimpleMailMessage message = new SimpleMailMessage();		 
-		message.setFrom(sender);
-	//	message.setTo(email);
-		message.setSubject(subject);
-		message.setText(body);		 
-		mailSender.send(message);
+
+
+	public void sendTextEmail(Credit emailTemplate) {
+
+		SimpleMailMessage msg = new SimpleMailMessage();
+		try {
+			if (emailTemplate.getPartmensuel()>emailTemplate.getMonthly()) {
+
+				String[] emails = emailTemplate.getClient().getEmail().split(",");
+				int receipantSize = emails.length;
+				for (int i = 0; i < receipantSize; i++) {
+
+					msg.setTo(emails[i]);
+					msg.setSubject("Votre demande de crédit a été accepté  ");
+					msg.setText("Cher client,"+(emailTemplate.getClient().getFirstName()+emailTemplate.getClient().getLastName()+"nous vous informons que votre demande de crédit"+emailTemplate.getFinalamount()+"a été accepté"));
+					mailSender.send(msg);
+				}
+
+			} else {
+				msg.setTo(emailTemplate.getClient().getEmail());
+				msg.setSubject("Demande de credit");
+				msg.setText("Cher client, "+(emailTemplate.getClient().getFirstName()+" "+emailTemplate.getClient().getLastName()+"nous vous informons que votre demande de crédit"+emailTemplate.getFinalamount()+"n'a pas été accepté"));
+				mailSender.send(msg);
+				mailSender.send(msg);
+			}
+
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+		}}}
 		
-	}
+
+	
 	
 
 	
 	
-}

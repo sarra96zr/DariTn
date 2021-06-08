@@ -68,8 +68,11 @@
 							<h:commandLink value="Delete"
 								action="#{credits.removeCredit(credit.id)}">
 								
+							</h:commandLink>/
+							<h:commandLink value="compare" update="dt-products"
+								action="#{credits.sendEmail(credit)}">
 							</h:commandLink>
-							
+						
 
 					</p:column>
                     

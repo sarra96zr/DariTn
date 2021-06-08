@@ -82,7 +82,10 @@
 							<h:commandLink value="Delete"
 								action="#{credits.removeCredit(credit.id)}">
 								
-							</h:commandLink>
+							</h:commandLink> 
+							<p:linkButton outcome="/creditclient" value="Simulate" type="button" styleClass="p-mr-2" style="width: 10rem">
+                            <f:param name="feed" value="#{credit.monthly}"/>
+                        </p:linkButton>
 							
 
 					</p:column>

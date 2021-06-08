@@ -15,6 +15,6 @@ public interface CreditService {
 	public void modifiercredit(int id, int credit);
 	public List<Credit> getallcreditsofclient(int id_client);
 	public List<Credit> retrieveAllCredit();
-	public void emailagentbancaire(int credit , String email, String subject, String message);
+	public void sendTextEmail(Credit c);
 	
 }

@@ -121,13 +121,17 @@ public class CreditController {
 		cs.modifiercredit(credit, id);		
 		return new ResponseEntity<>("success.", HttpStatus.ACCEPTED);
 	}
+
 	
-//  http://localhost:8081/Pi/client/client/{client}/credit/{id}/email
-	@PostMapping("/client/{client}/credit/{id}/email")
-	public ResponseEntity<String> emailagentbancaire( @PathVariable("client") int client, @PathVariable("id") int id,  @RequestParam(name="sender",required=false) String sender,  @RequestParam(name="subject",required=false) String subject, @RequestParam(name="body",required=false) String body)
-	{
-		cs.emailagentbancaire(id, sender, subject, body);
-		return new ResponseEntity<>("success.", HttpStatus.CREATED);
+	@PostMapping(value="/textemail",consumes = "application/json", produces = "application/json")
+	public String sendEmail(@RequestBody Credit emailTemplate) {
+		try {
+			//log.info("Sending Simple Text Email....");
+			cs.sendTextEmail(emailTemplate);
+			return "Email Sent!";
+		} catch (Exception ex) {
+			return "Error in sending email: " + ex;
+		}
 	}
 	
 	private List<Credit> credits; // ajouter le getter et le setter
