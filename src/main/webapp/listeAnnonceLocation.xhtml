@@ -170,8 +170,8 @@ Theme Informations --> <meta name ="viewport " content
 							<p:commandButton value="Valider" icon="pi pi-check"
 								action="#{annController.louer(annonceLocation.id)}"
 								update="manage-product-content"
-								process="manage-product-content @this" 
-								oncomplete="javascript:window.location.reload()"/>
+								process="manage-product-content @this"
+								oncomplete="javascript:window.location.reload()" />
 
 							<p:commandButton value="Annuler" icon="pi pi-times"
 								onclick="PF('manageProductDialog').hide()"

@@ -12,9 +12,8 @@
 			<meta charset="utf-8" />
 		</h:head>
 
-		<h:panelGroup columns="2">
+		
 			<center>
-				<br /> <br /> <br /> <br /> <br /> <br />
 				<script type="text/javascript">
 PrimeFaces.locales ['fr'] = {
 	    closeText: 'Fermer',
@@ -50,15 +49,10 @@ PrimeFaces.locales ['fr'] = {
 				<h:form>
 					<p:growl id="msgs" showDetail="true"
 						skipDetailIfEqualsSummary="true" />
+<br><br></br></br>
+<h2> Veuillez introduire vos données</h2>
+					<h:panelGrid >
 
-
-					<h:panelGrid columns="2" cellpadding="5">
-
-						<!-- 	<tr>
-							<td><p:outputLabel for="title" value="titre:" /></td>
-							<td><p:inputText id="title"
-									value="#{RDVController.rdv.title}" /></td>
-						</tr> -->
 
 						<tr>
 							<td><p:outputLabel for="titre" value="Titre:" /></td>
@@ -106,7 +100,8 @@ PrimeFaces.locales ['fr'] = {
 						<tr>
 							<center>
 								<p:commandButton value="Submit" update="msgs"
-									action="#{annController.addAnnonce()}" icon="pi pi-check" />
+									action="#{annController.addAnnonce()}" icon="pi pi-check"
+									/>
 							</center>
 						</tr>
 						<br />
@@ -116,6 +111,6 @@ PrimeFaces.locales ['fr'] = {
 
 				</h:form>
 			</center>
-		</h:panelGroup>
+	
 	</ui:define>
 </ui:composition>

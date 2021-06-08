@@ -70,152 +70,158 @@ Theme Informations --> <meta name ="viewport " content
 }
 </style>
 		</h:head>
-
 		<br></br>
 		<br></br>
 		<br></br>
 
-		<div class="card crud-demo">
+
+		<center>
 
 			<h:form id="form">
-				<p:growl id="messages" showDetail="true" />
-				<p:toolbar>
-					<p:toolbarGroup>
 
-						<f:facet name="header">
-							<div class="products-table-header">
-								<span style="font-weight: bold">Liste des annonces</span> <span
-									class="filter-container ui-input-icon-left"> <i
-									class="pi pi-search" /> <p:inputText id="globalFilter"
-										onkeyup="PF('dtProducts').RechercheAnnonce(annonce_title)"
-										placeholder="Search" />
-								</span>
-							</div>
-						</f:facet>
-					</p:toolbarGroup>
-					<p:toolbarGroup align="right">
-						<p:commandButton value="Ajouter une annonce" icon="pi pi-plus"
-							oncomplete="PF('manageProductDialog').show()"
-							styleClass="ui-button-info" style="margin-right: .5rem">
-							<p:resetInput target=":form:manage-product-content" />
-						</p:commandButton>
-					</p:toolbarGroup>
-				</p:toolbar>
+				<h1>Annonces</h1>
 
-				<p:dialog header="Ajouter une nouvelle annonce" showEffect="fade"
-					modal="true" widgetVar="manageProductDialog" responsive="true"
-					minHeight="40" width="350" minimizable="true" maximizable="true">
-					<p:outputPanel id="manage-product-content" class="ui-fluid">
-						<p:outputPanel rendered="#{not empty annController.a}">
+				<div class="products-table-header" align="center">
+					<span style="font-weight: bold">Cherchez votre annonce</span> <span
+						class="filter-container ui-input-icon-left"> <i
+						class="pi pi-search" /> <p:inputText id="globalFilter"
+							onkeyup="PF('dtProducts').RechercheAnnonce(titre)"
+							placeholder="Search" />
+					</span>
+				</div>
+				<h:form id="form">
+					<p:growl id="messages" showDetail="true" />
+					<p:toolbar>
+						<p:toolbarGroup>
+
+							<f:facet name="header">
+								<div class="products-table-header">
+									<span style="font-weight: bold">Liste des annonces</span> <span
+										class="filter-container ui-input-icon-left"> <i
+										class="pi pi-search" /> <p:inputText id="globalFilter"
+											onkeyup="PF('dtProducts').RechercheAnnonce(annonce_title)"
+											placeholder="Search" />
+									</span>
+								</div>
+							</f:facet>
+						</p:toolbarGroup>
+						<p:toolbarGroup align="right">
+							<h:button value="Deposer votre annonce" outcome="addAnnonce"
+								styleClass="ui-button-success" />
+						</p:toolbarGroup>
+					</p:toolbar>
 
 
-							<div class="p-field">
-								<p:outputLabel for="titre">Titre</p:outputLabel>
-								<p:inputText id="titre" value="#{annController.a.titre}"
-									required="true" />
-							</div>
+				</h:form>
 
-							<div class="p-field">
-								<p:outputLabel for="adresse">Adresse</p:outputLabel>
-								<p:inputText id="adresse" value="#{annController.a.adresse}"
-									required="true" />
-							</div>
+				<p:carousel value="#{annController.getAnnonceVente()}"
+					var="annonceVente" responsive="true">
 
-							<div class="p-field">
-								<p:outputLabel for="description">Description</p:outputLabel>
-								<p:inputTextarea id="description"
-									value="#{annController.a.description}" required="true" />
-							</div>
 
-							<div class="p-field">
-								<p:outputLabel for="prix">Prix</p:outputLabel>
-								<p:inputNumber id="prix" value="#{annController.a.prix}"
-									required="true" />
-							</div>
+					<div class="product-grid-item-top">
+						<div>
+							<i class="pi pi-tag product-category-icon" /> <span
+								class="product-category"><h2>#{annonceVente.titre}</h2></span>
+						</div>
+					</div>
+					<div class="product-grid-item-content">
+						<img class="responsive" src="img/selling-img/sel-img1.jpg"
+							width="100" height="100" />
+						<div class="product-name">#{annonceVente.description}</div>
+						<div class="product-description">#{annonceVente.adresse}</div>
 
-							<div class="p-field">
-								<p:outputLabel for="surface">Surface (m2)</p:outputLabel>
-								<p:inputNumber id="surface" value="#{annController.a.surface}"
-									required="true" />
-							</div>
+					</div>
 
-							<div class="p-field">
-								<p:outputLabel>Type de l'annonce</p:outputLabel>
-								<p:selectOneMenu value="#{annController.type_annonce}"
-									required="true">
-									<f:selectItem itemLabel="type_annonce" itemValue="#{null}" />
-									<f:selectItems value="#{annController.typea}" />
-								</p:selectOneMenu>
-							</div>
+					<h:outputText value="#{annonceVente.prix}"
+						styleClass="product-price">
+						<f:convertNumber currencySymbol="DT/m2" type="currency" />
+					</h:outputText>
+					<h:outputText value="#{annonceVente.surface}"
+						styleClass="product-price">
+						<f:convertNumber currencySymbol="m2" type="currency" />
+					</h:outputText>
 
-							<div class="p-field">
-								<p:outputLabel>Categorie de l'annonce</p:outputLabel>
-								<p:selectOneMenu value="#{annController.categorie_annonce}"
-									required="true">
-									<f:selectItem itemLabel="categorie_annonce" itemValue="#{null}" />
-									<f:selectItems value="#{annController.typec}" />
-								</p:selectOneMenu>
-							</div>
+					<br></br>
+					<p:rating readonly="true" value="#{annonceVente.rating}" />
+					<br></br>
 
+					<p:commandButton value="Acheter" icon="pi pi-plus"
+						oncomplete="PF('manageProductDialog').show()"
+						styleClass="ui-button-info" style="margin-right: .5rem">
+						<p:resetInput target="manage-product-content" />
+					</p:commandButton>
+
+
+					<p:linkButton outcome="modifAnnonce" value="Modifier"
+						style="margin-right:20px;">
+						<f:param name="id" value="#{annonceVente.id}" />
+					</p:linkButton>
+
+					<h:commandButton
+						action="#{annController.removeAnnonce(annonceVente.id)}"
+						value="Supprimer" />
+
+
+					<h:form>
+						<p:growl id="growl" showDetail="true" />
+						<p:growl id="growl-sticky" for="sticky-key" showDetail="true"
+							sticky="true" />
+					</h:form>
+
+
+
+					<p:dialog header="Deposer votre demande d'achats" showEffect="fade"
+						modal="true" widgetVar="manageProductDialog" responsive="true"
+						minHeight="40" width="350" minimizable="true" maximizable="true">
+						<p:outputPanel id="manage-product-content" class="ui-fluid">
+							<p:outputPanel rendered="#{not empty annController}">
+
+
+								<p:outputLabel>Prix de la location :</p:outputLabel>
+								<br />
+								<h:outputText value="#{annController.getPrixVente()}"
+									styleClass="product-price">
+									<f:convertNumber currencySymbol="DT" type="currency" />
+								</h:outputText>
+
+
+							</p:outputPanel>
 						</p:outputPanel>
-					</p:outputPanel>
+
+						<f:facet name="footer">
+
+
+
+							<p:commandButton value="Afficher prix" icon="pi pi-check"
+								action="#{annController.calculV(annonceVente.id)}"
+								update="manage-product-content"
+								process="manage-product-content @this" />
+
+							<p:commandButton value="Valider" icon="pi pi-check"
+								action="#{annController.acheter(annonceVente.id)}"
+								update="manage-product-content"
+								process="manage-product-content @this"
+								oncomplete="javascript:window.location.reload()" />
+
+							<p:commandButton value="Annuler" icon="pi pi-times"
+								onclick="PF('manageProductDialog').hide()"
+								class="ui-button-secondary" />
+
+						</f:facet>
+					</p:dialog>
 
 
 					<f:facet name="footer">
-						<p:commandButton value="Valider" icon="pi pi-check"
-							actionListener="#{annController.save1()}"
-							update="manage-product-content"
-							process="manage-product-content @this" />
-						<p:commandButton value="Annuler" icon="pi pi-times"
-							onclick="PF('manageProductDialog').hide()"
-							class="ui-button-secondary" />
+						<center>
+							<h2>In total there are
+								#{fn:length(annController.annonceVente)} annonces.</h2>
+						</center>
 					</f:facet>
-				</p:dialog>
+				</p:carousel>
+
 			</h:form>
 
-			<p:carousel value="#{annController.getAnnonceVente()}"
-				var="annonceVente" responsive="true">
-				<div class="product">
-					<div class="product-grid-item p-p-5">
-						<div class="product-grid-item-top">
-							<div>
-								<i class="pi pi-tag product-category-icon" /> <span
-									class="product-category"><h2>#{annonceVente.titre}</h2></span>
-							</div>
-						</div>
-						<div class="product-grid-item-content">
-							<img class="responsive" src="img/selling-img/sel-img1.jpg"
-								width="100" height="100" />
-							<div class="product-name">#{annonceVente.description}</div>
-							<div class="product-description">#{annonceVente.adresse}</div>
-
-						</div>
-						<div class="product-grid-item-bottom">
-							<h:outputText value="#{annonceVente.prix}"
-								styleClass="product-price">
-								<f:convertNumber currencySymbol="DT" type="currency" />
-							</h:outputText>
-							<br></br>
-							<p:rating readonly="true" value="#{annonceVente.rating}" />
-							<br></br>
-
-							<p:commandButton type="button" value="Acheter"
-								icon="pi pi-shopping-cart">
-							</p:commandButton>
-
-
-							<h:commandButton
-								action="#{annController.removeAnnonce(annonceVente.id)}"
-								value="Supprimer" />
-						</div>
-					</div>
-				</div>
-
-				<f:facet name="footer">
-                In total there are #{fn:length(annController.annonceVente)} annonces.
-            </f:facet>
-			</p:carousel>
-		</div>
+		</center>
 
 
 	</ui:define>

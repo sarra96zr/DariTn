@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/template/template.xhtml">
+	<ui:param name="page_name" value="Connexion" />
+	<ui:define name="menu">
+		<h:head>
+			<meta charset="utf-8" />
+		</h:head>
+
+
+		<center>
+			<script type="text/javascript">
+PrimeFaces.locales ['fr'] = {
+	    closeText: 'Fermer',
+	    prevText: 'Précédent',
+	    nextText: 'Suivant',
+	    monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' ],
+	    monthNamesShort: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc' ],
+	    dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+	    dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+	    dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+	    weekHeader: 'Semaine',
+	    firstDay: 1,
+	    isRTL: false,
+	    showMonthAfterYear: false,
+	    yearSuffix:'',
+	    timeOnlyTitle: 'Choisir l\'heure',
+	    timeText: 'Heure',
+	    hourText: 'Heures',
+	    minuteText: 'Minutes',
+	    secondText: 'Secondes',
+	    currentText: 'Maintenant',
+	    ampm: false,
+	    month: 'Mois',
+	    week: 'Semaine',
+	    day: 'Jour',
+	    allDayText: 'Toute la journée'
+</script>
+			<style type="text/css">
+.value {
+	font-weight: bold;
+}
+</style>
+			<h:form>
+				<p:growl id="msgs" showDetail="true"
+					skipDetailIfEqualsSummary="true" />
+				<br><br></br></br>
+				<h2>Veuillez introduire vos données</h2>
+				<h:panelGrid>
+
+
+					<tr>
+						<td><p:outputLabel for="titre" value="Titre:" /></td>
+						<td><p:inputText id="titre" value="#{annController.getTitreID(param['id'])}" /></td>
+					</tr>
+					<tr>
+						<td><p:outputLabel for="description" value="Description:" /></td>
+						<td><p:inputText id="description"
+								value="#{annController.getDescID(param['id'])}" /></td>
+					</tr>
+
+
+					<tr>
+						<td><p:outputLabel for="adresse" value="Adresse:" /></td>
+						<td><p:inputText id="adresse"
+								value="#{annController.getAddID(param['id'])}" /></td>
+					</tr>
+
+
+					<tr>
+						<td><p:outputLabel for="prix" value="Prix:" /></td>
+						<td><p:inputNumber id="prix" value="#{annController.getPrixID(param['id'])}" /></td>
+					</tr>
+					<tr>
+						<td><p:outputLabel for="surface" value="Surface (m2)" /></td>
+						<td><p:inputNumber id="surface"
+								value="#{annController.getSurfID(param['id'])}" /></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Type Annonce"></h:outputText></td>
+						<td><h:selectOneMenu value="#{annController.type_annonce}">
+								<f:selectItem itemLabel="Choisir le type" itemValue="#{null}" />
+								<f:selectItems value="#{annController.typea}" />
+							</h:selectOneMenu></td>
+					</tr>
+
+					<tr>
+						<td><h:outputText value="Catégorie de l'annonce"></h:outputText></td>
+						<td><h:selectOneMenu
+								value="#{annController.categorie_annonce}">
+								<f:selectItem itemLabel="Choisir le Role" itemValue="#{null}" />
+								<f:selectItems value="#{annController.typec}" />
+							</h:selectOneMenu></td>
+					</tr>
+					<tr>
+						<center>
+							<p:commandButton value="Submit" update="msgs"
+								action="#{annController.updateAnnonce()}" icon="pi pi-check" />
+						</center>
+					</tr>
+					<br />
+					<br></br>
+					<br></br>
+				</h:panelGrid>
+
+			</h:form>
+		</center>
+
+	</ui:define>
+</ui:composition>
