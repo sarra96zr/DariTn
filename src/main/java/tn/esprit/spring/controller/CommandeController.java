@@ -7,11 +7,17 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletResponse;
 
+import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.cdi.Eager;
 import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,6 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itextpdf.text.DocumentException;
 
 import tn.esprit.spring.entity.Meubles;
+import tn.esprit.spring.entity.Reclamations;
 import tn.esprit.spring.repository.CommandeRepo;
 import tn.esprit.spring.repository.UserRepo;
 import tn.esprit.spring.entity.User;
@@ -47,11 +54,39 @@ public class CommandeController {
 	
 	@Autowired
 	private UserRepo ur;
-	@Autowired
-	private MailService notificationService;
-
+//	@Autowired
+//	private MailService notificationService;
+	private Commande cmd= new Commande();
+	private List<Meubles> mb;
+	private List<Commande> c;
 	private User user=new User();
-	// afficher les commandes par meubles
+	
+	
+	public Commande getCmd() {
+		return cmd;
+	}
+	public void setCmd(Commande cmd) {
+		this.cmd = cmd;
+	}
+	public List<Meubles> getMb() {
+		return mb;
+	}
+	public void setMb(List<Meubles> mb) {
+		this.mb = mb;
+	}
+	public List<Commande> getC() {
+		return c;
+	}
+	public void setC(List<Commande> c) {
+		this.c = c;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+			// afficher les commandes par meubles
 	// http://localhost:8081/DariTn/Pi/ordersmeubles/{ref_meuble}
 			@GetMapping("/ordersmeubless/{ref_meuble}")
 			@ResponseBody
@@ -137,32 +172,43 @@ public class CommandeController {
 		   exporter.export(response);
 		    
 		}
-		//mail
-		@RequestMapping("send-mail-attachment")
-		public  String sendWithAttachment() throws MessagingException {
-
-			/*
+//		//mail
+//		@RequestMapping("send-mail-attachment")
+//		public  String sendWithAttachment() throws MessagingException {
+//
+		/*
 			 * Creating a User with the help of User class that we have declared and setting
 			 * Email address of the sender.
 			 */
-			user.setEmail("esprit.daritn@gmail.com"); //Receiver's email address
+			//user.setEmail("esprit.daritn@gmail.com"); //Receiver's email address
 
 			/*
 			 * Here we will call sendEmailWithAttachment() for Sending mail to the sender
 			 * that contains a attachment.
 			 */
-			try {
-				notificationService.sendEmailWithAttachment(user);
-			} catch (MailException mailException) {
-				System.out.println(mailException);
-			}
-			return "Congratulations! Your mail has been send to the user.";
-					
-		}
-			//JSF
+//			try {
+//				notificationService.sendEmailWithAttachment(user);
+//			} catch (MailException mailException) {
+//				System.out.println(mailException);
+//			}
+//			return "Congratulations! Your mail has been send to the user.";
+//					
+//		}
+			
+		
 		
 		public List<Commande> getordersbyRef( Meubles meuble) {
 			List<Commande> list = ordersService.GetOrdersByMeubles(meuble);
 			return list;
 		}
+		//JSF
+		public void saveCmd()
+
+		{
+			
+			orderrepository.save(cmd);
+        this.c.add(this.cmd);
+        
+        
+       	}
 }

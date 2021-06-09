@@ -110,32 +110,24 @@
    
         <br></br>
     <p:splitter style="height: 300px" styleClass="p-mb-5">
-        <p:splitterPanel styleClass="p-d-flex p-ai-center p-jc-center">
-    <p:row styleClass="my-heading-row">
-            Votre commande
-        </p:row>
-        <br></br>
-
-			
-        </p:splitterPanel>
-        <p:splitterPanel styleClass="p-d-flex p-ai-center p-jc-center">
+        
+        <p:splitterPanel styleClass="p-d-flex p-ai-center p-jc-center ">
         <p:row styleClass="my-heading-row">
-            Type du paiement
+            Vous devez remplir ce formulaire
         </p:row>
-        <br></br>
-               Livraison
            <p:panelGrid columns="4"
                  columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
                  layout="grid"
                  styleClass="ui-panelgrid-blank ui-fluid"
-                 style="border:0px none; background-color:transparent;">
+                 style="border:0px none; background-color:transparent;" 
+                 >
                  
                  
 
         
 
         <p:outputLabel for="@next" value="First Name"/>
-        <p:inputText/>
+        <p:inputText />
 
         <p:outputLabel for="@next" value="Last Name"/>
         <p:inputText/>
@@ -149,45 +141,20 @@
         <p:outputLabel for="@next" value="Address"/>
         <p:inputTextarea rows="3"/>
         <br></br>
-     <p:button value="Valider" icon="pi pi-check" iconPos="right"  />
-        
+     
+          
+							<p:linkButton value="Valider"  type="button"
+							action="#{JsfMeubleController.sendEmail(Email)}">
+							
+								
+							</p:linkButton>
+					
     </p:panelGrid>
-    <br></br>
-            Carte
-            <br></br>
-             <div class="card" align="center">
-    <p:link href="/DariTn/charge" value="Carte Bancaire" icon="pi pi-credit-card" styleClass="rounded-button ui-button-info ui-button-outlined">
-        
-    </p:link>
-    </div>
-        <br></br>
-            Agence
-            <br></br>
-  <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
-  
-
-<div class="card">
-<h6> Lot 13, Residence Essalem II, Avenue Fethi Zouhir, Cebalat Ben Ammar 2083
-
-    <p:commandButton id="btn" type="button" icon="pi pi-globe" value="Show Map" onclick="PF('dlg').show();"/>
-</h6>
-</div>
-
-<p:dialog id="gmapDialog" widgetVar="dlg" width="625" height="400" modal="true">
-<iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d102100.0016643796!2d10.119663334289806!3d36.8993171265492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e0!4m0!4m5!1s0x12e2cb75abbb1733%3A0x557a99cdf6c13b7b!2slot%2013%2C%20esprit%20ecole%20d&#39;ing%C3%A9nieurs%2C%20R%C3%A9sidence%20Essalem%20II%2C%20Avenue%20Fethi%20Zouhir%2C%20Cebalat%20Ben%20Ammar%202083!3m2!1d36.8992004!2d10.1897039!5e0!3m2!1sfr!2stn!4v1620946693911!5m2!1sfr!2stn" width="600" height="450" style="border:0;" ></iframe>
-<!--   <p:gmap id="gmap" center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px"/> -->
-</p:dialog>
-
-        </p:splitterPanel>
+            </p:splitterPanel>
     </p:splitter>
 
 
-    								<p:button value="Show" type="button" 
-									icon="pi pi-external-link" onclick="PF('dlg1').show()" />
-								<p:dialog header="Header" widgetVar="dlg1" minHeight="40"
-									width="350" showEffect="fade">
-									<p class="p-m-0">Lorem ipsum dolor sit .</p>
-								</p:dialog>
+    								
 </div>
 </body>
 	</ui:define>

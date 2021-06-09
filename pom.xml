@@ -39,6 +39,8 @@
 			<artifactId>rewrite-servlet</artifactId>
 			<version>3.4.1.Final</version>
 		</dependency>
+
+		
 		<dependency>
 			<groupId>org.ocpsoft.rewrite</groupId>
 			<artifactId>rewrite-integration-faces</artifactId>

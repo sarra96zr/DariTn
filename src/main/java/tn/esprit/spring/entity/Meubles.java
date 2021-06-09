@@ -18,6 +18,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -33,6 +34,9 @@ public class Meubles implements Serializable {
 	@Column(name = "nom_meuble")
 	public String Nom_meuble;
 	private String img;
+	
+	
+
 	@JsonIgnore
 	@Column(name = "des_meuble")
 	public String Description_meuble;
@@ -59,6 +63,7 @@ public class Meubles implements Serializable {
 	public Meubles() {
 		super();
 	}
+
 	@Transient
     public String getPhotosImagePath() {
         if (img == null || ref_meuble == null) return null;
@@ -179,5 +184,8 @@ public class Meubles implements Serializable {
 		this.prix = prix;
 		this.type_meuble = type_meuble;
 	}
+
+
+	
 
 }

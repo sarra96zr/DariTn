@@ -99,13 +99,15 @@ Theme Informations --> <meta name ="viewport " content
 				minHeight="40" width="350" minimizable="true" maximizable="true">
 				<p:outputPanel id="manage-product-content" class="ui-fluid">
 					<p:outputPanel rendered="#{not empty JsfMeubleController.m}">
-						<h:form enctype="multipart/form-data">
-Photo <h:inputFile value="#{JsfMeubleController.file}"></h:inputFile>
-
-							<br></br>
-							<h:commandButton value="Upload"
+					<p:outputLabel for="" value="Choose Image :" />
+       
+						
+Photo <h:commandButton value="Upload"
 								action="#{JsfMeubleController.saveFile()}"></h:commandButton>
-						</h:form>
+					
+
+							
+						
 						<div class="p-field">
 							<p:outputLabel>Category</p:outputLabel>
 							<p:selectOneMenu required="true"
@@ -173,7 +175,7 @@ Photo <h:inputFile value="#{JsfMeubleController.file}"></h:inputFile>
                         <h:outputText value="#{meubles.prix}" styleClass="infos">
 								<f:convertNumber currencySymbol="DT" type="currency" />
 							</h:outputText>
-                        <p:linkButton type="button" value="Add To Cart"
+                        <p:linkButton type="button" value="Commander"
                                          icon="pi pi-shopping-cart" 
                                          outcome="panier">
                         <f:param name="panier" value="#{meubles.ref_meuble}" />

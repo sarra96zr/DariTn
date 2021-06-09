@@ -3,13 +3,10 @@ package tn.esprit.spring.controller;
 
 
 import java.io.File;
-import java.io.FileOutputStream;
+
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.nio.file.Files;
@@ -22,21 +19,15 @@ import javax.servlet.http.Part;
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 //import org.primefaces.PrimeFaces;
-import org.primefaces.PrimeFaces;
+
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.FlowEvent;
 
 
+//import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
-
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-
 
 import net.bytebuddy.utility.RandomString;
 import tn.esprit.spring.service.MeubleService;
@@ -49,10 +40,10 @@ import tn.esprit.spring.helper.FileUploadUtil;
 import tn.esprit.spring.repository.MeubleRepo;
 @ManagedBean
 @Scope
-@Controller(value = "JsfMeubleController")
-@ELBeanName(value = "JsfMeubleController")
-@Join(path = "/", to = "/DariTn/meuble")
-public class JsfMeubleController {
+@Controller(value = "JsfController")
+@ELBeanName(value = "JsfController")
+@Join(path = "/Dari", to = "/DariTn/AdminMeuble.jsf")
+public class JsfController {
 	@Autowired
 	MeubleService MeubleService;
 	@Autowired
@@ -61,8 +52,7 @@ public class JsfMeubleController {
 	MeubleServiceImpl ms;
 	@Autowired
 	MeubleController mc;
-	@Autowired
-	private JavaMailSender javaMailSender;
+	
 	private String nom_meuble;
 	private Type_Meuble typem;
     private Part file;
@@ -210,8 +200,8 @@ public void setM(Meubles m) {
 		mr.save(m);
         this.meuble.add(this.m);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Product Added"));
-       PrimeFaces.current().executeScript("PF('manageProductDialog').hide()");
-       PrimeFaces.current().ajax().update("form:messages", "form:dt-products");
+//        PrimeFaces.current().executeScript("PF('manageProductDialog').hide()");
+//        PrimeFaces.current().ajax().update("form:messages", "form:dt-products");
 //        return "/DariTn/Meuble.xhtml";
         
        	}
@@ -385,7 +375,7 @@ private Part uploadedFile;
 
 private File savedFile;
 
-String pathImg = "C:\\Users\\Sarra\\Documents\\workspace-sts-3.8.4.RELEASE\\src\\main\\webapp\\img\\m_img" ;
+String pathImg = "src//main//webapp//img//m_img" ;
 
 public Part getUploadedFile() {
 	return uploadedFile;
@@ -396,7 +386,7 @@ public void setUploadedFile(Part uploadedFile) {
 }
 //upload
 public String upload() {
-	   System.err.println("ag west upgoload");
+	   System.err.println("xxxxxxxx");
 	   String fileName=  RandomString.make(8) +"_uplgonaded_"+ java.util.Calendar.getInstance().getTime().getDay() + "_" +java.util.Calendar.getInstance().getTime().getMonth() +".png" ;
 	   File uploads = new File(pathImg);
 	   
@@ -419,58 +409,6 @@ public String upload() {
 	}
 
 
-//mail
-public void sendTextEmail(Meubles emailTemplate) {
 
-	SimpleMailMessage msg = new SimpleMailMessage();
-	try {
-		if (emailTemplate.getClient().getEmail().contains(",")) {
-			String[] emails = emailTemplate.getClient().getEmail().split(",");
-			int receipantSize = emails.length;
-			for (int i = 0; i < receipantSize; i++) {
 
-				msg.setTo(emails[i]);
-				msg.setSubject("Votre facture: "+emailTemplate.getCommande());
-				msg.setText("Cher client,"+(emailTemplate.getClient().getFirstName()+emailTemplate.getClient().getLastName()+"vous trouveriez ci-joint votre facture. nous vous contactera "));
-				javaMailSender.send(msg);
-			}
-
-		} else {
-			msg.setTo(emailTemplate.getClient().getEmail());
-			msg.setSubject("-----"+emailTemplate.getCommande());
-			msg.setText("Cher client, "+(emailTemplate.getClient().getFirstName()+" "+emailTemplate.getClient().getLastName()+" nous vous informons que votre réclamation est prise en considération."));
-			javaMailSender.send(msg);
-			javaMailSender.send(msg);
-		}
-
-	}
-
-	catch (Exception e) {
-		e.printStackTrace();
-	}
-
-}
-@PostMapping(value="/textemail",consumes = "application/json", produces = "application/json")
-public String sendEmail(@RequestBody Meubles emailTemplate) {
-	try {
-		//log.info("Sending Simple Text Email....");
-		sendTextEmail(emailTemplate);
-		return "Email Sent!";
-	} catch (Exception ex) {
-		return "Error in sending email: " + ex;
-	}
-}
-public void onUploadImage(FileUploadEvent event) {
-    String fileName = event.getFile().getFileName();
-    //Get file extension.
-    String extension = "png";
-    int i = fileName.lastIndexOf('.');
-    if (i > 0) {
-        extension = fileName.substring(i + 1).toLowerCase();
-    }
-
-    String encodedImage = java.util.Base64.getEncoder().encodeToString(event.getFile().getContent());
-    this.picture = String.format("data:image/%s;base64, %s", 
-         extension, encodedImage);
-}
 }
