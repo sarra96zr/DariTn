@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition>
 	<meta charset="utf-8" />
 	<!-- Theme Informations -->
 
@@ -28,6 +29,7 @@
 	<!-- Icons & Fonts -->
 	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css/" />
 	<!-- Icons & Fonts -->
+
 	<nav id="nav"
 		class="container-fluid navbar navbar-default navbar-fixed-top">
 
@@ -40,7 +42,10 @@
 					class="icon-bar" /> <span class="icon-bar" /> <span
 					class="icon-bar" />
 			</button>
-			<a class="navbar-brand page-scroll" href="#page-top"><span>{Dari.Tn}</span></a>
+			<a class="navbar-brand page-scroll" href="#page-top"><span>{DariTn}
+
+			</span></a>
+
 		</div>
 
 		<div class="collapse navbar-collapse" id="toggle">
@@ -55,22 +60,35 @@
 
 				<li class="lBorder"><a class="page-scroll" href="#about">ABOUT</a></li>
 
-				<li class="lBorder"><a class="page-scroll" href="#contact">CONTACT</a></li>
-
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="">PAGES <i
+					data-toggle="dropdown" href="">Rendez-Vous <i
 						class="text-right fa fa-angle-up fa-2x" />
 				</a>
 
 					<ul class="dropdown-menu">
 
-						<li><a href="index.html">First theme</a></li>
+						<li><a href="/DariTn/AddRDV2.jsf">Prendre Rendez-vous</a></li>
 
-						<li><a href="second-theme.html">Second Theme</a></li>
+						<li><a href="/DariTn/RDV.jsf">liste des rendez-vous</a></li>
+					</ul></li>
 
-						<li><a href="third-theme.html">Third Theme</a></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="">Credit + Abonnement <i
+						class="text-right fa fa-angle-up fa-2x" />
+				</a>
 
-						<li><a href="404.html">Error 404</a></li>
+					<ul class="dropdown-menu">
+
+						<li><a href="/DariTn/banque-form.jsf">Banque</a></li>
+
+						<li><a href="/DariTn/abonnement.jsf">Abonnement</a></li>
+
+						<li><a href="/DariTn/assurance.jsf">Assurance</a></li>
+
+						<li><a href="/DariTn/surveillance.jsf">Surveillance</a></li>
+						<li><a href="/DariTn/camera.jsf">Camera</a></li>
+						<li><a href="/DariTn/creditclient.jsf">Capacité Mensuel</a></li>
+						<li><a href="/DariTn/credit.jsf">Credit</a></li>
 					</ul></li>
 			</ul>
 		</div>
@@ -90,3 +108,4 @@
 	<!-- Search - end --> </nav>
 
 </ui:composition>
+</html>

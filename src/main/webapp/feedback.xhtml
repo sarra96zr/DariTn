@@ -13,13 +13,13 @@
 				<h:form>
 					<h:panelGrid columns="2" cellpadding="5">
 						<tr>
-							<td><p:outputLabel value="FeedBack sur le rendez-vous:" /></td>
-							<td><p:inputTextarea for="descRDV"
-									value="#{RDVFeedBackController.rdvf.descRDV}" /></td>
+							<td><p:outputLabel style="font-weight: bold" value="FeedBack sur le rendez-vous:" /></td>
+							<td><p:inputTextarea for="desRDV"
+									value="#{RDVFeedBackController.desRDV}" /></td>
 						</tr>
 					</h:panelGrid>
 					<p:commandButton value="Submit"
-						action="#{RDVFeedBackController.ajoutRDV()}" icon="pi pi-check" />
+						action="#{RDVFeedBackController.ajoutRDV(param['feed'])}" icon="pi pi-check"/>
 						
 					<p:dialog modal="true" resizable="false" header="Values"
 						widgetVar="dlg" showEffect="fold">

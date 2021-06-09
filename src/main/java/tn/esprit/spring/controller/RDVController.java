@@ -43,6 +43,7 @@ public class RDVController {
 	RDVRepository rdvr;
 	public RDV rdv = new RDV();
 	public Date dateRDV;
+	private Long Id_rdv;
 
 
 	public void ajoutRDV() {
@@ -59,7 +60,20 @@ public class RDVController {
 		facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
 	}
 
-
+	public void displayRDV(RDV r)
+	{
+		this.setDateRDV(r.getDateRDV());
+		this.setId_rdv(r.getId_rdv());
+	}	
+	
+	public void updateRDV()
+	{
+		rdvService.addOrUpdateRDV(new RDV(Id_rdv, dateRDV));
+	}
+	
+	public void openNew() {
+        this.rdv = new RDV();
+	}
 
 	// http://localhost:8081/DariTn/Pi/retrieve-all-RDV
 	@GetMapping("/retrieve-all-RDV")
@@ -141,6 +155,15 @@ public class RDVController {
 	public void setRdv(RDV rdv) {
 		this.rdv = rdv;
 	}
+
+	public Long getId_rdv() {
+		return Id_rdv;
+	}
+
+	public void setId_rdv(Long id_rdv) {
+		Id_rdv = id_rdv;
+	}
+
 
 
 

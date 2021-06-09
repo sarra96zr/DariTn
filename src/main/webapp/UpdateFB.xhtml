@@ -48,21 +48,22 @@ PrimeFaces.locales ['fr'] = {
 }
 </style>
 				<h:form>
-					<p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true" />
+					<p:growl id="msgs" showDetail="true"
+						skipDetailIfEqualsSummary="true" />
 					<h:panelGrid columns="2" cellpadding="5">
-					<tr>
-						<td><p:outputLabel for="dateRDV" style="font-weight: bold" value="Ajouter une date de Rendez-vous:" /></td>
-						<td><p:calendar id="dateRDV"
-								value="#{RDVController.rdv.dateRDV}" mode="inline"
+						<tr>
+							<td><p:outputLabel for="dateRDV" value="dateRDV:" /></td>
+							<td><p:calendar id="dateRDV"
+									value="#{RDVController.rdv.dateRDV}" mode="inline"
 									showOn="dateRDV" locale="fr" pattern="dd.MM.yyyy HH:mm">
-								<p:ajax event="dateSelect"
+									<p:ajax event="dateSelect"
 										listener="#{RDVController.onDateSelect}" update="msgs" />
-							</p:calendar></td>
-					</tr>
+								</p:calendar></td>
+						</tr>
 						<br />
-					</h:panelGrid><br/>
-					<p:commandButton value="Submit"  update="msgs"
-						action="#{RDVController.ajoutRDV()}" icon="pi pi-check" />
+					</h:panelGrid>
+					<p:commandButton value="Valider" update="msgs"
+						action="#{RDVController.UpdateRDV()}" icon="pi pi-check" />
 
 					<p:dialog modal="true" resizable="false" header="Values"
 						widgetVar="dlg" showEffect="fold">
@@ -75,7 +76,7 @@ PrimeFaces.locales ['fr'] = {
 
 						</p:panelGrid>
 					</p:dialog>
-<br /><br /><br />
+
 				</h:form>
 			</center>
 		</h:panelGroup>

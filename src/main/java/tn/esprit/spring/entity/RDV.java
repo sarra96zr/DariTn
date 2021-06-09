@@ -68,6 +68,11 @@ private static final long serialVersionUID = 1L;
 	}
 
 
+	public RDV(long id_rdv, Date dateRDV) {
+		super();
+		this.id_rdv = id_rdv;
+		this.dateRDV = dateRDV;
+	}
 
 	public RDV(long id_rdv, Date dateRDV, Client client, Annonce annonce /*RDVFeedBack rDVF*/) {
 		super();

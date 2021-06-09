@@ -4,49 +4,150 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/template/template.xhtml">
+	xmlns:p="http://primefaces.org/ui" template="/template/template.xhtml">
 	<ui:param name="page_name" value="Connexion" />
 	<ui:define name="menu">
-		<h:panelGroup columns="2">
-			<center>
-				<br /> <br /> <br />
-				<h:form>
-					<h:dataTable value="#{RDVController.getRDV()}" var="RDV" border="1">
+		<h:head>
+			<meta charset="utf-8" />
+		</h:head>
+		<br />
+		<br />
+		<br />
+		<br />
+		<script type="text/javascript">
+PrimeFaces.locales ['fr'] = {
+	    closeText: 'Fermer',
+	    prevText: 'Précédent',
+	    nextText: 'Suivant',
+	    monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' ],
+	    monthNamesShort: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc' ],
+	    dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+	    dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+	    dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+	    weekHeader: 'Semaine',
+	    firstDay: 1,
+	    isRTL: false,
+	    showMonthAfterYear: false,
+	    yearSuffix:'',
+	    timeOnlyTitle: 'Choisir l\'heure',
+	    timeText: 'Heure',
+	    hourText: 'Heures',
+	    minuteText: 'Minutes',
+	    secondText: 'Secondes',
+	    currentText: 'Maintenant',
+	    ampm: false,
+	    month: 'Mois',
+	    week: 'Semaine',
+	    day: 'Jour',
+	    allDayText: 'Toute la journée'
+</script>
+		<style type="text/css">
+.value {
+	font-weight: bold;
+}
+</style>
+		<div class="card">
+			<h:form id="form">
+				<p:toolbar>
+					<p:toolbarGroup>
+						<p:linkButton outcome="/AddRDV2" value="Ajouter RDV" type="button"
+							style="width: 10rem" styleClass="ui-button-outlined">
+						</p:linkButton>
+					</p:toolbarGroup>
+				</p:toolbar>
 
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Nom" />
-							</f:facet>
-							<h:outputText value="#{RDV.annonce.title}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="dateRDV" />
-							</f:facet>
-							<h:outputText value="#{RDV.dateRDV}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Action" />
-							</f:facet>
-							<h:commandButton action="#{RDVController.removeRDV(RDV.id_rdv)}"
-								value="Update" />
-							<h:commandButton action="#{RDVController.removeRDV(RDV.id_rdv)}"
-								value="Delete" />
- 							<h:commandButton
-								action="/feedback.xhtml"
-								value="FeedBack"
-								actionListener="#{RDVFeedBackController.ajoutRDV()}">
-								<f:param name="feed" value="RDV.id_rdv" />
-								</h:commandButton>
-							
+				<p:dataTable id="table" value="#{RDVController.getRDV()}"
+					widgetVar="dtProducts" styleClass="products-table" var="RDV"
+					reflow="true" rowKey="#{RDV.id_rdv}" paginator="true" rows="5"
+					rowSelectMode="add" paginatorPosition="bottom">
+					<f:facet name="header">
+						<div class="products-table-header">
+							<span style="font-weight: bold">Liste des Rendez-vous</span> <span
+								class="filter-container ui-input-icon-left"> <i
+								class="pi pi-search" /> <p:inputText id="globalFilter"
+									onkeyup="PF('dtProducts').SearchProductByName(Annonce.Titre)"
+									placeholder="Search" />
+							</span>
+						</div>
+					</f:facet>
+
+					<p:column style="width: 34%; text-align: center;">
+						<f:facet name="header">Annonce</f:facet>
+						<h:outputText value="#{RDV.annonce.title}" />
+					</p:column>
+
+					<p:column style="width: 34%; text-align: center;">
+						<f:facet name="header">dateRDV</f:facet>
+						<h:outputText value="#{RDV.dateRDV}" />
+					</p:column>
+
+					<p:column id="action" headerText="Actions"
+						style="width: 34%; text-align: center;" exportable="false">
+
+						<p:commandButton icon="pi pi-pencil"
+							update=":form:manage-product-content"
+							oncomplete="PF('manageProductDialog').show()"
+							styleClass="edit-button ui-button-success" process="@this"
+							style="width: 5rem">
+							<f:setPropertyActionListener value="Update"
+								target="#{RDVController.rdv}" />
+							<p:resetInput target=":form:manage-product-content" />
+						</p:commandButton>
+
+
+						<p:commandButton icon="pi pi-trash" styleClass="ui-button-danger"
+							style="width: 5rem" process="@this"
+							oncomplete="PF('deleteProductDialog').show()">
+							<f:setPropertyActionListener value="Deleteee"
+								target="#{RDVController.rdv}" />
+						</p:commandButton>
+
+						<p:linkButton outcome="/feedback" value="FeedBack" type="button"
+							styleClass="p-mr-2 " style="width: 6rem">
+							<f:param name="feed" value="#{RDV.id_rdv}" />
+						</p:linkButton>
 						
+						
+						<p:confirmDialog widgetVar="deleteProductDialog" showEffect="fade"
+							width="300" message="Voulez vous effacer le RDV?"
+							header="Confirm" severity="warn">
+							<p:commandButton value="Yes" icon="pi pi-check"
+								actionListener="#{RDVController.removeRDV(RDV.id_rdv)}"
+								process="@this" oncomplete="PF('deleteProductDialog').hide()" />
+							<p:commandButton value="No" type="button"
+								styleClass="ui-button-secondary" icon="pi pi-times"
+								onclick="PF('deleteProductDialog').hide()" />
+						</p:confirmDialog>
+					</p:column>
+				</p:dataTable>
+				<p:dialog header="rendez-vous" showEffect="fade" modal="true"
+					widgetVar="manageProductDialog" responsive="true" minHeight="40"
+					width="350" minimizable="true" maximizable="true">
 
-						</h:column>
-					</h:dataTable>
-				</h:form>
-			</center>
+					<p:outputPanel id="manage-product-content" class="ui-fluid">
+						<p:outputPanel rendered="#{not empty RDVController.rdv}">
 
-		</h:panelGroup>
+							<p:outputLabel for="dateRDV" value="dateRDV:" />
+							<p:calendar id="dateRDV" value="#{RDVController.rdv.dateRDV}"
+								mode="inline" showOn="dateRDV" locale="fr"
+								pattern="dd.MM.yyyy HH:mm" required="true">
+							</p:calendar>
+
+						</p:outputPanel>
+					</p:outputPanel>
+					<f:facet name="footer">
+						<p:commandButton value="Valider" icon="pi pi-check"
+							actionListener="#{RDVController.updateRDV()}"
+							update="manage-product-content"
+							process="manage-product-content @this"
+							oncomplete="javascript:window.location.reload()" />
+						<p:commandButton value="Annuler" icon="pi pi-times"
+							onclick="PF('manageProductDialog').hide()"
+							class="ui-button-secondary" />
+					</f:facet>
+				</p:dialog>
+			</h:form>
+		</div>
+		<br/><br/><br/><br/>
 	</ui:define>
 </ui:composition>

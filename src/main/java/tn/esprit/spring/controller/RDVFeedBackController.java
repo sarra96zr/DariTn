@@ -28,11 +28,16 @@ public class RDVFeedBackController {
 	RDVFeedBackService rdvFeedBackService;
 	RDVFeedBackRepository rdvfr;
 	public RDVFeedBack rdvf = new RDVFeedBack();
-	public String descRDV;
+	public String desRDV;
 	
-	public void ajoutRDV() {
-		System.err.println("*********"+rdvf.descRDV);
-		rdvFeedBackService.addOrUpdateRDV(new RDVFeedBack(rdvf.descRDV));
+	public void ajoutRDV(String id) {
+		System.err.println("*********"+desRDV);
+		System.err.println("*---------*******"+id);
+		RDVFeedBack rf = new RDVFeedBack(desRDV);
+		RDV r = new RDV();
+		r.setId_rdv(Long.valueOf(id));
+		rf.setRdv(r);
+		rdvFeedBackService.addOrUpdateRDV(rf);
 	}
 	
 	
@@ -101,13 +106,13 @@ public class RDVFeedBackController {
 				}
 
 
-				public String getDescRDV() {
-					return descRDV;
+				public String getDesRDV() {
+					return desRDV;
 				}
 
 
-				public void setDescRDV(String descRDV) {
-					this.descRDV = descRDV;
+				public void setDesRDV(String desRDV) {
+					this.desRDV = desRDV;
 				}
 				
 				
