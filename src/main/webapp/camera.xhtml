@@ -21,8 +21,7 @@
 			<center>
 				<p:photoCam widgetVar="pc" listener="#{photoCamView.oncapture}"
 					update="photo" />
-				<p:commandButton type="button" value="Capture"
-					onclick="PF('pc').capture()" />
+				
 				<p:outputPanel id="photo">
 					<p:graphicImage
 						name="img#{photoCamView.filename}.jpeg"

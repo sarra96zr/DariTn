@@ -13,16 +13,16 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-import tn.esprit.spring.entity.Abonnement;
+import tn.esprit.spring.entity.Assurance;
 
 import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 public class GeneratePdfRec {
-		 private List<Abonnement> listorders;
+		 private List<Assurance> listorders;
 
-		public GeneratePdfRec(List<Abonnement> listUsers) {
+		public GeneratePdfRec(List<Assurance> listUsers) {
 	        this.listorders = listUsers;
 	    }
 	    private static float topRightTextSpace = -2f;
@@ -52,25 +52,25 @@ public class GeneratePdfRec {
 	        Font font = FontFactory.getFont(FontFactory.HELVETICA);
 	        font.setColor(BaseColor.WHITE);
 	         
-	        cell.setPhrase(new Phrase("Type", font));
+	        cell.setPhrase(new Phrase("Date Debut", font));
 	         
 	        table.addCell(cell);
 	         
-	        cell.setPhrase(new Phrase("Titre de la réclamation", font));
+	        cell.setPhrase(new Phrase("Date Fin", font));
 	        
 	        table.addCell(cell);
 	         
-	        cell.setPhrase(new Phrase("Description", font));
+	        cell.setPhrase(new Phrase("Assurance", font));
 	        
 	        table.addCell(cell);
 	    }
 	   
 	  
 	    private void writeTableData(PdfPTable table) {
-	        for (Abonnement order : listorders) {
-	            table.addCell(String.valueOf(order.date_debut));
-	            table.addCell(String.valueOf(order.date_fin));
-	            table.addCell(String.valueOf(order.getType()));
+	        for (Assurance order : listorders) {
+	            table.addCell(String.valueOf(order.getDateDebut()));
+	            table.addCell(String.valueOf(order.getDateFin()));
+	            table.addCell(String.valueOf(order.getAssur()));
 	            
 	        }
 	    }
@@ -85,7 +85,7 @@ public class GeneratePdfRec {
 	        font.setColor(BaseColor.CYAN);
 	       
 	       
-	        Paragraph p = new Paragraph("Liste des Réclamations", font);
+	        Paragraph p = new Paragraph("Devis", font);
 	        p.setAlignment(Paragraph.ALIGN_CENTER);
 
 	        document.add(p);

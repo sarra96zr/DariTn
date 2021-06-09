@@ -1,18 +1,26 @@
 package tn.esprit.spring.controller;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.dom4j.DocumentException;
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import tn.esprit.spring.entity.Abonnement;
 import tn.esprit.spring.entity.Aonnement;
 import tn.esprit.spring.entity.Assur;
 import tn.esprit.spring.entity.Assurance;
+import tn.esprit.spring.helper.GeneratePdfRec;
 import tn.esprit.spring.service.AssuranceService;
 
 
@@ -28,6 +36,25 @@ public class AssuranceController {
 	private Date datedeb;
 	private Date datefin;
 	private List<Assurance> assurances;
+	
+	
+	//PDF
+	// http://localhost:8081/DariTn/orders/export/pdf
+	@RequestMapping("/export/pdf")
+	public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException, com.itextpdf.text.DocumentException {
+		response.setContentType("application/pdf");
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String currentDateTime = dateFormatter.format(new Date());
+
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment; filename=users_" + currentDateTime + ".pdf";
+		response.setHeader(headerKey, headerValue);
+
+		List<Assurance> listorders = assuranceservice.retrieveAllAssurance();
+
+		GeneratePdfRec exporter = new GeneratePdfRec(listorders);
+		exporter.export(response);
+	}
 	
 	public List<Assurance> getAssurances() {
 		assurances = assuranceservice.retrieveAllAssurance();
