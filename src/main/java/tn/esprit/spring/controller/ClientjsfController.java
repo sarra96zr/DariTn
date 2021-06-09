@@ -43,6 +43,7 @@ public class ClientjsfController {
 	JwtProvider jwtProvider;
 	@Autowired
 	AuthenticationManager authenticationManager;
+	static long idSession;
 	
 	private long id_user ;
 	
@@ -104,9 +105,12 @@ public class ClientjsfController {
 	}
 	
 	public String authenticateUser() {
+		System.err.println("hello");
+		
 		LoginForm loginRequest = new LoginForm();
 		loginRequest.setEmail(email);
 		loginRequest.setPassword(password);
+	
 		try{
 			
 		

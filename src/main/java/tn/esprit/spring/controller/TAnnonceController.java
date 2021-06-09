@@ -42,7 +42,7 @@ import tn.esprit.spring.service.VenteService;
 
 @Scope(value="session")
 @ELBeanName(value = "annController") // Name of the bean used by JSF
-@Join(path = "/", to = "/listeAnnonceVente.jsf")
+@Join(path = "/", to = "/login.jsf")
 @Controller(value = "annController")
 @RestController
 public class TAnnonceController {
@@ -63,7 +63,8 @@ public class TAnnonceController {
 	public Type_Annonce[] getTypea() { return Type_Annonce.values(); }
 	public Categorie_Annonce[] getTypec() { return Categorie_Annonce.values(); }
 	private Integer annonceIdToBeUpdated; 
-	public Annonce a = new Annonce();
+	private Annonce a = new Annonce();
+	
 	public Location location = new Location();
 	static Double prixLoc;
 	static Double prixVente;
@@ -154,7 +155,7 @@ public class TAnnonceController {
 	// modifier annonce
 	public void updateAnnonce()
 	{ 
-		System.err.println("hello");
+		System.err.println("hello from update");
 		annonceService.updateAnnonce(new Annonce(update, titre, adresse, null, description, null, prix, 3, surface,Disponible.Dispo, type_annonce, categorie_annonce, null));
 	}
 	public Annonce modif(String id_a){
@@ -173,10 +174,12 @@ public class TAnnonceController {
 		this.setTitre(a.getTitre());
 		this.setDescription(a.getDescription());
 		this.setAdresse(a.getAdresse()); 
+		this.setSurface(a.getSurface());
 		this.setPrix(a.getPrix());
 		this.setType_annonce(a.getType_annonce());
 		this.setCategorie_annonce(a.getCategorie_annonce());
 		this.setUpdate(a.getId());
+		updateAnnonce();
 	}
 
 	public String getTitreID(String id_a){
@@ -342,7 +345,7 @@ public class TAnnonceController {
 			Double prix = locationService.calculPrix(a.getPrix(), dateDebut, dateFin);
 			System.out.println(prixLoc);
 
-			locationService.addOrUpdateLocation(new Location(dateDebut, dateFin, TAnnonceController.getPrixLoc() , null, a) );
+			locationService.addOrUpdateLocation(new Location(dateDebut, dateFin, TAnnonceController.getPrixLoc() ,null, a) );
 			System.out.println(getPrixLoc());
 			System.err.println("hello2");
 			prixLoc = locationService.calculPrix(a.getPrix(), dateDebut, dateFin);
@@ -410,7 +413,8 @@ public class TAnnonceController {
 		Long id = Long.valueOf(id_a);
 		Annonce a = ann.findById(id).get();
 
-		venteService.addVente(new Vente(prixLoc, null, a));
+		venteService.addVente(new Vente(TAnnonceController.prixVente, null, a));
+		a.setDisponible(Disponible.En_cours);
 		annonceService.addOrUpdateAnnonce(a);	
 
 	}
